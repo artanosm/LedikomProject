@@ -8,7 +8,7 @@ const CheckOut = () => {
   const cartCtx = useContext(CartContext);
   let [deliveryForm, setDeliveryForm] = useState(null);
   console.log(cartCtx);
-  console.log(deliveryForm);
+
 
   // const deliveryHandler =(e)=>{
   //   setDeliveryForm(target.value)
@@ -93,7 +93,7 @@ const CheckOut = () => {
 
         <div className={classes.info}>
           <h3>Delivery Information</h3>
-          <CheckOutForm deliveryForm={deliveryForm} />
+          <CheckOutForm cartItems={cartCtx.items} totalAmount={cartCtx.totalAmount} deliveryForm={deliveryForm} />
         </div>
       </div>
     </Fragment>
