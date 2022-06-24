@@ -1,0 +1,27 @@
+.valueContainer {
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  width: auto;
+}
+
+
+.valueShow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.priceRange {
+  color:rgb(164, 161, 161);
+}
+
+@media only screen and (max-width: 500px) {
+  .valueShow {
+    width: 100%;
+  }
+
+  .valueContainer {
+    width: 100%;
+  }
+}

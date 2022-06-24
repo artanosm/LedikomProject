@@ -1,0 +1,55 @@
+.itemContainer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+}
+
+.itemContainer h3 {
+    width: 60%;
+  color: darkgray;
+}
+
+.cartImage {
+  height: auto;
+  width: 5rem;
+}
+
+.amountContainer {
+    justify-self: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 10%;
+  gap: 1rem;
+}
+
+.amountContainer button {
+  background-color: white;
+  border: none
+}
+
+@media only screen and (max-width: 500px) {
+  .itemContainer {
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .amountContainer {
+    width: 2%;
+    justify-content: space-around;
+  }
+  .itemContainer h3 {
+    width: 50%;
+    font-size: small;
+    padding-right: 2rem;
+    color: darkgray;
+  }
+  .amountContainer p {
+    font-size: small;
+    padding: 0;
+    color: darkgrey;
+  }
+}

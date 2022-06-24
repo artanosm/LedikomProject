@@ -1,0 +1,30 @@
+.container {
+    margin: 2vw;
+}
+
+.filterContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    gap: 2rem;
+    width: 80%;
+    padding: rem;
+    height: 10vh;
+}
+
+
+
+@media only screen and (max-width: 500px){
+    
+    .filterContainer {
+        justify-content: flex-start;
+        width: 100%;
+        padding: 0.1rem 0.1rem;
+        margin: 0;
+        gap: 1rem;
+    }
+
+    
+    
+}

@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    gap: 1rem;
+}
+
+
+.filterContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    gap: 1rem;
+    width: 35%;
+    padding: 2rem;
+    height: 10vh;
+}
+
+.filterContainer h4 {
+    padding-bottom: 0;
+    margin-bottom: 0.3rem;
+}
+

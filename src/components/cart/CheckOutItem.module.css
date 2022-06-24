@@ -1,0 +1,45 @@
+.mainContainer {
+  display: flex;
+  justify-content:flex-start;
+  margin: 0 0 1rem 0 ;
+  gap: 1rem;
+}
+
+.mainContainer img {
+  width: 20%;
+}
+
+.mainContainer p {
+  width: 50%;
+}
+
+.priceAmount {
+  display: flex;
+}
+
+.priceAmount p {
+  padding-left: 3rem;
+}
+
+hr {
+  color: darkgray;
+}
+
+@media only screen and (max-width: 500px) {
+  .mainContainer {
+    width: 100%;
+    height: auto;
+    align-items: center;
+  }
+  .mainContainer img {
+    width: 25%;
+    height: fit-content;
+  }
+  .priceAmount {
+    width: 100%;
+  }
+
+  .priceAmount p {
+    padding-left: 1rem;
+  }
+}

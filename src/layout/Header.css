@@ -1,0 +1,191 @@
+/*Desktop View*/
+.option,
+.phones:hover > .brands {
+  /* display: flex; */
+  visibility: visible;
+  opacity: 1;
+}
+
+.option a {
+  padding: 40px 0;
+}
+
+.brands {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s, opacity 0.3s ease-in-out;
+  list-style: none;
+  display: flex;
+  position: absolute;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  top: 100px;
+  background-color: rgb(71, 71, 71);
+  color: rgb(255, 255, 255);
+  left: 0;
+  width: 100vw;
+  height: 40px;
+}
+
+.options a {
+  padding: 40px 0;
+}
+
+.icon {
+  color: rgb(255, 255, 255);
+  transition: all 0.3s ease;
+}
+.icon:hover {
+  color: rgb(234, 57, 234);
+}
+.header {
+  width: 100%;
+  display: flex;
+  background: black;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  padding: 0px 2rem;
+  height: 100px;
+}
+.logo-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-container {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartLi {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.img {
+  width: 8rem;
+  height: 100%;
+}
+.nav-options {
+  padding-left: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  gap: 2rem;
+  list-style-type: none;
+  z-index: 2;
+  height: 100%;
+}
+.mobile-option {
+  display: none;
+}
+
+.option :hover {
+  color: white;
+  transition: all 0.3s;
+}
+
+.option a {
+  color: white;
+  text-decoration: none;
+}
+
+.option a:hover {
+  color: rgb(234, 57, 234);
+}
+
+.mobile-menu {
+  display: none;
+}
+@media (max-width: 500px) {
+  /*Mobile View */
+  .header {
+    justify-content: flex-end;
+    padding: 0px 10px;
+    height: 70px;
+  }
+  .logo-container {
+    margin-right: auto;
+  }
+  .cartLi {
+    display: none;
+  }
+  .cart {
+    gap: 1rem;
+    width: auto;
+  }
+
+  .nav-options {
+    display: flex;
+    width: 100%;
+    height: 350px;
+    position: absolute;
+    top: 45px;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    flex-direction: column;
+    list-style-type: none;
+    grid-gap: 0px;
+  }
+  
+  .nav-options.active {
+    width: 100%;
+    height: fit-content;
+    border-radius: 10px;
+    background: black;
+    left: 0;
+    opacity: 1;
+    transition: all 0.5s ease;
+    z-index: 1;
+    align-content: center;
+    padding-left: 0px;
+  }
+  .img {
+    width: fit-content;
+    height: 4rem;
+  }
+
+  .brands {
+  display: flex;
+  flex-direction: column;
+  }
+
+  .menu-icon {
+    color: white;
+    width: 45px;
+    height: 45px;
+  }
+  .option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vw;
+    padding: 30px 0px;
+  }
+  .option a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .option a:hover {
+    color: rgb(234, 57, 234);
+  }
+  .mobile-menu {
+    width: 10%;
+    margin-left: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+}
