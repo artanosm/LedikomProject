@@ -23,13 +23,14 @@ const Cart = (props) => {
 
   const cartItems = (
     <ul className={classes.cartContainer}>
-      {cartCtx.items.map((item) => {
+      {cartCtx.items.map((item, key) => {
+        console.log(key)
         return (
           <CartItem
             brand={item.brand}
             model={item.model}
             id={item.id}
-            // key={keyId}
+            key={key}
             amount={item.amount}
             color={item.color}
             storage={item.storage}

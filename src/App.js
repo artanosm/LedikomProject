@@ -47,8 +47,9 @@ function App() {
         <Route path="/login" element={<User />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<CheckOut />} />
-        <Route path="phones/phone/:brand" element={<BrandPage />} />
         <Route path="/phones/:phoneId" element={<PhoneDetails />} />
+        {/* <Route path="phones/phone/:brand" element={<BrandPage />} /> */}
+      
       </Routes>
       <Footer />
     </AuthContextProvider>

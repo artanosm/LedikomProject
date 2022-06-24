@@ -1,6 +1,7 @@
 import classes from "./Footer.module.css";
+import {Facebook, Instagram, YouTube, Call, Email} from '@mui/icons-material';
 
-import { SocialMediaIconsReact } from "social-media-icons-react";
+// import { SocialMediaIconsReact } from "social-media-icons-react";
 
 import React from "react";
 
@@ -23,8 +24,8 @@ const Footer = () => {
         />
         <div className={classes.footer}>
           <h3>Contacts</h3>
-          <a href="tel: 070252525">070 25 25 25</a>
-          <a href="mailto:  info@ledikom.mk">info@ledikom.mk</a>
+          <a href="tel: 070252525"><Call fontSize="sm"/> 070 25 25 25</a>
+          <a href="mailto:  info@ledikom.mk"><Email fontSize="sm"/> info@ledikom.mk</a>
         </div>
         <div className={classes.footer}>
           <h3>Useful Links</h3>
@@ -35,42 +36,9 @@ const Footer = () => {
         <div className={classes.footer}>
           <h3>Social Media</h3>
           <span>
-            <SocialMediaIconsReact
-              borderColor="rgba(255,255,255,0.25)"
-              borderWidth="0"
-              borderStyle="outset"
-              icon="facebook"
-              iconColor="darkgrey"
-              backgroundColor="rgba(9,9,9,0)"
-              iconSize="0"
-              roundness="26%"
-              url="https://facebook.com/"
-              size="30"
-            />
-            <SocialMediaIconsReact
-              borderColor="rgba(255,255,255,0.25)"
-              borderWidth="0"
-              borderStyle="outset"
-              icon="instagram"
-              iconColor="darkgrey"
-              backgroundColor="rgba(9,9,9,0)"
-              iconSize="0"
-              roundness="26%"
-              url="https://instagram.com/"
-              size="30"
-            />
-            <SocialMediaIconsReact
-              borderColor="rgba(255,255,255,0.25)"
-              borderWidth="0"
-              borderStyle="outset"
-              icon="youtube"
-              iconColor="darkgrey"
-              backgroundColor="rgba(9,9,9,0)"
-              iconSize="0"
-              roundness="26%"
-              url="https://youtube.com/"
-              size="30"
-            />
+          <a href="https://facebook.com/"> <Facebook/></a>            
+          <a href="https://instagram.com/"> <Instagram/></a>            
+          <a href="https://youtube.com/"> <YouTube/></a>            
           </span>
         </div>
       </div>

@@ -90,11 +90,10 @@ const PhoneDetails = (props) => {
     setStorage(storage);
   };
 
-  const addItemToCart = (item) => {
+  const addItemToCart = () => {
     let rand = Math.floor(Math.random()*1000) * Math.floor(Math.random()*1000)
     console.log('rand', rand);
     cartCtx.addItem({
-      // id: phony.id+storage+colorImg,
       id: rand,
       model: phony.model,
       brand: phony.brand,
