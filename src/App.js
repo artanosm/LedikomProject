@@ -13,8 +13,8 @@ import CheckOut from "./pages/CheckOut";
 import Cart from "./components/cart/Cart";
 import PhoneDetails from "./components/phoneDetails/PhoneDetails";
 import AddPhone from "./components/AddPhone";
+import Orders from './pages/Orders'
 import { AuthContextProvider } from "./store/auth-context";
-import BrandPage from "./pages/BrandPage";
 import CartContext from "./store/cart-context";
 
 function App() {
@@ -47,6 +47,7 @@ function App() {
         <Route path="/login" element={<User />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/orders" element={<Orders/>} />
         <Route path="/phones/:phoneId" element={<PhoneDetails />} />
         {/* <Route path="phones/phone/:brand" element={<BrandPage />} /> */}
       

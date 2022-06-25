@@ -22,6 +22,7 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
           address: order.address,
           city: order.city,
           textArea: order.textArea,
+          orderCompleted: false,
           totalAmount: totalAmount,
           cartItems: cartItems,
         }),

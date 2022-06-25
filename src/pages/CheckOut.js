@@ -7,13 +7,7 @@ import CheckOutForm from "../components/cart/CheckOutForm";
 const CheckOut = () => {
   const cartCtx = useContext(CartContext);
   let [deliveryForm, setDeliveryForm] = useState(null);
-  console.log(cartCtx);
-
-
-  // const deliveryHandler =(e)=>{
-  //   setDeliveryForm(target.value)
-  // }
-
+ 
   const cartItems = (
     <ul>
       {cartCtx.items.map((item) => {
