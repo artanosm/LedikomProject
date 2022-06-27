@@ -24,7 +24,6 @@ const Cart = (props) => {
   const cartItems = (
     <ul className={classes.cartContainer}>
       {cartCtx.items.map((item, key) => {
-        console.log(key)
         return (
           <CartItem
             brand={item.brand}
