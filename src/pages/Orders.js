@@ -41,7 +41,7 @@ const Orders = () => {
       });
   }, []);
 
-  console.log(orders);
+
 
   const orderItems = orders.map((order, key) => {
     return (
