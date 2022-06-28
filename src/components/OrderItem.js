@@ -1,5 +1,6 @@
 import React from "react";
 import OrdersItemGroup from "./OrdersItemGroup";
+import classes from "./OrderItem.module.css";
 
 const OrderItem = ({ order }) => {
   const cartItems = (
@@ -11,9 +12,16 @@ const OrderItem = ({ order }) => {
   );
 
   return (
-    <div>
-      <h1>{order.name}</h1>
-      <div>{cartItems}</div>
+    <div className={classes.container}>
+      <div className={classes.info}>
+        <p>Name: {order.name}</p>
+        <p>Email: {order.email}</p>
+        <p>Phone: {order.phone}</p>
+        <p>City: {order.city}</p>
+        <p>Address: {order.address}</p>
+      </div>
+      <div> Items: {cartItems}</div>
+      <h4>Total Amount: {order.totalAmount}</h4>
     </div>
   );
 };

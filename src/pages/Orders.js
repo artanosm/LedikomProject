@@ -16,6 +16,7 @@ const Orders = () => {
 
       for (const key in responseData) {
         loadedOrders.push({
+          id: key,
           address: responseData[key].address,
           city: responseData[key].city,
           email: responseData[key].email,
