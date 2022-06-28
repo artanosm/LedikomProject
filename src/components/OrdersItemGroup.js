@@ -3,8 +3,8 @@ import classes from "./OrdersItemGroup.module.css";
 
 const OrdersItemGroup = ({ item }) => {
   return (
-    <div>
-      <img src={item.color} alt='product' />
+    <div className={classes.container}>
+      <img className={classes.img} src={item.color} alt='product' />
 
       <div>
      

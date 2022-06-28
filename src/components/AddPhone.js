@@ -48,6 +48,7 @@ const AddPhone = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const phone = {
+      date: new Date(),
       brand: brandRef.current.value,
       model: modelRef.current.value,
       type: typeRef.current.value,

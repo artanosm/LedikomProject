@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.css";
 
-const PhonesList = ({ priceRange, brand, type }) => {
+const PhonesList = ({ priceRange, brand, type, sort }) => {
   const [phones, setPhones] = useState([]);
 
   useEffect(() => {
@@ -55,9 +55,22 @@ const PhonesList = ({ priceRange, brand, type }) => {
   } else {
     filteredType = filteredPhones;
   }
-
-  const phoneItems = filteredType.map((phone) => {
-
+  let sortedPhones;
+  if (sort) {
+    if (sort.value === "ascending") {
+      sortedPhones = filteredType.sort(
+        (a, b) => parseFloat(a.price.price64GB) - parseFloat(b.price.price64GB)
+      );
+    } else {
+      sortedPhones = filteredType.sort(
+        (a, b) => parseFloat(b.price.price64GB) - parseFloat(a.price.price64GB)
+      );
+    }
+  } else {
+    sortedPhones = filteredType;
+  }
+  console.log(sortedPhones);
+  const phoneItems = sortedPhones.map((phone) => {
     let price1;
     // if (phone.price.price64GB) {
     //   price1 = phone.price.price64GB;
@@ -66,8 +79,8 @@ const PhonesList = ({ priceRange, brand, type }) => {
     //   price1 = phone.price.price1TB;
     // }
     const values = Object.values(phone.price);
-    const fil = values.filter(val => val !== '')
-    price1 = Math.min(...fil);   
+    const fil = values.filter((val) => val !== "");
+    price1 = Math.min(...fil);
     // Object.values(phone.price).forEach(val => val ? price1 = val : price1 = '')
     if (!priceRange) {
       return (
