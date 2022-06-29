@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
-import classes from './AuthForm.module.css'
+import classes from "./AuthForm.module.css";
 
 const AuthForm = (props) => {
   const [isLogin, setIsLogin] = useState(true);
@@ -20,7 +20,7 @@ const AuthForm = (props) => {
     e.preventDefault();
     const enteredEmail = enteredEmailRef.current.value;
     const enteredPassword = enteredPasswordRef.current.value;
-    console.log(enteredEmail, enteredPassword);
+
     setIsLoading(true);
 
     let url;
@@ -39,6 +39,7 @@ const AuthForm = (props) => {
         body: JSON.stringify({
           email: enteredEmail,
           password: enteredPassword,
+
           returnSecureToken: true,
         }),
         headers: {
@@ -67,6 +68,7 @@ const AuthForm = (props) => {
           new Date().getTime() + +data.expiresIn * 1000
         );
         authCtx.login(data.idToken, expirationTime.toISOString());
+
         navigate("/profile", { replace: true });
       })
       .catch((err) => {
@@ -76,34 +78,42 @@ const AuthForm = (props) => {
 
   return (
     <div className={classes.mainContainer}>
-    <div className={classes.container}>
-      <h1 className={classes.h1}>{isLogin ? "Login" : "Sign Up"}</h1>
-      <form onSubmit={submitHandler} className={classes.formContainer}>
-        <div className={classes.formControl}>
-          
-          <input ref={enteredEmailRef} placeholder='Your Email' type="email" id="email" required />
-        </div>
-        <div className={classes.formControl}>
-         
-          <input
-            ref={enteredPasswordRef}
-            placeholder='Your Password'
-            type="password"
-            id="password"
-            required
-          />
-        </div>
-        <div className={classes.actions}>
-          {!isLoading && (
-            <button>{isLogin ? "Login" : "Create Account"}</button>
-          )}
-          {isLoading && <p>Loading...</p>}
-          <button className={classes.toggle} type="button" onClick={switchAuthModeHandler}>
-            {isLogin ? "Create new account" : "Login with existing account"}
-          </button>
-        </div>
-      </form>
-    </div>
+      <div className={classes.container}>
+        <h1 className={classes.h1}>{isLogin ? "Login" : "Sign Up"}</h1>
+        <form onSubmit={submitHandler} className={classes.formContainer}>
+          <div className={classes.formControl}>
+            <input
+              ref={enteredEmailRef}
+              placeholder="Your Email"
+              type="email"
+              id="email"
+              required
+            />
+          </div>
+          <div className={classes.formControl}>
+            <input
+              ref={enteredPasswordRef}
+              placeholder="Your Password"
+              type="password"
+              id="password"
+              required
+            />
+          </div>
+          <div className={classes.actions}>
+            {!isLoading && (
+              <button>{isLogin ? "Login" : "Create Account"}</button>
+            )}
+            {isLoading && <p>Loading...</p>}
+            <button
+              className={classes.toggle}
+              type="button"
+              onClick={switchAuthModeHandler}
+            >
+              {isLogin ? "Create new account" : "Login with existing account"}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

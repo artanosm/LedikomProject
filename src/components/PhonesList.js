@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.css";
 
-const PhonesList = ({ priceRange, brand, type, sort, date }) => {
+const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
   const [phones, setPhones] = useState([]);
 
   useEffect(() => {
@@ -71,25 +71,34 @@ const PhonesList = ({ priceRange, brand, type, sort, date }) => {
     sortedPhones = filteredType;
   }
 
-// Arranges the products the newest first
-if (date) {
-  sortedPhones.sort((a,b) =>{
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
-    return new Date(b.date) - new Date(a.date);
-  });
-}
+  // Arranges the products the newest first
+  if (date) {
+    sortedPhones.sort((a, b) => {
+      // Turn your strings into dates, and then subtract them
+      // to get a value that is either negative, positive, or zero.
+      return new Date(b.date) - new Date(a.date);
+    });
+  }
 
-  const phoneItems = sortedPhones.map((phone) => {
+  let itemsToDisplay;
+ 
+  if (numberOfItems) {
+    itemsToDisplay = sortedPhones.slice(0, numberOfItems.value);
+  } else {
+    itemsToDisplay = sortedPhones;
+  }
+ 
+
+  const phoneItems = itemsToDisplay.map((phone) => {
     let price1;
-   // takes the prices in price property
+    // takes the prices in price property
     const values = Object.values(phone.price);
     const minPrice = values.filter((val) => val !== "");
     price1 = Math.min(...minPrice);
     if (!priceRange) {
       return (
         <PhoneItem
-        date={phone.date}
+          date={phone.date}
           type={phone.type}
           price1={price1}
           key={phone.id}

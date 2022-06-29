@@ -12,7 +12,7 @@ const PhoneItem = (props) => {
           src={props.image}
         />
         <div className={classes.dataContainer}>
-        <h3 className={classes.model}>{props.model}</h3>
+        <p className={classes.model}>{props.model}</p>
         <p className={classes.brand}>{props.brand}</p>
         <p className={classes.price}>
           {/* {props.price?.price64GB

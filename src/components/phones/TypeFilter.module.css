@@ -1,5 +1,6 @@
 .container {
-    width: 30%;
+    width:10%;
+    min-width: fit-content;
 }
 
 @media only screen and (max-width: 500px){

@@ -29,23 +29,6 @@ const Header = (props) => {
         </li>
         <li className="option phones" onClick={closeMobileMenu}>
           <Link to="/phones">Phones </Link>
-          {/* <ul className="brands">
-            <li className="brand">
-              <Link to="/phones/phone/Apple">Apple</Link>
-            </li>
-            <li className="brand">
-              <Link to="/phones/phone/Samsung">Samsung</Link>
-            </li>
-            <li className="brand">
-              <Link to="/phones/phone/Xiaomi">Xiaomi</Link>
-            </li>
-            <li className="brand">
-              <Link to="/phones/phone/Huawei">Huawei</Link>
-            </li>
-            <li className="brand">
-              <Link to="/phones/phone/Oneplus">OnePlus</Link>
-            </li>
-          </ul> */}
         </li>
         <li className="option" onClick={closeMobileMenu}>
           <Link to="/service">Service</Link>

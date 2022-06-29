@@ -13,7 +13,7 @@ const Home = () => {
       </div>
       <div className={classes.container}>
         <h2>New Products</h2>
-        <PhonesList date={date}/>
+        <PhonesList numberOfItems={4} date={date}/>
       </div>
       <FreeDelivery/>
     </div>
