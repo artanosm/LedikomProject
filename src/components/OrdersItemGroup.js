@@ -3,14 +3,21 @@ import classes from "./OrdersItemGroup.module.css";
 
 const OrdersItemGroup = ({ item }) => {
   return (
+    <>
+
+    
     <div className={classes.container}>
-      <img className={classes.img} src={item.color} alt='product' />
+      <img className={classes.img} src={item.color} alt="product" />
 
       <div>
-     
-        {item.brand} {item.model} {item.amount} {item.price} {item.storage}
+        <h5>{item.brand}</h5>
+        <p>{item.model}</p>
+        <p>{item.price}</p>
+        <p>{item.storage}</p>
       </div>
     </div>
+    <hr/>
+    </>
   );
 };
 

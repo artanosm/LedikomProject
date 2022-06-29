@@ -4,6 +4,7 @@ import classes from "./Home.module.css";
 import PhonesList from '../components/PhonesList'
 
 const Home = () => {
+  const date = true
   return (
     <div>
       <div className={classes.sliderContainer}>
@@ -11,7 +12,7 @@ const Home = () => {
       </div>
       <div className={classes.container}>
         <h2>New Products</h2>
-        <PhonesList />
+        <PhonesList date={date}/>
       </div>
     </div>
   );

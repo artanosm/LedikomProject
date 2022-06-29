@@ -13,7 +13,7 @@ import CheckOut from "./pages/CheckOut";
 import Cart from "./components/cart/Cart";
 import PhoneDetails from "./components/phoneDetails/PhoneDetails";
 import AddPhone from "./components/AddPhone";
-import Orders from './pages/Orders'
+import Orders from "./pages/Orders";
 import { AuthContextProvider } from "./store/auth-context";
 import CartContext from "./store/cart-context";
 
@@ -24,8 +24,8 @@ function App() {
   let cartTA = cartCtx.totalAmount;
 
   useEffect(() => {
-    window.localStorage.setItem("cartItems", JSON.stringify(cartI));
-    window.localStorage.setItem("cartTotalAmount", JSON.stringify(cartTA));
+    localStorage.setItem("cartItems", JSON.stringify(cartI));
+    localStorage.setItem("cartTotalAmount", JSON.stringify(cartTA));
   }, [cartI, cartTA]);
 
   const showCartHandler = () => {
@@ -47,10 +47,8 @@ function App() {
         <Route path="/login" element={<User />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<CheckOut />} />
-        <Route path="/orders" element={<Orders/>} />
+        <Route path="/orders" element={<Orders />} />
         <Route path="/phones/:phoneId" element={<PhoneDetails />} />
-        {/* <Route path="phones/phone/:brand" element={<BrandPage />} /> */}
-      
       </Routes>
       <Footer />
     </AuthContextProvider>

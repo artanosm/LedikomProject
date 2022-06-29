@@ -1,8 +1,13 @@
 import React, { useRef } from "react";
 import Input from "./Input";
 import classes from "./CheckOutForm.module.css";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import CartContext from "../../store/cart-context";
 
 const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
+  const cartCtx = useContext(CartContext);
+  const navigate = useNavigate();
   let nameRef = useRef(null);
   let emailRef = useRef(null);
   let phoneRef = useRef(null);
@@ -52,6 +57,8 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
       totalAmount: totalAmount,
       cartItems: JSON.parse(JSON.stringify(cartItems)),
     });
+    cartCtx.clearCart();
+    navigate("/", { replace: true });
   };
   return (
     <form onSubmit={submitHandler}>

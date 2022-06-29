@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.css";
 
-const PhonesList = ({ priceRange, brand, type, sort }) => {
+const PhonesList = ({ priceRange, brand, type, sort, date }) => {
   const [phones, setPhones] = useState([]);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const PhonesList = ({ priceRange, brand, type, sort }) => {
 
       for (const key in responseData) {
         loadedPhones.push({
+          date: responseData[key].date,
           type: responseData[key].type,
           id: key,
           model: responseData[key].model,
@@ -69,22 +70,26 @@ const PhonesList = ({ priceRange, brand, type, sort }) => {
   } else {
     sortedPhones = filteredType;
   }
-  console.log(sortedPhones);
+
+// Arranges the products the newest first
+if (date) {
+  sortedPhones.sort((a,b) =>{
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.date) - new Date(a.date);
+  });
+}
+
   const phoneItems = sortedPhones.map((phone) => {
     let price1;
-    // if (phone.price.price64GB) {
-    //   price1 = phone.price.price64GB;
-    // }
-    // else {
-    //   price1 = phone.price.price1TB;
-    // }
+   // takes the prices in price property
     const values = Object.values(phone.price);
-    const fil = values.filter((val) => val !== "");
-    price1 = Math.min(...fil);
-    // Object.values(phone.price).forEach(val => val ? price1 = val : price1 = '')
+    const minPrice = values.filter((val) => val !== "");
+    price1 = Math.min(...minPrice);
     if (!priceRange) {
       return (
         <PhoneItem
+        date={phone.date}
           type={phone.type}
           price1={price1}
           key={phone.id}

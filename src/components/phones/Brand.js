@@ -15,7 +15,8 @@ const customStyles = {
     backgroundColor: "white",
     borderBottom: "1px dotted darkgrey",
     color: state.isSelected ? "black" : "darkgrey",
-    color: state.isFocused ? "#ff51ff": "darkgrey",
+    color: state.isFocused ? "#ff51ff" : "darkgrey",
+
     padding: 8,
   }),
   //   control: () => ({
@@ -29,6 +30,27 @@ const customStyles = {
     return { ...provided, opacity, transition };
   },
 };
+
+// const customStyles = {
+//   option: (provided, state) => ({
+//     ...provided,
+//     backgroundColor: "white",
+//     borderBottom: "1px dotted darkgrey",
+//     color: state.isSelected ? "black" : "darkgrey",
+//     color: state.isFocused ? "#ff51ff": "darkgrey",
+//     padding: 8,
+//   }),
+//   //   control: () => ({
+//   //     // none of react-select's styles are passed to <Control />
+//   //     width: 200,
+//   //   }),
+//   singleValue: (provided, state) => {
+//     const opacity = state.isDisabled ? 0.5 : 1;
+//     const transition = "opacity 300ms";
+
+//     return { ...provided, opacity, transition };
+//   },
+// };
 
 const Brand = ({ brand, setBrand }) => {
   return (
@@ -55,3 +77,11 @@ const Brand = ({ brand, setBrand }) => {
 };
 
 export default Brand;
+
+
+
+
+
+
+
+
