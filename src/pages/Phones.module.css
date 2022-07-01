@@ -5,6 +5,7 @@
 .filterContainer {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
     align-content: center;
     gap: 1rem;
@@ -13,10 +14,13 @@
 }
 .priceRangeContainer {
     display: flex;
+    width: 30%;
+    min-width: 200px;
 }
 .priceRangeContainer h4 {
-    color: black;
+    color: rgb(149, 149, 149);
     margin: 0 1rem 0 0;
+    
 }
 
 .showFilter {
@@ -29,8 +33,12 @@
         flex-direction: column;
     }
     .priceRangeContainer {
-        width: 100%;
-        padding: 1rem 1rem;
+        width: 90%;
+        padding: 0.3rem 0.5rem;
+    }
+    .priceRangeContainer h4 {
+        padding-top: 0.5rem;
+        
     }
     .filterContainer {
         display: none;

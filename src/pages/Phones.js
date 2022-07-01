@@ -6,7 +6,9 @@ import Brand from "../components/phones/Brand";
 import TypeFilter from "../components/phones/TypeFilter";
 import SortItems from "../components/phones/SortItems";
 import ItemsToDisplay from "../components/phones/ItemsToDisplay";
-import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
+import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+
 const Phones = () => {
   const [filtersClick, setFiltersClick] = useState(false);
   const [priceRange, setPriceRange] = useState([10, 1500]);
@@ -18,13 +20,19 @@ const Phones = () => {
     label: "24",
   });
 
-  const filtersClickHandler = ()=>{
-    setFiltersClick(!filtersClick)
-  }
+  const filtersClickHandler = () => {
+    setFiltersClick(!filtersClick);
+  };
 
   return (
     <div className={classes.container}>
-      <div className={filtersClick ? `${classes.filterContainer} ${classes.active}` : classes.filterContainer}>
+      <div
+        className={
+          filtersClick
+            ? `${classes.filterContainer} ${classes.active}`
+            : classes.filterContainer
+        }
+      >
         <div className={classes.priceRangeContainer}>
           <h4>Price:</h4>
           <RangePrice priceRange={priceRange} setPriceRange={setPriceRange} />
@@ -38,7 +46,9 @@ const Phones = () => {
           setNumberOfItems={setNumberOfItems}
         />
       </div>
-      <button className={classes.showFilter} onClick={filtersClickHandler}><FilterListOutlinedIcon /></button>
+      <button className={classes.showFilter} onClick={filtersClickHandler}>
+        {filtersClick ? <CloseOutlinedIcon /> : <FilterListOutlinedIcon />}
+      </button>
       <PhonesList
         sort={sort}
         type={type}

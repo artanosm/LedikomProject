@@ -26,17 +26,13 @@ export default function RangePrice({priceRange, setPriceRange}) {
     <ThemeProvider theme={theme}>
       <Box sx={{ width: 300 }}>
         <div className={classes.valueContainer}>
-          {/* <div className={classes.valueShow}>
-            <div className={classes.priceRange}>{priceRange[0]} $</div>
-            <div className={classes.priceRange}>{priceRange[1]} $</div>
-          </div> */}
           <Slider
             size="small"
             min={0}
             max={1500}
             value={priceRange}
             onChange={handleChange}
-            valueLabelDisplay='on'
+            valueLabelDisplay='auto'
             getAriaValueText={valuetext}
             color="primary"
             disableSwap

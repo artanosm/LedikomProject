@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrderItem from "../components/OrderItem";
+import classes from "./Orders.module.css";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -42,16 +43,13 @@ const Orders = () => {
       });
   }, []);
 
-
-
   const orderItems = orders.map((order, key) => {
-    return (
-    <OrderItem order={order} key={key} />
-)});
+    return <OrderItem order={order} key={key} />;
+  });
 
   return (
-    <div>
-      <h3>Orders</h3>
+    <div className={classes.main}>
+      <h1>Orders</h1>
       <div>{orderItems}</div>
     </div>
   );
