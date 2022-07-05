@@ -16,6 +16,9 @@ import AddPhone from "./components/AddPhone";
 import Orders from "./pages/Orders";
 import { AuthContextProvider } from "./store/auth-context";
 import CartContext from "./store/cart-context";
+import ServiceBrand from "./components/service/ServiceBrand";
+import AddService from "./components/AddService";
+import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -42,8 +45,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/addPhone" element={<AddPhone />} />
+        <Route path="/addService" element={<AddService />} />
         <Route path="/phones" element={<Phones />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/service/:brand" element={<ServiceBrand />} />
+        <Route path="/service/:brand/:serviceId" element={<PhoneServiceDetails />} />
         <Route path="/login" element={<User />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<CheckOut />} />

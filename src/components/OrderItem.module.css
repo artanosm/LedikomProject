@@ -1,6 +1,7 @@
 .container {
     height: auto;
-    width: auto;
+    width: 80%;
+    min-width: 330px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     display: flex;
@@ -25,4 +26,29 @@
     padding: 0.5rem;
     margin: 0.2rem;
     width: auto;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .buttonsContainer button {
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    width: 7rem;
+    margin: 0;
+    height: 2rem;
+    color:white;
+    margin: 1rem;
+  }
+
+  .deleteButton {
+    background-color: rgb(255, 66, 66);
+  }
+
+  .completeButton {
+    background-color: rgb(26, 120, 244);
   }

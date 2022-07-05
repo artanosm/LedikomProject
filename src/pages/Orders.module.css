@@ -4,5 +4,32 @@
 }
 
 .main h1 {
-    margin: 1rem 1rem 1rem 2rem ;
+    margin: 1rem 1rem 1rem 1rem ;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.headerContainer button {
+    border-radius: 5px;
+    background-color: whitesmoke;
+    border: none;
+    padding: 1px;
+    width: 8rem;
+    margin: 0;
+    height: 2rem;
+    color:darkgray;
+}
+.headerContainer button:hover {
+    background-color: rgb(240, 97, 233);
+    color: white;
+}
+
+.headerContainer button.active {
+    background-color: rgb(240, 97, 233);
+    color: white;
 }

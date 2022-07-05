@@ -12,7 +12,7 @@ const OrdersItemGroup = ({ item }) => {
       <div>
         <h5>{item.brand}</h5>
         <p>{item.model}</p>
-        <p>{item.price}</p>
+        <p>{item.price} $</p>
         <p>{item.storage}</p>
       </div>
     </div>

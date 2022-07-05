@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import OrderItem from "../components/OrderItem";
 import classes from "./Orders.module.css";
 
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
+  const [completedOrders, setCompletedOrders] = useState(false);
+  const [reFetch, setReFetch] = useState(false)
   useEffect(() => {
     const getOrders = async () => {
       const response = await fetch(
@@ -33,23 +36,46 @@ const Orders = () => {
       setOrders(loadedOrders);
     };
     getOrders()
-      //   .then((data) => {
-      //     console.log(data);
+        .then(() => {
 
-      //     setOrders(data);
-      //   })
+          setReFetch(false);
+        })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  },[reFetch]);
 
-  const orderItems = orders.map((order, key) => {
-    return <OrderItem order={order} key={key} />;
-  });
-
+  let orderItems;
+  if (completedOrders) {
+    let filtered = orders.filter(
+      (orderIsTrue) => orderIsTrue.orderCompleted === true
+    );
+    console.log(filtered);
+    orderItems = filtered.map((order, key) => {
+      return (
+        <OrderItem reFetch={reFetch} setReFetch={setReFetch} order={order} key={key} />
+      );
+    });
+  } else {
+    let filtered = orders.filter(
+      (orderIsFalse) => orderIsFalse.orderCompleted === false
+    );
+    orderItems = filtered.map((order, key) => {
+      return <OrderItem reFetch={reFetch} setReFetch={setReFetch}  order={order} key={key} />;
+    });
+  }
+  console.log(orderItems);
+ 
   return (
     <div className={classes.main}>
-      <h1>Orders</h1>
+      <div className={classes.headerContainer}>
+        <h1>Orders</h1>
+        <button className={!completedOrders ? `${classes.active}` : `${''}`} onClick={() => setCompletedOrders(false)}>Orders</button>
+        <button className={completedOrders ? `${classes.active}` : `${''}`}  onClick={() => setCompletedOrders(true)}>
+          Completed Orders
+        </button>
+      </div>
+
       <div>{orderItems}</div>
     </div>
   );

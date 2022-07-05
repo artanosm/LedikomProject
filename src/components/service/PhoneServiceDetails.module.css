@@ -1,0 +1,29 @@
+.main {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    margin: 1rem;
+}
+
+.imageContainer {
+    width: 25%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    height: fit-content;
+   
+}
+.imageContainer img {
+    width: 100%;
+}
+
+.headerService {
+    width: 75%;
+}
+.headerService hr {
+    border: 0.2px solid lightgray;
+}
+.servicesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    width: 100%;
+}

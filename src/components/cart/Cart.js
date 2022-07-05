@@ -9,9 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const navigate = useNavigate();
-  console.log(cartCtx.items);
- 
-
+  
   const clearCartHandler = () => {
     cartCtx.clearCart();
   };

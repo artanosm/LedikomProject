@@ -40,7 +40,7 @@ const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
       console.log(error);
     });
   }, []);
-  // console.log(phones);
+  console.log(phones);
 
   let filteredPhones;
 

@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./PhoneDetails.module.css";
 import Colors from "./Colors";
 import Storage from "./Storage";
 import CartContext from "../../store/cart-context";
-
 
 const PhoneDetails = (props) => {
   const cartCtx = useContext(CartContext);
@@ -13,7 +12,7 @@ const PhoneDetails = (props) => {
   const [price, setPrice] = useState("");
   const [storage, setStorage] = useState("");
   const [phone, setPhone] = useState(null);
-  
+
   useEffect(() => {
     const fetchPhones = async () => {
       const response = await fetch(
@@ -24,7 +23,7 @@ const PhoneDetails = (props) => {
         throw new Error("Something went wrong");
       }
       const responseData = await response.json();
-      // console.log(responseData);
+      console.log(responseData);
       const loadedPhones = [];
 
       for (const key in responseData) {
@@ -77,8 +76,6 @@ const PhoneDetails = (props) => {
 
   const phony = { ...phone };
 
-  // console.log(phony);
-
   const colorImageHandler = (color) => {
     setColorImg(color);
   };
@@ -91,8 +88,8 @@ const PhoneDetails = (props) => {
   };
 
   const addItemToCart = () => {
-    let rand = Math.floor(Math.random()*1000) * Math.floor(Math.random()*1000)
-    console.log('rand', rand);
+    let rand =
+      Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({
       id: rand,
       model: phony.model,
@@ -103,46 +100,48 @@ const PhoneDetails = (props) => {
       color: colorImg,
       amount: 1,
     });
-  
   };
   return (
-    <div className={classes.container}>
-      <div className={classes.imageContainer}>
-        <img className={classes.image} src={colorImg} alt="phone"></img>
-      </div>
-      <div className={classes.dataContainer}>
-        <h1 className={classes.h1}>{phony.model}</h1>
-        <div>
-          <h3>Brand:</h3> {phony.brand}
+    <Fragment>
+      {!phone && <h2>Not Found</h2>}
+      {phone && <div className={classes.container}>
+        <div className={classes.imageContainer}>
+          <img className={classes.image} src={colorImg} alt="phone"></img>
         </div>
-        <div>
-          <h3>Waranty:</h3> 12 months
-        </div>
-        {phony.ram && (
+        <div className={classes.dataContainer}>
+          <h1 className={classes.h1}>{phony.model}</h1>
           <div>
-            <h3>Ram:</h3> {phony.ram}
+            <h3>Brand:</h3> {phony.brand}
           </div>
-        )}
-        <Colors
-          phony={phony}
-          setColorImg={colorImageHandler}
-          color={colorImg}
-        />
-        <Storage
-          phony={phony}
-          setPrice={priceHandler}
-          price={price}
-          setStorage={storageHandler}
-          storage={storage}
-        />
-        <div className={classes.containerPrice}>
-          <h3>{price ? price : phony.price128GB} $</h3>
-          <button className={classes.button} onClick={addItemToCart}>
-            Add to Cart
-          </button>
+          <div>
+            <h3>Waranty:</h3> 12 months
+          </div>
+          {phony.ram && (
+            <div>
+              <h3>Ram:</h3> {phony.ram}
+            </div>
+          )}
+          <Colors
+            phony={phony}
+            setColorImg={colorImageHandler}
+            color={colorImg}
+          />
+          <Storage
+            phony={phony}
+            setPrice={priceHandler}
+            price={price}
+            setStorage={storageHandler}
+            storage={storage}
+          />
+          <div className={classes.containerPrice}>
+            <h3>{price ? price : phony.price128GB} $</h3>
+            <button className={classes.button} onClick={addItemToCart}>
+              Add to Cart
+            </button>
+          </div>
         </div>
-      </div>
-    </div>
+      </div>}
+    </Fragment>
   );
 };
 
