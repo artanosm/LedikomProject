@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./PhoneServiceDetails.module.css";
 import ServiceCard from "./ServiceCard";
@@ -7,8 +7,11 @@ import Screen from "../../assets/service/screen.png";
 import BackGlass from "../../assets/service/backGlass.png";
 import BackCamera from "../../assets/service/backCamera.png";
 import FrontCamera from "../../assets/service/frontCamera.png";
+import ServiceContext from "../../store/service-context";
+import ServiceItem from "./ServiceItem";
 
 const PhoneServiceDetails = () => {
+  const serviceCtx = useContext(ServiceContext);
   const param = useParams();
   const [item, setItem] = useState();
 
@@ -21,7 +24,6 @@ const PhoneServiceDetails = () => {
         throw new Error("Something went wrong");
       }
       const responseData = await response.json();
-      console.log(responseData);
 
       setItem(responseData);
     };
@@ -29,14 +31,21 @@ const PhoneServiceDetails = () => {
       console.log(error);
     });
   }, [param.serviceId]);
-  console.log(item, "item");
+
   let itemD;
   if (item) {
     itemD = item;
   } else {
     return;
   }
-  console.log(itemD);
+
+  const serviceList = (
+    <ul className={classes.cartContainer}>
+      {serviceCtx.items.map((item, key) => {
+        return <ServiceItem key={key} name={item.name} price={item.price} />;
+      })}
+    </ul>
+  );
   return (
     <div className={classes.main}>
       <div className={classes.imageContainer}>
@@ -71,6 +80,17 @@ const PhoneServiceDetails = () => {
             price={itemD.frontCamera.price}
             name="Front Camera"
           />
+        </div>
+        <div className={classes.serviceAmountsContainer}>
+          {serviceList}
+          
+          {serviceCtx.items.length > 0 && (
+            <div className={classes.totalAmount}>
+              <p>Total:</p>
+              <p className={classes.totalNum}>{serviceCtx.totalAmount} $</p>
+            </div>
+            
+          )}
         </div>
       </div>
     </div>

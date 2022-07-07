@@ -4,14 +4,17 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import CartProvider from "./store/CartProvider";
+import ServiceProvider from "./store/ServiceProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-    <CartProvider>
-      <App />
-    </CartProvider>
+      <CartProvider>
+        <ServiceProvider>
+          <App />
+        </ServiceProvider>
+      </CartProvider>
     </Router>
   </React.StrictMode>
 );

@@ -23,10 +23,12 @@
 }
 
 .clearCart {
-    background-color: rgb(255, 66, 66);
+    background-color: rgb(255, 228, 228);
+    color: red;
 } 
 .clearCart:hover {
-    background-color: rgb(193, 3, 3);
+    color: white;
+    background-color: rgb(249, 63, 63);
 }
 .checkOut {
     background-color: rgb(49, 165, 49);

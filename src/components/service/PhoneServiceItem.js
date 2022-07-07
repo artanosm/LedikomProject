@@ -3,7 +3,7 @@ import classes from './PhoneServiceItem.module.css';
 import { Link } from 'react-router-dom';
 
 const PhoneServiceItem = ({item}) => {
-    console.log(item);
+    
   return (
     <Link to={item.id} className={classes.main}>
         <img src={item.image} alt='logo' />

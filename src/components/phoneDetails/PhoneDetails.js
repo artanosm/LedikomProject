@@ -23,7 +23,7 @@ const PhoneDetails = (props) => {
         throw new Error("Something went wrong");
       }
       const responseData = await response.json();
-      console.log(responseData);
+  
       const loadedPhones = [];
 
       for (const key in responseData) {

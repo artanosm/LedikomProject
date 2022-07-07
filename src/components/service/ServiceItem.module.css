@@ -1,0 +1,16 @@
+.main {
+    width: 100% ;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgray;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+.name {
+    font-weight: 100;
+    margin: 0;
+}
+.price {
+    color: magenta;
+    margin:0;
+}
