@@ -7,3 +7,11 @@ padding: 2rem;
     flex-wrap: wrap;
     gap: 2rem;
 }
+
+@media (max-width:500px){
+    .listItems {
+        gap: 1rem;
+        width: 100%;
+        flex-direction: column;
+    }
+}

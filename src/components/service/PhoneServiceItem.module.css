@@ -22,4 +22,17 @@
       font-weight: 700;
       color: darkgray;
   }
+
   
+  @media (max-width: 500px) {
+    .main {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        max-width: 350px;
+    }
+    .main img {
+        width: 45%;
+    }
+  }

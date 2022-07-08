@@ -27,7 +27,7 @@ const Header = (props) => {
         <li className="option" onClick={closeMobileMenu}>
           <Link to="/">Home</Link>
         </li>
-        <li className="option phones" onClick={closeMobileMenu}>
+        <li className="option" onClick={closeMobileMenu}>
           <Link to="/phones">Phones </Link>
         </li>
         <li className="option" onClick={closeMobileMenu}>

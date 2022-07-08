@@ -4,6 +4,7 @@ import classes from "./PhoneDetails.module.css";
 import Colors from "./Colors";
 import Storage from "./Storage";
 import CartContext from "../../store/cart-context";
+import CheckIcon from '@mui/icons-material/Check';
 
 const PhoneDetails = (props) => {
   const cartCtx = useContext(CartContext);
@@ -12,6 +13,7 @@ const PhoneDetails = (props) => {
   const [price, setPrice] = useState("");
   const [storage, setStorage] = useState("");
   const [phone, setPhone] = useState(null);
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     const fetchPhones = async () => {
@@ -60,13 +62,13 @@ const PhoneDetails = (props) => {
       setPhone(...found);
       setColorImg(found[0].image);
       setPrice(found[0]?.price64GB);
-      if (found[0]?.price64GB === "") {
-        setPrice(found[0].price128GB);
-      }
+      // if (found[0]?.price64GB === "") {
+      //   setPrice(found[0].price128GB);
+      // }
       setStorage(found[0]?.storage64GB);
-      if (found[0]?.storage64GB === "") {
-        setStorage(found[0]?.storage128GB);
-      }
+      // if (found[0]?.storage64GB === "") {
+      //   setStorage(found[0]?.storage128GB);
+      // }
     };
 
     fetchPhones().catch((error) => {
@@ -87,7 +89,11 @@ const PhoneDetails = (props) => {
     setStorage(storage);
   };
 
+ 
+
   const addItemToCart = () => {
+    setAlert(true);
+    setTimeout(()=>setAlert(false),3000)
     let rand =
       Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({
@@ -95,7 +101,6 @@ const PhoneDetails = (props) => {
       model: phony.model,
       brand: phony.brand,
       storage: storage,
-      // + Converts string to number
       price: +price,
       color: colorImg,
       amount: 1,
@@ -104,6 +109,7 @@ const PhoneDetails = (props) => {
   return (
     <Fragment>
       {/* {!phone && <h2>Not Found</h2>} */}
+      {alert && <div className={classes.alert}><CheckIcon fontSize="large" /> <p>Item Added to Cart</p></div>}
       {phone && (
         <div className={classes.container}>
           <div className={classes.imageContainer}>
@@ -133,7 +139,7 @@ const PhoneDetails = (props) => {
               setColorImg={colorImageHandler}
               color={colorImg}
             />
-            
+
             <Storage
               phony={phony}
               setPrice={priceHandler}
