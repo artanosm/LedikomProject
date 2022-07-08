@@ -38,7 +38,7 @@
   transition: all 0.3s ease;
 }
 .icon:hover {
-  color: rgb(234, 57, 234);
+  color: rgb(238 49 131);
 }
 .header {
   width: 100%;
@@ -102,7 +102,7 @@
 }
 
 .option a:hover {
-  color: rgb(234, 57, 234);
+  color: rgb(238 49 131);
 }
 
 .mobile-menu {
@@ -180,7 +180,7 @@
   }
 
   .option a:hover {
-    color: rgb(234, 57, 234);
+    color: rgb(238 49 131);
   }
   .mobile-menu {
     width: 10%;

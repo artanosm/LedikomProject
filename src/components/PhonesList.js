@@ -4,7 +4,6 @@ import classes from "./PhonesList.module.css";
 
 const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
   const [phones, setPhones] = useState([]);
-
   useEffect(() => {
     const fetchPhones = async () => {
       const response = await fetch(
@@ -87,7 +86,6 @@ const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
     itemsToDisplay = sortedPhones;
   }
  
-
   const phoneItems = itemsToDisplay.map((phone) => {
     let price1;
     // takes the prices in price property

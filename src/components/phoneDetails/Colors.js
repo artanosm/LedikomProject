@@ -4,7 +4,7 @@ import classes from "./Colors.module.css";
 const Colors = ({ phony, setColorImg, color }) => {
   return (
     <div>
-      <h3>Colors:</h3>
+      <h4 className={classes.title}>Colors:</h4>
       <div className={classes.colorsContainer}>
         {phony.black && (
           <div

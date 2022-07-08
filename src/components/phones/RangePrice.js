@@ -8,7 +8,7 @@ const theme = createTheme({
   palette: {
     primary: {
       // Magenta color
-      main: "#ea39ea",
+      main: "#ee3183",
     }
   },
 });

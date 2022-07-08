@@ -7,7 +7,7 @@ function Storage({ phony, setPrice, price, storage, setStorage }) {
   }
   return (
     <div>
-      <h3>Storage:</h3>
+      <h4 className={classes.title}>Storage:</h4>
       <div className={classes.storageContainer}>
         {phony.storage64GB && (
           <div

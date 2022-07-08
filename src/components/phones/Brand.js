@@ -7,6 +7,7 @@ const options = [
   { value: "Xiaomi", label: "Xiaomi" },
   { value: "Huawei", label: "Huawei" },
   { value: "OnePlus", label: "OnePlus" },
+  { value: "Google", label: "Google" },
 ];
 
 const customStyles = {
@@ -15,7 +16,7 @@ const customStyles = {
     backgroundColor: "white",
     borderBottom: "1px dotted darkgrey",
     color: state.isSelected ? "black" : "darkgrey",
-    color: state.isFocused ? "#ff51ff" : "darkgrey",
+    color: state.isFocused ? "#ee3183" : "darkgrey",
 
     padding: 8,
   }),
@@ -31,26 +32,6 @@ const customStyles = {
   },
 };
 
-// const customStyles = {
-//   option: (provided, state) => ({
-//     ...provided,
-//     backgroundColor: "white",
-//     borderBottom: "1px dotted darkgrey",
-//     color: state.isSelected ? "black" : "darkgrey",
-//     color: state.isFocused ? "#ff51ff": "darkgrey",
-//     padding: 8,
-//   }),
-//   //   control: () => ({
-//   //     // none of react-select's styles are passed to <Control />
-//   //     width: 200,
-//   //   }),
-//   singleValue: (provided, state) => {
-//     const opacity = state.isDisabled ? 0.5 : 1;
-//     const transition = "opacity 300ms";
-
-//     return { ...provided, opacity, transition };
-//   },
-// };
 
 const Brand = ({ brand, setBrand }) => {
   return (
@@ -67,8 +48,8 @@ const Brand = ({ brand, setBrand }) => {
           borderRadius: 15,
           colors: {
             ...theme.colors,
-            primary25: "#ff51ff",
-            primary: "#ff51ff",
+            primary25: "#ee3183",
+            primary: "#ee3183",
           },
         })}
       />

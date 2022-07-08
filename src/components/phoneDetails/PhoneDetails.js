@@ -23,7 +23,7 @@ const PhoneDetails = (props) => {
         throw new Error("Something went wrong");
       }
       const responseData = await response.json();
-  
+
       const loadedPhones = [];
 
       for (const key in responseData) {
@@ -103,44 +103,53 @@ const PhoneDetails = (props) => {
   };
   return (
     <Fragment>
-      {!phone && <h2>Not Found</h2>}
-      {phone && <div className={classes.container}>
-        <div className={classes.imageContainer}>
-          <img className={classes.image} src={colorImg} alt="phone"></img>
-        </div>
-        <div className={classes.dataContainer}>
-          <h1 className={classes.h1}>{phony.model}</h1>
-          <div>
-            <h3>Brand:</h3> {phony.brand}
+      {/* {!phone && <h2>Not Found</h2>} */}
+      {phone && (
+        <div className={classes.container}>
+          <div className={classes.imageContainer}>
+            <img className={classes.image} src={colorImg} alt="phone"></img>
           </div>
-          <div>
-            <h3>Waranty:</h3> 12 months
-          </div>
-          {phony.ram && (
+          <div className={classes.dataContainer}>
+            <h1 className={classes.h1}>{phony.model}</h1>
             <div>
-              <h3>Ram:</h3> {phony.ram}
+              <h4 className={classes.titles}>Brand:</h4>{" "}
+              <span>{phony.brand}</span>
             </div>
-          )}
-          <Colors
-            phony={phony}
-            setColorImg={colorImageHandler}
-            color={colorImg}
-          />
-          <Storage
-            phony={phony}
-            setPrice={priceHandler}
-            price={price}
-            setStorage={storageHandler}
-            storage={storage}
-          />
-          <div className={classes.containerPrice}>
-            <h3>{price ? price : phony.price128GB} $</h3>
-            <button className={classes.button} onClick={addItemToCart}>
-              Add to Cart
-            </button>
+            <hr />
+            <div>
+              <h4 className={classes.titles}>Waranty:</h4>{" "}
+              <span>12 months</span>
+            </div>
+            <hr />
+            {phony.ram && (
+              <div>
+                <h4 className={classes.titles}>Ram:</h4>{" "}
+                <span>{phony.ram}</span>
+              </div>
+            )}
+            <hr />
+            <Colors
+              phony={phony}
+              setColorImg={colorImageHandler}
+              color={colorImg}
+            />
+            
+            <Storage
+              phony={phony}
+              setPrice={priceHandler}
+              price={price}
+              setStorage={storageHandler}
+              storage={storage}
+            />
+            <div className={classes.containerPrice}>
+              <h3>{price ? price : phony.price128GB} $</h3>
+              <button className={classes.button} onClick={addItemToCart}>
+                Add to Cart
+              </button>
+            </div>
           </div>
         </div>
-      </div>}
+      )}
     </Fragment>
   );
 };

@@ -33,6 +33,7 @@ const ServiceBrand = () => {
           backGlass: responseData[key].backGlass,
           backCamera: responseData[key].backCamera,
           frontCamera: responseData[key].frontCamera,
+          speaker: responseData[key].speaker,
         });
       }
       return loadedPhones;
@@ -46,7 +47,7 @@ const ServiceBrand = () => {
   const filtered = phones.filter((phone) => phone.brand === brand.brand);
   
   const phoneItems = (
-    <ul>
+    <ul className={classes.listItems}>
       {filtered.map((item, key) => {
         return <PhoneServiceItem key={key} item={item} />;
       })}

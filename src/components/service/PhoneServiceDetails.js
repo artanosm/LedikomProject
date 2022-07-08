@@ -7,6 +7,7 @@ import Screen from "../../assets/service/screen.png";
 import BackGlass from "../../assets/service/backGlass.png";
 import BackCamera from "../../assets/service/backCamera.png";
 import FrontCamera from "../../assets/service/frontCamera.png";
+import Speaker from "../../assets/service/speaker.png";
 import ServiceContext from "../../store/service-context";
 import ServiceItem from "./ServiceItem";
 
@@ -55,41 +56,60 @@ const PhoneServiceDetails = () => {
         <h2>{itemD.model}</h2>
         <hr />
         <div className={classes.servicesContainer}>
-          <ServiceCard
-            itemImage={Screen}
-            price={itemD.screen.price}
-            name="Screen"
-          />
-          <ServiceCard
-            itemImage={Battery}
-            price={itemD.battery.price}
-            name="Battery"
-          />
-          <ServiceCard
-            itemImage={BackGlass}
-            price={itemD.backGlass.price}
-            name="Back Glass"
-          />
-          <ServiceCard
-            itemImage={BackCamera}
-            price={itemD.backCamera.price}
-            name="Back Camera"
-          />
-          <ServiceCard
-            itemImage={FrontCamera}
-            price={itemD.frontCamera.price}
-            name="Front Camera"
-          />
+          {itemD.screen.price !== 0 && (
+            <ServiceCard
+              itemImage={Screen}
+              price={itemD.screen.price}
+              name="Screen"
+            />
+          )}
+          {itemD.battery.price !== 0 && (
+            <ServiceCard
+              itemImage={Battery}
+              price={itemD.battery.price}
+              name="Battery"
+            />
+          )}
+          {itemD.backGlass.price !== 0 && (
+            <ServiceCard
+              itemImage={BackGlass}
+              price={itemD.backGlass.price}
+              name="Back Glass"
+            />
+          )}
+          {itemD.backCamera.price !== 0 && (
+            <ServiceCard
+              itemImage={BackCamera}
+              price={itemD.backCamera.price}
+              name="Back Camera"
+            />
+          )}
+          {itemD.frontCamera.price !== 0 && (
+            <ServiceCard
+              itemImage={FrontCamera}
+              price={itemD.frontCamera.price}
+              name="Front Camera"
+            />
+          )}
+          {itemD.speaker.price !== 0 && (
+            <ServiceCard
+              itemImage={Speaker}
+              price={itemD.speaker.price}
+              name="Speaker"
+            />
+          )}
         </div>
         <div className={classes.serviceAmountsContainer}>
           {serviceList}
-          
+
           {serviceCtx.items.length > 0 && (
+            <div>
             <div className={classes.totalAmount}>
               <p>Total:</p>
               <p className={classes.totalNum}>{serviceCtx.totalAmount} $</p>
             </div>
-            
+            <p className={classes.callP}>Call On:<span className={classes.numS}>070 660 038</span></p>
+            </div>
           )}
         </div>
       </div>

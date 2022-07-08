@@ -12,7 +12,7 @@ const customStyles = {
     backgroundColor: "white",
     borderBottom: "1px dotted darkgrey",
     color: state.isSelected ? "black" : "darkgrey",
-    color: state.isFocused ? "#ff51ff" : "darkgrey",
+    color: state.isFocused ? "#ee3183" : "darkgrey",
 
     padding: 8,
   }),
@@ -43,8 +43,8 @@ const SortItems = ({ sort, setSort }) => {
           borderRadius: 15,
           colors: {
             ...theme.colors,
-            primary25: "#ff51ff",
-            primary: "#ff51ff",
+            primary25: "#ee3183",
+            primary: "#ee3183",
           },
         })}
       />

@@ -1,6 +1,9 @@
 .main {
+padding: 2rem;
+}
+
+.listItems {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
-    margin: 2rem;
+    gap: 2rem;
 }

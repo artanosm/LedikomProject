@@ -11,6 +11,7 @@ const AddService = () => {
   const batteryRef = useRef();
   const frontCameraRef = useRef();
   const backCameraRef = useRef();
+  const speakerRef = useRef();
 
   let navigate = useNavigate();
 
@@ -43,6 +44,7 @@ const AddService = () => {
       battery:{price:+batteryRef.current.value},
       frontCamera:{price:+frontCameraRef.current.value},
       backCamera:{price:+backCameraRef.current.value},
+      speaker:{price:+speakerRef.current.value},
     };
 
     console.log(phone, "phone");
@@ -73,14 +75,22 @@ const AddService = () => {
         <div>
             <label htmlFor="screen">Screen</label>
             <input type="number" id="screen" ref={screenRef}></input>
+            <br/>
             <label htmlFor="backGlass">Back Glass</label>
             <input type="number" id="backGlass" ref={backGlassRef}></input>
+            <br/>
             <label htmlFor="battery">Battery</label>
             <input type="number" id="battery" ref={batteryRef}></input>
+            <br/>
             <label htmlFor="frontCamera">Front Camera</label>
             <input type="number" id="frontCamera" ref={frontCameraRef}></input>
+            <br/>
             <label htmlFor="backCamera">Back Camera</label>
             <input type="number" id="backCamera" ref={backCameraRef}></input>
+            <br/>
+            <label htmlFor="speaker">Speaker</label>
+            <input type="number" id="speaker" ref={speakerRef}></input>
+            <br/>
         </div>
         
         <button onClick={submitHandler} type="submit">Add Phone</button>

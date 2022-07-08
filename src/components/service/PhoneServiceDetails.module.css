@@ -15,6 +15,7 @@
 }
 .imageContainer img {
     width: 100%;
+    padding: 1rem;
 }
 
 .headerService {
@@ -44,4 +45,28 @@
 
 .totalNum {
     color: magenta;
+}
+
+.callP {
+    font-weight: 700;
+    font-size: 1rem;
+}
+.numS{
+    color: magenta;
+}
+
+@media only screen and (max-width: 500px) {
+    .main {
+        flex-direction: column;
+       align-items: center;
+        gap: 0;
+        margin: 0.5rem;
+    }
+    .imageContainer {
+        width: 80%;
+    }
+    .servicesContainer {
+        gap:1rem;
+    }
+   
 }

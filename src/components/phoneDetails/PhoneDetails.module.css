@@ -8,17 +8,27 @@
 
 .imageContainer {
   margin: 3rem 1rem 1rem;
-
   width: 40%;
+  min-width: 250px;
 }
 
-
+hr {
+  border: 0.5px solid lightgray;
+}
 
 .dataContainer {
   width: 50%;
   padding: 1rem;
 }
 
+.dataContainer div span {
+  color: rgb(238 49 131);
+}
+.titles {
+  color: black;
+  margin:  0.5rem 0;
+  font-weight: 100;
+}
 .image {
   height: auto;
   width: 100%;
@@ -47,14 +57,14 @@
   border-radius: 10px;
   margin: 1rem;
   padding: 1rem;
-  color: rgb(255, 0, 255);
+  color: rgb(238 49 131);
   box-shadow: 0 2px 10px rgb(219, 219, 219);
   transition: all 0.2s ease;
   /* box-shadow: 0 1px 5px rgb(84, 84, 84); */
 }
 .button:hover {
   cursor: pointer;
-  background-color: rgb(255, 0, 255);
+  background-color: rgb(238 49 131);
   color: white;
 }
 
