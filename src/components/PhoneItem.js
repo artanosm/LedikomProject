@@ -18,7 +18,7 @@ const PhoneItem = (props) => {
           {/* {props.price?.price64GB
             ? `${props.price?.price64GB}`
             : `${props.price?.price128GB}`} $ */}
-          {props.price1}$
+          {props.price1} $
         </p>
         </div>
       </div>

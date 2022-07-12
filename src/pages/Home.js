@@ -8,14 +8,18 @@ const Home = () => {
   const date = true
   return (
     <div>
-      <div className={classes.sliderContainer}>
-        <SliderImages />
-      </div>
+      {/* <div className={classes.sliderContainer}> */}
+        <SliderImages className={classes.sliderContainer} />
+      {/* </div> */}
       <div className={classes.container}>
         <h2>New Products</h2>
-        <PhonesList numberOfItems={{value:4}} date={date}/>
+        <PhonesList numberOfItems={{value:8}} date={date}/>
       </div>
       <FreeDelivery/>
+      <div className={classes.container}>
+        <h2>Suggested Products</h2>
+        <PhonesList numberOfItems={{value:4}} sort={{value:'ascending'}} date={date}/>
+      </div>
     </div>
   );
 };

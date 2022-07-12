@@ -1,16 +1,18 @@
 .container {
-    margin: 2vw;
+  margin: 2vw;
+  display: flex;
+  flex-direction: column;
 }
-.container h3 {
-    display: flex;
-    justify-content: center;
+.container h2 {
+  color: rgb(43, 46, 63);
+
+  align-self: center;
 }
 
 .sliderContainer {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
 }
-

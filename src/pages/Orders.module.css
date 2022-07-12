@@ -22,14 +22,15 @@
     width: 8rem;
     margin: 0;
     height: 2rem;
-    color:darkgray;
+    color:rgb(118, 117, 117);
+    transition: all 0.3s linear;
 }
 .headerContainer button:hover {
-    background-color: rgb(240, 97, 233);
+    background-color: #ee3183;
     color: white;
 }
 
 .headerContainer button.active {
-    background-color: rgb(240, 97, 233);
+    background-color: #ee3183;
     color: white;
 }

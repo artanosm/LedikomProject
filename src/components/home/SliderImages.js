@@ -21,16 +21,15 @@ const SliderImages = () => {
 
   return (
     <div className={classes.sliderContainer}>
-      <Carousel
-        
+      <Carousel 
         data={images}
-        time={2500}
+        time={3000}
         width="100%"
         height="100%"
         radius="10px"
         automatic={true}
         dots={true}
-        slideBackgroundColor="darkgrey"
+        slideBackgroundColor="white"
         slideImageFit="contain"
         style={{
           textAlign: "center",

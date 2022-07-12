@@ -106,15 +106,15 @@ const AddPhone = () => {
         <div>
           <label htmlFor="storage">Storage</label>
           <input type="text" id="storage" ref={storageRef64GB} />
-          <span>64GB</span>
+          <span>Storage 1</span>
           <input type="text" id="storage" ref={storageRef128GB} />
-          <span>128GB</span>
+          <span>Storage 2</span>
           <input type="text" id="storage" ref={storageRef256GB} />
-          <span>256GB</span>
+          <span>Storage 3</span>
           <input type="text" id="storage" ref={storageRef512GB} />
-          <span>512GB</span>
+          <span>Storage 4</span>
           <input type="text" id="storage" ref={storageRef1TB} />
-          <span>1TB</span>
+          <span>Storage 5</span>
         </div>
         <div>
           <label htmlFor="ram">Ram</label>
@@ -123,15 +123,15 @@ const AddPhone = () => {
         <div>
           <label htmlFor="price">Price</label>
           <input type="number" id="price" ref={price64GBRef} />
-          <span>64 GB</span>
+          <span>Price 1</span>
           <input type="number" id="price" ref={price128GBRef} />
-          <span>128 GB</span>
+          <span>Price 2</span>
           <input type="number" id="price" ref={price256GBRef} />
-          <span>256 GB</span>
+          <span>Price 3</span>
           <input type="number" id="price" ref={price512GBRef} />
-          <span>512 GB</span>
+          <span>Price 4</span>
           <input type="number" id="price" ref={price1TBRef} />
-          <span>1 TB</span>
+          <span>Price 5</span>
         </div>
         <div>
           <label>Colors</label>

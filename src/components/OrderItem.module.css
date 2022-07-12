@@ -41,14 +41,29 @@
     width: 7rem;
     margin: 0;
     height: 2rem;
-    color:white;
+    
     margin: 1rem;
   }
 
   .deleteButton {
-    background-color: rgb(255, 66, 66);
+    color: red;
+    background-color: rgb(245, 237, 237);
+    transition: all 0.3s linear;
+  }
+
+  .deleteButton:hover {
+    color: white;
+    background-color: red;
   }
 
   .completeButton {
-    background-color: rgb(26, 120, 244);
+    color: rgb(48, 48, 255);
+    background-color: rgb(224, 237, 255);
+    transition: all 0.3s linear;
+
+  }
+
+  .completeButton:hover {
+    color: white;
+    background-color: rgb(64, 64, 255);
   }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ReactComponent as CloseMenu } from "../assets/x.svg";
 import { ReactComponent as MenuIcon } from "../assets/menu.svg";
-import { BsPerson } from "react-icons/bs";
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 import HeaderCart from "./HeaderCart";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ const Header = (props) => {
         <li className="option" onClick={closeMobileMenu}>
           <Link to="/">Home</Link>
         </li>
-        <li className="option" onClick={closeMobileMenu}>
+        <li className="option phones" onClick={closeMobileMenu}>
           <Link to="/phones">Phones </Link>
         </li>
         <li className="option" onClick={closeMobileMenu}>
@@ -38,7 +38,7 @@ const Header = (props) => {
       <div className="cart">
         <Link to="/login">
           <div className="icon">
-            <BsPerson size="1.2em" />
+            <PersonOutlineOutlinedIcon fontSize="medium"/>
           </div>
         </Link>
         <HeaderCart className="cart" onClick={props.onShowCart} />

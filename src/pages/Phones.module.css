@@ -37,7 +37,7 @@
         padding: 0.3rem 0.5rem;
     }
     .priceRangeContainer h4 {
-        padding-top: 0.5rem;
+        padding-top: 0rem;
         
     }
     .filterContainer {
@@ -53,12 +53,14 @@
         display: flex;
     }
     .showFilter {
-        display: block;
-        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        width: fit-content;
         background-color: white;
         border: 1px solid darkgray;
         border-radius: 10px;
         margin: 0.5rem;
-        padding: 1%;
     }
 }

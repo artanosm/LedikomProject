@@ -4,7 +4,7 @@ import classes from "./PhoneDetails.module.css";
 import Colors from "./Colors";
 import Storage from "./Storage";
 import CartContext from "../../store/cart-context";
-import CheckIcon from '@mui/icons-material/Check';
+import CheckIcon from "@mui/icons-material/Check";
 
 const PhoneDetails = (props) => {
   const cartCtx = useContext(CartContext);
@@ -62,13 +62,7 @@ const PhoneDetails = (props) => {
       setPhone(...found);
       setColorImg(found[0].image);
       setPrice(found[0]?.price64GB);
-      // if (found[0]?.price64GB === "") {
-      //   setPrice(found[0].price128GB);
-      // }
       setStorage(found[0]?.storage64GB);
-      // if (found[0]?.storage64GB === "") {
-      //   setStorage(found[0]?.storage128GB);
-      // }
     };
 
     fetchPhones().catch((error) => {
@@ -89,11 +83,9 @@ const PhoneDetails = (props) => {
     setStorage(storage);
   };
 
- 
-
   const addItemToCart = () => {
     setAlert(true);
-    setTimeout(()=>setAlert(false),3000)
+    setTimeout(() => setAlert(false), 3000);
     let rand =
       Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({
@@ -109,7 +101,11 @@ const PhoneDetails = (props) => {
   return (
     <Fragment>
       {/* {!phone && <h2>Not Found</h2>} */}
-      {alert && <div className={classes.alert}><CheckIcon fontSize="large" /> <p>Item Added to Cart</p></div>}
+      <div
+        className={alert ? `${classes.alert} ${classes.active}` : classes.alert}
+      >
+        <CheckIcon fontSize="large" /> <p>Item Added to Cart</p>
+      </div>
       {phone && (
         <div className={classes.container}>
           <div className={classes.imageContainer}>

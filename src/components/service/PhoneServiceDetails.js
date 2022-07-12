@@ -108,7 +108,7 @@ const PhoneServiceDetails = () => {
               <p>Total:</p>
               <p className={classes.totalNum}>{serviceCtx.totalAmount} $</p>
             </div>
-            <p className={classes.callP}>Call On:<span className={classes.numS}>070 660 038</span></p>
+            <p className={classes.callP}>Call On: <span className={classes.numS}>  070 660 038</span></p>
             </div>
           )}
         </div>

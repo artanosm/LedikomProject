@@ -14,12 +14,12 @@
   transition: all 0.2s ease;
 }
 .main:hover {
-    border: solid 1.5px rgb(250, 115, 241);
+    border: solid 1.5px rgb(238 49 131);
     cursor: pointer;
 }
 
 .active {
-  border: solid 1.5px rgb(250, 115, 241);
+  border: solid 1.5px rgb(238 49 131);
 }
 
 .main img {
