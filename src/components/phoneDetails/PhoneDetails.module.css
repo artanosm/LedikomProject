@@ -47,13 +47,13 @@ hr {
 }
 
 .dataContainer div span {
-  color: rgb(238 49 131);
+  color: #ee3183;
 }
-.titles {
+/* .titles {
   color: black;
   margin:  0.5rem 0;
   font-weight: 100;
-}
+} */
 .image {
   height: auto;
   width: 100%;

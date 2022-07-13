@@ -1,0 +1,12 @@
+.storageItem {
+    color: rgb(238, 47, 130);
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgb(219, 219, 219);
+    border-radius: 10px;
+    width: 6rem;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+  .active {
+    box-shadow: 0 2px 10px rgb(238 49 131);
+  }  

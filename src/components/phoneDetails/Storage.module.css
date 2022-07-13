@@ -9,20 +9,7 @@
   margin: 1rem 0;
 }
 
-.storageItem {
-  color: rgb(238 49 131);
-  padding: 1rem;
-  box-shadow: 0 2px 10px rgb(219, 219, 219);
-  border-radius: 10px;
-  width: 6rem;
-  text-align: center;
-  transition: all 0.2s ease;
-}
-
 .storageContainer div:hover {
   cursor: pointer;
 }
 
-.active {
-  box-shadow: 0 2px 10px rgb(238 49 131);
-}

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import classes from "./PhoneDetails.module.css";
 import Colors from "./Colors";
 import Storage from "./Storage";
+import InfoItem from "./InfoItem";
 import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
 
@@ -48,13 +49,13 @@ const PhoneDetails = (props) => {
           storage1TB: responseData[key].storage.storage1TB,
 
           ram: responseData[key].ram,
+          waranty: responseData[key].waranty,
 
-          black: responseData[key].colors?.black,
-          white: responseData[key].colors?.white,
-          red: responseData[key].colors?.red,
-          blue: responseData[key].colors?.blue,
-          green: responseData[key].colors?.green,
-          gold: responseData[key].colors?.gold,
+          color1: responseData[key].colors?.color1,
+          color2: responseData[key].colors?.color2,
+          color3: responseData[key].colors?.color3,
+          color4: responseData[key].colors?.color4,
+          color5: responseData[key].colors?.color5,
         });
       }
 
@@ -98,6 +99,7 @@ const PhoneDetails = (props) => {
       amount: 1,
     });
   };
+
   return (
     <Fragment>
       {/* {!phone && <h2>Not Found</h2>} */}
@@ -113,36 +115,25 @@ const PhoneDetails = (props) => {
           </div>
           <div className={classes.dataContainer}>
             <h1 className={classes.h1}>{phony.model}</h1>
-            <div>
-              <h4 className={classes.titles}>Brand:</h4>{" "}
-              <span>{phony.brand}</span>
-            </div>
-            <hr />
-            <div>
-              <h4 className={classes.titles}>Waranty:</h4>{" "}
-              <span>12 months</span>
-            </div>
-            <hr />
-            {phony.ram && (
-              <div>
-                <h4 className={classes.titles}>Ram:</h4>{" "}
-                <span>{phony.ram}</span>
-              </div>
+            <InfoItem title={"Brand:"} content={phony.brand} />
+            <InfoItem title={"Waranty:"} content={phony.waranty} />
+            {phony.ram && <InfoItem title={"Ram:"} content={phony.ram} />}
+            {phony.color1.hex && (
+              <Colors
+                phony={phony}
+                setColorImg={colorImageHandler}
+                colorImg={colorImg}
+              />
             )}
-            <hr />
-            <Colors
-              phony={phony}
-              setColorImg={colorImageHandler}
-              color={colorImg}
-            />
-
-            <Storage
-              phony={phony}
-              setPrice={priceHandler}
-              price={price}
-              setStorage={storageHandler}
-              storage={storage}
-            />
+            {phony.storage64GB && (
+              <Storage
+                phony={phony}
+                setPrice={priceHandler}
+                price={price}
+                setStorage={storageHandler}
+                storage={storage}
+              />
+            )}
             <div className={classes.containerPrice}>
               <h3>{price ? price : phony.price128GB} $</h3>
               <button className={classes.button} onClick={addItemToCart}>
@@ -157,3 +148,4 @@ const PhoneDetails = (props) => {
 };
 
 export default PhoneDetails;
+
