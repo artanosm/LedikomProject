@@ -6,16 +6,16 @@ import Storage from "./Storage";
 import InfoItem from "./InfoItem";
 import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
+import { motion } from "framer-motion";
 
 const PhoneDetails = (props) => {
   const cartCtx = useContext(CartContext);
   const { phoneId } = useParams();
-  const [colorImg, setColorImg] = useState("");
+  const [colorImg, setColorImg] = useState({});
   const [price, setPrice] = useState("");
   const [storage, setStorage] = useState("");
   const [phone, setPhone] = useState(null);
   const [alert, setAlert] = useState(false);
-
   useEffect(() => {
     const fetchPhones = async () => {
       const response = await fetch(
@@ -31,10 +31,10 @@ const PhoneDetails = (props) => {
 
       for (const key in responseData) {
         loadedPhones.push({
-          id: key,
+          id: responseData[key].model.replace(/\s/g, "-"),
           model: responseData[key].model,
           brand: responseData[key].brand,
-          image: responseData[key].image,
+          storageOrCase: responseData[key].storageOrCase,
 
           price64GB: responseData[key].price.price64GB,
           price128GB: responseData[key].price.price128GB,
@@ -61,7 +61,7 @@ const PhoneDetails = (props) => {
 
       const found = loadedPhones.filter((f) => f.id === phoneId);
       setPhone(...found);
-      setColorImg(found[0].image);
+      setColorImg({ color: found[0].color1.image, name: found[0].color1.name });
       setPrice(found[0]?.price64GB);
       setStorage(found[0]?.storage64GB);
     };
@@ -111,13 +111,17 @@ const PhoneDetails = (props) => {
       {phone && (
         <div className={classes.container}>
           <div className={classes.imageContainer}>
-            <img className={classes.image} src={colorImg} alt="phone"></img>
+            <img
+              className={classes.image}
+              src={colorImg.color}
+              alt="phone"
+            ></img>
           </div>
           <div className={classes.dataContainer}>
             <h1 className={classes.h1}>{phony.model}</h1>
-            <InfoItem title={"Brand:"} content={phony.brand} />
-            <InfoItem title={"Waranty:"} content={phony.waranty} />
-            {phony.ram && <InfoItem title={"Ram:"} content={phony.ram} />}
+            <InfoItem title="Brand:" content={phony.brand} />
+            <InfoItem title="Waranty:" content={phony.waranty} />
+            {phony.ram && <InfoItem title="Ram:" content={phony.ram} />}
             {phony.color1.hex && (
               <Colors
                 phony={phony}
@@ -134,12 +138,23 @@ const PhoneDetails = (props) => {
                 storage={storage}
               />
             )}
-            <div className={classes.containerPrice}>
+            <motion.div
+              className={classes.containerPrice}
+              initial={{ x: "-100vw" }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <h3>{price ? price : phony.price128GB} $</h3>
-              <button className={classes.button} onClick={addItemToCart}>
+              <motion.button
+                className={classes.button}
+                onClick={addItemToCart}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.1 }}
+              >
                 Add to Cart
-              </button>
-            </div>
+              </motion.button>
+            </motion.div>
           </div>
         </div>
       )}
@@ -148,4 +163,3 @@ const PhoneDetails = (props) => {
 };
 
 export default PhoneDetails;
-

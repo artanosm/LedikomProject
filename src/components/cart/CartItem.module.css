@@ -1,6 +1,6 @@
 .itemContainer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-around;
   gap: 1rem;
   align-items: center;
   align-content: center;
@@ -8,7 +8,7 @@
 }
 
 .itemContainer h3 {
-    width: 60%;
+  width: 60%;
   color: darkgray;
 }
 
@@ -18,9 +18,8 @@
 }
 
 .amountContainer {
-    justify-self: right;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 10%;
   gap: 1rem;
@@ -28,28 +27,19 @@
 
 .amountContainer button {
   background-color: white;
-  border: none
+  border: none;
 }
 
 @media only screen and (max-width: 500px) {
   .itemContainer {
-    justify-content: flex-start;
-    gap: 0.5rem;
+    justify-content: space-between;
+    gap: 0.2rem;
   }
 
-  .amountContainer {
-    width: 2%;
-    justify-content: space-around;
-  }
   .itemContainer h3 {
     width: 50%;
     font-size: small;
     padding-right: 2rem;
     color: darkgray;
-  }
-  .amountContainer p {
-    font-size: small;
-    padding: 0;
-    color: darkgrey;
   }
 }

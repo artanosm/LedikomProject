@@ -1,47 +1,87 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.css";
+import useFetch from "./customHooks/use-fetch";
 
-const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
+const getMultipleRandom = (arr, num) => {
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+
+  return shuffled.slice(0, num);
+};
+
+const PhonesList = ({
+  priceRange,
+  brand,
+  type,
+  sort,
+  date,
+  numberOfItems,
+  randomItems,
+}) => {
   const [phones, setPhones] = useState([]);
+
+  const [data] = useFetch(
+    "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
+  );
+
   useEffect(() => {
-    const fetchPhones = async () => {
-      const response = await fetch(
-        "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
-      );
-
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const responseData = await response.json();
-
+    if (data && data !== null) {
       const loadedPhones = [];
-
-      for (const key in responseData) {
+      for (const key in data) {
         loadedPhones.push({
-          date: responseData[key].date,
-          type: responseData[key].type,
-          id: key,
-          model: responseData[key].model,
-          brand: responseData[key].brand,
-          price: responseData[key].price,
-          image: responseData[key].image,
-          colors: responseData[key].colors,
-          storage: responseData[key].storage,
-          ram: responseData[key].ram,
+          date: data[key].date,
+          type: data[key].type,
+          id: data[key].model.replace(/\s/g, "-"),
+          model: data[key].model,
+          brand: data[key].brand,
+          price: data[key].price,
+          colors: data[key].colors,
+          storage: data[key].storage,
+          ram: data[key].ram,
         });
       }
 
       setPhones(loadedPhones);
-    };
+    }
+  }, [data]);
 
-    fetchPhones().catch((error) => {
-      console.log(error);
-    });
-  }, []);
+  // useEffect(() => {
+  //   const fetchPhones = async () => {
+  //     const response = await fetch(
+  //       "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error("Something went wrong");
+  //     }
+  //     const responseData = await response.json();
+
+  //     const loadedPhones = [];
+
+  //     for (const key in responseData) {
+  //       loadedPhones.push({
+  //         date: responseData[key].date,
+  //         type: responseData[key].type,
+  //         id: key,
+  //         model: responseData[key].model,
+  //         brand: responseData[key].brand,
+  //         price: responseData[key].price,
+  //         image: responseData[key].image,
+  //         colors: responseData[key].colors,
+  //         storage: responseData[key].storage,
+  //         ram: responseData[key].ram,
+  //       });
+  //     }
+
+  //     setPhones(loadedPhones);
+  //   };
+
+  //   fetchPhones().catch((error) => {
+  //     console.log(error);
+  //   });
+  // }, []);
 
   let filteredPhones;
-
   if (brand) {
     filteredPhones = phones.filter((phone) => phone.brand === brand.value);
   } else {
@@ -54,6 +94,7 @@ const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
   } else {
     filteredType = filteredPhones;
   }
+
   let sortedPhones;
   if (sort) {
     if (sort.value === "ascending") {
@@ -70,22 +111,33 @@ const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
   }
 
   // Arranges the products the newest first
-  if (date) {
+  date &&
     sortedPhones.sort((a, b) => {
-      // Turn your strings into dates, and then subtract them
-      // to get a value that is either negative, positive, or zero.
       return new Date(b.date) - new Date(a.date);
     });
-  }
+  // if (date) {
+  //   sortedPhones.sort((a, b) => {
+  //     // Turn your strings into dates, and then subtract them
+  //     // to get a value that is either negative, positive, or zero.
+  //     return new Date(b.date) - new Date(a.date);
+  //   });
+  // }
+
+  randomItems &&
+    (sortedPhones = getMultipleRandom(sortedPhones, numberOfItems.value));
 
   let itemsToDisplay;
- 
-  if (numberOfItems) {
-    itemsToDisplay = sortedPhones.slice(0, numberOfItems.value);
-  } else {
-    itemsToDisplay = sortedPhones;
-  }
- 
+
+  numberOfItems
+    ? (itemsToDisplay = sortedPhones.slice(0, numberOfItems.value))
+    : (itemsToDisplay = sortedPhones);
+
+  // if (numberOfItems) {
+  //   itemsToDisplay = sortedPhones.slice(0, numberOfItems.value);
+  // } else {
+  //   itemsToDisplay = sortedPhones;
+  // }
+
   const phoneItems = itemsToDisplay.map((phone) => {
     let price1;
     // takes the prices in price property
@@ -103,7 +155,6 @@ const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
           price={phone.price}
           brand={phone.brand}
           model={phone.model}
-          image={phone.image}
           colors={phone.colors}
         />
       );
@@ -118,12 +169,10 @@ const PhonesList = ({ priceRange, brand, type, sort, date, numberOfItems }) => {
           price={phone.price}
           brand={phone.brand}
           model={phone.model}
-          image={phone.image}
           colors={phone.colors}
         />
       );
     }
-
     return null;
   });
 

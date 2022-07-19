@@ -49,11 +49,7 @@ hr {
 .dataContainer div span {
   color: #ee3183;
 }
-/* .titles {
-  color: black;
-  margin:  0.5rem 0;
-  font-weight: 100;
-} */
+
 .image {
   height: auto;
   width: 100%;
@@ -98,7 +94,7 @@ hr {
   .container {
     flex-direction: column;
     justify-content: flex-start;
-    
+    gap: 0;
   }
   .alert {
     top: 10px;
@@ -110,10 +106,18 @@ hr {
   width: 80%;
 }
   .imageContainer {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
     width: 90%;
   }
   .dataContainer {
     width: 100%;
+    padding: 0 1rem 1rem 1rem;
+  }
+  .dataContainer h1 {
+    padding: 0 0 1rem 0;
+    margin: 0;
   }
   .containerPrice {
     width: 100%;

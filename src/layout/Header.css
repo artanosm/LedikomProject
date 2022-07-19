@@ -7,7 +7,7 @@
 }
 
 .option a {
-  padding: 40px 0;
+  padding: 10px 0;
 }
 
 .brands {
@@ -109,6 +109,9 @@
 .mobile-menu {
   display: none;
 }
+
+
+
 @media (max-width: 610px) {
   /*Mobile View */
   .header {

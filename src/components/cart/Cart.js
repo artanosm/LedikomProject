@@ -6,6 +6,7 @@ import CartItem from "./CartItem";
 import { useNavigate } from "react-router-dom";
 // import { Button } from "@mui/material";
 
+
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const Cart = (props) => {
             key={key}
             amount={item.amount}
             color={item.color}
+            colorName={item.colorName}
             storage={item.storage}
           />
         );
@@ -53,14 +55,13 @@ const Cart = (props) => {
           >
             Clear Cart
           </button>
-          <button
+          <button 
             className={`${classes.checkOut} ${classes.button}`}
             onClick={onCheckHandler}
           >
             Check out
           </button>
           {/* <Button size="small" onClick={onCheckHandler} variant='contained' color="success">Check Out</Button> */}
-
           <h3>Total: {cartCtx.totalAmount} $</h3>
         </div>
       )}

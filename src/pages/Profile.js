@@ -27,7 +27,6 @@ const Profile = () => {
         }
       );
       const responseData = await response.json();
-      console.log(responseData);
       const users = [];
       users.push({
         email: responseData.users[0].email,
@@ -37,7 +36,6 @@ const Profile = () => {
     };
     getUserData().catch((err) => console.log(err));
   }, [authCtx.isLoggedIn, authCtx.token]);
-  console.log(users);
   return (
     <div>
       {isLoggedIn && <h1>Welcome your email is {users[0].email} </h1>}

@@ -1,9 +1,10 @@
 import React, { useContext, useRef, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
+import AuthFormInput from "./AuthFormInput";
 import classes from "./AuthForm.module.css";
 
-const AuthForm = (props) => {
+const AuthForm =()  => {
   const [isLogin, setIsLogin] = useState(true);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +40,6 @@ const AuthForm = (props) => {
         body: JSON.stringify({
           email: enteredEmail,
           password: enteredPassword,
-
           returnSecureToken: true,
         }),
         headers: {
@@ -50,7 +50,7 @@ const AuthForm = (props) => {
       .then((res) => {
         setIsLoading(false);
         if (res.ok) {
-          console.log(res);
+          // console.log(res);
           return res.json();
         } else {
           return res.json().then((data) => {
@@ -81,7 +81,9 @@ const AuthForm = (props) => {
       <div className={classes.container}>
         <h1 className={classes.h1}>{isLogin ? "Login" : "Sign Up"}</h1>
         <form onSubmit={submitHandler} className={classes.formContainer}>
-          <div className={classes.formControl}>
+        <AuthFormInput ref={enteredEmailRef} placeholder='Your Email' type='email' id='email' />
+        <AuthFormInput ref={enteredPasswordRef} placeholder='Your Password' type='password' id='password' />
+          {/* <div className={classes.formControl}>
             <input
               ref={enteredEmailRef}
               placeholder="Your Email"
@@ -89,8 +91,8 @@ const AuthForm = (props) => {
               id="email"
               required
             />
-          </div>
-          <div className={classes.formControl}>
+          </div> */}
+          {/* <div className={classes.formControl}>
             <input
               ref={enteredPasswordRef}
               placeholder="Your Password"
@@ -98,7 +100,7 @@ const AuthForm = (props) => {
               id="password"
               required
             />
-          </div>
+          </div> */}
           <div className={classes.actions}>
             {!isLoading && (
               <button>{isLogin ? "Login" : "Create Account"}</button>

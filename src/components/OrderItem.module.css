@@ -14,6 +14,10 @@
     margin: 1rem;
   }
 
+  .container h4 {
+    color: rgb(64, 77, 112);
+  }
+
   .info {
     display: flex;
     flex-wrap: wrap;
@@ -57,7 +61,7 @@
   }
 
   .completeButton {
-    color: rgb(48, 48, 255);
+    color: rgb(0, 109, 251);
     background-color: rgb(224, 237, 255);
     transition: all 0.3s linear;
 
@@ -65,5 +69,5 @@
 
   .completeButton:hover {
     color: white;
-    background-color: rgb(64, 64, 255);
+    background-color: rgb(0, 109, 251);
   }

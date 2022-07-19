@@ -2,6 +2,7 @@ import React from "react";
 import { Carousel } from "react-carousel-minimal";
 import classes from "./SliderImages.module.css";
 
+
 const SliderImages = () => {
   const images = [
     {

@@ -1,24 +1,20 @@
-import React, { Fragment, useRef } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
-
-
-
+import InputForm from "./addPhone/InputForm";
 
 const AddPhone = () => {
   const brandRef = useRef("");
   const modelRef = useRef("");
   const typeRef = useRef("");
-  const imageRef = useRef("");
   const ramRef = useRef("");
-  const warantyRef =useRef('')
+  const warantyRef = useRef("");
+  const storageOrCaseRef = useRef('')
 
   const storageRef64GB = useRef("");
   const storageRef128GB = useRef("");
   const storageRef256GB = useRef("");
   const storageRef512GB = useRef("");
   const storageRef1TB = useRef("");
-
 
   const price64GBRef = useRef("");
   const price128GBRef = useRef("");
@@ -49,7 +45,7 @@ const AddPhone = () => {
   let navigate = useNavigate();
 
   async function addPhoneHandler(phon) {
-      const response = await fetch(
+    const response = await fetch(
       "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json",
       {
         method: "POST",
@@ -71,9 +67,9 @@ const AddPhone = () => {
       brand: brandRef.current.value,
       model: modelRef.current.value,
       type: typeRef.current.value,
-      image: imageRef.current.value,
       ram: ramRef.current.value,
       waranty: warantyRef.current.value,
+      storageOrCase: storageOrCaseRef.current.value,
       storage: {
         storage64GB: storageRef64GB.current.value,
         storage128GB: storageRef128GB.current.value,
@@ -117,115 +113,72 @@ const AddPhone = () => {
       },
     };
 
-    
     addPhoneHandler(phone);
     navigate("/phones", { replace: true });
   };
 
   return (
-    <Fragment>
+    <div>
       <h1>Add Phone</h1>
       <form onSubmit={submitHandler}>
+        <InputForm title="Brand" type="text" ref={brandRef} />
+        <InputForm title="Model" type="text" ref={modelRef} />
+        <InputForm title="Type" type="text" ref={typeRef} />
+        <InputForm title="Ram" type="text" ref={ramRef} />
+        <InputForm title="Waranty" type="text" ref={warantyRef} />
+        <br />
         <div>
-          <label htmlFor="brand">Brand</label>
-          <input type="text" id="brand" ref={brandRef} />
+          <label>Storage or Case Size:</label>
+          <InputForm title='Storage or Case Size' type='text' ref={storageOrCaseRef}/>
+          <br />
+          <InputForm title="Storage 1" type="text" ref={storageRef64GB} />
+          <InputForm title="Storage 2" type="text" ref={storageRef128GB} />
+          <InputForm title="Storage 3" type="text" ref={storageRef256GB} />
+          <InputForm title="Storage 4" type="text" ref={storageRef512GB} />
+          <InputForm title="Storage 5" type="text" ref={storageRef1TB} />
         </div>
+        <br />
         <div>
-          <label htmlFor="model">Model</label>
-          <input type="text" id="model" ref={modelRef}></input>
-        </div>
-        <div>
-          <label htmlFor="type">Type</label>
-          <input type="text" id="type" ref={typeRef}></input>
-        </div>
-        <div>
-          <label htmlFor="image">Image</label>
-          <input type="text" id="image" ref={imageRef}></input>
-        </div>
-        <div>
-          <label htmlFor="ram">Ram</label>
-          <input type="text" id="ram" ref={ramRef} />
-        </div>
-        <div>
-          <label htmlFor="waranty">Waranty</label>
-          <input type="text" id="waranty" ref={warantyRef} />
-        </div>
-        <div>
-          <label htmlFor="storage">Storage:</label>
-          <br/>
-          <span>Storage 1</span>
-          <input type="text" id="storage" ref={storageRef64GB} />
-          <span>Storage 2</span>
-          <input type="text" id="storage" ref={storageRef128GB} />
-          <span>Storage 3</span>
-          <input type="text" id="storage" ref={storageRef256GB} />
-          <span>Storage 4</span>
-          <input type="text" id="storage" ref={storageRef512GB} />
-          <span>Storage 5</span>
-          <input type="text" id="storage" ref={storageRef1TB} />
-        </div>
-        <div>
-          <label htmlFor="price">Price</label>
-          <input type="number" id="price" ref={price64GBRef} />
-          <span>Price 1</span>
-          <input type="number" id="price" ref={price128GBRef} />
-          <span>Price 2</span>
-          <input type="number" id="price" ref={price256GBRef} />
-          <span>Price 3</span>
-          <input type="number" id="price" ref={price512GBRef} />
-          <span>Price 4</span>
-          <input type="number" id="price" ref={price1TBRef} />
-          <span>Price 5</span>
+          <InputForm title="Price 1" type="number" ref={price64GBRef} />
+          <InputForm title="Price 2" type="number" ref={price128GBRef} />
+          <InputForm title="Price 3" type="number" ref={price256GBRef} />
+          <InputForm title="Price 4" type="number" ref={price512GBRef} />
+          <InputForm title="Price 5" type="number" ref={price1TBRef} />
         </div>
         <br />
         <div>
           <label>Colors</label>
           <br />
           <label>Color 1</label>
-          <label>Name</label>
-          <input type="text" ref={color1NameRef} />
-          <label>Hex</label>
-          <input type="text" ref={color1HexRef} />
-          <label>Image Url</label>
-          <input type="text" ref={color1ImageRef} />
+          <InputForm title="Name" type="text" ref={color1NameRef} />
+          <InputForm title="Hex" type="text" ref={color1HexRef} />
+          <InputForm title="Image Url" type="text" ref={color1ImageRef} />
           <br />
           <label>Color 2</label>
-          <label>Name</label>
-          <input type="text" ref={color2NameRef} />
-          <label>Hex</label>
-          <input type="text" ref={color2HexRef} />
-          <label>Image Url</label>
-          <input type="text" ref={color2ImageRef} />
+          <InputForm title="Name" type="text" ref={color2NameRef} />
+          <InputForm title="Hex" type="text" ref={color2HexRef} />
+          <InputForm title="Image Url" type="text" ref={color2ImageRef} />
           <br />
           <label>Color 3</label>
-          <label>Name</label>
-          <input type="text" ref={color3NameRef} />
-          <label>Hex</label>
-          <input type="text" ref={color3HexRef} />
-          <label>Image Url</label>
-          <input type="text" ref={color3ImageRef} />
+          <InputForm title="Name" type="text" ref={color3NameRef} />
+          <InputForm title="Hex" type="text" ref={color3HexRef} />
+          <InputForm title="Image Url" type="text" ref={color3ImageRef} />
           <br />
           <label>Color 4</label>
-          <label>Name</label>
-          <input type="text" ref={color4NameRef} />
-          <label>Hex</label>
-          <input type="text" ref={color4HexRef} />
-          <label>Image Url</label>
-          <input type="text" ref={color4ImageRef} />
+          <InputForm title="Name" type="text" ref={color4NameRef} />
+          <InputForm title="Hex" type="text" ref={color4HexRef} />
+          <InputForm title="Image Url" type="text" ref={color4ImageRef} />
           <br />
           <label>Color 5</label>
-          <label>Name</label>
-          <input type="text" ref={color5NameRef} />
-          <label>Hex</label>
-          <input type="text" ref={color5HexRef} />
-          <label>Image Url</label>
-          <input type="text" ref={color5ImageRef} />
+          <InputForm title="Name" type="text" ref={color5NameRef} />
+          <InputForm title="Hex" type="text" ref={color5HexRef} />
+          <InputForm title="Image Url" type="text" ref={color5ImageRef} />
+          <br />
         </div>
         <button type="submit">Add Phone</button>
       </form>
-    </Fragment>
+    </div>
   );
 };
 
 export default AddPhone;
-

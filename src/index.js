@@ -5,6 +5,9 @@ import "./index.css";
 import App from "./App";
 import CartProvider from "./store/CartProvider";
 import ServiceProvider from "./store/ServiceProvider";
+// Importing the Bootstrap CSS
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

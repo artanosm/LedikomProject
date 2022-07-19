@@ -17,8 +17,7 @@ const OrderItem = ({ order , reFetch, setReFetch }) => {
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-      const responseData = await response.json();
-      console.log(responseData);
+      // const responseData = await response.json();
     };
     deleteOrder()
       .then(() => setReFetch(true))
@@ -76,7 +75,7 @@ const OrderItem = ({ order , reFetch, setReFetch }) => {
         <p>Address: {order.address}</p>
       </div>
       <div> Items: {cartItems}</div>
-      <h4>Total Amount: {order.totalAmount}</h4>
+      <h4>Total Amount: {order.totalAmount} $</h4>
       <div className={classes.buttonsContainer}>
         <button onClick={onDeleteHandler} className={classes.deleteButton}>Delete Order</button>
         {!order.orderCompleted && <button onClick={onCompleteHandler} className={classes.completeButton}>Complete Order</button>}

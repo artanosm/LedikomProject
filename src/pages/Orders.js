@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import OrderItem from "../components/OrderItem";
+import AuthContext from "../store/auth-context";
 import classes from "./Orders.module.css";
 
-
 const Orders = () => {
+  const authCtx = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState(false);
-  const [reFetch, setReFetch] = useState(false)
+  const [reFetch, setReFetch] = useState(false);
+
   useEffect(() => {
     const getOrders = async () => {
       const response = await fetch(
@@ -36,14 +38,13 @@ const Orders = () => {
       setOrders(loadedOrders);
     };
     getOrders()
-        .then(() => {
-
-          setReFetch(false);
-        })
+      .then(() => {
+        setReFetch(false);
+      })
       .catch((error) => {
         console.log(error);
       });
-  },[reFetch]);
+  }, [reFetch]);
 
   let orderItems;
   if (completedOrders) {
@@ -53,7 +54,12 @@ const Orders = () => {
     console.log(filtered);
     orderItems = filtered.map((order, key) => {
       return (
-        <OrderItem reFetch={reFetch} setReFetch={setReFetch} order={order} key={key} />
+        <OrderItem
+          reFetch={reFetch}
+          setReFetch={setReFetch}
+          order={order}
+          key={key}
+        />
       );
     });
   } else {
@@ -61,21 +67,35 @@ const Orders = () => {
       (orderIsFalse) => orderIsFalse.orderCompleted === false
     );
     orderItems = filtered.map((order, key) => {
-      return <OrderItem reFetch={reFetch} setReFetch={setReFetch}  order={order} key={key} />;
+      return (
+        <OrderItem
+          reFetch={reFetch}
+          setReFetch={setReFetch}
+          order={order}
+          key={key}
+        />
+      );
     });
   }
-  console.log(orderItems);
- 
+
   return (
     <div className={classes.main}>
+      <h3>Please Login</h3>
       <div className={classes.headerContainer}>
         <h1>Orders</h1>
-        <button className={!completedOrders ? `${classes.active}` : `${''}`} onClick={() => setCompletedOrders(false)}>Orders</button>
-        <button className={completedOrders ? `${classes.active}` : `${''}`}  onClick={() => setCompletedOrders(true)}>
+        <button
+          className={!completedOrders ? `${classes.active}` : `${""}`}
+          onClick={() => setCompletedOrders(false)}
+        >
+          Orders
+        </button>
+        <button
+          className={completedOrders ? `${classes.active}` : `${""}`}
+          onClick={() => setCompletedOrders(true)}
+        >
           Completed Orders
         </button>
       </div>
-
       <div>{orderItems}</div>
     </div>
   );

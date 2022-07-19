@@ -13,8 +13,8 @@ const CartItem = ({ brand, amount, model, id, color, storage}) => {
 
   return (
     <div className={classes.itemContainer}>
-      <img className={classes.cartImage} src={color} alt="phone"></img>
-      <h3>{`${brand} ${model} ${storage}`}</h3>
+      <img className={classes.cartImage} src={color.color} alt="phone"></img>
+      <h3>{`${brand} ${model} ${storage} ${color.name}`}</h3>
       <div className={classes.amountContainer}>
         <Button size="medium" color="error" onClick={removeItemHandler}>
           <DeleteOutlineIcon />

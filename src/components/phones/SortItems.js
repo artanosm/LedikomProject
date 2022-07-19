@@ -40,7 +40,7 @@ const SortItems = ({ sort, setSort }) => {
         options={options}
         theme={(theme) => ({
           ...theme,
-          borderRadius: 15,
+          borderRadius: 10,
           colors: {
             ...theme.colors,
             primary25: "#ee3183",
