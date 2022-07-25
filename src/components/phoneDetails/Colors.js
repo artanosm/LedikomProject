@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import classes from "./Colors.module.css";
 import ColorItem from "./ColorItem";
 
 const Colors = ({ phony, setColorImg, colorImg }) => {
  
   return (
-    <div>
+    <Fragment>
       <h4 className={classes.title}>Colors:</h4>
       <div className={classes.colorsContainer}>
         {phony.color1.hex && (
@@ -24,7 +24,7 @@ const Colors = ({ phony, setColorImg, colorImg }) => {
           <ColorItem colorA={phony.color5} colorImg={colorImg} setColorImg={setColorImg}/>
         )}
       </div>
-    </div>
+    </Fragment>
   );
 };
 

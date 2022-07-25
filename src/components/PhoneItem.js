@@ -8,9 +8,9 @@ const PhoneItem = (props) => {
     <Link className={classes.a} to={`/phones/${props.id}`}>
       <motion.div
         className={classes.container}
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.2 }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
       >
         <img
           className={classes.image}

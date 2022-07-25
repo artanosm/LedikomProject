@@ -6,7 +6,7 @@ import Storage from "./Storage";
 import InfoItem from "./InfoItem";
 import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const PhoneDetails = (props) => {
   const cartCtx = useContext(CartContext);
@@ -103,11 +103,25 @@ const PhoneDetails = (props) => {
   return (
     <Fragment>
       {/* {!phone && <h2>Not Found</h2>} */}
-      <div
-        className={alert ? `${classes.alert} ${classes.active}` : classes.alert}
-      >
-        <CheckIcon fontSize="large" /> <p>Item Added to Cart</p>
-      </div>
+      <AnimatePresence>
+        {alert && (
+          <motion.div
+            className={classes.alert}
+            initial={{ x: "100vw" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100vw" }}
+            transition={{
+              duration: 0.8,
+              type: "spring",
+              stiffness: 160,
+              damping: 20,
+            }}
+          >
+            <CheckIcon fontSize="large" /> <p>Item Added to Cart</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {phone && (
         <div className={classes.container}>
           <div className={classes.imageContainer}>
@@ -138,23 +152,18 @@ const PhoneDetails = (props) => {
                 storage={storage}
               />
             )}
-            <motion.div
-              className={classes.containerPrice}
-              initial={{ x: "-100vw" }}
-              animate={{ x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <div className={classes.containerPrice}>
               <h3>{price ? price : phony.price128GB} $</h3>
               <motion.button
                 className={classes.button}
                 onClick={addItemToCart}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.1 }}
               >
                 Add to Cart
               </motion.button>
-            </motion.div>
+            </div>
           </div>
         </div>
       )}

@@ -7,6 +7,8 @@ import XiaomiLogo from "../assets/brandsLogo/xiaomi-logo.png";
 import HuaweiLogo from "../assets/brandsLogo/huawei-logo.png";
 import OnePlusLogo from "../assets/brandsLogo/oneplus-logo.png";
 import GoogleLogo from "../assets/brandsLogo/google-logo.png";
+import {motion} from 'framer-motion'
+
 
 const brands = [
   { name: "Apple", logo: AppleLogo },
@@ -23,7 +25,10 @@ const brandsItem = brands.map((brand, key) => {
 const Service = () => {
   return (
     <Fragment>
-      <div className={classes.main}>{brandsItem}</div>
+      <motion.div className={classes.main}
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+      >{brandsItem}</motion.div>
     </Fragment>
   );
 };

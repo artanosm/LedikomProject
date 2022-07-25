@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "react-select";
 import classes from './Brand.module.css'
+
+
 const options = [
   { value: "Apple", label: "Apple" },
   { value: "Samsung", label: "Samsung" },

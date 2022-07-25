@@ -9,10 +9,11 @@
   }
   .active {
     box-shadow: 0 2px 10px rgb(238 49 131);
+    
   }  
 
   @media only screen and (max-width: 700px) {
-    .storeageItem {
-      width: 4rem;
+    .storageItem {
+      width: 7rem;
     }
   }

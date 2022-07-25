@@ -2,13 +2,10 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  /* margin: 1rem; */
   gap: 1rem;
 }
 
 .alert {
-  visibility: hidden;
-  transition: all 0.5s linear;
   padding: 1rem;
   color: white;
   top: 70px;
@@ -23,18 +20,21 @@
   justify-content: flex-start;
   gap: 0.5rem;
   align-items: center;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
-.alert.active {
+/* .alert.active {
   transition: all 0.5s linear;
-  visibility: visible;
-  opacity: 1;
-}
+  /* opacity: 1; */
+/* } */
 .imageContainer {
   margin: 3rem 1rem 1rem;
+  height: fit-content;
+  padding: 1rem;
   width: 40%;
   min-width: 250px;
+  box-shadow: 0 2px 10px rgb(219, 219, 219);
+  border-radius: 10px;
 }
 
 hr {
@@ -53,8 +53,7 @@ hr {
 .image {
   height: auto;
   width: 100%;
-  box-shadow: 0 2px 10px rgb(219, 219, 219);
-  border-radius: 10px;
+
 }
 
 .h1 {
@@ -106,7 +105,7 @@ hr {
   width: 80%;
 }
   .imageContainer {
-    margin: 1rem 0;
+    margin: 1rem 1rem;
     display: flex;
     justify-content: center;
     width: 90%;
@@ -116,6 +115,7 @@ hr {
     padding: 0 1rem 1rem 1rem;
   }
   .dataContainer h1 {
+    font-size: larger;
     padding: 0 0 1rem 0;
     margin: 0;
   }

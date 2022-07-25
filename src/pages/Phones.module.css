@@ -41,16 +41,26 @@
         
     }
     .filterContainer {
-        display: none;
+        /* top: -100%; */
+        left:-100%;
+        position: absolute;
+        display:flex;
+        opacity: 0;
         justify-content: flex-start;
         flex-direction: column;
         padding: 0.1rem 0.1rem;
         margin: 0;
         gap: 0.1rem;
         height: auto;
+        animation: sliderRev 0.2s  ease;
+
+        
     }
     .filterContainer.active {
-        display: flex;
+        left:0;
+        animation: slider 0.4s  ease;
+        position: relative;
+        opacity: 1;
     }
     .showFilter {
         display: flex;
@@ -61,6 +71,24 @@
         background-color: white;
         border: 1px solid darkgray;
         border-radius: 10px;
-        margin: 0.5rem;
+        margin: 0.5rem; 
+        color: gray;        
+    }
+    .showFilter span {
+        width: 100%;
+        display: flex;
+        align-items: center;
     }
 }
+
+@keyframes slider {
+    from {left: -10%; opacity: 0;}
+    to {left: 0; opacity: 1;}
+  }
+  @keyframes sliderRev {
+    from {left: 0; opacity: 1;}
+    to {left: -10%; opacity: 0;}
+  }
+
+ 
+
