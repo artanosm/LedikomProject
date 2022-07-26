@@ -7,6 +7,7 @@ import InfoItem from "./InfoItem";
 import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
 import { motion, AnimatePresence } from "framer-motion";
+import Loader from "../../ui/Loader";
 
 const PhoneDetails = (props) => {
   const cartCtx = useContext(CartContext);
@@ -16,6 +17,9 @@ const PhoneDetails = (props) => {
   const [storage, setStorage] = useState("");
   const [phone, setPhone] = useState(null);
   const [alert, setAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+
   useEffect(() => {
     const fetchPhones = async () => {
       const response = await fetch(
@@ -64,6 +68,7 @@ const PhoneDetails = (props) => {
       setColorImg({ color: found[0].color1.image, name: found[0].color1.name });
       setPrice(found[0]?.price64GB);
       setStorage(found[0]?.storage64GB);
+      setIsLoading(false)
     };
 
     fetchPhones().catch((error) => {
@@ -103,6 +108,7 @@ const PhoneDetails = (props) => {
   return (
     <Fragment>
       {/* {!phone && <h2>Not Found</h2>} */}
+      {isLoading && <Loader/>}
       <AnimatePresence>
         {alert && (
           <motion.div

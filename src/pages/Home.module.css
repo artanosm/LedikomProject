@@ -16,7 +16,7 @@
   align-content: center;
 }
 
-@media only screen and (max-width: 550px){
+@media only screen and (max-width: 610px){
   .container h2 {
     font-size: large;
     margin-bottom: 1rem;

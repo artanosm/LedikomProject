@@ -36,7 +36,6 @@ export default function RangePrice({priceRange, setPriceRange}) {
             getAriaValueText={valuetext}
             color="primary"
             disableSwap
-            
           />
         </div>
       </Box>

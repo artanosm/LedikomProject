@@ -17,7 +17,7 @@
   color:rgb(164, 161, 161);
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 665px) {
   .valueShow {
     width: 100%;
   }

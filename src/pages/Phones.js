@@ -8,7 +8,7 @@ import SortItems from "../components/phones/SortItems";
 import ItemsToDisplay from "../components/phones/ItemsToDisplay";
 import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 const Phones = () => {
   const [filtersClick, setFiltersClick] = useState(false);
@@ -33,8 +33,8 @@ const Phones = () => {
             ? `${classes.filterContainer} ${classes.active}`
             : classes.filterContainer
         }
-        initial={{opacity:0}}
-        animate={{opacity:1}}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
       >
         <div className={classes.priceRangeContainer}>
           <h4>Price:</h4>

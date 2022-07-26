@@ -27,7 +27,7 @@
     display: none;
 }
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 665px){
     .container {
         display: flex;
         flex-direction: column;
@@ -37,11 +37,10 @@
         padding: 0.3rem 0.5rem;
     }
     .priceRangeContainer h4 {
-        padding-top: 0rem;
+        padding-top: 6px;
         
     }
     .filterContainer {
-        /* top: -100%; */
         left:-100%;
         position: absolute;
         display:flex;
@@ -52,9 +51,7 @@
         margin: 0;
         gap: 0.1rem;
         height: auto;
-        animation: sliderRev 0.2s  ease;
-
-        
+              
     }
     .filterContainer.active {
         left:0;
@@ -85,10 +82,10 @@
     from {left: -10%; opacity: 0;}
     to {left: 0; opacity: 1;}
   }
-  @keyframes sliderRev {
+  /* @keyframes sliderRev {
     from {left: 0; opacity: 1;}
-    to {left: -10%; opacity: 0;}
-  }
+    to {left: -1px; opacity: 0;}
+  } */
 
  
 

@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.css";
 import useFetch from "./customHooks/use-fetch";
+import Loader from "../ui/Loader";
 
 const getMultipleRandom = (arr, num) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
@@ -19,6 +20,7 @@ const PhonesList = ({
   randomItems,
 }) => {
   const [phones, setPhones] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [data] = useFetch(
     "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
@@ -42,6 +44,7 @@ const PhonesList = ({
       }
 
       setPhones(loadedPhones);
+      setIsLoading(false);
     }
   }, [data]);
 
@@ -80,7 +83,6 @@ const PhonesList = ({
   //     console.log(error);
   //   });
   // }, []);
-
   let filteredPhones;
   if (brand) {
     filteredPhones = phones.filter((phone) => phone.brand === brand.value);
@@ -178,6 +180,7 @@ const PhonesList = ({
 
   return (
     <Fragment>
+      {isLoading && <Loader/>}
       <div className={classes.container}>{phoneItems}</div>
     </Fragment>
   );

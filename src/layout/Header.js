@@ -18,7 +18,7 @@ const Header = (props) => {
         className="logo-container"
         initial={{ rotate: 0 }}
         animate={{ rotate: [15, -15, 0] }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.5 }}
       >
         <Link to="/" onClick={closeMobileMenu}>
           <img
@@ -31,21 +31,21 @@ const Header = (props) => {
 
       <ul className={click ? "nav-options active" : "nav-options"}>
         <li
-          className={click ? "option activeO" : "option"}
+          className={click ? "option activeOption" : "option"}
           onClick={closeMobileMenu}
         >
           <Link to="/">Home</Link>
         </li>
         {click && <hr />}
         <li
-          className={click ? "option activeO" : "option"}
+          className={click ? "option activeOption" : "option"}
           onClick={closeMobileMenu}
         >
           <Link to="/phones">Phones</Link>
         </li>
         {click && <hr />}
         <li
-          className={click ? "option activeO" : "option"}
+          className={click ? "option activeOption" : "option"}
           onClick={closeMobileMenu}
         >
           <Link to="/service">Service</Link>

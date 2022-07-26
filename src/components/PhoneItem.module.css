@@ -61,7 +61,7 @@
   margin: 2%;
 }
 
-.priceIcon {
+/* .priceIcon {
   background-color: rgb(255, 255, 255);
   margin: 2%;
   height: auto;
@@ -72,13 +72,13 @@
   box-shadow: 0 1px 5px rgb(40, 40, 40);
   border: none;
   cursor: pointer;
-}
+} */
 
-.priceIcon:hover {
+/* .priceIcon:hover {
   background-color: rgb(255, 0, 255);
   color: white;
-}
-
+} */
+/* 
 .more {
   color: rgb(255, 0, 255);
   text-decoration: none;
@@ -86,9 +86,9 @@
 
 .more:hover {
   animation: glow 1s ease-in-out infinite alternate;
-}
+} */
 
-@keyframes glow {
+/* @keyframes glow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 30px #e60073,
       0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
@@ -97,7 +97,7 @@
     text-shadow: 0 0 20px #fff, 0 0 20px #ff4da6, 0 0 40px #ff4da6,
       0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
   }
-}
+} */
 
 @media only screen and (max-width: 610px) {
   .a {
