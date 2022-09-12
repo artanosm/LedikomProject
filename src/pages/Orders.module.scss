@@ -1,3 +1,5 @@
+@use '../index.scss' as index;
+@use '../sass/abstracts/mixins' as *;
 .main {
     margin: 1rem;
     display: block;
@@ -8,9 +10,10 @@
 }
 
 .headerContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+    @include flex-center(flex-start);
+    // display: flex;
+    // align-items: center;
+    // justify-content: flex-start;
     gap: 0.5rem;
 }
 
@@ -26,11 +29,11 @@
     transition: all 0.3s linear;
 }
 .headerContainer button:hover {
-    background-color: #ee3183;
+    background-color: index.$magenta-color;
     color: white;
 }
 
 .headerContainer button.active {
-    background-color: #ee3183;
+    background-color: index.$magenta-color;
     color: white;
 }

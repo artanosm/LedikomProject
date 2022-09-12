@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './AuthFormInput.module.css'
+import classes from './AuthFormInput.module.scss'
 
 const AuthFormInput = React.forwardRef((props,ref) => {
   return (

@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import classes from "./Service.module.css";
+import classes from "./Service.module.scss";
 import BrandItem from "../components/service/BrandItem";
 import AppleLogo from "../assets/brandsLogo/apple-logo.png";
 import SamsungLogo from "../assets/brandsLogo/samsung-logo.png";

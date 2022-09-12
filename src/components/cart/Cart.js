@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import classes from "./Cart.module.css";
+import classes from "./Cart.module.scss";
 import Modal from "../../ui/Modal";
 import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
@@ -44,7 +44,7 @@ const Cart = (props) => {
       {cartCtx.items.length !== 0 ? (
         <div>{cartItems}</div>
       ) : (
-        <p>No Items Yet</p>
+        <p>Your Cart is empty</p>
       )}
       {cartCtx.items.length > 0 && (
         <div className={classes.totalContainer}>

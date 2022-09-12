@@ -11,7 +11,7 @@ const customStyles = {
     ...provided,
     backgroundColor: "white",
     borderBottom: "1px dotted darkgrey",
-    color: state.isSelected ? "black" : "darkgrey",
+    // color: state.isSelected ? "black" : "darkgrey",
     color: state.isFocused ? "#ee3183" : "darkgrey",
 
     padding: 8,

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Input from "./Input";
-import classes from "./CheckOutForm.module.css";
+import classes from "./CheckOutForm.module.scss";
 // import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import CartContext from "../../store/cart-context";

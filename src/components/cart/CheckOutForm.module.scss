@@ -1,7 +1,10 @@
+@use '../../sass/abstracts/mixins' as *;
+
 .select {
+    height: 2rem;
     width: 80%;
     font-size: medium;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-bottom: 1rem;
 }
 
@@ -22,6 +25,10 @@
 }
 
 .alert {
+    @include flex-center(flex-start);
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: center;
     visibility: hidden;
     transition: all 0.5s linear;
     padding: 1rem;
@@ -34,10 +41,7 @@
     width: 230px;
     background-color: rgba(89, 207, 89,0.9);
     border-radius: 15px;
-    display: flex;
-    justify-content: flex-start;
     gap: 0.5rem;
-    align-items: center;
     opacity: 0;
   }
   

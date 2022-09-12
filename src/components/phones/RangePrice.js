@@ -4,7 +4,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Slider from "@mui/material/Slider";
 
 const theme = createTheme({
-  
   palette: {
     primary: {
       // Magenta color

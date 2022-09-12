@@ -1,15 +1,21 @@
+@use '../../index.scss' as index;
+@use '../../sass/abstracts/mixins' as *;
+
+
 .itemContainer {
-  display: flex;
-  justify-content: space-around;
-  gap: 1rem;
-  align-items: center;
-  align-content: center;
+  @include flex-center (flex-start);
+  // display: flex;
+  // align-items: center;
+  // align-content: center;
+  // justify-content: flex-start;
+  gap: 2rem;
   width: 100%;
 }
 
 .itemContainer h3 {
   width: 60%;
-  color: darkgray;
+  color: index.$dark-blue;
+  font-weight: 100;
 }
 
 .cartImage {
@@ -18,9 +24,10 @@
 }
 
 .amountContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  @include flex-center (space-around);
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-around;
   width: 10%;
   gap: 1rem;
 }
@@ -40,7 +47,6 @@
     width: 50%;
     font-size: small;
     padding-right: 2rem;
-    color: darkgray;
   }
 }
 

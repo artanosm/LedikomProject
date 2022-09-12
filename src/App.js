@@ -29,7 +29,8 @@ function App() {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartI));
     localStorage.setItem("cartTotalAmount", JSON.stringify(cartTA));
-  }, [cartI, cartTA]);
+  }, [cartI, cartTA]);  
+  
 
   const showCartHandler = () => {
     setCartIsShown(true);

@@ -1,5 +1,15 @@
+
 .titles {
-    color: black;
+    color: var(--dark-blue);
     margin:  0.5rem 0;
     font-weight: 100;
+  }
+
+.titles span {
+  padding-left: 1rem;
+}
+  @media only screen and (max-width:610px){
+    .titles {
+      margin: 3px 0 ;
+    }
   }

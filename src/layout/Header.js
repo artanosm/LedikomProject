@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 import HeaderCart from "./HeaderCart";
 import { Link } from "react-router-dom";
-import "./Header.css";
+import "./Header.scss";
 
 const Header = (props) => {
   const [click, setClick] = useState(false);
@@ -29,7 +29,7 @@ const Header = (props) => {
         </Link>
       </motion.div>
 
-      <ul className={click ? "nav-options active" : "nav-options"}>
+      <ul  className={click ? "nav-options active" : "nav-options"}>
         <li
           className={click ? "option activeOption" : "option"}
           onClick={closeMobileMenu}
@@ -57,7 +57,6 @@ const Header = (props) => {
           <motion.div
             className="icon"
             whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 1 }}
             transition={{ duration: 0.1 }}
           >
             <PersonOutlineOutlinedIcon fontSize="medium" />

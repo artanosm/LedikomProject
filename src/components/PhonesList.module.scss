@@ -1,0 +1,32 @@
+@use '../index.scss' as index;
+@use '../sass/abstracts/mixins' as *;
+
+.container {
+    @include flex-center(flex-start);
+    // display: flex;
+    // justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: stretch;
+    height: auto;
+    width: 100%;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+
+.filterContainer {
+    @include flex-center (flex-start);
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: center;
+    // align-content: center;
+    gap: 1rem;
+    width: 35%;
+    padding: 2rem;
+    height: 10vh;
+}
+
+.filterContainer h4 {
+    padding-bottom: 0;
+    margin-bottom: 0.3rem;
+}

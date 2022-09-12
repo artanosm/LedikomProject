@@ -1,12 +1,15 @@
+@use '../sass/abstracts/mixins' as *;
+
 .container {
     margin: 2vw;
 }
 
 .filterContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    align-content: center;
+    @include flex-center(flex-start);
+    // display: flex;
+    // justify-content: flex-start;
+    // align-items: center;
+    // align-content: center;
     gap: 2rem;
     width: 80%;
     padding: rem;

@@ -1,19 +1,23 @@
+@use '../index.scss' as index;
+@use '../sass/abstracts/mixins' as *;
+
 .container {
   margin: 2vw;
   display: flex;
   flex-direction: column;
 }
 .container h2 {
-  color: rgb(43, 46, 63);
+  color: index.$dark-blue;
   align-self: center;
 }
 
 .sliderContainer {
+  @include flex-center;
+  // display: flex;
+  // align-items: center;
+  // align-content: center;
+  // justify-content: center;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
 }
 
 @media only screen and (max-width: 610px){

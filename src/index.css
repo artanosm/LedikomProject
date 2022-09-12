@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
 
-* {
+*{
   box-sizing: border-box;
 }
 
@@ -10,7 +10,11 @@ html {
 
 body {
   margin: 0;
-  background-color: #fff;
-  color: rgb(57, 57, 84);
-}
+  background-color: white;
+  color: #393954;
+} 
+
+
+
+
 

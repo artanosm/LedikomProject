@@ -13,19 +13,16 @@ const customStyles = {
     ...provided,
     backgroundColor: "white",
     borderBottom: "1px dotted darkgrey",
-    color: state.isSelected ? "black" : "darkgrey",
+    // color: state.isSelected ? "darkgrey" : "darkgrey",
     color: state.isFocused ? "#ee3183" : "darkgrey",
 
     padding: 8,
   }),
-  //   control: () => ({
-  //     // none of react-select's styles are passed to <Control />
-  //     width: 200,
-  //   }),
+
   singleValue: (provided, state) => {
     const opacity = state.isDisabled ? 0.5 : 1;
     const transition = "opacity 300ms";
-
+    
     return { ...provided, opacity, transition };
   },
 };

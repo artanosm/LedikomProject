@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './PhoneServiceItem.module.css';
+import classes from './PhoneServiceItem.module.scss';
 import { Link } from 'react-router-dom';
 
 const PhoneServiceItem = ({item}) => {

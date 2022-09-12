@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./CheckOutItem.module.css";
+import classes from "./CheckOutItem.module.scss";
 
 const CartItem = (props) => {
   return (

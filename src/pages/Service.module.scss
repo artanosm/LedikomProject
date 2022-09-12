@@ -1,0 +1,9 @@
+@use '../sass/abstracts/mixins' as *;
+.main {
+    @include flex-center(space-evenly,row,none);
+    // display: flex;
+    // justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem;
+}

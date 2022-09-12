@@ -1,9 +1,13 @@
+@use '../index.scss' as index;
+@import '../sass/abstracts/mixins';
+
 .button {
+  @include flex-center;
+  // display:flex;
+  // align-items: center;
+  // align-content: center;
+  // justify-content: center;
   width: 6rem;
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
   height: auto;
   border-radius: 5px;
   margin: 1.2rem;
@@ -14,10 +18,14 @@
   padding: 0.4rem 0;
 }
 
+.button.active {
+  background-color: index.$magenta-color;
+}
+
 .button:hover {
   cursor: pointer;
   color: white;
-  background-color: rgb(238 49 131);
+  background-color: index.$magenta-color;
   transition: all 0.3s;
 }
 

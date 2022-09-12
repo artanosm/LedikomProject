@@ -1,27 +1,26 @@
 import React, { Fragment } from "react";
-import classes from "./Colors.module.css";
+import classes from "./Colors.module.scss";
 import ColorItem from "./ColorItem";
 
-const Colors = ({ phony, setColorImg, colorImg }) => {
- 
+const Colors = ({ phone, setColorImg, colorImg }) => {
   return (
     <Fragment>
       <h4 className={classes.title}>Colors:</h4>
       <div className={classes.colorsContainer}>
-        {phony.color1.hex && (
-          <ColorItem colorA={phony.color1} colorImg={colorImg}  setColorImg={setColorImg}/>
+        {phone.colors.color1.hex && (
+          <ColorItem colorA={phone.colors.color1} colorImg={colorImg}  setColorImg={setColorImg}/>
         )}
-        {phony.color2.hex && (
-         <ColorItem colorA={phony.color2} colorImg={colorImg} setColorImg={setColorImg}/>
+        {phone.colors.color2.hex && (
+         <ColorItem colorA={phone.colors.color2} colorImg={colorImg} setColorImg={setColorImg}/>
         )}
-        {phony.color3.hex && (
-          <ColorItem colorA={phony.color3} colorImg={colorImg} setColorImg={setColorImg}/>
+        {phone.colors.color3.hex && (
+          <ColorItem colorA={phone.colors.color3} colorImg={colorImg} setColorImg={setColorImg}/>
         )}
-        {phony.color4.hex && (
-          <ColorItem colorA={phony.color4} colorImg={colorImg} setColorImg={setColorImg}/>
+        {phone.colors.color4.hex && (
+          <ColorItem colorA={phone.colors.color4} colorImg={colorImg} setColorImg={setColorImg}/>
         )}
-        {phony.color5.hex && (
-          <ColorItem colorA={phony.color5} colorImg={colorImg} setColorImg={setColorImg}/>
+        {phone.colors.color5.hex && (
+          <ColorItem colorA={phone.colors.color5} colorImg={colorImg} setColorImg={setColorImg}/>
         )}
       </div>
     </Fragment>

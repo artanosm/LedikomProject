@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import OrderItem from "../components/OrderItem";
-import AuthContext from "../store/auth-context";
-import classes from "./Orders.module.css";
+import classes from "./Orders.module.scss";
 
 const Orders = () => {
-  const authCtx = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState(false);
   const [reFetch, setReFetch] = useState(false);

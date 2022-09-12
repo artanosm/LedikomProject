@@ -2,12 +2,10 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+import "./index.scss";
 import App from "./App";
 import CartProvider from "./store/CartProvider";
 import ServiceProvider from "./store/ServiceProvider";
-// Importing the Bootstrap CSS
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

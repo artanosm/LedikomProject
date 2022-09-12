@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import RangePrice from "../components/phones/RangePrice";
 import PhonesList from "../components/PhonesList";
-import classes from "./BrandPage.module.css";
+import classes from "./BrandPage.module.scss";
 import TypeFilter from "../components/phones/TypeFilter";
 
 const BrandPage = () => {

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PhoneServiceItem from "./PhoneServiceItem";
 import classes from "./ServiceBrand.module.css";
+import Loader from "../../ui/Loader";
 
 const ServiceBrand = () => {
   const [phones, setPhones] = useState([]);
   const brand = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     const getBrand = async () => {
@@ -39,7 +42,11 @@ const ServiceBrand = () => {
       return loadedPhones;
     };
     getBrand()
-      .then((data) => setPhones([...data]))
+      .then((data) => {
+        setPhones([...data])
+        setIsLoading(false);
+
+      })
       .catch((error) => {
         console.log(error);
       });
@@ -55,8 +62,12 @@ const ServiceBrand = () => {
   );
 
   return (
-    
+    <Fragment>
+      {isLoading && <Loader/>}
+
       <div className={classes.main}>{phoneItems}</div>
+    </Fragment>
+
    
   );
 };

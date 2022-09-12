@@ -1,3 +1,5 @@
+@use '../../sass/abstracts/mixins' as *;
+
 .formControl {
     margin-bottom: 0.5rem;
     border-radius: 15px;
@@ -20,9 +22,10 @@
     color:darkgrey;
   }
   .actions {
+    @include flex-center(center,column);
+    // display: flex;
+    // align-items: center;
+    // flex-direction: column;
     margin-top: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   

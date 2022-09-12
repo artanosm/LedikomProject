@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './ServiceItem.module.css'
+import classes from './ServiceItem.module.scss'
 
 
 

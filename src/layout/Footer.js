@@ -35,11 +35,12 @@ const Footer = () => {
         </div>
         <div className={classes.footer}>
           <h3>Social Media</h3>
-          <span>
-          <a href="https://facebook.com/"> <Facebook/></a>            
-          <a href="https://instagram.com/"> <Instagram/></a>            
-          <a href="https://youtube.com/"> <YouTube/></a>            
-          </span>
+          <div>
+          <a href="https://facebook.com/"><Facebook/></a>            
+          <a href="https://instagram.com/"><Instagram/></a>            
+          <a href="https://youtube.com/"><YouTube/></a>            
+          </div>
+         
         </div>
       </div>
       <p>

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import classes from "./PhoneServiceDetails.module.css";
+import classes from "./PhoneServiceDetails.module.scss";
 import ServiceCard from "./ServiceCard";
 import Battery from "../../assets/service/battery.png";
 import Screen from "../../assets/service/screen.png";

@@ -1,21 +1,23 @@
+@use "../index.scss" as index;
+@use '../sass/abstracts/mixins' as *;
 .a {
   text-decoration: none;
   margin: 0;
-  padding: 1rem;
 }
 
 .container {
+  @include flex-center(space-evenly,column);
+  // display: flex;
+  // justify-content: space-evenly;
+  // flex-direction: column;
+  // align-content: center;
   height: auto;
   max-width: 250px;
   min-width: 100px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  align-content: center;
   padding: 0;
-  color: black;
+  color: index.$dark-blue;
   padding: 1rem;
 }
 
@@ -27,9 +29,10 @@
   width: 100%;
 }
 .priceContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  @include flex-center(space-around);
+  // display: flex;
+  // justify-content: space-around;
+  // align-items: center;
   height: auto;
 }
 
@@ -54,6 +57,7 @@
 
 .price {
   display: inline-block;
+  color: rgb(50, 57, 97);
   font-weight: bold;
   height: auto;
   width: 50%;

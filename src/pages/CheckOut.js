@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useState } from "react";
 import CartContext from "../store/cart-context";
-import classes from "./CheckOut.module.css";
+import classes from "./CheckOut.module.scss";
 import CheckOutItem from "../components/cart/CheckOutItem";
 import CheckOutForm from "../components/cart/CheckOutForm";
 
@@ -59,7 +59,7 @@ const CheckOut = () => {
             </div>
           </div>
           <div className={classes.deliver}>
-            <h3>Deliver</h3>
+            <h3>Delivery</h3>
             <div className={classes.deliver1}>
               <div>
                 <input

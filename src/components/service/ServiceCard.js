@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import classes from "./ServiceCard.module.css";
+import classes from "./ServiceCard.module.scss";
 import ServiceContext from "../../store/service-context";
 
 const ServiceCard = ({ itemImage, price, name }) => {

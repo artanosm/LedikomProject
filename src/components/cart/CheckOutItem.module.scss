@@ -1,6 +1,8 @@
+@use '../../sass/abstracts/mixins' as *;
 .mainContainer {
-  display: flex;
-  justify-content:flex-start;
+  @include flex-center(flex-start);
+  // display: flex;
+  // justify-content:flex-start;
   margin: 0 0 1rem 0 ;
   gap: 1rem;
 }
@@ -27,6 +29,7 @@ hr {
 
 @media only screen and (max-width: 500px) {
   .mainContainer {
+    font-size: smaller;
     width: 100%;
     height: auto;
     align-items: center;

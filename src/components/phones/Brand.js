@@ -4,6 +4,7 @@ import classes from './Brand.module.css'
 
 
 const options = [
+  // { value: null, label: "Brands" },
   { value: "Apple", label: "Apple" },
   { value: "Samsung", label: "Samsung" },
   { value: "Xiaomi", label: "Xiaomi" },
@@ -17,7 +18,7 @@ const customStyles = {
     ...provided,
     backgroundColor: "white",
     borderBottom: "1px dotted darkgrey",
-    color: state.isSelected ? "black" : "darkgrey",
+    // color: state.isSelected ? "black" : "darkgrey",
     color: state.isFocused ? "#ee3183" : "darkgrey",
 
     padding: 8,
@@ -36,6 +37,7 @@ const customStyles = {
 
 
 const Brand = ({ brand, setBrand }) => {
+
   return (
     <div className={classes.container} >
       <Select

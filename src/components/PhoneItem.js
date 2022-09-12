@@ -1,11 +1,12 @@
 import React from "react";
-import classes from "./PhoneItem.module.css";
+import classes from "./PhoneItem.module.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const PhoneItem = (props) => {
+  // console.log(props.id);
   return (
-    <Link className={classes.a} to={`/phones/${props.id}`}>
+    <Link className={classes.a} to={`/phones/${props.id}?color=${props.colors.color1.name}&storage=${props.storage.storage64GB.replace(/\s/g, "+")}`}>
       <motion.div
         className={classes.container}
         initial={{ opacity: 0 }}

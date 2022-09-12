@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
-import classes from "./PhonesList.module.css";
-import useFetch from "./customHooks/use-fetch";
+import classes from "./PhonesList.module.scss";
+import useFetch from "./customHooks/useFetch";
 import Loader from "../ui/Loader";
 
 const getMultipleRandom = (arr, num) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
-
   return shuffled.slice(0, num);
 };
 
@@ -33,6 +32,7 @@ const PhonesList = ({
         loadedPhones.push({
           date: data[key].date,
           type: data[key].type,
+          // adding dash to every empty space
           id: data[key].model.replace(/\s/g, "-"),
           model: data[key].model,
           brand: data[key].brand,
@@ -42,7 +42,6 @@ const PhonesList = ({
           ram: data[key].ram,
         });
       }
-
       setPhones(loadedPhones);
       setIsLoading(false);
     }
@@ -83,6 +82,14 @@ const PhonesList = ({
   //     console.log(error);
   //   });
   // }, []);
+  //  let brands
+  //   if (!brand) {
+  //     brands = {value:null,label:'Brands'}
+  //   }
+  //   else {
+  //     brands = brand
+  //   }
+
   let filteredPhones;
   if (brand) {
     filteredPhones = phones.filter((phone) => phone.brand === brand.value);
@@ -158,6 +165,7 @@ const PhonesList = ({
           brand={phone.brand}
           model={phone.model}
           colors={phone.colors}
+          storage={phone.storage}
         />
       );
     }
@@ -172,6 +180,8 @@ const PhonesList = ({
           brand={phone.brand}
           model={phone.model}
           colors={phone.colors}
+          storage={phone.storage}
+
         />
       );
     }
@@ -180,7 +190,7 @@ const PhonesList = ({
 
   return (
     <Fragment>
-      {isLoading && <Loader/>}
+      {isLoading && <Loader />}
       <div className={classes.container}>{phoneItems}</div>
     </Fragment>
   );

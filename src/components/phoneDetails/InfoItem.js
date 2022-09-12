@@ -4,7 +4,7 @@ import classes from "./InfoItem.module.css";
 const InfoItem = ({title, content}) => {
   return (
     <div>
-      <h4 className={classes.titles}>{title}</h4> <span>{content}</span>
+      <h4 className={classes.titles}>{title}<span>{content}</span></h4>
       <hr />
     </div>
   );
