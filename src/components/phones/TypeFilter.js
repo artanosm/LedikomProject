@@ -2,10 +2,10 @@ import React from "react";
 import Select from "react-select";
 import classes from "./TypeFilter.module.css";
 const options = [
-  { value: "phone", label: "Phone" },
-  { value: "smartwatch", label: "Smartwatch" },
-  { value: "tablet", label: "Tablet" },
-  { value: "accessories", label: "Accessories" },
+  { value: "Phone", label: "Phone" },
+  { value: "Smartwatch", label: "Smartwatch" },
+  { value: "Tablet", label: "Tablet" },
+  { value: "Accessories", label: "Accessories" },
 ];
 
 const customStyles = {

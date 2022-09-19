@@ -1,13 +1,9 @@
 import React from "react";
 import classes from "./ColorItem.module.scss";
 import { motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
-
 
 const ColorItem = ({ colorA, colorImg, setColorImg }) => {
   
-
-const [searchParams, setSearchParams] = useSearchParams();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
@@ -17,11 +13,8 @@ const [searchParams, setSearchParams] = useSearchParams();
       className={`${classes.colorsItem} ${
         colorImg.color === colorA.image ? classes.active : ""
       }`}
-      onClick={(e) => { 
-        e.preventDefault();     
-        setColorImg({ color: colorA.image, name: colorA.name });
-        setSearchParams({color:colorA.name,storage:searchParams.get('storage') })
-        
+      onClick={() => {    
+        setColorImg({ color: colorA.image, name: colorA.name });        
       }}
     >
       <div style={{ backgroundColor: colorA.hex }}></div>

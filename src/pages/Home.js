@@ -18,6 +18,7 @@ const Home = () => {
       <FreeDelivery/>
       <div className={classes.container}>
         <h2>Suggested Products</h2>
+        
         <PhonesList numberOfItems={{value:4}}  randomItems={true} sort={{value:'descending'}} date={date}/>
       </div>
     </div>

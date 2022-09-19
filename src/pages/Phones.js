@@ -9,12 +9,14 @@ import ItemsToDisplay from "../components/phones/ItemsToDisplay";
 import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { motion } from "framer-motion";
-// import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
+
 
 const Phones = () => {
+
   const [filtersClick, setFiltersClick] = useState(false);
   const [priceRange, setPriceRange] = useState([10, 1500]);
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [brand, setBrand] = useState(null);
   const [type, setType] = useState(null);
@@ -24,8 +26,41 @@ const Phones = () => {
     label: "24",
   });
 
+  const paramsFunction = (e,queryName) =>{
+    if (e === null) {
+      searchParams.delete(queryName);
+      setSearchParams(searchParams);
+    } else {
+      searchParams.set(queryName, e.value);
+      setSearchParams(searchParams);
+    }
+  }
+  useEffect(() => {
+    let brandParam = searchParams.get("brand");
+    let typeParam = searchParams.get("type");
+    let sortParam = searchParams.get("sort");
+    brandParam ? setBrand({ value: brandParam, label: brandParam }) : setBrand(null)
+    typeParam ? setType({ value: typeParam, label: typeParam }) : setType(null)
+    sortParam ? setSort({ value: sortParam, label: sortParam }) :setSort(null)
+  },[searchParams]);
+
   const filtersClickHandler = () => {
     setFiltersClick(!filtersClick);
+  };
+
+  const setBrandHandler = (e) => {
+    setBrand(e);
+    paramsFunction(e,'brand')
+  };
+
+  const setSortHandler = (e) => {
+    setSort(e);
+    paramsFunction(e,'sort')
+  };
+
+  const setTypeHandler = (e) => { 
+    setType(e);
+    paramsFunction(e,'type')
   };
 
   return (
@@ -44,9 +79,9 @@ const Phones = () => {
           <RangePrice priceRange={priceRange} setPriceRange={setPriceRange} />
         </div>
 
-        <Brand brand={brand} setBrand={setBrand} />
-        <TypeFilter brand={brand} type={type} setType={setType} />
-        <SortItems sort={sort} setSort={setSort} />
+        <Brand brand={brand} setBrand={setBrandHandler} />
+        <TypeFilter brand={brand} type={type} setType={setTypeHandler} />
+        <SortItems sort={sort} setSort={setSortHandler} />
         <ItemsToDisplay
           numberOfItems={numberOfItems}
           setNumberOfItems={setNumberOfItems}
@@ -84,37 +119,3 @@ const Phones = () => {
 };
 
 export default Phones;
-
-// const brandParam = searchParams.get("brand");
-
-// useEffect(() => {
-//   if (brandParam) {
-//     setBrand({value:brandParam,label:brandParam})
-//   }
-// },[]);
-
-// useEffect(()=>{
-// if (brandParam) {
-//   return;
-// }
-// else{
-//  if (!brandParam) {
-//   return
-//  }
-//   setBrand({value:null,label:'Brands'})
-// }
-// },[brandParam])
-
-// useEffect(()=>{
-//   if (brand.value === null) {
-//     setSearchParams({})
-//   }else {
-//   setSearchParams({brand: brand.value})
-//   }
-// },[brand])
-
-// useEffect(() => {
-//   if (brandParam) {
-//     setBrand({value:brandParam,label:brandParam})
-//   }
-// },[]);

@@ -129,32 +129,9 @@
     padding-left: 0;
   }
 
-  /* .nav-options {
-    display: flex;
-    width: 100%;
-    position: absolute;
-    top: 45px;
-    left: -100%;
-    opacity: 0;
-    transition: all 0.3s ease;
-    flex-direction: column;
-    list-style-type: none;
-    grid-gap: 0;
-    height: fit-content;
-    border-radius: 10px;
-  }
+  
 
-  .nav-options.active {
-    left: 0;
-    width: 100%;
-    height: fit-content;
-    background: black;
-    opacity: 1;
-    transition: all 0.3s ease;
-    z-index: 1;
-    align-content: center;
-    padding-left: 0;
-  } */
+  
 
   .nav-options.active hr {
     height: 1px;

@@ -1,10 +1,8 @@
 import React from "react";
 import classes from "./StorageItem.module.scss";
 import { motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
 
 const StorageItem = ({ storage, storageA, price, setPrice, setStorage }) => {
-  const [searchParams, setSearchParams] = useSearchParams(); 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.7 }}
@@ -14,15 +12,9 @@ const StorageItem = ({ storage, storageA, price, setPrice, setStorage }) => {
       className={`${classes.storageItem} ${
         storage === storageA ? classes.active : ""
       }`}
-      onClick={(e) => {
-        e.preventDefault();
+      onClick={() => {
         setPrice(price);
         setStorage(storageA);
-        setSearchParams({
-          color: searchParams.get("color"),
-          storage: storageA,
-        });
-       
       }}
     >
       {storageA}

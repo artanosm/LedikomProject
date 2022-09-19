@@ -1,10 +1,10 @@
 import React from "react";
 import Select from "react-select";
-import classes from './Brand.module.css'
+import classes from './Brand.module.css';
+
 
 
 const options = [
-  // { value: null, label: "Brands" },
   { value: "Apple", label: "Apple" },
   { value: "Samsung", label: "Samsung" },
   { value: "Xiaomi", label: "Xiaomi" },
@@ -36,8 +36,9 @@ const customStyles = {
 };
 
 
-const Brand = ({ brand, setBrand }) => {
 
+const Brand = ({ brand, setBrand }) => {
+  
   return (
     <div className={classes.container} >
       <Select
