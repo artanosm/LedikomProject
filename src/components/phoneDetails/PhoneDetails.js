@@ -37,7 +37,7 @@ const PhoneDetails = () => {
       colorParam === phone?.colors[color].name &&
         setColorImg({ color: phone?.colors[color].image, name: colorParam });
     }
-  }, [searchParams]);
+  }, [searchParams,colorParam,storageParam,phone]);
 
   const storageFunction = (storageP, obj) => {
     let p;
@@ -52,6 +52,8 @@ const PhoneDetails = () => {
     }
     return p;
   };
+
+  
   useEffect(() => {
     const fetchPhones = async () => {
       const response = await fetch(
@@ -82,14 +84,14 @@ const PhoneDetails = () => {
 
       let storagePrice = storageFunction(storageParam, found);
       setPrice(storagePrice);
-      setPhone(found);
+      setPhone(()=> found);
       setIsLoading(false);
     };
 
     fetchPhones().catch((error) => {
       console.log(error);
     });
-  }, []);
+  },[]);
 
   const colorImageHandler = (color) => {
     setColorImg(color);
@@ -107,8 +109,8 @@ const PhoneDetails = () => {
   };
 
   const addItemToCart = () => {
-    setAlert(true);
-    setTimeout(() => setAlert(false), 3000);
+    setAlert(()=> true);
+    setTimeout(() => setAlert(()=> false), 3000);
     let rand =
       Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({

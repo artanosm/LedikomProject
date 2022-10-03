@@ -1,8 +1,7 @@
 import React from "react";
-import classes from "./OrdersItemGroup.module.css";
+import classes from "./OrdersItemGroup.module.scss";
 
 const OrdersItemGroup = ({ item }) => {
-  console.log(item);
   return (
     <>    
     <div className={classes.container}>

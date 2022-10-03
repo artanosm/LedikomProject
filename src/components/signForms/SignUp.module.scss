@@ -7,13 +7,10 @@
 }
 .container {
   @include flex-center(center,column);
-  // display: flex;
-  // align-items: center;
-  // align-content: center;
-  // flex-direction: column;
   gap: 1rem;
   width: 40%;
-  min-width: 250px;
+  max-width: 400px;
+  min-width: 300px;
   height: auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
   border-radius: 15px;
@@ -23,6 +20,11 @@
 .h1{
   color:#151b4d;
 }
+
+.span {
+  color:darkgrey;
+  font-size: small;
+}
 .formContainer {
   @include flex-center(center,column);
   // display: flex;
@@ -31,46 +33,28 @@
   height: fit-content;
   width: 100%;
   gap: 1rem;
-  margin: 4rem 1rem;
+  margin: 2rem 1rem;
 }
 
-/* .formControl {
-  margin-bottom: 0.5rem;
-  border-radius: 15px;
-  width: 100%;
-}
-
-.formControl input {
-  font-size: medium;
-  color: rgb(114, 112, 112);
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
-  border-radius: 5px;
-  border: white;
-  width: 100%;
-  height: 40px;
-  text-align: left;
-  padding: 0.25rem;
-}
-.formControl input::placeholder{
-  color:darkgrey;
-} */
 .actions {
   @include flex-center(center,column);
+  width: 100%;
   // display: flex;
   // align-items: center;
   // flex-direction: column;
-  margin-top: 1.5rem;
 }
 
 .actions button {
+  width: 90%; 
+  max-width: 250px;
+  margin-bottom: 1rem;
   cursor: pointer;
   font: inherit;
   color: white;
   background-color: index.$magenta-color;
   border: 1px solid index.$magenta-color;
   border-radius: 4px;
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem 1.5rem;
 }
 
 .actions button:hover {
@@ -79,11 +63,11 @@
 }
 
 .actions .toggle {
-  margin-top: 1rem;
+  width: 100%;
   background-color: transparent;
   color: index.$magenta-color;
   border: none;
-  padding: 0.15rem 1.5rem;
+  padding: 0;
 }
 
 .actions:hover .toggle:hover {
@@ -94,8 +78,27 @@
 
 @media only screen and (max-width: 500px){
   .container{
-    width: 90%;
-    margin: 3rem 2rem;
+    width: 100%;
+    margin: 2rem 2rem;
     padding: 0 2rem;
   }
+
+  .actions button {
+    width: 100%;  
+    padding: 0.5rem 0.5rem;
+  }
+
+  .formContainer {
+    gap: 0.5rem;
+    margin: 1rem 1rem;
+  } 
+}
+
+.alert {
+  @include flex-center(center);
+  width: 100%;
+  background-color: rgb(253, 217, 217);
+  color: rgb(181, 0, 0);
+  padding: 1rem;
+  border-radius: 15px;
 }

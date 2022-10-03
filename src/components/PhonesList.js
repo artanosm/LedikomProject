@@ -32,6 +32,7 @@ const PhonesList = ({
         loadedPhones.push({
           date: data[key].date,
           type: data[key].type,
+          firebaseId:data[key],
           // adding dash to every empty space
           id: data[key].model.replace(/\s/g, "-"),
           model: data[key].model,
@@ -42,7 +43,7 @@ const PhonesList = ({
           ram: data[key].ram,
         });
       }
-      setPhones(loadedPhones);
+      setPhones(()=> loadedPhones);
       setIsLoading(false);
     }
   }, [data]);

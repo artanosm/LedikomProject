@@ -1,0 +1,152 @@
+@use '../../index.scss' as index;
+@use '../../sass/abstracts/mixins' as *;
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  @include flex-center(center,column);
+  width: 40%;
+  gap: 1rem;
+  width: 40%;
+  max-width: 400px;
+  min-width: 300px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+  border-radius: 15px;
+  margin: 4rem 4rem;
+  padding: 2rem 2rem;
+}
+.h1{
+  color:#151b4d;
+}
+
+.inlineContainer {
+  @include flex-center(center);
+  width:100%;
+}
+
+.alert {
+  @include flex-center(center);
+  width: 100%;
+  padding: 1rem;
+  border-radius: 15px;
+}
+
+.redAlert {
+  background-color: rgb(253, 217, 217);
+  color: rgb(181, 0, 0);
+}
+
+.greenAlert {
+  background-color: rgb(222, 255, 213);
+  color: rgb(23, 142, 1);
+}
+
+
+.span {
+  color:darkgrey;
+  font-size: small;
+}
+.formContainer {
+  @include flex-center(center,column);
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+  height: fit-content;
+  width: 100%;
+  gap: 1rem;
+  margin: 2rem 1rem;
+}
+
+
+.actions {
+  @include flex-center(center,column);
+  width: 100%;
+  // display: flex;
+  // align-items: center;
+  // flex-direction: column;
+}
+
+.resetButton {
+  @include flex-center(center);
+  cursor: pointer;
+  font: inherit;
+  font-size: small;
+  color: index.$magenta-color;
+  padding: 0.5rem 0.5rem;
+  background-color: white;
+  border: none;
+}
+
+
+
+.actions .google {
+  @include flex-center(center);
+  cursor: pointer;
+  font: inherit;
+  border-radius: 4px;
+  padding: 0.5rem 0.5rem;
+  background-color: white;
+  color:rgb(0, 119, 255);
+  border: 1px solid rgb(0, 119, 255);
+}
+
+.actions .google:hover {
+  transition: all 0.3s;
+  background-color: rgb(0, 119, 255);
+  color:white;
+  border: 1px solid white;
+}
+
+
+.actions button {
+  width: 90%; 
+  max-width: 250px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: index.$magenta-color;
+  border: 1px solid index.$magenta-color;
+  border-radius: 4px;
+  padding: 0.5rem 1.5rem;
+}
+
+.actions button:hover {
+  background-color: #ba2264;
+  border-color: #ba2264;
+}
+
+.actions .toggle {
+  width: 100%;
+  background-color: transparent;
+  color: index.$magenta-color;
+  border: none;
+  padding: 0;
+}
+
+.actions:hover .toggle:hover {
+  background-color: transparent;
+  color: #ba2264;
+}
+
+
+@media only screen and (max-width: 500px){
+  .container{
+    width: 100%;
+    margin: 2rem 2rem;
+    padding: 0 2rem;
+  }
+
+  .actions button {
+    width: 100%;  
+    padding: 0.5rem 0.5rem;
+  }
+
+  .formContainer {
+    gap: 0.5rem;
+    margin: 1rem 1rem;
+  } 
+}

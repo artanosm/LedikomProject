@@ -45,7 +45,6 @@ const ServiceBrand = () => {
       .then((data) => {
         setPhones([...data])
         setIsLoading(false);
-
       })
       .catch((error) => {
         console.log(error);

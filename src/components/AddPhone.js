@@ -8,7 +8,7 @@ const AddPhone = () => {
   const typeRef = useRef("");
   const ramRef = useRef("");
   const warantyRef = useRef("");
-  const storageOrCaseRef = useRef('')
+  const storageOrCaseRef = useRef("");
 
   const storageRef64GB = useRef("");
   const storageRef128GB = useRef("");
@@ -123,13 +123,22 @@ const AddPhone = () => {
       <form onSubmit={submitHandler}>
         <InputForm title="Brand" type="text" ref={brandRef} />
         <InputForm title="Model" type="text" ref={modelRef} />
-        <InputForm title="Type" type="text" ref={typeRef} />
+        <label>Storage or Case Size:</label>
+        <select ref={typeRef}>
+          <option value="Phone">Phone</option>
+          <option value="Tablet">Tablet</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Smartwatch">Smartwatch</option>
+        </select>
         <InputForm title="Ram" type="text" ref={ramRef} />
         <InputForm title="Waranty" type="text" ref={warantyRef} />
         <br />
         <div>
           <label>Storage or Case Size:</label>
-          <InputForm title='Storage or Case Size' type='text' ref={storageOrCaseRef}/>
+          <select ref={storageOrCaseRef}>
+            <option value="Storage">Storage</option>
+            <option value="Case">Case</option>
+          </select>
           <br />
           <InputForm title="Storage 1" type="text" ref={storageRef64GB} />
           <InputForm title="Storage 2" type="text" ref={storageRef128GB} />

@@ -7,7 +7,8 @@ import Footer from "./layout/Footer";
 import Home from "./pages/Home";
 import Phones from "./pages/Phones";
 import Service from "./pages/Service";
-import User from "./pages/User";
+import Login from "./components/signForms/Login";
+import SignUp from "./components/signForms/SignUp";
 import Profile from "./pages/Profile";
 import CheckOut from "./pages/CheckOut";
 import Cart from "./components/cart/Cart";
@@ -51,7 +52,8 @@ function App() {
         <Route path="/service" element={<Service />} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
         <Route path="/service/:brand/:serviceId" element={<PhoneServiceDetails />} />
-        <Route path="/login" element={<User />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/orders" element={<Orders />} />
