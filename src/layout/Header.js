@@ -16,6 +16,7 @@ const Header = (props) => {
   const authCtx = useContext(AuthContext)
 
   const closeMobileMenu = () => setClick(false);
+  
   return (
     <div className="header">
       <motion.div

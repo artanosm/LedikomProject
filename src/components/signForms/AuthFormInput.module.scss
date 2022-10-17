@@ -20,6 +20,7 @@
   }
   .formControl input::placeholder{
     color:darkgrey;
+    font-size: small; 
   }
   .actions {
     @include flex-center(center,column);

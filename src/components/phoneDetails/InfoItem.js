@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./InfoItem.module.css";
 
 const InfoItem = ({title, content}) => {
+
   return (
     <div>
       <h4 className={classes.titles}>{title}<span>{content}</span></h4>
@@ -10,4 +11,4 @@ const InfoItem = ({title, content}) => {
   );
 };
 
-export default InfoItem;
+export default React.memo(InfoItem);

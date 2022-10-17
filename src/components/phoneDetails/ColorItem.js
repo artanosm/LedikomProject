@@ -2,8 +2,8 @@ import React from "react";
 import classes from "./ColorItem.module.scss";
 import { motion } from "framer-motion";
 
-const ColorItem = ({ colorA, colorImg, setColorImg }) => {
-  
+const ColorItem = ({ color, colorImg, setColorImg }) => {
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
@@ -11,16 +11,16 @@ const ColorItem = ({ colorA, colorImg, setColorImg }) => {
       whileHover={{ scale: 1.1 }}
       transition={{ duration: 0.1 }}
       className={`${classes.colorsItem} ${
-        colorImg.color === colorA.image ? classes.active : ""
+      colorImg.color === color.image ? classes.active : ""
       }`}
       onClick={() => {    
-        setColorImg({ color: colorA.image, name: colorA.name });        
+        setColorImg({ color: color.image, name: color.name });        
       }}
     >
-      <div style={{ backgroundColor: colorA.hex }}></div>
-      <p>{colorA.name}</p>
+      <div style={{ backgroundColor: color.hex }}></div>
+      <p>{color.name}</p>
     </motion.div>
   );
 };
 
-export default ColorItem;
+export default React.memo(ColorItem);

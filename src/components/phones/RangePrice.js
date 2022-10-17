@@ -14,6 +14,7 @@ const theme = createTheme({
 
 export default function RangePrice({priceRange, setPriceRange}) {
 
+
   function valuetext(value) {
     return `${value}`;
   }
@@ -42,21 +43,3 @@ export default function RangePrice({priceRange, setPriceRange}) {
   );
 }
 
-// import classes from './RangePrice.module.css'
-// import React, { useState } from "react";
-
-// const RangePrice = () => {
-// //   const [value, setValue] = useState([10, 1500]);
-
-//   return (
-//     <div>
-//     <div className={classes.valueShow}>
-//     <span>{10}</span>
-//     <span>{1500}</span>
-//     </div>
-
-//     </div>
-//   );
-// };
-
-// export default RangePrice;

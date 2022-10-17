@@ -32,7 +32,7 @@ const PhonesList = ({
         loadedPhones.push({
           date: data[key].date,
           type: data[key].type,
-          firebaseId:data[key],
+          firebaseId: data[key],
           // adding dash to every empty space
           id: data[key].model.replace(/\s/g, "-"),
           model: data[key].model,
@@ -43,7 +43,7 @@ const PhonesList = ({
           ram: data[key].ram,
         });
       }
-      setPhones(()=> loadedPhones);
+      setPhones(() => loadedPhones);
       setIsLoading(false);
     }
   }, [data]);
@@ -125,13 +125,6 @@ const PhonesList = ({
     sortedPhones.sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
     });
-  // if (date) {
-  //   sortedPhones.sort((a, b) => {
-  //     // Turn your strings into dates, and then subtract them
-  //     // to get a value that is either negative, positive, or zero.
-  //     return new Date(b.date) - new Date(a.date);
-  //   });
-  // }
 
   randomItems &&
     (sortedPhones = getMultipleRandom(sortedPhones, numberOfItems.value));
@@ -141,12 +134,6 @@ const PhonesList = ({
   numberOfItems
     ? (itemsToDisplay = sortedPhones.slice(0, numberOfItems.value))
     : (itemsToDisplay = sortedPhones);
-
-  // if (numberOfItems) {
-  //   itemsToDisplay = sortedPhones.slice(0, numberOfItems.value);
-  // } else {
-  //   itemsToDisplay = sortedPhones;
-  // }
 
   const phoneItems = itemsToDisplay.map((phone) => {
     let price1;
@@ -182,7 +169,6 @@ const PhonesList = ({
           model={phone.model}
           colors={phone.colors}
           storage={phone.storage}
-
         />
       );
     }

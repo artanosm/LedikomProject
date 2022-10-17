@@ -1,8 +1,8 @@
-@mixin flex-center ($just-cont: center,$flex-dir: row,$ali-items: center){
+@mixin flex-center ($just-cont: center,$flex-dir: row,$ali-items: center,$ali-content:center){
     display: flex;
     justify-content: $just-cont;
     flex-direction: $flex-dir;
     align-items: $ali-items;
-    // align-items: center;
-    // align-content: center;
+    align-content: $ali-content;
+
 }

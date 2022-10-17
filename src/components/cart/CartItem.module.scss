@@ -1,30 +1,56 @@
-@use '../../index.scss' as index;
-@use '../../sass/abstracts/mixins' as *;
-
+@use "../../index.scss" as index;
+@use "../../sass/abstracts/mixins" as *;
 
 .itemContainer {
-  @include flex-center (flex-start);
+  @include flex-center(space-around);
   // display: flex;
   // align-items: center;
   // align-content: center;
   // justify-content: flex-start;
-  gap: 2rem;
+  gap: 1rem;
   width: 100%;
+  border-bottom: solid rgb(227, 227, 227) 1px;
+  padding: 1rem;
+}
+.itemContainer > p {
+  width:fit-content;
+  padding-right: 1rem;
+}
+.dataContainer {
+  // @include flex-center(flex-start);
+  @include flex-center(flex-start, column);
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  gap: 0.1rem;
 }
 
-.itemContainer h3 {
-  width: 60%;
-  color: index.$dark-blue;
+.dataContainer h3,
+p {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.dataContainer h3 {
   font-weight: 100;
+  font-size: 1rem;
+}
+.itemContainer > p {
+  font-size: .9rem;
 }
 
+.dataContainer p {
+  color: grey;
+  font-size: .8rem;
+}
 .cartImage {
   height: auto;
   width: 5rem;
 }
 
 .amountContainer {
-  @include flex-center (space-around);
+  @include flex-center(space-around);
   // display: flex;
   // align-items: center;
   // justify-content: space-around;
@@ -40,16 +66,29 @@
 @media only screen and (max-width: 500px) {
   .itemContainer {
     justify-content: space-between;
+    padding: 0.1rem;
     gap: 0.2rem;
   }
 
   .itemContainer h3 {
-    width: 50%;
     font-size: small;
     padding-right: 2rem;
   }
+.itemContainer > p {
+  font-size: small;
 }
 
-
-
-
+  .dataContainer {
+    gap: 0.2rem;
+  }
+  .dataContainer h3 {
+    
+    font-size: small;
+    padding: 0.2rem;
+  }
+  .dataContainer p {
+    font-size: x-small;
+    padding: 0.2rem;
+  }
+ 
+}

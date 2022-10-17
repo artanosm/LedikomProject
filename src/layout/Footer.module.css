@@ -9,8 +9,8 @@
 }
 
 .container1 p {
-    color: darkgray;
-    font-size: small;
+  color: darkgray;
+  font-size: small;
 }
 
 .container2 {
@@ -25,7 +25,6 @@
 }
 
 .logoFooter {
-  
   width: 15%;
 }
 
@@ -51,7 +50,7 @@
 .footer p {
   color: darkgray;
   font-size: small;
-  padding: 0 ;
+  padding: 0;
   margin: 0.5rem 0;
 }
 .newsletter {
@@ -80,7 +79,7 @@
 }
 
 .inputContainer input {
-    font-size: large;
+  font-size: large;
   border: none;
   background-color: white;
   width: 50%;
@@ -89,9 +88,17 @@
 }
 
 .inputContainer input:focus {
-  
   transition: all 0.3s;
 }
+.inputContainer::before {
+  content: "Subscribe for newsletter!";
+  color: lightgray;
+  width: 30%;
+  top:-25rem;
+  text-align: center;
+  margin: auto;
+}
+
 .inputContainer button {
   background-color: #131920;
   border: white solid 0.5px;
@@ -107,8 +114,7 @@
   background-color: white;
 }
 
-@media only screen and (max-width: 500px){
-
+@media only screen and (max-width: 500px) {
   .inputContainer {
     flex-direction: column;
     gap: 1rem;
@@ -116,14 +122,20 @@
   .inputContainer input {
     width: 15rem;
   }
+
+  .inputContainer::before {
+    width: 90%;
+    text-align: start;
+    margin: 0;
+  }
+  
   .inputContainer button {
     font-size: medium;
     width: 6rem;
     height: 2rem;
   }
-  .logoFooter{
+  .logoFooter {
     width: 30%;
-    
   }
   .container2 {
     flex-direction: column;

@@ -51,4 +51,4 @@ const TypeFilter = ({ type, setType }) => {
   );
 };
 
-export default TypeFilter;
+export default React.memo(TypeFilter);

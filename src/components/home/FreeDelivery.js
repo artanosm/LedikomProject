@@ -2,6 +2,7 @@ import React from 'react'
 import classes from './FreeDelivery.module.css'
 
 const FreeDelivery = () => {
+
   return (
     <div className={classes.mainContainer}>
         <h1>Professional Service</h1>

@@ -3,6 +3,7 @@ import classes from "./Storage.module.scss";
 import StorageItem from "./StorageItem";
 
 function Storage({ phone, setPrice, price, storage, setStorage }) {
+
   if (!price) {
     price = phone.price128GB;
   }
@@ -60,5 +61,5 @@ function Storage({ phone, setPrice, price, storage, setStorage }) {
   );
 }
 
-export default Storage;
+export default React.memo(Storage);
 

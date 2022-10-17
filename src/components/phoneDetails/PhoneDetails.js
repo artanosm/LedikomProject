@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, Fragment } from "react";
+import { useState, useEffect, useContext, Fragment, useCallback } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import classes from "./PhoneDetails.module.scss";
 import Colors from "./Colors";
@@ -33,11 +33,18 @@ const PhoneDetails = () => {
     setStorage(storageParam);
     let priceStorage = storageFunction(storageParam, phone);
     setPrice(priceStorage);
+    // for (const color in phone?.colors) {
+    //   colorParam === phone?.colors[color].name &&
+    //     setColorImg({ color: phone?.colors[color].image, name: colorParam });
+    // }
+  }, [storageParam, phone]);
+
+  useEffect(() => {
     for (const color in phone?.colors) {
       colorParam === phone?.colors[color].name &&
         setColorImg({ color: phone?.colors[color].image, name: colorParam });
     }
-  }, [searchParams,colorParam,storageParam,phone]);
+  }, [colorParam, phone?.colors]);
 
   const storageFunction = (storageP, obj) => {
     let p;
@@ -53,7 +60,6 @@ const PhoneDetails = () => {
     return p;
   };
 
-  
   useEffect(() => {
     const fetchPhones = async () => {
       const response = await fetch(
@@ -67,7 +73,6 @@ const PhoneDetails = () => {
 
       let found;
       for (const key in responseData) {
-      
         if (responseData[key].model.replace(/\s/g, "-") === phoneId) {
           found = responseData[key];
         }
@@ -84,33 +89,43 @@ const PhoneDetails = () => {
 
       let storagePrice = storageFunction(storageParam, found);
       setPrice(storagePrice);
-      setPhone(()=> found);
+      setPhone(() => found);
       setIsLoading(false);
     };
 
     fetchPhones().catch((error) => {
       console.log(error);
     });
-  },[]);
+  }, []);
 
-  const colorImageHandler = (color) => {
-    setColorImg(color);
-    searchParams.set("color", color.name);
-    setSearchParams(searchParams);
-  };
-  const priceHandler = (price) => {
-    setPrice(price);
-  };
+  const colorImageHandler = useCallback(
+    (e) => {
+      setColorImg(e);
+      searchParams.set("color", e.name);
+      setSearchParams(searchParams);
+    },
+    [setColorImg]
+  );
 
-  const storageHandler = (storage) => {
-    setStorage(storage);
-    searchParams.set("storage", storage);
-    setSearchParams(searchParams);
-  };
+  const priceHandler = useCallback(
+    (e) => {
+      setPrice(e);
+    },
+    [setPrice]
+  );
+
+  const storageHandler = useCallback(
+    (e) => {
+      setStorage(e);
+      searchParams.set("storage", e);
+      setSearchParams(searchParams);
+    },
+    [setStorage]
+  );
 
   const addItemToCart = () => {
-    setAlert(()=> true);
-    setTimeout(() => setAlert(()=> false), 3000);
+    setAlert(() => true);
+    setTimeout(() => setAlert(() => false), 2000);
     let rand =
       Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({
@@ -130,18 +145,14 @@ const PhoneDetails = () => {
       <AnimatePresence>
         {alert && (
           <motion.div
+            layout
             className={classes.alert}
-            initial={{ x: "100vw" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100vw" }}
-            transition={{
-              duration: 0.8,
-              type: "spring",
-              stiffness: 160,
-              damping: 20,
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <CheckIcon fontSize="large" /> <p>Item Added to Cart</p>
+            <CheckIcon fontSize="large" />
+            <p>Item Added to Cart</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -162,7 +173,7 @@ const PhoneDetails = () => {
             {phone.ram && <InfoItem title="Ram:" content={phone.ram} />}
             {phone.colors.color1.hex && (
               <Colors
-                phone={phone}
+                phoneColors={phone.colors}
                 setColorImg={colorImageHandler}
                 colorImg={colorImg}
               />

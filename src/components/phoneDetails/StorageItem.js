@@ -3,6 +3,7 @@ import classes from "./StorageItem.module.scss";
 import { motion } from "framer-motion";
 
 const StorageItem = ({ storage, storageA, price, setPrice, setStorage }) => {
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.7 }}
@@ -22,4 +23,4 @@ const StorageItem = ({ storage, storageA, price, setPrice, setStorage }) => {
   );
 };
 
-export default StorageItem;
+export default React.memo(StorageItem);

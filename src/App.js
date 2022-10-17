@@ -30,19 +30,21 @@ function App() {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartI));
     localStorage.setItem("cartTotalAmount", JSON.stringify(cartTA));
-  }, [cartI, cartTA]);  
-  
+  }, [cartI, cartTA]);
 
   const showCartHandler = () => {
     setCartIsShown(true);
   };
   const hideCartHandler = () => {
+    window.document.body.style.overflow = "unset";
     setCartIsShown(false);
   };
 
   return (
     <AuthContextProvider>
-      {cartIsShown && <Cart onClose={hideCartHandler} />}
+      {cartIsShown && (
+        <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
+      )}
       <Header onShowCart={showCartHandler} />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -51,7 +53,10 @@ function App() {
         <Route path="/phones" element={<Phones />} />
         <Route path="/service" element={<Service />} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
-        <Route path="/service/:brand/:serviceId" element={<PhoneServiceDetails />} />
+        <Route
+          path="/service/:brand/:serviceId"
+          element={<PhoneServiceDetails />}
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />

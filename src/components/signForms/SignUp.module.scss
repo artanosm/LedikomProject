@@ -70,6 +70,13 @@
   padding: 0;
 }
 
+.actions .toggle::before {
+  content: "Have an account?";
+  color: lightgray;
+  padding-right: 5px;
+  font-size: small;
+}
+
 .actions:hover .toggle:hover {
   background-color: transparent;
   color: #ba2264;

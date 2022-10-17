@@ -6,6 +6,7 @@ import classes from "./BrandPage.module.scss";
 import TypeFilter from "../components/phones/TypeFilter";
 
 const BrandPage = () => {
+  
   const [priceRange, setPriceRange] = useState([10, 1500]);
   const [type, setType] = useState(null)
 

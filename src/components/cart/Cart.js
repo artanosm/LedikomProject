@@ -4,13 +4,12 @@ import Modal from "../../ui/Modal";
 import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
 import { useNavigate } from "react-router-dom";
-// import { Button } from "@mui/material";
-
+import { AnimatePresence, motion } from "framer-motion";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const navigate = useNavigate();
-  
+
   const clearCartHandler = () => {
     cartCtx.clearCart();
   };
@@ -22,47 +21,45 @@ const Cart = (props) => {
 
   const cartItems = (
     <ul className={classes.cartContainer}>
-      {cartCtx.items.map((item, key) => {
-        return (
-          <CartItem
-            brand={item.brand}
-            model={item.model}
-            id={item.id}
-            key={key}
-            amount={item.amount}
-            color={item.color}
-            colorName={item.colorName}
-            storage={item.storage}
-          />
-        );
-      })}
+      <AnimatePresence mode={"popLayout"}>
+        {cartCtx.items.map((item, key) => {
+          return (
+            <motion.li
+              layout
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: -50, opacity: 0 }}
+              transition={{ type: "tween" }}
+              key={item.id}
+            >
+              <CartItem item={item} key={key} />
+            </motion.li>
+          );
+        })}
+      </AnimatePresence>
     </ul>
   );
-
   return (
-    <Modal onClose={props.onClose}>
+    <Modal cartIsShown={props.cartIsShown} onClose={props.onClose}>
       {cartCtx.items.length !== 0 ? (
-        <div>{cartItems}</div>
+        <div className={classes.itemsContainer}>{cartItems}</div>
       ) : (
         <p>Your Cart is empty</p>
       )}
       {cartCtx.items.length > 0 && (
         <div className={classes.totalContainer}>
-           {/* <Button size="small" onClick={clearCartHandler} variant='outlined' color="error">Clear Cart</Button> */}
           <button
             className={`${classes.clearCart} ${classes.button}`}
             onClick={clearCartHandler}
           >
             Clear Cart
           </button>
-          <button 
+          <button
             className={`${classes.checkOut} ${classes.button}`}
             onClick={onCheckHandler}
           >
             Check out
           </button>
-          {/* <Button size="small" onClick={onCheckHandler} variant='contained' color="success">Check Out</Button> */}
-          <h3>Total: {cartCtx.totalAmount} $</h3>
+       <h3>Total: {cartCtx.totalAmount} $</h3>
         </div>
       )}
     </Modal>

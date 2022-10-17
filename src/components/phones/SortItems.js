@@ -29,6 +29,7 @@ const customStyles = {
 };
 
 const SortItems = ({ sort, setSort }) => {
+
   return (
     <div className={classes.container}>
       <Select
@@ -52,4 +53,4 @@ const SortItems = ({ sort, setSort }) => {
   );
 };
 
-export default SortItems;
+export default React.memo(SortItems);

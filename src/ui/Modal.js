@@ -16,6 +16,8 @@ const ModalOverlay = (props) => {
 const portalElement = document.getElementById("overlays");
 
 const Modal = (props) => {
+  props.cartIsShown && (window.document.body.style.overflow = "hidden");
+
   return (
     <Fragment>
       {ReactDom.createPortal(

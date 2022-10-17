@@ -5,11 +5,7 @@
 }
 
 .filterContainer {
-  @include flex-center(flex-start);
-  // display: flex;
-  // align-items: center;
-  // align-content: center;
-//   justify-content: flex-start;
+  @include flex-center(center);
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
@@ -23,7 +19,8 @@
 }
 .priceRangeContainer h4 {
   color: rgb(149, 149, 149);
-  margin: 0 1rem 0 0;
+  margin: 0 0.7rem 0 0;
+  font-weight: 200;
 }
 .showFilter {
   display: none;
@@ -41,6 +38,7 @@
   .priceRangeContainer h4 {
     padding-top: 6px;
   }
+  
   .filterContainer {
     display: none;
     position: absolute;
@@ -48,39 +46,31 @@
     padding: 0.1rem 0.1rem;
     margin: 0;
     gap: 0.1rem;
-    /* top:-100%; */
-    /* display:flex;
-        justify-content: flex-start;
-        height: auto; */
   }
   .filterContainer.active {
     display: flex;
     animation: slider 0.5s ease;
     position: relative;
-    /* top:0; */
   }
-  /* .filterContainer {
-        left:-100%;
-        position: absolute;
-        flex-direction: column;
-        padding: 0.1rem 0.1rem;
-        margin: 0;
-        gap: 0.1rem;
-        /* display:flex;
-        justify-content: flex-start;
-        height: auto; */
-  /* } */
-  /* .filterContainer.active {
-        animation: slider 0.3s  ease;
-        left:0;
-        position: relative;
-    } */
+
+  // .filterContainer {
+  //   // position: absolute;
+  //   position: relative;
+  //   flex-direction: column;
+  //   padding: 0.1rem 0.1rem;
+  //   margin: 0;
+  //   gap: 0.1rem;
+  //   display: flex;
+    
+  //   // top:-100%;
+  // }
+  // // .filterContainer.active {
+  // //   // animation: slider 0.5s ease;
+  // //   // top: 0;
+  // // }
+
   .showFilter {
     @include flex-center;
-    // display: flex;
-    // align-items: center;
-    // align-content: center;
-    // justify-content: center;
     width: fit-content;
     background-color: white;
     border: 1px solid grey;
@@ -90,8 +80,6 @@
   }
   .showFilter span {
     @include flex-center;
-    // display: flex;
-    // align-items: center;
     width: 100%;
   }
 }

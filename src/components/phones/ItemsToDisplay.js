@@ -52,4 +52,4 @@ const ItemsToDisplay = ({ numberOfItems, setNumberOfItems }) => {
   );
 };
 
-export default ItemsToDisplay;
+export default React.memo(ItemsToDisplay);

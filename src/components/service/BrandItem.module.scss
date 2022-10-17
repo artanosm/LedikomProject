@@ -1,5 +1,4 @@
-@use '../../sass/abstracts/mixins' as *;
-
+@use "../../sass/abstracts/mixins" as *;
 
 .main {
   @include flex-center(flex-end, column);
@@ -15,7 +14,6 @@
   gap: 1rem;
   padding: 0.5rem;
   text-decoration: none;
-
 }
 
 .main:hover {
@@ -24,10 +22,11 @@
 }
 
 .main img {
-    width: 100%;
+  width: 100%;
 }
 .brandName {
-    font-size: 1rem;
-    font-weight: 700;
-    color: darkgray;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: darkgray;
 }

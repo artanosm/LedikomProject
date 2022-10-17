@@ -123,7 +123,7 @@ const AddPhone = () => {
       <form onSubmit={submitHandler}>
         <InputForm title="Brand" type="text" ref={brandRef} />
         <InputForm title="Model" type="text" ref={modelRef} />
-        <label>Storage or Case Size:</label>
+        <label>Type:</label>
         <select ref={typeRef}>
           <option value="Phone">Phone</option>
           <option value="Tablet">Tablet</option>
