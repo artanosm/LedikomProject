@@ -11,10 +11,20 @@ const CartItem = ({item}) => {
   const cartCtx = useContext(CartContext);
   const [show, setShow] = useState(true);
 
-  const removeItemHandler = () => {
-    setShow(false);
-    cartCtx.removeItem(id);
-  };
+const deleteItemHandler = () =>{
+  setShow(false);
+  cartCtx.deleteItem(id)
+}
+
+const increaseItemHandler = () => {
+  cartCtx.addItem(item)
+}
+const decreaseItemHandler = () => {
+  cartCtx.removeItem(id)
+}
+  
+
+
   return (
     <div className={classes.itemContainer}>
       <img className={classes.cartImage} src={color.color} alt="phone"></img>
@@ -23,11 +33,15 @@ const CartItem = ({item}) => {
         <p>{brand}</p>
         <p>{storage}</p>
       </div>
-  
-      <p>{price}$</p>
+      <div className={classes.buttonContainer}>
+        <button onClick={decreaseItemHandler}>-</button>
+        <p>{amount}</p>
+        <button onClick={increaseItemHandler}>+</button>
+      </div>
+      <p>{price * amount}$</p>
       <div className={classes.amountContainer}>
         {show && (
-          <Button size="medium" color="error" onClick={removeItemHandler}>
+          <Button size="medium" color="error" onClick={deleteItemHandler}>
             <DeleteOutlineIcon />
           </Button>
         )}

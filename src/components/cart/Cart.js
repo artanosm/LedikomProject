@@ -30,6 +30,7 @@ const Cart = (props) => {
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: -50, opacity: 0 }}
               transition={{ type: "tween" }}
+              // key={item.id}
               key={item.id}
             >
               <CartItem item={item} key={key} />

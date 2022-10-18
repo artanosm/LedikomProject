@@ -126,10 +126,11 @@ const PhoneDetails = () => {
   const addItemToCart = () => {
     setAlert(() => true);
     setTimeout(() => setAlert(() => false), 2000);
-    let rand =
-      Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
+    // let rand =
+      // Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({
-      id: rand,
+      // id: rand,
+      id: `${phone.model}${storage}${colorImg.name}`,
       model: phone.model,
       brand: phone.brand,
       storage: storage,
