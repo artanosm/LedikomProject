@@ -5,6 +5,7 @@ import CartContext from "../../store/cart-context";
 import CartItem from "./CartItem";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import CloseIcon from '@mui/icons-material/Close';
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
@@ -40,6 +41,11 @@ const Cart = (props) => {
   );
   return (
     <Modal cartIsShown={props.cartIsShown} onClose={props.onClose}>
+      <div className={classes.headerCartContainer}>
+        <h1>My Cart</h1>
+        <button onClick={props.onClose} className={classes.closeButton}>
+        <CloseIcon fontSize="medium"/></button>
+      </div>
       {cartCtx.items.length !== 0 ? (
         <div className={classes.itemsContainer}>{cartItems}</div>
       ) : (
@@ -59,7 +65,7 @@ const Cart = (props) => {
           >
             Check out
           </button>
-       <h3>Total: {cartCtx.totalAmount} $</h3>
+          <h3>Total: {cartCtx.totalAmount} $</h3>
         </div>
       )}
     </Modal>

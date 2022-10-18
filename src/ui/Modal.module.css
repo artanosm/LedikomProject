@@ -12,7 +12,7 @@
   .modal {
     margin: 0;
     position:relative;
-    top: 10vh;
+    top: 5vh;
     left: calc(50% / 2);
     width: 50%;
     background-color: white;

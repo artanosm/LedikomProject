@@ -1,70 +1,98 @@
-@use '../../index.scss' as index;
-@use '../../sass/abstracts/mixins' as *;
+@use "../../index.scss" as index;
+@use "../../sass/abstracts/mixins" as *;
 
 .itemsContainer {
-    overflow-y: scroll;
-    overflow-x:hidden;
-    height: 70vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 68vh;
 }
 
 .cartContainer {
-    @include flex-center( center,column,none,center);
-    list-style: none;
-    gap: 1rem;
-    // overflow-y: scroll;
-    // overflow-x:hidden;
-    
-    // display: flex;
-    // align-content: center;
-    // justify-content: center;
-    // flex-direction: column;
+  @include flex-center(center, column, none, center);
+  list-style: none;
+  gap: 1rem;
+  // overflow-y: scroll;
+  // overflow-x:hidden;
+
+  // display: flex;
+  // align-content: center;
+  // justify-content: center;
+  // flex-direction: column;
 }
 
 .totalContainer {
-    @include flex-center(space-around);
-    // display: flex;
-    // align-items: center;
-    // justify-content: space-around;
+  @include flex-center(space-around);
+  padding-top: 0.5rem;
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-around;
 }
 .totalContainer h3 {
-    color:index.$magenta-color;
-    font-weight: 400;
+  color: index.$magenta-color;
+  font-weight: 400;
 }
 
 .button {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  width: 5rem;
+  margin: 0;
+  height: 2rem;
+  color: white;
+  transition: all 0.1s linear;
+}
+
+.headerCartContainer {
+  @include flex-center(space-between);
+  padding: 0rem;
+  margin-bottom: .7rem;
+}
+
+.headerCartContainer h1 {
+  margin: 0 0 0 1rem;
+}
+.closeButton {
+  @include flex-center(center);
+  padding: 2px;
+  margin: 0;
+  background-color: white;
+  border: none;
+}
+.closeButton:hover {
+    background-color: lightgrey;
     border-radius: 5px;
-    border: none;
-    padding: 5px;
-    width: 5rem;
-    margin: 0;
-    height: 2rem;
-    color:white;
-    transition: all 0.1s linear;
 }
 
 .clearCart {
-    background-color: rgb(255, 235, 235);
-    color: red;
-} 
+  background-color: rgb(255, 235, 235);
+  color: red;
+}
 .clearCart:hover {
-    color: white;
-    background-color: rgb(249, 63, 63);
+  color: white;
+  background-color: rgb(249, 63, 63);
 }
 .checkOut {
-    background-color: rgb(235, 253, 235);
-    color: green;
+  background-color: rgb(235, 253, 235);
+  color: green;
 }
 
-.checkOut:hover{
-    background-color: green;
-    color: white;
+.checkOut:hover {
+  background-color: green;
+  color: white;
 }
 
 @media only screen and (max-width: 500px) {
-   .cartContainer {
+  .cartContainer {
     padding-left: 0;
-   }
-   .totalContainer h3 {
+  }
+  .headerCartContainer {
+    margin-bottom: 0.3rem;
+  }
+  .headerCartContainer h1 {
+    font-size: larger;
+  }
+  .totalContainer h3 {
     font-size: smaller;
-   }
+  }
 }
