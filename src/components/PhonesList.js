@@ -44,12 +44,12 @@ const PhonesList = ({
           ram: data[key].ram,
         });
       }
-
+     
       searchQuery
         ? setPhones(
             loadedPhones.filter((item) =>
-              item.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              item.model.toLowerCase().includes(searchQuery.toLowerCase())
+              item.brand.toLowerCase().includes(searchQuery) ||
+              item.model.toLowerCase().includes(searchQuery)
            
             )
           )

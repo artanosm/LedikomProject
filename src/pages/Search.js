@@ -4,8 +4,8 @@ import Phones from "./Phones";
 
 const Search = () => {
   const [searchParams] = useSearchParams();
-  const searchQuery = searchParams.get("query");
+  const searchQuery = searchParams.get("query").toLocaleLowerCase();
   return <Phones searchQuery={searchQuery} />;
 };
 
-export default Search;
+export default React.memo(Search);
