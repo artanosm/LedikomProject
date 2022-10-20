@@ -17,6 +17,7 @@ const PhonesList = ({
   date,
   numberOfItems,
   randomItems,
+  searchQuery = false,
 }) => {
   const [phones, setPhones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -43,10 +44,19 @@ const PhonesList = ({
           ram: data[key].ram,
         });
       }
-      setPhones(() => loadedPhones);
+
+      searchQuery
+        ? setPhones(
+            loadedPhones.filter((item) =>
+              item.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              item.model.toLowerCase().includes(searchQuery.toLowerCase())
+           
+            )
+          )
+        : setPhones(() => loadedPhones);
       setIsLoading(false);
     }
-  }, [data]);
+  }, [data,searchQuery]);
 
   // useEffect(() => {
   //   const fetchPhones = async () => {

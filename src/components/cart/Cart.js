@@ -43,15 +43,14 @@ const Cart = (props) => {
   return (
     <Modal cartIsShown={props.cartIsShown} onClose={props.onClose}>
       <div className={classes.headerCartContainer}>
-        <h1>My Cart</h1>
+        {cartCtx.items.length > 0 &&<h1>My Cart</h1>}
+        {cartCtx.items.length === 0 &&<h2>Your Cart is empty</h2>}
         <button onClick={props.onClose} className={classes.closeButton}>
         <CloseIcon fontSize="medium"/></button>
       </div>
-      {cartCtx.items.length !== 0 ? (
+      {cartCtx.items.length !== 0 &&
         <div className={classes.itemsContainer}>{cartItems}</div>
-      ) : (
-        <p>Your Cart is empty</p>
-      )}
+     }
       {cartCtx.items.length > 0 && (
         <div className={classes.totalContainer}>
           <button

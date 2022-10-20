@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 
+import TopHeader from "./layout/TopHeader";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 
@@ -20,6 +21,7 @@ import CartContext from "./store/cart-context";
 import ServiceBrand from "./components/service/ServiceBrand";
 import AddService from "./components/AddService";
 import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
+import Search from "./pages/Search";
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -45,12 +47,14 @@ function App() {
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
       )}
+      <TopHeader/>
       <Header onShowCart={showCartHandler} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/addPhone" element={<AddPhone />} />
         <Route path="/addService" element={<AddService />} />
         <Route path="/phones" element={<Phones />} />
+        <Route path="/search" element={<Search/>} />
         <Route path="/service" element={<Service />} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
         <Route

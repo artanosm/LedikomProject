@@ -11,7 +11,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 
-const Phones = () => {
+const Phones = (props) => {
   const [filtersClick, setFiltersClick] = useState(false);
   const [priceRange, setPriceRange] = useState([10, 1500]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -140,6 +140,7 @@ const Phones = () => {
         brand={brand}
         priceRange={priceRange}
         numberOfItems={numberOfItems}
+        searchQuery={props.searchQuery}
       />
     </div>
   );
