@@ -1,23 +1,21 @@
-@use '../index.scss' as index;
-@import '../sass/abstracts/mixins';
-/*Desktop View*/
+
+@use '../sass/abstracts/mixins' as *;
+@use '../sass/abstracts/colors';
+
 
 .icon {
   padding-top: 0.3rem;
   color: rgb(255, 255, 255);
   transition: all 0.3s ease;
+  &:hover {
+      color: colors.$magenta-color;
+  }
 }
-.icon:hover {
-  color: index.$magenta-color;
-}
+
 .header {
   width: 100%;
   background: black;
   @include flex-center(space-between);
-  // display: flex;
-  // align-content: center;
-  // align-items: center;
-  // justify-content: space-between;
   padding: 0px 2rem;
   height: 100px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
@@ -25,27 +23,17 @@
 
 .logo-nav {
   @include flex-center(space-between);
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
 }
 .logo-container {
-  justify-self: start;
+  // justify-self: start;
   @include flex-center;
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
+
 }
 .cart {
   @include flex-center(space-between);
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
 }
 
 .cartLi {
-  // display: flex;
-  // align-items: center;
   @include flex-center;
   gap: 0.5rem;
 }
@@ -56,10 +44,6 @@
 .nav-options {
   padding: 0;
   @include flex-center;
-  // display: flex;
-  // align-items: center;
-  // align-content: center;
-  // justify-content: center;
   gap: 2rem;
   list-style-type: none;
   z-index: 2;
@@ -67,18 +51,17 @@
 }
 
 .option :hover {
-  color: white;
+  color: colors.$white;
   transition: all 0.3s;
 }
 
 .option a {
   padding: 10px 0;
-  color: white;
+  color: colors.$white;
   text-decoration: none;
-}
-
-.option a:hover {
-  color: index.$magenta-color;
+  &:hover{
+    color: colors.$magenta-color;
+  }
 }
 
 .mobile-menu {
@@ -86,7 +69,6 @@
 }
 
 @media (max-width: 610px) {
-  /*Mobile View */
   .header {
     justify-content: flex-end;
     padding: 0px 10px;
@@ -104,8 +86,9 @@
   }
 
   .nav-options {
-    display: flex;
-    flex-direction: column;
+    @include flex-center(center,column);
+    // display: flex;
+    // flex-direction: column;
     position: absolute;
     width: 100%;
     height: fit-content;
@@ -119,7 +102,7 @@
   }
 
   .nav-options.active {
-    background: black;
+    background: colors.$black;
     right: 0;
     height: fit-content;
     opacity: 1;
@@ -129,13 +112,9 @@
     padding-left: 0;
   }
 
-  
-
-  
-
   .nav-options.active hr {
     height: 1px;
-    background-color: rgb(49, 49, 49);
+    background-color:colors.$dark-gray;
     width: 70%;
     margin: 0;
     border: none;
@@ -145,41 +124,28 @@
     height: 4rem;
   }
   .menu-icon {
-    color: white;
+    color: colors.$white;
     width: 45px;
     height: 45px;
   }
   .option {
     display: none;
-    // flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
-    // height: 10vw;
-    // padding: 30px 0px;
+    a {
+      color: colors.$white;
+      text-decoration: none;
+      padding: 0;
+    }
   }
   .option.activeOption {
-    // display: flex;
-    // align-items: center;
     @include flex-center(center, column);
-    // justify-content: center;
-    // flex-direction: column;
     height: 10vw;
     padding: 30px 0px;
   }
 
-  .option a {
-    color: white;
-    text-decoration: none;
-    padding: 0;
-  }
-
-  .option a:hover {
-    color: var(--main-color);
-  }
   .mobile-menu {
     width: 10%;
     margin-left: 1rem;
-    display: flex;
-    justify-content: space-between;
+    @include flex-center(space-between);
+
   }
 }

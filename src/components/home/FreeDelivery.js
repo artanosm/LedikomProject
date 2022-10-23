@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './FreeDelivery.module.css'
+import classes from './FreeDelivery.module.scss'
 
 const FreeDelivery = () => {
 

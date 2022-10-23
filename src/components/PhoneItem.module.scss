@@ -1,38 +1,32 @@
-@use "../index.scss" as index;
-@use '../sass/abstracts/mixins' as *;
+@use "../sass/abstracts/colors" as colors;
+@use "../sass/abstracts/mixins" as *;
+
 .a {
   text-decoration: none;
   margin: 0;
 }
 
 .container {
-  @include flex-center(space-evenly,column);
-  // display: flex;
-  // justify-content: space-evenly;
-  // flex-direction: column;
-  // align-content: center;
+  @include flex-center(space-evenly, column);
   height: auto;
   max-width: 250px;
   min-width: 100px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   padding: 0;
-  color: index.$dark-blue;
+  color: colors.$dark-blue;
   padding: 1rem;
+  &:hover{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    transition: all 0.3s;
+  }
 }
 
-.container:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  transition: all 0.3s;
-}
 .dataContainer {
   width: 100%;
 }
 .priceContainer {
   @include flex-center(space-around);
-  // display: flex;
-  // justify-content: space-around;
-  // align-items: center;
   height: auto;
 }
 
@@ -42,7 +36,7 @@
 }
 
 .brand {
-  color: gray;
+  color: colors.$gray;
   width: 100%;
   height: auto;
   margin: 2%;
@@ -57,7 +51,7 @@
 
 .price {
   display: inline-block;
-  color: rgb(50, 57, 97);
+  color: colors.$dark-blue;
   font-weight: bold;
   height: auto;
   width: 50%;
@@ -65,43 +59,6 @@
   margin: 2%;
 }
 
-/* .priceIcon {
-  background-color: rgb(255, 255, 255);
-  margin: 2%;
-  height: auto;
-  padding: 5% 0;
-  width: 30%;
-  color: black;
-  border-radius: 10px;
-  box-shadow: 0 1px 5px rgb(40, 40, 40);
-  border: none;
-  cursor: pointer;
-} */
-
-/* .priceIcon:hover {
-  background-color: rgb(255, 0, 255);
-  color: white;
-} */
-/* 
-.more {
-  color: rgb(255, 0, 255);
-  text-decoration: none;
-}
-
-.more:hover {
-  animation: glow 1s ease-in-out infinite alternate;
-} */
-
-/* @keyframes glow {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 10px #fff, 0 0 30px #e60073,
-      0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
-  }
-  to {
-    text-shadow: 0 0 20px #fff, 0 0 20px #ff4da6, 0 0 40px #ff4da6,
-      0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
-  }
-} */
 
 @media only screen and (max-width: 610px) {
   .a {
@@ -118,9 +75,7 @@
     padding: 5%;
   }
   .dataContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    @include flex-center(space-around,column);
     flex-wrap: wrap;
   }
   .image {

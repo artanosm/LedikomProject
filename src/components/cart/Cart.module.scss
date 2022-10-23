@@ -1,5 +1,6 @@
-@use "../../index.scss" as index;
+// @use "../../index.scss" as index;
 @use "../../sass/abstracts/mixins" as *;
+@use "../../sass/abstracts/colors";
 
 .itemsContainer {
   overflow-y: scroll;
@@ -13,25 +14,15 @@
   @include flex-center(center, column, none, center);
   list-style: none;
   gap: 1rem;
-  // overflow-y: scroll;
-  // overflow-x:hidden;
-
-  // display: flex;
-  // align-content: center;
-  // justify-content: center;
-  // flex-direction: column;
 }
 
 .totalContainer {
   @include flex-center(space-around);
   padding-top: 0.5rem;
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-around;
-}
-.totalContainer h3 {
-  color: index.$magenta-color;
-  font-weight: 400;
+  h3 {
+    color: colors.$magenta-color;
+    font-weight: 400;
+  }
 }
 
 .button {
@@ -41,7 +32,7 @@
   width: 5rem;
   margin: 0;
   height: 2rem;
-  color: white;
+  color: colors.$white;
   transition: all 0.1s linear;
 }
 
@@ -49,39 +40,40 @@
   @include flex-center(space-between);
   padding: 0rem;
   margin-bottom: .7rem;
+  h1 {
+    margin: 0 0 0 1rem;
+  }
 }
 
-.headerCartContainer h1 {
-  margin: 0 0 0 1rem;
-}
 .closeButton {
   @include flex-center(center);
   padding: 2px;
   margin: 0;
-  background-color: white;
+  background-color: colors.$white;
   border: none;
-}
-.closeButton:hover {
-    background-color: lightgrey;
+  &:hover {
+    background-color: colors.$light-gray;
     border-radius: 5px;
+}
 }
 
 .clearCart {
-  background-color: rgb(255, 235, 235);
-  color: red;
-}
-.clearCart:hover {
-  color: white;
-  background-color: rgb(249, 63, 63);
-}
-.checkOut {
-  background-color: rgb(235, 253, 235);
-  color: green;
+  background-color: colors.$red-lighter;
+  color: colors.$red;
+  &:hover {
+    color: colors.$white;
+    background-color: colors.$red;
+  }
 }
 
-.checkOut:hover {
-  background-color: green;
-  color: white;
+.checkOut {
+  background-color: colors.$green-lighter;
+  // color: green;
+  color: colors.$green;
+  &:hover {
+    background-color: colors.$green;
+    color: colors.$white;
+  }
 }
 
 @media only screen and (max-width: 500px) {
@@ -90,10 +82,11 @@
   }
   .headerCartContainer {
     margin-bottom: 0.3rem;
+    h1 {
+      font-size: larger;
+    }
   }
-  .headerCartContainer h1 {
-    font-size: larger;
-  }
+
   .totalContainer h3 {
     font-size: smaller;
   }

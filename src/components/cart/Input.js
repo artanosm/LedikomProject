@@ -1,5 +1,5 @@
 import React from "react";
-import classes from  './Input.module.css'
+import classes from  './Input.module.scss'
 const Input = ({ type, name , forwardedRef}) => {
   return (
     <div className={classes.div}>

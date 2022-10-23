@@ -2,18 +2,14 @@
 
 .mainContainer {
     @include flex-center(space-between,row,flex-start);
-    // display: flex;
-    // justify-content: space-between;
 }
 
 .firstContainer {
     @include flex-center(center,column,flex-start);
-    // display: flex;
-    // flex-direction: column;
     width: 60%;
 }
 
-ul {
+.ul {
     padding: 0;
 }
 
@@ -43,8 +39,6 @@ ul {
 }
 .headers {
     @include flex-center(flex-start);
-    // display: flex;
-    // justify-content: flex-end;
     width: 100%;
     gap: 1rem;
     margin: 0;
@@ -59,8 +53,6 @@ ul {
 
 .deliver {
     @include flex-center(flex-start);
-    // display: flex;
-    // align-items: center;
     font-size: 0.9rem;
     gap: 3rem;
     width: 100%;

@@ -1,41 +1,42 @@
 @use "../sass/abstracts/mixins" as *;
-@use "../index.scss" as index;
+@use '../sass/abstracts/colors';
 
 .mainContainer {
   @include flex-center(space-between);
   padding: .8rem 4rem;
-  background-color: #333;
+  background-color: colors.$dark-gray;
 }
 
 .socialNetworkContainer {
   @include flex-center(space-around);
   gap: 1rem;
   a {
-    color: white;
+    color: colors.$white;
   }
 }
 
 .inputContainer {
   @include flex-center(center);
   input {
+    color: colors.$dark-gray;
+    font-size: medium;
     height: 1.7rem;
-    border: white;
+    border: colors.$white;
     outline: none;
     border-radius: 5px 0 0 5px;
   }
+  
 }
-
-
 
 .searchButton {
   @include flex-center(center);
   height: 1.7rem;
-  color: white;
+  color: colors.$white;
   padding: 0 6px;
   margin: 0;
   border-radius: 0 5px 5px 0;
-  border: solid 1px index.$magenta-color;
-  background-color: index.$magenta-color;
+  border: solid 1px colors.$magenta-color;
+  background-color: colors.$magenta-color;
 }
 
 @media only screen and (max-width: 500px) {

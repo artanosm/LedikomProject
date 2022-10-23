@@ -64,10 +64,17 @@ const AddService = () => {
           <label htmlFor="model">Model</label>
           <input type="text" id="model" ref={modelRef}></input>
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="type">Type</label>
           <input type="text" id="type" ref={typeRef}></input>
-        </div>
+        </div> */}
+        <label>Type:</label>
+        <select ref={typeRef}>
+          <option value="Phone">Phone</option>
+          <option value="Tablet">Tablet</option>
+          <option value="Accessories">Accessories</option>
+          <option value="Smartwatch">Smartwatch</option>
+        </select>
         <div>
           <label htmlFor="image">Image</label>
           <input type="text" id="image" ref={imageRef}></input>

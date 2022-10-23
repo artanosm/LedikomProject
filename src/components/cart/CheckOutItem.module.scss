@@ -1,30 +1,28 @@
 @use '../../sass/abstracts/mixins' as *;
+@use '../../sass/abstracts/colors';
+
 .mainContainer {
   @include flex-center(flex-start);
-  // display: flex;
-  // justify-content:flex-start;
   margin: 0 0 1rem 0 ;
   gap: 1rem;
-}
-
-.mainContainer img {
-  width: 20%;
-}
-
-.mainContainer p {
-  width: 50%;
+  img {
+    width: 20%;
+  }
+  p {
+    width: 50%;
+  }
 }
 
 .priceAmount {
   display: flex;
+  p {
+    padding-left: 3rem;
+  }
 }
 
-.priceAmount p {
-  padding-left: 3rem;
-}
 
 hr {
-  color: darkgray;
+  color: colors.$gray;
 }
 
 @media only screen and (max-width: 500px) {
@@ -33,16 +31,17 @@ hr {
     width: 100%;
     height: auto;
     align-items: center;
-  }
-  .mainContainer img {
-    width: 25%;
-    height: fit-content;
-  }
-  .priceAmount {
-    width: 100%;
+    img {
+      width: 25%;
+      height: fit-content;
+    }
   }
 
-  .priceAmount p {
-    padding-left: 1rem;
+  .priceAmount {
+    width: 100%;
+    p {
+      padding-left: 1rem;
+    }
   }
+
 }

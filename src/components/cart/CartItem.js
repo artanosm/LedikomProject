@@ -30,6 +30,7 @@ const decreaseItemHandler = () => {
       <img className={classes.cartImage} src={color.color} alt="phone"></img>
       <div className={classes.dataContainer}>
         <h3>{model}</h3>
+        <p>{color.name}</p>
         <p>{brand}</p>
         <p>{storage}</p>
       </div>

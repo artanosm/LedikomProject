@@ -1,32 +1,26 @@
-@use '../index.scss' as index;
-@import '../sass/abstracts/mixins';
+@use "../sass/abstracts/mixins" as *;
+@use "../sass/abstracts/colors";
 
 .button {
   @include flex-center;
-  // display:flex;
-  // align-items: center;
-  // align-content: center;
-  // justify-content: center;
   width: 6rem;
   height: auto;
   border-radius: 5px;
   margin: 1.2rem;
   font-size: 1rem;
-  background-color: rgb(50, 50, 50);
-  color: white;
+  background-color: colors.$dark-gray;
+  color: colors.$white;
   border: none;
   padding: 0.4rem 0;
+  &:hover {
+    cursor: pointer;
+    background-color: colors.$magenta-color;
+    transition: all 0.3s;
+  }
 }
 
 .button.active {
-  background-color: index.$magenta-color;
-}
-
-.button:hover {
-  cursor: pointer;
-  color: white;
-  background-color: index.$magenta-color;
-  transition: all 0.3s;
+  background-color: colors.$magenta-color;
 }
 
 .span {
@@ -40,6 +34,6 @@
     margin: 0;
     padding: 8px;
     margin: 0 2px;
-    background-color: rgb(50, 50, 50);
+    background-color: colors.$dark-gray;
   }
 }

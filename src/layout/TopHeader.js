@@ -27,7 +27,7 @@ const TopHeader = () => {
         </a>
       </div>
       <form onSubmit={submitHandler} className={classes.inputContainer}>
-        <input ref={searchRef} />
+        <input ref={searchRef} placeholder='Search...' />
         <button type="submit" className={classes.searchButton}>
           <Search fontSize="small" />
         </button>

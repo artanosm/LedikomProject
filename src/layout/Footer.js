@@ -1,16 +1,13 @@
-import classes from "./Footer.module.css";
+import React from "react";
+import classes from "./Footer.module.scss";
 import {Facebook, Instagram, YouTube, Call, Email} from '@mui/icons-material';
 
-// import { SocialMediaIconsReact } from "social-media-icons-react";
-
-import React from "react";
 
 const Footer = () => {
   return (
     <div className={classes.container1}>
       <div className={classes.newsletter}>
         <h1>NEWSLETTER</h1>
-        {/* <p>Subscribe for newsletter!</p> */}
         <div className={classes.inputContainer}>
           <input type="email" placeholder="Please enter your email!"></input>
           <button>Sign In</button>

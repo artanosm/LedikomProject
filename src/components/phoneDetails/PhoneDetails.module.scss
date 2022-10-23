@@ -1,5 +1,6 @@
-@use '../../index.scss' as index;
+
 @use '../../sass/abstracts/mixins' as *;
+@use '../../sass/abstracts/colors';
 
 .container {
   display: flex;
@@ -10,18 +11,15 @@
 
 .alert {
   @include flex-center(flex-start);
-  // display: flex;
-  // justify-content: flex-start;
-  // align-items: center;
   padding: 1rem;
-  color: white;
+  color:colors.$white;
   top: 70px;
   right: 15px;
   z-index: 3;
   position: fixed;
   height: 100px;
   width: 230px;
-  background-color: rgba(89, 207, 89,0.95);
+  background-color: colors.$green;
   border-radius: 15px;
   gap: 0.5rem;
 }
@@ -32,22 +30,22 @@
   padding: 1rem;
   width: 40%;
   min-width: 250px;
-  box-shadow: 0 2px 10px rgb(219, 219, 219);
+  box-shadow: 0 2px 10px colors.$light-gray;
   border-radius: 10px;
 }
 
 hr {
-  border: 0.5px solid lightgray;
+  border: 0.5px solid colors.$light-gray;
 }
 
 .dataContainer {
   width: 50%;
   padding: 1rem;
+  div span {
+    color: colors.$magenta-color;
+  }
 }
 
-.dataContainer div span {
-  color: index.$magenta-color;
-}
 
 .image {
   height: auto;
@@ -56,37 +54,35 @@ hr {
 
 .h1 {
   font-size: 2rem;
-  border-bottom: rgb(188, 187, 187) solid 1px;
+  border-bottom: solid 1px colors.$light-gray;;
   padding-bottom: 1.5rem;
 }
 
 .containerPrice {
   @include flex-center(flex-start);
-  // display: flex;
-  // align-items: center;
-  // justify-content: flex-start;
-  // flex-direction: row;
   flex-wrap: nowrap;
   gap: 2rem;
+  h3 {
+    color:colors.$dark-blue;
+  }
 }
 
 .button {
-  background-color: rgb(235, 235, 235);
-  border: 0 none white;
+  @include flex-center(center);
+  background-color: colors.$light-gray;
+  border: 0 none colors.$white;
   border-radius: 10px;
   margin: 1rem;
   padding: 1rem;
-  color: index.$magenta-color;
-  box-shadow: 0 2px 10px rgb(219, 219, 219);
+  color: colors.$magenta-color;
+  box-shadow: 0 2px 10px colors.$light-gray;;
   transition: all 0.2s ease;
+  &:hover {
+    cursor: pointer;
+    background-color: colors.$magenta-color;
+    color: colors.$white;
+  }
 }
-.button:hover {
-  cursor: pointer;
-  background-color: index.$magenta-color;
-  color: white;
-}
-
-
 
 @media only screen and (max-width: 600px) {
   .container {
@@ -112,12 +108,13 @@ hr {
   .dataContainer {
     width: 100%;
     padding: 0 1rem 1rem 1rem;
+    h1 {
+      font-size: larger;
+      padding: 0 0 1rem 0;
+      margin: 0;
+    }
   }
-  .dataContainer h1 {
-    font-size: larger;
-    padding: 0 0 1rem 0;
-    margin: 0;
-  }
+
   .containerPrice {
     width: 100%;
     display: flex;

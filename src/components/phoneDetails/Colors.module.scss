@@ -1,17 +1,16 @@
-@use '../../index.scss' as index;
+
 @use '../../sass/abstracts/mixins' as *;
+@use  "../../sass/abstracts/colors" as colors;
+
 
 .colorsContainer {
   @include flex-center(flex-start);
-  // display: flex;
-  // justify-content: flex-start;
   flex-wrap: wrap;
-
   gap: 1rem;
 }
 
 .title {
-  color: index.$dark-blue;
+  color: colors.$dark-blue;
   font-weight: 100;
   margin: 1rem 0;
 }

@@ -7,7 +7,7 @@ const OrdersItemGroup = ({ item }) => {
     <div className={classes.container}>
       <img className={classes.img} src={item.color.color} alt="product" />
 
-      <div>
+      <div className={classes.infoContainer}>
         <h5>{item.brand}</h5>
         <p>{item.model}</p>
         <p>{item.color.name}</p>

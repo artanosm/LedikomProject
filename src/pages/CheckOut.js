@@ -9,7 +9,7 @@ const CheckOut = () => {
   let [deliveryForm, setDeliveryForm] = useState(null);
  
   const cartItems = (
-    <ul>
+    <ul className={classes.ul}>
       {cartCtx.items.map((item) => {
         return (
           <CheckOutItem

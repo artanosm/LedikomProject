@@ -6,6 +6,7 @@ import Storage from "./Storage";
 import InfoItem from "./InfoItem";
 import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { motion, AnimatePresence } from "framer-motion";
 import Loader from "../../ui/Loader";
 
@@ -197,6 +198,7 @@ const PhoneDetails = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.1 }}
               >
+              <AddShoppingCartIcon/>
                 Add to Cart
               </motion.button>
             </div>

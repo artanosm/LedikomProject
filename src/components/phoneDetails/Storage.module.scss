@@ -1,20 +1,16 @@
-@use '../../index.scss' as index;
+@use '../../sass/abstracts/colors' as colors;
 @use '../../sass/abstracts/mixins' as *;
 
 .storageContainer {
   @include flex-center(flex-start);
-  // display: flex;
-  // justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
+  cursor: pointer;
 }
 .title {
-  color: index.$dark-blue;
+  color: colors.$dark-blue;
   font-weight: 100;
   margin: 1rem 0;
 }
 
-.storageContainer div:hover {
-  cursor: pointer;
-}
 

@@ -16,12 +16,13 @@ import Cart from "./components/cart/Cart";
 import PhoneDetails from "./components/phoneDetails/PhoneDetails";
 import AddPhone from "./components/AddPhone";
 import Orders from "./pages/Orders";
-import { AuthContextProvider } from "./store/auth-context";
-import CartContext from "./store/cart-context";
-import ServiceBrand from "./components/service/ServiceBrand";
 import AddService from "./components/AddService";
+import ServiceBrand from "./components/service/ServiceBrand";
 import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
 import Search from "./pages/Search";
+
+import { AuthContextProvider } from "./store/auth-context";
+import CartContext from "./store/cart-context";
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -47,14 +48,14 @@ function App() {
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
       )}
-      <TopHeader/>
+      <TopHeader />
       <Header onShowCart={showCartHandler} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/addPhone" element={<AddPhone />} />
         <Route path="/addService" element={<AddService />} />
         <Route path="/phones" element={<Phones />} />
-        <Route path="/search" element={<Search/>} />
+        <Route path="/search" element={<Search />} />
         <Route path="/service" element={<Service />} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
         <Route

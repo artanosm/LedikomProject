@@ -1,6 +1,8 @@
-
+@use '/src/sass/abstracts/colors';
+@use '/src/sass/abstracts/mixins' as *;
 .titles {
-    color: var(--dark-blue);
+  @include flex-center(flex-start);
+    color: colors.$dark-blue;
     margin:  0.5rem 0;
     font-weight: 100;
   }

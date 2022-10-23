@@ -7,5 +7,9 @@
 .img {
     width: 12%;
     min-width: 100px;
-    max-height: 120px;
+    max-height: 100px;
+}
+
+.infoContainer > * {
+    margin: 0;
 }

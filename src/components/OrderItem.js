@@ -1,6 +1,6 @@
 import React from "react";
 import OrdersItemGroup from "./OrdersItemGroup";
-import classes from "./OrderItem.module.css";
+import classes from "./OrderItem.module.scss";
 
 const OrderItem = ({ order , reFetch, setReFetch }) => {
   const onDeleteHandler = () => {
@@ -57,7 +57,7 @@ const OrderItem = ({ order , reFetch, setReFetch }) => {
   };
 
   const cartItems = (
-    <ul>
+    <ul className={classes.listContainer}>
       {order.cartItems.map((item, key) => {
         return <OrdersItemGroup item={item} key={key} />;
       })}
@@ -74,7 +74,7 @@ const OrderItem = ({ order , reFetch, setReFetch }) => {
         <p>City: {order.city}</p>
         <p>Address: {order.address}</p>
       </div>
-      <div> Items: {cartItems}</div>
+      <div>{cartItems}</div>
       <h4>Total Amount: {order.totalAmount} $</h4>
       <div className={classes.buttonsContainer}>
         <button onClick={onDeleteHandler} className={classes.deleteButton}>Delete Order</button>

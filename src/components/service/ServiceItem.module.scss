@@ -1,11 +1,11 @@
-@use '../../index.scss' as index;
+@use '../../sass/abstracts/colors';
+@use '../../sass/abstracts/mixins' as *;
 
 
 .main {
+    @include flex-center(space-between);
     width: 100% ;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid colors.$light-gray;
     font-size: 0.9rem;
     margin: 0.5rem 0;
 }
@@ -14,6 +14,6 @@
     margin: 0;
 }
 .price {
-    color: index.$magenta-color;
+    color: colors.$magenta-color;
     margin:0;
 }

@@ -1,0 +1,143 @@
+@use "../sass/abstracts/colors";
+.container1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+  background-color: colors.$dark-blue;
+  p {
+    color: colors.$gray;
+    font-size: small;
+  }
+}
+
+.container2 {
+  background-color: #171e27;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: auto;
+  color: colors.$white;
+  padding: 4rem;
+}
+
+.logoFooter {
+  width: 15%;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  margin: 1rem 0;
+  a {
+    color: colors.$gray;
+    text-decoration: none;
+    font-size: small;
+    padding: 0.5rem;
+  }
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+  p {
+    color: colors.$gray;
+    font-size: small;
+    padding: 0;
+    margin: 0.5rem 0;
+  }
+}
+
+.newsletter {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  background-color: #131920;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: colors.$white;
+  padding: 3rem;
+  p {
+    color: colors.$gray;
+    font-size: smaller;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5%;
+  width: 100%;
+  height: auto;
+  &::before {
+    content: "Subscribe for newsletter!";
+    color: colors.$light-gray;
+    width: 30%;
+    top: -25rem;
+    text-align: center;
+    margin: auto;
+  }
+  input {
+    font-size: large;
+    border: none;
+    background-color: colors.$white;
+    width: 50%;
+    height: 50px;
+    border-radius: 4px;
+    &:focus {
+      transition: all 0.3s;
+    }
+  }
+  button {
+    background-color: #131920;
+    border: colors.$white solid 0.5px;
+    width: 20%;
+    color: colors.$white;
+    border-radius: 4px;
+    font-size: large;
+    transition: all 0.5s;
+    &:hover {
+      color: colors.$dark-blue;
+      background-color: colors.$white;
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .inputContainer {
+    flex-direction: column;
+    gap: 1rem;
+    &::before {
+      width: 90%;
+      text-align: start;
+      margin: 0;
+    }
+    input {
+      width: 15rem;
+    }
+    button {
+      font-size: medium;
+      width: 6rem;
+      height: 2rem;
+    }
+  }
+
+  .inputContainer .logoFooter {
+    width: 30%;
+  }
+  .container2 {
+    flex-direction: column;
+    img {
+      width: 50%;
+    }
+  }
+  .container1 p {
+    padding: 2%;
+  }
+}

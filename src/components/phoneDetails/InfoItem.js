@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./InfoItem.module.css";
+import classes from "./InfoItem.module.scss";
 
 const InfoItem = ({title, content}) => {
 
