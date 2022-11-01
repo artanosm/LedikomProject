@@ -5,15 +5,15 @@
 .itemsContainer {
   overflow-y: scroll;
   overflow-x: hidden;
-  // height: 68vh;
   height: auto;
-  max-height: 68vh;
+  max-height: 60vh;
 }
 
 .cartContainer {
   @include flex-center(center, column, none, center);
   list-style: none;
   gap: 1rem;
+  padding: 0.2rem;
 }
 
 .totalContainer {
@@ -68,7 +68,6 @@
 
 .checkOut {
   background-color: colors.$green-lighter;
-  // color: green;
   color: colors.$green;
   &:hover {
     background-color: colors.$green;
@@ -84,6 +83,10 @@
     margin-bottom: 0.3rem;
     h1 {
       font-size: larger;
+    }
+    h2 {
+      font-size: medium;
+      padding: .5rem;
     }
   }
 

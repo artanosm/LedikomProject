@@ -6,11 +6,12 @@
 }
 
 .filterContainer {
-  @include flex-center(center);
+  @include flex-center(flex-start);
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
   height: auto;
+  padding-left: 3rem;
 }
 
 .priceRangeContainer {

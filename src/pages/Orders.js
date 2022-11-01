@@ -1,14 +1,15 @@
-import React, {  Fragment, useEffect, useState,useContext } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import OrderItem from "../components/OrderItem";
 import classes from "./Orders.module.scss";
 import AuthContext from "../store/auth-context";
 
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState(false);
   const [reFetch, setReFetch] = useState(false);
-  
 
   const authCtx = useContext(AuthContext);
 
@@ -56,7 +57,7 @@ const Orders = () => {
     let filtered = orders.filter(
       (orderIsTrue) => orderIsTrue.orderCompleted === true
     );
-    
+
     orderItems = filtered.map((order, key) => {
       return (
         <OrderItem
@@ -85,32 +86,40 @@ const Orders = () => {
 
   return (
     <Fragment>
-
-    {!isLoggedIn && 
-    <div>
-    <h4>Please Login as Admin</h4>
-      <Link to={'/login'}>Go to Login page</Link>
-    </div>}
-    {isLoggedIn && 
-    <div className={classes.main}>
-      
-      <div className={classes.headerContainer}>
-        <h1>Orders</h1>
-        <button
-          className={!completedOrders ? `${classes.active}` : `${""}`}
-          onClick={() => setCompletedOrders(false)}
-        >
-          Orders
-        </button>
-        <button
-          className={completedOrders ? `${classes.active}` : `${""}`}
-          onClick={() => setCompletedOrders(true)}
-        >
-          Completed Orders
-        </button>
-      </div>
-      <div>{orderItems}</div>
-    </div>}
+      {!isLoggedIn && (
+        <div>
+          <h4>Please Login as Admin</h4>
+          <Link to={"/login"}>Go to Login page</Link>
+        </div>
+      )}
+      {isLoggedIn && (
+        <div className={classes.main}>
+          <div className={classes.headerContainer}>
+            <h1>Orders</h1>
+            <button
+              className={
+                !completedOrders
+                  ? `${classes.active} ${classes.buttonOrders}`
+                  : `${classes.buttonOrders}`
+              }
+              onClick={() => setCompletedOrders(false)}
+            >
+              Orders
+            </button>
+            <button
+              className={
+                completedOrders
+                  ? `${classes.active} ${classes.buttonCompleted}`
+                  : `${classes.buttonCompleted}`
+              }
+              onClick={() => setCompletedOrders(true)}
+            >
+              Completed Orders
+            </button>
+          </div>
+          <div>{orderItems}</div>
+        </div>
+      )}
     </Fragment>
   );
 };

@@ -12,19 +12,19 @@ const customStyles = {
   option: (provided, state) => ({
     ...provided,
     backgroundColor: "white",
-    borderBottom: "1px dotted darkgrey",
+    // borderBottom: "1px dotted darkgrey",
     // color: state.isSelected ? "darkgrey" : "darkgrey",
     color: state.isFocused ? "#ee3183" : "darkgrey",
 
-    padding: 8,
+    padding: 6,
   }),
 
-  singleValue: (provided, state) => {
-    const opacity = state.isDisabled ? 0.5 : 1;
-    const transition = "opacity 300ms";
+  // singleValue: (provided, state) => {
+  //   const opacity = state.isDisabled ? 0.5 : 1;
+  //   const transition = "opacity 300ms";
     
-    return { ...provided, opacity, transition };
-  },
+  //   return { ...provided, opacity, transition };
+  // },
 };
 
 const TypeFilter = ({ type, setType }) => {

@@ -2,7 +2,9 @@ import React, { useContext, useState } from "react";
 import classes from "./CartItem.module.scss";
 import CartContext from "../../store/cart-context";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import { Button } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import {IconButton} from "@mui/material";
 
 // const CartItem = ({ brand,price, amount, model, id, color, storage }) => {
 const CartItem = ({item}) => {
@@ -35,16 +37,20 @@ const decreaseItemHandler = () => {
         <p>{storage}</p>
       </div>
       <div className={classes.buttonContainer}>
-        <button onClick={decreaseItemHandler}>-</button>
+      <IconButton sx={{padding:0}} onClick={decreaseItemHandler} fontSize='small'><RemoveIcon fontSize="small" /></IconButton>
+        {/* <button onClick={decreaseItemHandler}>-</button>
         <p>{amount}</p>
-        <button onClick={increaseItemHandler}>+</button>
+        <button onClick={increaseItemHandler}>+</button> */}
+        <span>{amount}</span>
+
+      <IconButton sx={{padding:0}} onClick={increaseItemHandler} fontSize="small"><AddIcon fontSize="small"/></IconButton>
       </div>
       <p>{price * amount}$</p>
       <div className={classes.amountContainer}>
         {show && (
-          <Button size="medium" color="error" onClick={deleteItemHandler}>
-            <DeleteOutlineIcon />
-          </Button>
+          <IconButton color="error" onClick={deleteItemHandler}>
+            <DeleteOutlineIcon  />
+          </IconButton>
         )}
       </div>
     </div>

@@ -33,7 +33,7 @@ const PhonesList = ({
         loadedPhones.push({
           date: data[key].date,
           type: data[key].type,
-          firebaseId: data[key],
+          firebaseId: key,
           // adding dash to every empty space
           id: data[key].model.replace(/\s/g, "-"),
           model: data[key].model,
@@ -44,20 +44,19 @@ const PhonesList = ({
           ram: data[key].ram,
         });
       }
-     
+
       searchQuery
         ? setPhones(
-            loadedPhones.filter((item) =>
-              item.brand.toLowerCase().includes(searchQuery) ||
-              item.model.toLowerCase().includes(searchQuery)
-           
+            loadedPhones.filter(
+              (item) =>
+                item.brand.toLowerCase().includes(searchQuery) ||
+                item.model.toLowerCase().includes(searchQuery)
             )
           )
         : setPhones(() => loadedPhones);
       setIsLoading(false);
     }
-  }, [data,searchQuery]);
-
+  }, [data, searchQuery]);
   // useEffect(() => {
   //   const fetchPhones = async () => {
   //     const response = await fetch(
@@ -100,7 +99,6 @@ const PhonesList = ({
   //   else {
   //     brands = brand
   //   }
-
   let filteredPhones;
   if (brand) {
     filteredPhones = phones.filter((phone) => phone.brand === brand.value);
@@ -147,6 +145,7 @@ const PhonesList = ({
 
   const phoneItems = itemsToDisplay.map((phone) => {
     let price1;
+  
     // takes the prices in price property
     const values = Object.values(phone.price);
     const minPrice = values.filter((val) => val !== "");
@@ -154,6 +153,7 @@ const PhonesList = ({
     if (!priceRange) {
       return (
         <PhoneItem
+          firebaseId={phone?.firebaseId}
           date={phone.date}
           type={phone.type}
           price1={price1}
@@ -170,6 +170,7 @@ const PhonesList = ({
     if (price1 < priceRange[1] && price1 > priceRange[0]) {
       return (
         <PhoneItem
+          firebaseId={phone?.firebaseId}
           type={phone.type}
           price1={price1}
           key={phone.id}

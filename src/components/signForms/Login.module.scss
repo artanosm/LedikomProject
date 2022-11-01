@@ -1,56 +1,63 @@
-@use '../../sass/abstracts/colors' as colors;
-@use '../../sass/abstracts/mixins' as *;
+@use "../../sass/abstracts/colors" as colors;
+@use "../../sass/abstracts/mixins" as *;
 
 .mainContainer {
   display: flex;
   justify-content: center;
 }
 .container {
-  @include flex-center(center,column);
-  width: 40%;
-  gap: 1rem;
+  @include flex-center(center, column);
+  // width: 40%;
+  gap: .5rem;
   max-width: 400px;
-  min-width: 320px;
+  min-width: 350px;
   height: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
-  border-radius: 15px;
-  margin: 4rem 4rem;
+  max-height: 70vh;
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+  // border-radius: 15px;
+  margin: 2rem 4rem;
   padding: 2rem 2rem;
+  border-radius: 50px;
+  background: #ededed;
+  box-shadow: inset 20px 20px 60px #f2f2f2,
+              inset -20px -20px 60px #ffffff;
+ 
 }
-.h1{
-  color:#151b4d;
+.h1 {
+  color: colors.$dark-blue;
 }
-
 
 .inlineContainer {
   @include flex-center(center);
-  width:100%;
+  width: 100%;
 }
 
 .alert {
   @include flex-center(center);
+  font-size: smaller;
   width: 100%;
-  padding: 1rem;
+  padding: .5rem;
   border-radius: 15px;
 }
 
 .redAlert {
-  background-color: rgb(253, 217, 217);
-  color: rgb(181, 0, 0);
+  background-color: colors.$red-lighter;
+  color: colors.$red;
 }
 
 .greenAlert {
-  background-color: rgb(222, 255, 213);
-  color: rgb(23, 142, 1);
+  background-color: colors.$green-lighter;
+  // background-color: rgb(222, 255, 213);
+  color: colors.$green;
+  // color: rgb(23, 142, 1);
 }
-
 
 // .span {
 //   color:darkgrey;
 //   font-size: small;
 // }
 .formContainer {
-  @include flex-center(center,column);
+  @include flex-center(center, column);
   // display: flex;
   // align-items: center;
   // flex-direction: column;
@@ -60,9 +67,8 @@
   margin: 2rem 1rem;
 }
 
-
 .actions {
-  @include flex-center(center,column);
+  @include flex-center(center, column);
   width: 100%;
   // display: flex;
   // align-items: center;
@@ -76,18 +82,20 @@
   font-size: small;
   color: colors.$magenta-color;
   padding: 0.5rem 0.5rem;
-  background-color: white;
+
   border: none;
+}
+
+.resetButton:hover {
+  color: colors.$magenta-dark;
 }
 
 .resetButton::before {
   content: "Forgot your Password?";
-  color: lightgray;
+  color: colors.$gray;
   padding-right: 5px;
   font-size: small;
 }
-
-
 
 .actions .google {
   @include flex-center(center);
@@ -96,35 +104,37 @@
   font: inherit;
   border-radius: 4px;
   padding: 0.5rem 0.5rem;
-  background-color: white;
-  color:rgb(0, 119, 255);
-  border: 1px solid rgb(0, 119, 255);
+  // background-color: colors.$white;
+  color: colors.$blue;
+  border: 1px solid colors.$blue;;
 }
 
 .actions .google:hover {
   transition: all 0.3s;
-  background-color: rgb(0, 119, 255);
-  color:white;
-  border: 1px solid white;
+  background-color: colors.$blue;
+  color: colors.$white;
+  border: 1px solid colors.$white;
 }
 
-
 .actions button {
-  width: 90%; 
+  width: 90%;
   max-width: 250px;
   margin-bottom: 1rem;
   cursor: pointer;
   font: inherit;
-  color: white;
-  background-color: colors.$magenta-color;
+  color: colors.$white;
   border: 1px solid colors.$magenta-color;
   border-radius: 4px;
   padding: 0.5rem 1.5rem;
 }
 
+.loginButton {
+  background-color: colors.$magenta-color;
+} 
+
 .actions button:hover {
-  background-color: #ba2264;
-  border-color: #ba2264;
+  background-color: colors.$magenta-dark;
+  border-color: colors.$magenta-dark;
 }
 
 .actions .toggle {
@@ -137,31 +147,30 @@
 
 .actions .toggle::before {
   content: "Don't have an account?";
-  color: lightgray;
+  color: colors.$gray;
   padding-right: 5px;
   font-size: small;
 }
 
 .actions:hover .toggle:hover {
   background-color: transparent;
-  color: #ba2264;
+  color: colors.$magenta-dark;
 }
 
-
-@media only screen and (max-width: 500px){
-  .container{
+@media only screen and (max-width: 500px) {
+  .container {
     width: 100%;
     margin: 2rem 2rem;
     padding: 0 2rem;
   }
 
   .actions button {
-    width: 100%;  
+    width: 100%;
     padding: 0.5rem 0.5rem;
   }
 
   .formContainer {
     gap: 0.5rem;
     margin: 1rem 1rem;
-  } 
+  }
 }

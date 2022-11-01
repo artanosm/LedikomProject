@@ -1,0 +1,29 @@
+@use "../sass/abstracts/mixins" as *;
+@use "../sass/abstracts/colors";
+
+.main {
+  @include flex-center(flex-start);
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.infoContainer h3 {
+  padding-left: 2.3rem;
+}
+
+.infoContainer > p {
+  @include flex-center(flex-start);
+  gap: 1rem;
+  margin: 0.5rem;
+  font-weight: 100;
+  font-size: medium;
+}
+
+@media only screen and (max-width: 610px) {
+  .main {
+    flex-direction: column;
+  }
+  .infoContainer > p span {
+    width: fit-content;
+  }
+}

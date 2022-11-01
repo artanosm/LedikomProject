@@ -21,6 +21,10 @@ const SliderImages = () => {
       image:
         "https://admin.ledikom.mk/uploads/banners/2/1664010366-2-1920x800.jpg?v=1",
     },
+    {
+      image:
+        "https://admin.ledikom.mk/uploads/banners/3/1664010548-3-1920x800.jpg?v=1",
+    },
   ];
 
   return (

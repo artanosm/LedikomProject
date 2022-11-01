@@ -1,13 +1,17 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import AuthContext from "../../store/auth-context";
 import { useNavigate } from "react-router-dom";
-import AuthFormInput from "./AuthFormInput";
+// import AuthFormInput from "./AuthFormInput";
 import classes from "./Login.module.scss";
 import GoogleLogo from "../../assets/brandsLogo/google.svg";
 import { motion, AnimatePresence } from "framer-motion";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
+import Box from "@mui/material/Box";
+
+import InputMui from "./InputMui";
 
 const Login = () => {
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +63,6 @@ const Login = () => {
     }
     setIsLoading(false);
   };
-
   const submitHandler = async (e) => {
     e.preventDefault();
     setError("");
@@ -67,6 +70,7 @@ const Login = () => {
 
     const enteredEmail = enteredEmailRef.current.value;
     const enteredPassword = enteredPasswordRef.current.value;
+    console.log(enteredEmail, enteredPassword);
     try {
       await authCtx.signIn(enteredEmail, enteredPassword);
       navigate("/profile", { replace: true });
@@ -108,7 +112,37 @@ const Login = () => {
           )}
         </AnimatePresence>
         <form onSubmit={submitHandler} className={classes.formContainer}>
-          <AuthFormInput
+          <Box sx={{ display: "flex", alignItems: "flex-end", width: "100%" }}>
+            <AccountCircle
+              sx={{
+                color: "action.active",
+                mr: 1,
+                my: 0.5,
+              }}
+            />
+            <InputMui
+              ref={enteredEmailRef}
+              label={"Email"}
+              type={"email"}
+              id={"email"}
+            />
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "flex-end", width: "100%" }}>
+            <KeyOutlinedIcon
+              sx={{
+                color: "action.active",
+                mr: 1,
+                my: 0.5,
+              }}
+            />
+            <InputMui
+              ref={enteredPasswordRef}
+              label={"Password"}
+              type={"password"}
+              id={"password"}
+            />
+          </Box>
+          {/* <AuthFormInput
             ref={enteredEmailRef}
             placeholder="Email"
             type="email"
@@ -119,7 +153,7 @@ const Login = () => {
             placeholder="Password"
             type="password"
             id="password"
-          />
+          /> */}
           <div className={classes.inlineContainer}>
             <button
               className={classes.resetButton}
@@ -130,7 +164,7 @@ const Login = () => {
             </button>
           </div>
           <div className={classes.actions}>
-            {!isLoading && <button>Login</button>}
+            {!isLoading && <button className={classes.loginButton}>Login</button>}
             {isLoading && (
               <button
                 disabled

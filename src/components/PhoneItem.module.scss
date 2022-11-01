@@ -4,6 +4,7 @@
 .a {
   text-decoration: none;
   margin: 0;
+  cursor: pointer;
 }
 
 .container {
@@ -17,7 +18,7 @@
   color: colors.$dark-blue;
   padding: 1rem;
   &:hover{
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
     transition: all 0.3s;
   }
 }
@@ -75,7 +76,7 @@
     padding: 5%;
   }
   .dataContainer {
-    @include flex-center(space-around,column);
+    @include flex-center(space-around,column,flex-start);
     flex-wrap: wrap;
   }
   .image {

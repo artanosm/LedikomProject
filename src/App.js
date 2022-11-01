@@ -20,6 +20,8 @@ import AddService from "./components/AddService";
 import ServiceBrand from "./components/service/ServiceBrand";
 import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
 import Search from "./pages/Search";
+import Contact  from "./pages/Contact";
+import Mui from "./components/MUI/Mui";
 
 import { AuthContextProvider } from "./store/auth-context";
 import CartContext from "./store/cart-context";
@@ -44,6 +46,11 @@ function App() {
   };
 
   return (
+    // <Routes>
+    //   <Route path="/" element={<Mui/>} />
+    // </Routes>
+
+
     <AuthContextProvider>
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
@@ -57,6 +64,7 @@ function App() {
         <Route path="/phones" element={<Phones />} />
         <Route path="/search" element={<Search />} />
         <Route path="/service" element={<Service />} />
+        <Route path="/contact" element={<Contact/>} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
         <Route
           path="/service/:brand/:serviceId"

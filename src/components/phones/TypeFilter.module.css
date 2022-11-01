@@ -1,5 +1,6 @@
 .container {
-    width:16%;
+    /* width:16%; */
+    width:110px;
     min-width: fit-content;
 }
 

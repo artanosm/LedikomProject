@@ -55,6 +55,13 @@ const Header = (props) => {
         >
           <Link to="/service">Service</Link>
         </li>
+        {click && <hr />}
+        <li
+          className={click ? "option activeOption" : "option"}
+          onClick={closeMobileMenu}
+        >
+          <Link to="/contact">Contact</Link>
+        </li>
       </ul>
 
       <div className="cart">

@@ -1,16 +1,32 @@
-import { useState, useEffect, useContext, Fragment, useCallback } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import classes from "./PhoneDetails.module.scss";
-import Colors from "./Colors";
-import Storage from "./Storage";
-import InfoItem from "./InfoItem";
-import CartContext from "../../store/cart-context";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CheckIcon from "@mui/icons-material/Check";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { Fragment, useCallback, useContext, useEffect, useState } from "react";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import CartContext from "../../store/cart-context";
 import Loader from "../../ui/Loader";
+import Colors from "./Colors";
+import InfoItem from "./InfoItem";
+import classes from "./PhoneDetails.module.scss";
+import Storage from "./Storage";
+
+
+const storageFunction =(storageP, obj) => {
+  let p;
+  if (storageP) {
+    storageP === obj?.storage.storage64GB && (p = obj?.price.price64GB);
+    storageP === obj?.storage.storage128GB && (p = obj?.price.price128GB);
+    storageP === obj?.storage.storage256GB && (p = obj?.price.price256GB);
+    storageP === obj?.storage.storage512GB && (p = obj?.price.price512GB);
+    storageP === obj?.storage.storage1TB && (p = obj?.price.price1TB);
+  } else {
+    p = obj?.price.price64GB;
+  }
+  return p;
+};
 
 const PhoneDetails = () => {
+  const location = useLocation();
   const cartCtx = useContext(CartContext);
   const { phoneId } = useParams();
 
@@ -25,6 +41,7 @@ const PhoneDetails = () => {
   const [phone, setPhone] = useState(null);
   const [alert, setAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [firebaseId, setFirebaseId] = useState(location.state?.firebaseId);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -34,10 +51,6 @@ const PhoneDetails = () => {
     setStorage(storageParam);
     let priceStorage = storageFunction(storageParam, phone);
     setPrice(priceStorage);
-    // for (const color in phone?.colors) {
-    //   colorParam === phone?.colors[color].name &&
-    //     setColorImg({ color: phone?.colors[color].image, name: colorParam });
-    // }
   }, [storageParam, phone]);
 
   useEffect(() => {
@@ -47,25 +60,30 @@ const PhoneDetails = () => {
     }
   }, [colorParam, phone?.colors]);
 
-  const storageFunction = (storageP, obj) => {
-    let p;
-    if (storageP) {
-      storageP === obj?.storage.storage64GB && (p = obj?.price.price64GB);
-      storageP === obj?.storage.storage128GB && (p = obj?.price.price128GB);
-      storageP === obj?.storage.storage256GB && (p = obj?.price.price256GB);
-      storageP === obj?.storage.storage512GB && (p = obj?.price.price512GB);
-      storageP === obj?.storage.storage1TB && (p = obj?.price.price1TB);
-    } else {
-      p = obj?.price.price64GB;
-    }
-    return p;
-  };
+  // const storageFunction = (storageP, obj) => {
+  //   let p;
+  //   if (storageP) {
+  //     storageP === obj?.storage.storage64GB && (p = obj?.price.price64GB);
+  //     storageP === obj?.storage.storage128GB && (p = obj?.price.price128GB);
+  //     storageP === obj?.storage.storage256GB && (p = obj?.price.price256GB);
+  //     storageP === obj?.storage.storage512GB && (p = obj?.price.price512GB);
+  //     storageP === obj?.storage.storage1TB && (p = obj?.price.price1TB);
+  //   } else {
+  //     p = obj?.price.price64GB;
+  //   }
+  //   return p;
+  // };
 
   useEffect(() => {
     const fetchPhones = async () => {
-      const response = await fetch(
-        "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
-      );
+      let url;
+      if (firebaseId) {
+        url = `https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones/${firebaseId}.json`;
+      } else {
+        url =
+          "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json";
+      }
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error("Something went wrong");
@@ -73,9 +91,14 @@ const PhoneDetails = () => {
       const responseData = await response.json();
 
       let found;
-      for (const key in responseData) {
-        if (responseData[key].model.replace(/\s/g, "-") === phoneId) {
-          found = responseData[key];
+      if (firebaseId) {
+        found = responseData;
+      } else {
+        for (const key in responseData) {
+          if (responseData[key].model.replace(/\s/g, "-") === phoneId) {
+            setFirebaseId(key);
+            found = responseData[key];
+          }
         }
       }
 
@@ -127,10 +150,7 @@ const PhoneDetails = () => {
   const addItemToCart = () => {
     setAlert(() => true);
     setTimeout(() => setAlert(() => false), 2000);
-    // let rand =
-      // Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
     cartCtx.addItem({
-      // id: rand,
       id: `${phone.model}${storage}${colorImg.name}`,
       model: phone.model,
       brand: phone.brand,
@@ -198,7 +218,7 @@ const PhoneDetails = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.1 }}
               >
-              <AddShoppingCartIcon/>
+                <AddShoppingCartIcon />
                 Add to Cart
               </motion.button>
             </div>
