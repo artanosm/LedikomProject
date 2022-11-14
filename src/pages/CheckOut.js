@@ -28,7 +28,6 @@ const CheckOut = () => {
     </ul>
   );
 
-  console.log(cartItems);
 
   return (
     <Fragment>

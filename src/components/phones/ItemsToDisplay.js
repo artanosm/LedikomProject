@@ -34,6 +34,7 @@ const ItemsToDisplay = ({ numberOfItems, setNumberOfItems }) => {
       <Select
         styles={customStyles}
         isClearable={false}
+        isSearchable={false}
         placeholder="24"
         defaultValue={numberOfItems}
         onChange={setNumberOfItems}

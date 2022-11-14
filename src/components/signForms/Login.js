@@ -8,7 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import KeyOutlinedIcon from "@mui/icons-material/KeyOutlined";
 import Box from "@mui/material/Box";
-
 import InputMui from "./InputMui";
 
 const Login = () => {
@@ -19,10 +18,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authCtx.user) {
-      navigate("/profile", { replace: true });
+    if (authCtx.user?.email) {
+      navigate("/profile");
     }
-  }, []);
+  }, [authCtx.user?.email,navigate]);
 
   const enteredEmailRef = useRef("");
   const enteredPasswordRef = useRef("");
@@ -71,10 +70,21 @@ const Login = () => {
     const enteredEmail = enteredEmailRef.current.value;
     const enteredPassword = enteredPasswordRef.current.value;
     console.log(enteredEmail, enteredPassword);
+    if (!enteredEmail) {
+      setError("Please enter your email!");
+      setIsLoading(false);
+      return;
+    }
+    if (!enteredPassword) {
+      setError("Please enter your password!");
+      setIsLoading(false);
+      return;
+    }
     try {
       await authCtx.signIn(enteredEmail, enteredPassword);
       navigate("/profile", { replace: true });
     } catch (err) {
+      console.log(err);
       setError("Your email or password was incorrect");
     }
     setIsLoading(false);
@@ -164,7 +174,9 @@ const Login = () => {
             </button>
           </div>
           <div className={classes.actions}>
-            {!isLoading && <button className={classes.loginButton}>Login</button>}
+            {!isLoading && (
+              <button className={classes.loginButton}>Login</button>
+            )}
             {isLoading && (
               <button
                 disabled

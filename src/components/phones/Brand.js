@@ -2,7 +2,6 @@ import React from "react";
 import Select from "react-select";
 import classes from "./Brand.module.css";
 
-
 const options = [
   { value: "Apple", label: "Apple" },
   { value: "Samsung", label: "Samsung" },
@@ -11,9 +10,6 @@ const options = [
   { value: "OnePlus", label: "OnePlus" },
   { value: "Google", label: "Google" },
 ];
-
-
-
 
 const customStyles = {
   option: (provided, state) => ({
@@ -25,15 +21,14 @@ const customStyles = {
 };
 
 const Brand = ({ brand, setBrand }) => {
- 
-
   return (
     <div className={classes.container}>
-       <Select
+      <Select
         styles={customStyles}
         isClearable={true}
         placeholder="Brand"
         defaultValue={brand}
+        isSearchable={false}
         onChange={setBrand}
         options={options}
         theme={(theme) => ({
@@ -44,9 +39,8 @@ const Brand = ({ brand, setBrand }) => {
             primary: "#ee3183",
           },
         })}
-      >
-  </Select>
-   </div>
+      ></Select>
+    </div>
   );
 };
 

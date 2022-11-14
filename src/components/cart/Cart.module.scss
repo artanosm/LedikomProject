@@ -75,6 +75,16 @@
   }
 }
 
+.loginFirst {
+  background-color: colors.$green-lighter;
+  color: colors.$green;
+  &:hover {
+    background-color: colors.$green;
+    color: colors.$white;
+  }
+}
+
+
 @media only screen and (max-width: 500px) {
   .cartContainer {
     padding-left: 0;

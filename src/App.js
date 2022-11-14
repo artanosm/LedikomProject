@@ -16,18 +16,25 @@ import Cart from "./components/cart/Cart";
 import PhoneDetails from "./components/phoneDetails/PhoneDetails";
 import AddPhone from "./components/AddPhone";
 import Orders from "./pages/Orders";
+import MyOrders from "./pages/MyOrders";
 import AddService from "./components/AddService";
 import ServiceBrand from "./components/service/ServiceBrand";
 import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
 import Search from "./pages/Search";
-import Contact  from "./pages/Contact";
-import Mui from "./components/MUI/Mui";
+import Contact from "./pages/Contact";
+import OrderDetail from "./components/profile/OrderDetail";
 
 import { AuthContextProvider } from "./store/auth-context";
 import CartContext from "./store/cart-context";
+// import {db} from '../src/components/firebase'
+// import {collection, getDocs} from 'firebase/firestore'
+import {realTimeDatabase} from '../src/components/firebase'
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
+
+  // const usersCollectionRef = collection(db, 'users');
+
   const cartCtx = useContext(CartContext);
   let cartI = cartCtx.items;
   let cartTA = cartCtx.totalAmount;
@@ -36,6 +43,9 @@ function App() {
     localStorage.setItem("cartItems", JSON.stringify(cartI));
     localStorage.setItem("cartTotalAmount", JSON.stringify(cartTA));
   }, [cartI, cartTA]);
+
+
+
 
   const showCartHandler = () => {
     setCartIsShown(true);
@@ -50,7 +60,6 @@ function App() {
     //   <Route path="/" element={<Mui/>} />
     // </Routes>
 
-
     <AuthContextProvider>
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
@@ -64,7 +73,7 @@ function App() {
         <Route path="/phones" element={<Phones />} />
         <Route path="/search" element={<Search />} />
         <Route path="/service" element={<Service />} />
-        <Route path="/contact" element={<Contact/>} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
         <Route
           path="/service/:brand/:serviceId"
@@ -72,9 +81,11 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/checkout" element={<CheckOut />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/orders" element={<MyOrders />} />
+        <Route path="/profile/orders/:orderId" element={<OrderDetail />} />
+        <Route path="/checkout" element={<CheckOut />} />
         <Route path="/phones/:phoneId" element={<PhoneDetails />} />
       </Routes>
       <Footer />

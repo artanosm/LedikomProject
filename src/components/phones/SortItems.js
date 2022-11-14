@@ -35,6 +35,7 @@ const SortItems = ({ sort, setSort }) => {
       <Select
         styles={customStyles}
         isClearable={true}
+        isSearchable={false}
         placeholder="Price"
         defaultValue={sort}
         onChange={setSort}

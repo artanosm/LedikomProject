@@ -1,5 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import { auth } from "../components/firebase";
+import React, { useState, useEffect, useCallback } from "react";
+import { auth, db } from "../components/firebase";
+import {
+  setDoc,
+  doc,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
+
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -8,57 +16,114 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  updateProfile,
 } from "firebase/auth";
 
+let logoutTimer;
 const AuthContext = React.createContext();
 
-export function useAuth() {
-  return useContext(AuthContext);
-}
+// ==============================
+const retriveStoredToken = () => {
+  const storedToken = localStorage.getItem("token");
+  const storedExpirationDate = localStorage.getItem("expirationTime");
+
+  const remainingTime = calculateRemainingtime(storedExpirationDate);
+
+  if (remainingTime <= 60000) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("expirationTime");
+    return null;
+  }
+  return { token: storedToken, duration: remainingTime };
+};
+
+const calculateRemainingtime = (expirationTime) => {
+  const currentTime = new Date().getTime();
+  const adjExpiration = new Date(expirationTime).getTime();
+
+  const remainingDuration = adjExpiration - currentTime;
+
+  return remainingDuration;
+};
+
+// ==============================
 
 export const AuthContextProvider = (props) => {
   const [user, setUser] = useState();
-  
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const [userData, setUserData] = useState({});
+
+  const tokenData = retriveStoredToken();
+  // const usersCollectionRef = collection(db, "users");
+
+  let initialtoken;
+
+  if (tokenData) {
+    initialtoken = tokenData.token;
   }
-  function signIn(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
+
+  const [token, setToken] = useState(initialtoken);
+
+  async function signUp(email, password) {
+    await createUserWithEmailAndPassword(auth, email, password).then((cred) => {
+      setDoc(doc(db, "users", cred.user.uid), { createdAt: serverTimestamp() });
+    });
   }
-  function logOut() {
-    return signOut(auth);
+
+  async function getUserData(uid) {
+    // const data = await getDoc(doc(db, "users", uid));
+    // setUserData(data.data())
+    await onSnapshot(doc(db, "users", uid), (doc) => {
+      setUserData(doc.data());
+    });
   }
+
+  async function signIn(email, password) {
+    await signInWithEmailAndPassword(auth, email, password).then((cred) => {
+      console.log(cred);
+      // setToken(cred._tokenResponse.idToken);
+      getUserData(cred.user.uid);
+      const expirationTime = new Date(
+        new Date().getTime() + +cred._tokenResponse.expiresIn * 1000
+      );
+      localStorage.setItem("token", cred._tokenResponse.idToken);
+      localStorage.setItem("expirationTime", expirationTime);
+      const remainingTime = calculateRemainingtime(expirationTime);
+      logoutTimer = setTimeout(logOut, remainingTime);
+    });
+  }
+
+  const logOut = useCallback(async () => {
+    await signOut(auth).then(() => {
+      setToken(null);
+      localStorage.removeItem("token");
+      localStorage.removeItem("expirationTime");
+      localStorage.removeItem("cartItems");
+      localStorage.removeItem("cartTotalAmount");
+      if (logoutTimer) {
+        clearTimeout(logoutTimer);
+      }
+    });
+  }, []);
+
   function googleSignIn() {
     const googleAuthProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth,googleAuthProvider);
+    return signInWithPopup(auth, googleAuthProvider);
   }
   function resetPassword(email) {
-    return sendPasswordResetEmail(auth, email)
+    return sendPasswordResetEmail(auth, email);
   }
 
-//   const calculateRemainingTime = (expirationTime) => {
-//   const currentTime = new Date().getTime();
-//   const adjustedExpirationTime = new Date(expirationTime).getTime();
-
-//   const remainingDuration = adjustedExpirationTime - currentTime;
-
-//   return remainingDuration;
-// };
-
-// const retriveStoredToken = () => {
-//   const storedToken = localStorage.getItem("token");
-//   const storedExpirationDate = localStorage.getItem("expirationTime");
-
-//   const remainingTime = calculateRemainingTime(storedExpirationDate);
-//   if (remainingTime <= 3600) {
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("expirationTime");
-//     return;
-//   }
+  function updateUserProfile(userDisplayName, userPhotoURL) {
+    return updateProfile(auth.currentUser, {
+      displayName: userDisplayName,
+      photoURL: userPhotoURL,
+    });
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
+      currentuser && getUserData(currentuser.uid);
     });
 
     return () => {
@@ -66,14 +131,25 @@ export const AuthContextProvider = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (tokenData) {
+      logoutTimer = setTimeout(logOut, tokenData.duration);
+    }
+  }, [tokenData, logOut]);
+
   const contextValue = {
+    token,
     user,
+    userData,
     signUp,
     signIn,
     logOut,
     googleSignIn,
     resetPassword,
+    updateUserProfile,
+    getUserData,
   };
+
   return (
     <AuthContext.Provider value={contextValue}>
       {props.children}
@@ -82,4 +158,3 @@ export const AuthContextProvider = (props) => {
 };
 
 export default AuthContext;
-

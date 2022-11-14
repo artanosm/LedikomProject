@@ -2,13 +2,15 @@ import React, { useContext } from "react";
 import classes from "./Cart.module.scss";
 import Modal from "../../ui/Modal";
 import CartContext from "../../store/cart-context";
+import AuthContext from "../../store/auth-context";
 import CartItem from "./CartItem";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
 
   const clearCartHandler = () => {
@@ -16,7 +18,11 @@ const Cart = (props) => {
   };
 
   const onCheckHandler = () => {
-    navigate("/checkout");
+    if (authCtx.user) {
+      navigate("/checkout");
+    } else {
+      navigate("/login");
+    }
     props.onClose();
   };
 
@@ -43,14 +49,15 @@ const Cart = (props) => {
   return (
     <Modal cartIsShown={props.cartIsShown} onClose={props.onClose}>
       <div className={classes.headerCartContainer}>
-        {cartCtx.items.length > 0 &&<h1>My Cart</h1>}
-        {cartCtx.items.length === 0 &&<h2>Your Cart is empty</h2>}
+        {cartCtx.items.length > 0 && <h1>My Cart</h1>}
+        {cartCtx.items.length === 0 && <h2>Your Cart is empty</h2>}
         <button onClick={props.onClose} className={classes.closeButton}>
-        <CloseIcon fontSize="medium"/></button>
+          <CloseIcon fontSize="medium" />
+        </button>
       </div>
-      {cartCtx.items.length !== 0 &&
+      {cartCtx.items.length !== 0 && (
         <div className={classes.itemsContainer}>{cartItems}</div>
-     }
+      )}
       {cartCtx.items.length > 0 && (
         <div className={classes.totalContainer}>
           <button
@@ -59,12 +66,14 @@ const Cart = (props) => {
           >
             Clear Cart
           </button>
+
           <button
             className={`${classes.checkOut} ${classes.button}`}
             onClick={onCheckHandler}
           >
             Check out
           </button>
+
           <h3>Total: {cartCtx.totalAmount} $</h3>
         </div>
       )}

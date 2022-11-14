@@ -3,6 +3,7 @@ import { ReactComponent as CloseMenu } from "../assets/x.svg";
 import { ReactComponent as MenuIcon } from "../assets/menu.svg";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import { motion } from "framer-motion";
+import { Avatar } from "@mui/material";
 
 import HeaderCart from "./HeaderCart";
 import { Link } from "react-router-dom";
@@ -13,10 +14,10 @@ import AuthContext from "../store/auth-context";
 const Header = (props) => {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  const authCtx = useContext(AuthContext)
+  const authCtx = useContext(AuthContext);
 
   const closeMobileMenu = () => setClick(false);
-  
+
   return (
     <div className="header">
       <motion.div
@@ -34,7 +35,7 @@ const Header = (props) => {
         </Link>
       </motion.div>
 
-      <ul  className={click ? "nav-options active" : "nav-options"}>
+      <ul className={click ? "nav-options active" : "nav-options"}>
         <li
           className={click ? "option activeOption" : "option"}
           onClick={closeMobileMenu}
@@ -65,13 +66,17 @@ const Header = (props) => {
       </ul>
 
       <div className="cart">
-        <Link to="/login">
+        <Link to={authCtx.user ? "/profile" : "/login"}>
           <motion.div
             className="icon"
             whileHover={{ scale: 1.2 }}
             transition={{ duration: 0.1 }}
           >
-          {authCtx.user ? <span>{authCtx.user.email}</span> :  <PersonOutlineOutlinedIcon fontSize="medium" />}
+            {authCtx.user ? (
+              <Avatar sx={{width:30,height:30}} src={authCtx.userData.photoProfile} />
+            ) : (
+              <PersonOutlineOutlinedIcon fontSize="medium" />
+            )}
           </motion.div>
         </Link>
         <HeaderCart className="cart" onClick={props.onShowCart} />

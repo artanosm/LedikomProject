@@ -42,7 +42,7 @@ const PhoneDetails = () => {
   const [alert, setAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [firebaseId, setFirebaseId] = useState(location.state?.firebaseId);
-
+ 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -59,20 +59,6 @@ const PhoneDetails = () => {
         setColorImg({ color: phone?.colors[color].image, name: colorParam });
     }
   }, [colorParam, phone?.colors]);
-
-  // const storageFunction = (storageP, obj) => {
-  //   let p;
-  //   if (storageP) {
-  //     storageP === obj?.storage.storage64GB && (p = obj?.price.price64GB);
-  //     storageP === obj?.storage.storage128GB && (p = obj?.price.price128GB);
-  //     storageP === obj?.storage.storage256GB && (p = obj?.price.price256GB);
-  //     storageP === obj?.storage.storage512GB && (p = obj?.price.price512GB);
-  //     storageP === obj?.storage.storage1TB && (p = obj?.price.price1TB);
-  //   } else {
-  //     p = obj?.price.price64GB;
-  //   }
-  //   return p;
-  // };
 
   useEffect(() => {
     const fetchPhones = async () => {
@@ -120,7 +106,7 @@ const PhoneDetails = () => {
     fetchPhones().catch((error) => {
       console.log(error);
     });
-  }, []);
+  }, [colorParam,firebaseId,phoneId,storageParam]);
 
   const colorImageHandler = useCallback(
     (e) => {
@@ -128,7 +114,7 @@ const PhoneDetails = () => {
       searchParams.set("color", e.name);
       setSearchParams(searchParams);
     },
-    [setColorImg]
+    [setColorImg,searchParams,setSearchParams]
   );
 
   const priceHandler = useCallback(
@@ -144,7 +130,7 @@ const PhoneDetails = () => {
       searchParams.set("storage", e);
       setSearchParams(searchParams);
     },
-    [setStorage]
+    [setStorage,searchParams,setSearchParams]
   );
 
   const addItemToCart = () => {

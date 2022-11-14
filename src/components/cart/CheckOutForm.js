@@ -1,31 +1,39 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import Input from "./Input";
 import classes from "./CheckOutForm.module.scss";
 // import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
+import { realTimeDatabase } from "../firebase";
+import AuthContext from "../../store/auth-context";
+import { setDoc, doc} from "firebase/firestore";
+import { db } from "../firebase";
+import { v4 } from "uuid";
 
 const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
   const [alert, setAlert] = useState(false);
 
+  const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
-  // const navigate = useNavigate();
-  const formRef = useRef(null);
-  let nameRef = useRef(null);
-  let emailRef = useRef(null);
-  let phoneRef = useRef(null);
-  let addressRef = useRef(null);
-  let cityRef = useRef(null);
-  let textAreaRef = useRef(null);
 
- 
+  const randomString = v4();
+
+  const formRef = useRef(null);
+  const nameRef = useRef(null);
+  const emailRef = useRef(null);
+  const phoneRef = useRef(null);
+  const addressRef = useRef(null);
+  const cityRef = useRef(null);
+  const textAreaRef = useRef(null);
+
   const addOrder = async (order) => {
     const response = await fetch(
-      "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/orders.json",
+      `${realTimeDatabase}/orders/${randomString}.json`,
+
       {
-        method: "POST",
+        method: "PUT",
         body: JSON.stringify({
+          date: new Date().toGMTString(),
           name: order.name,
           email: order.email,
           phone: order.phone,
@@ -36,16 +44,17 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
           orderCompleted: false,
           totalAmount: totalAmount,
           cartItems: cartItems,
-        }),
+          id:order.id,
+        },randomString),
         headers: { "Content-Type": "application.json" },
       }
     );
-    const data = await response.json();
-    console.log(data);
   };
-
   const submitHandler = (e) => {
     e.preventDefault();
+    if (!authCtx.user) {
+      return;
+    }
     const enteredName = nameRef.current.value;
     const enteredEmail = emailRef.current.value;
     const enteredPhone = phoneRef.current.value;
@@ -53,7 +62,10 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
     const selectedCity = cityRef.current.value;
     const textArea = textAreaRef.current.value;
 
-    addOrder({
+    const order = {
+      date: new Date().toGMTString(),
+      id:randomString,
+      cartItems: JSON.parse(JSON.stringify(cartItems)),
       name: enteredName,
       email: enteredEmail,
       phone: enteredPhone,
@@ -61,8 +73,17 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
       city: selectedCity,
       textArea: textArea,
       totalAmount: totalAmount,
-      cartItems: JSON.parse(JSON.stringify(cartItems)),
+    }
+
+    setDoc(doc(db, `users/${authCtx.user.uid}/orders`,randomString), {
+      ...order
     });
+    // addDoc(collection(db, `users/${authCtx.user.uid}/orders`,randomString), {
+    //   ...order
+    // });
+
+    addOrder(order);
+
     cartCtx.clearCart();
     setAlert(true);
     setTimeout(() => setAlert(false), 3000);
@@ -71,16 +92,35 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
   };
   return (
     <form ref={formRef} onSubmit={submitHandler}>
-      {/* {!phone && <h2>Not Found</h2>} */}
       <div
         className={alert ? `${classes.alert} ${classes.active}` : classes.alert}
       >
         <CheckIcon fontSize="large" /> <p>Order sent</p>
       </div>
-      <Input forwardedRef={nameRef} name={"Name"} type={"text"} />
-      <Input forwardedRef={emailRef} name={"Email"} type={"email"} />
-      <Input forwardedRef={phoneRef} name={"Phone Number"} type={"tel"} />
-      <Input forwardedRef={addressRef} name={"Address"} type={"text"} />
+      <Input
+        defaultValue={authCtx.userData?.name}
+        ref={nameRef}
+        name={"Name"}
+        type={"text"}
+      />
+      <Input
+        defaultValue={authCtx.user?.email}
+        ref={emailRef}
+        name={"Email"}
+        type={"email"}
+      />
+      <Input
+        defaultValue={authCtx.userData?.phoneNumber}
+        ref={phoneRef}
+        name={"Phone Number"}
+        type={"tel"}
+      />
+      <Input
+        defaultValue={authCtx.userData?.address}
+        ref={addressRef}
+        name={"Address"}
+        type={"text"}
+      />
       <select className={classes.select} ref={cityRef}>
         <option disabled defaultValue>
           Select City

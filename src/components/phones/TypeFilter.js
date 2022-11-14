@@ -33,6 +33,7 @@ const TypeFilter = ({ type, setType }) => {
       <Select
         styles={customStyles}
         isClearable={true}
+        isSearchable={false}
         placeholder="Type"
         defaultValue={type}
         onChange={setType}

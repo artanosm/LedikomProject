@@ -28,6 +28,7 @@ const Orders = () => {
 
       for (const key in responseData) {
         loadedOrders.push({
+          date:responseData[key].date,
           id: key,
           address: responseData[key].address,
           city: responseData[key].city,
@@ -96,6 +97,8 @@ const Orders = () => {
         <div className={classes.main}>
           <div className={classes.headerContainer}>
             <h1>Orders</h1>
+            <div className={classes.buttonContainer}>
+
             <button
               className={
                 !completedOrders
@@ -116,6 +119,7 @@ const Orders = () => {
             >
               Completed Orders
             </button>
+            </div>
           </div>
           <div>{orderItems}</div>
         </div>

@@ -1,12 +1,13 @@
 import React from "react";
 import OrdersItemGroup from "./OrdersItemGroup";
 import classes from "./OrderItem.module.scss";
+import { realTimeDatabase } from "./firebase";
 
 const OrderItem = ({ order , reFetch, setReFetch }) => {
   const onDeleteHandler = () => {
     const deleteOrder = async () => {
       const response = await fetch(
-        `https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/orders/${order.id}.json`,
+        `${realTimeDatabase}/orders/${order.id}.json`,
         {
           method: "DELETE",
           headers: {
@@ -29,7 +30,7 @@ const OrderItem = ({ order , reFetch, setReFetch }) => {
   const onCompleteHandler = () => {
     const completeOrder = async () => {
       const response = await fetch(
-        `https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/orders/${order.id}.json`,
+        `${realTimeDatabase}/orders/${order.id}.json`,
         {
           method: "PUT",
           headers: {
@@ -67,12 +68,13 @@ const OrderItem = ({ order , reFetch, setReFetch }) => {
   return (
     <div className={classes.container}>
       <div className={classes.info}>
-        <p>Order ID: {order.id}</p>
         <p>Name: {order.name}</p>
         <p>Email: {order.email}</p>
         <p>Phone: {order.phone}</p>
         <p>City: {order.city}</p>
         <p>Address: {order.address}</p>
+        <p>Date: {order.date}</p>
+        <p>Order ID: {order.id}</p>
       </div>
       <div>{cartItems}</div>
       <h4>Total Amount: {order.totalAmount} $</h4>

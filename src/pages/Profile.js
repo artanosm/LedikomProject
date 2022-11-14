@@ -1,76 +1,65 @@
-import React, { useContext} from "react";
 import AuthContext from "../store/auth-context";
-import { Navigate, useNavigate } from "react-router-dom";
+// import { storage } from "../components/firebase";
+// import {
+//   ref,
+//   uploadBytes,
+//   getDownloadURL,
+//   listAll,
+//   list,
+// } from "firebase/storage";
+import React, { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import classes from "./Profile.module.scss";
+import ProfileForm from "../components/profile/ProfileForm";
+import { Stack, Button } from "@mui/material";
+import ProfileInfo from "../components/profile/ProfileInfo";
 
 const Profile = () => {
-  const navigate = useNavigate()
+  const [edit, setEdit] = useState(false);
+  const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  
   const isLoggedIn = authCtx.user;
- 
+
   const logoutHandler = () => {
     authCtx.logOut();
-    navigate('/', {replace:true})
+    navigate("/", { replace: true });
   };
 
   return (
-    <div>
-      {!isLoggedIn && <Navigate to="/login" />}
-      {isLoggedIn && <h1>Welcome your email is: {authCtx.user.email} </h1>}
-      {isLoggedIn && <button onClick={logoutHandler}>Log Out</button>}
+    <div className={classes.mainContainer}>
+      {!isLoggedIn && (
+        <h5>
+          You are not signed in <Link to="/login">Login</Link> first
+        </h5>
+      )}
+      {isLoggedIn && (
+        /* <div className={classes.profileContainer}> */
+        <Stack alignItems={"center"} sx={{ width: "100%" }}>
+          <Stack direction={"row"} justifyContent="end" sx={{ width: "100%" }}>
+            <Button onClick={() => setEdit(!edit)}>Edit Profile</Button>
+            <Button color="error" onClick={logoutHandler}>
+              Logout
+            </Button>
+            <Link to={'/profile/orders'}>My Orders</Link>
+          </Stack>
+
+          {!edit && (
+            <ProfileInfo />
+          )}
+          {edit && (
+            <Stack
+              sx={{ width: "100%" }}
+              direction="row"
+              justifyContent="center"
+            >
+              <ProfileForm edit={edit} setEdit={setEdit} />
+            </Stack>
+          )}
+        </Stack>
+        /* </div> */
+      )}
     </div>
   );
 };
 
 export default Profile;
-
-
-
-// import React, { useContext, useEffect, useState } from "react";
-// import AuthContext from "../store/auth-context";
-// import { Navigate } from "react-router-dom";
-
-// const Profile = () => {
-//   const authCtx = useContext(AuthContext);
-//   const [users, setUsers] = useState([{ email: "" }]);
-
-//   const logoutHandler = () => {
-//     authCtx.logout();
-//   };
-
-//   const isLoggedIn = authCtx.isLoggedIn;
-
-//   useEffect(() => {
-//     const getUserData = async () => {
-//       const response = await fetch(
-//         "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyDzk-iiZ_Pp7Ic95GXULqdmdnGcKuRJiW8",
-//         {
-//           method: "POST",
-//           body: JSON.stringify({
-//             idToken: authCtx.token,
-//           }),
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-//       const responseData = await response.json();
-//       const users = [];
-//       users.push({
-//         email: responseData.users[0].email,
-//       });
-
-//       setUsers(users);
-//     };
-//     getUserData().catch((err) => console.log(err));
-//   }, [authCtx.isLoggedIn, authCtx.token]);
-//   return (
-//     <div>
-//       {isLoggedIn && <h1>Welcome your email is {users[0].email} </h1>}
-//       {!isLoggedIn && <Navigate to="/login" />}
-//       {isLoggedIn && <button onClick={logoutHandler}>Log Out</button>}
-//     </div>
-//   );
-// };
-
-// export default Profile;

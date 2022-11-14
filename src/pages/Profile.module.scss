@@ -1,0 +1,16 @@
+@use '../sass/abstracts/mixins' as *;
+
+.mainContainer {
+    @include flex-center(flex-start,column,flex-start)
+}
+
+.profileContainer {
+    @include flex-center(flex-start,column);
+    width: 100%;
+    padding: 1rem;
+    // margin: 1rem;
+}
+
+// .infoContainer {
+//     width: 100%; 
+// }
