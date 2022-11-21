@@ -5,7 +5,7 @@ const OrdersItemGroup = ({ item }) => {
   return (
     <>    
     <div className={classes.container}>
-      <img className={classes.img} src={item.color.color} alt="product" />
+      <img className={classes.img} src={item.color.image} alt="product" />
 
       <div className={classes.infoContainer}>
         <h5>{item.brand}</h5>
@@ -14,6 +14,9 @@ const OrdersItemGroup = ({ item }) => {
         <p>{item.storage}</p>
         <p>{item.colorName}</p>
         <p>{item.price} $</p>
+      </div>
+      <div className={classes.amountContainer}>
+        <span>x {item.amount}</span>
       </div>
     </div>
     <hr/>

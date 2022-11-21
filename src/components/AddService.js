@@ -1,4 +1,5 @@
 import React, { Fragment, useRef } from "react";
+import { realTimeDatabase } from "./firebase";
 import { useNavigate } from "react-router-dom";
 
 const AddService = () => {
@@ -17,7 +18,8 @@ const AddService = () => {
 
   async function addPhoneHandler(servicePhone) {
     const response = await fetch(
-      "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/service.json",
+      `${realTimeDatabase}/service.json`,
+
       {
         method: "POST",
         body: JSON.stringify(servicePhone),
@@ -26,9 +28,6 @@ const AddService = () => {
         },
       }
     );
-
-    const data = await response.json();
-    console.log(data);
   }
 
   const submitHandler = (e) => {
@@ -39,12 +38,12 @@ const AddService = () => {
       model: modelRef.current.value,
       type: typeRef.current.value,
       image: imageRef.current.value,
-      screen:{price:+screenRef.current.value},
-      backGlass:{price:+backGlassRef.current.value},
-      battery:{price:+batteryRef.current.value},
-      frontCamera:{price:+frontCameraRef.current.value},
-      backCamera:{price:+backCameraRef.current.value},
-      speaker:{price:+speakerRef.current.value},
+      screen: { price: +screenRef.current.value },
+      backGlass: { price: +backGlassRef.current.value },
+      battery: { price: +batteryRef.current.value },
+      frontCamera: { price: +frontCameraRef.current.value },
+      backCamera: { price: +backCameraRef.current.value },
+      speaker: { price: +speakerRef.current.value },
     };
 
     console.log(phone, "phone");
@@ -64,10 +63,6 @@ const AddService = () => {
           <label htmlFor="model">Model</label>
           <input type="text" id="model" ref={modelRef}></input>
         </div>
-        {/* <div>
-          <label htmlFor="type">Type</label>
-          <input type="text" id="type" ref={typeRef}></input>
-        </div> */}
         <label>Type:</label>
         <select ref={typeRef}>
           <option value="Phone">Phone</option>
@@ -80,27 +75,29 @@ const AddService = () => {
           <input type="text" id="image" ref={imageRef}></input>
         </div>
         <div>
-            <label htmlFor="screen">Screen</label>
-            <input type="number" id="screen" ref={screenRef}></input>
-            <br/>
-            <label htmlFor="backGlass">Back Glass</label>
-            <input type="number" id="backGlass" ref={backGlassRef}></input>
-            <br/>
-            <label htmlFor="battery">Battery</label>
-            <input type="number" id="battery" ref={batteryRef}></input>
-            <br/>
-            <label htmlFor="frontCamera">Front Camera</label>
-            <input type="number" id="frontCamera" ref={frontCameraRef}></input>
-            <br/>
-            <label htmlFor="backCamera">Back Camera</label>
-            <input type="number" id="backCamera" ref={backCameraRef}></input>
-            <br/>
-            <label htmlFor="speaker">Speaker</label>
-            <input type="number" id="speaker" ref={speakerRef}></input>
-            <br/>
+          <label htmlFor="screen">Screen</label>
+          <input type="number" id="screen" ref={screenRef}></input>
+          <br />
+          <label htmlFor="backGlass">Back Glass</label>
+          <input type="number" id="backGlass" ref={backGlassRef}></input>
+          <br />
+          <label htmlFor="battery">Battery</label>
+          <input type="number" id="battery" ref={batteryRef}></input>
+          <br />
+          <label htmlFor="frontCamera">Front Camera</label>
+          <input type="number" id="frontCamera" ref={frontCameraRef}></input>
+          <br />
+          <label htmlFor="backCamera">Back Camera</label>
+          <input type="number" id="backCamera" ref={backCameraRef}></input>
+          <br />
+          <label htmlFor="speaker">Speaker</label>
+          <input type="number" id="speaker" ref={speakerRef}></input>
+          <br />
         </div>
-        
-        <button onClick={submitHandler} type="submit">Add Phone</button>
+
+        <button onClick={submitHandler} type="submit">
+          Add Phone
+        </button>
       </form>
     </Fragment>
   );

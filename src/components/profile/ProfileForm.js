@@ -40,7 +40,9 @@ const ProfileForm = ({ setEdit }) => {
       const existing = res.items[0].fullPath;
       const deleteProfilePic = ref(storage, existing);
 
-      deleteObject(deleteProfilePic).then(console.log("Old profile picture deleted"));
+      deleteObject(deleteProfilePic).then(
+        console.log("Old profile picture deleted")
+      );
     });
     const photoToUpload = ref(
       storage,
@@ -50,7 +52,7 @@ const ProfileForm = ({ setEdit }) => {
       getDownloadURL(snapshot.ref).then((url) => {
         updateDoc(doc(userDataRef, authCtx.user.uid), {
           photoProfile: url,
-        }).then(console.log('New profile picture uploaded'));
+        }).then(console.log("New profile picture uploaded"));
       });
     });
   };
@@ -83,7 +85,6 @@ const ProfileForm = ({ setEdit }) => {
         }}
       >
         <Stack direction="row" alignItems="center" spacing={2}>
-          {/* <Avatar src={authCtx.user?.photoURL} /> */}
           <Avatar src={authCtx.userData?.photoProfile} />
           <IconButton
             size="small"

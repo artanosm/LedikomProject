@@ -9,7 +9,6 @@ import {IconButton} from "@mui/material";
 // const CartItem = ({ brand,price, amount, model, id, color, storage }) => {
 const CartItem = ({item}) => {
   const { brand,price, amount, model, id, color, storage } = item;
-  
   const cartCtx = useContext(CartContext);
   const [show, setShow] = useState(true);
 
@@ -29,7 +28,7 @@ const decreaseItemHandler = () => {
 
   return (
     <div className={classes.itemContainer}>
-      <img className={classes.cartImage} src={color.color} alt="phone"></img>
+      <img className={classes.cartImage} src={color.image} alt="phone"></img>
       <div className={classes.dataContainer}>
         <h3>{model}</h3>
         <p>{color.name}</p>
@@ -38,9 +37,6 @@ const decreaseItemHandler = () => {
       </div>
       <div className={classes.buttonContainer}>
       <IconButton sx={{padding:0}} onClick={decreaseItemHandler} fontSize='small'><RemoveIcon fontSize="small" /></IconButton>
-        {/* <button onClick={decreaseItemHandler}>-</button>
-        <p>{amount}</p>
-        <button onClick={increaseItemHandler}>+</button> */}
         <span>{amount}</span>
 
       <IconButton sx={{padding:0}} onClick={increaseItemHandler} fontSize="small"><AddIcon fontSize="small"/></IconButton>

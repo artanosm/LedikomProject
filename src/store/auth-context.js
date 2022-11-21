@@ -65,7 +65,7 @@ export const AuthContextProvider = (props) => {
 
   async function signUp(email, password) {
     await createUserWithEmailAndPassword(auth, email, password).then((cred) => {
-      setDoc(doc(db, "users", cred.user.uid), { createdAt: serverTimestamp() });
+      setDoc(doc(db, "users", cred.user.uid), { userId:cred.user.uid, createdAt: serverTimestamp() });
     });
   }
 
@@ -80,10 +80,9 @@ export const AuthContextProvider = (props) => {
   async function signIn(email, password) {
     await signInWithEmailAndPassword(auth, email, password).then((cred) => {
       console.log(cred);
-      // setToken(cred._tokenResponse.idToken);
       getUserData(cred.user.uid);
       const expirationTime = new Date(
-        new Date().getTime() + +cred._tokenResponse.expiresIn * 1000
+        new Date().getTime() + +cred._tokenResponse.expiresIn * 500
       );
       localStorage.setItem("token", cred._tokenResponse.idToken);
       localStorage.setItem("expirationTime", expirationTime);

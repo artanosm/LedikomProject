@@ -6,7 +6,7 @@ import CartContext from "../../store/cart-context";
 import CheckIcon from "@mui/icons-material/Check";
 import { realTimeDatabase } from "../firebase";
 import AuthContext from "../../store/auth-context";
-import { setDoc, doc} from "firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 } from "uuid";
 
@@ -26,30 +26,36 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
   const cityRef = useRef(null);
   const textAreaRef = useRef(null);
 
-  const addOrder = async (order) => {
-    const response = await fetch(
-      `${realTimeDatabase}/orders/${randomString}.json`,
+  // const addOrder = async (order) => {
+    // await fetch(
+    //   `${realTimeDatabase}/orders/${randomString}.json`,
 
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          date: new Date().toGMTString(),
-          name: order.name,
-          email: order.email,
-          phone: order.phone,
-          address: order.address,
-          city: order.city,
-          delivery: deliveryForm,
-          textArea: order.textArea,
-          orderCompleted: false,
-          totalAmount: totalAmount,
-          cartItems: cartItems,
-          id:order.id,
-        },randomString),
-        headers: { "Content-Type": "application.json" },
-      }
-    );
-  };
+    //   {
+    //     method: "PUT",
+    //     body: JSON.stringify(
+    //       {
+    //         date: new Date().toString().slice(0,25),
+    //         serverDate:serverTimestamp(),
+
+    //         name: order.name,
+    //         email: order.email,
+    //         phone: order.phone,
+    //         address: order.address,
+    //         city: order.city,
+    //         delivery: deliveryForm,
+    //         textArea: order.textArea,
+    //         orderCompleted: false,
+    //         totalAmount: totalAmount,
+    //         cartItems: cartItems,
+    //         id: order.id,
+    //         userId: authCtx.user.uid,
+    //       },
+    //       randomString
+    //     ),
+    //     headers: { "Content-Type": "application.json" },
+    //   }
+    // );
+  // };
   const submitHandler = (e) => {
     e.preventDefault();
     if (!authCtx.user) {
@@ -63,9 +69,11 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
     const textArea = textAreaRef.current.value;
 
     const order = {
-      date: new Date().toGMTString(),
-      id:randomString,
+      date: new Date().toString().slice(0,25),
+      serverDate:serverTimestamp(),
+      id: randomString,
       cartItems: JSON.parse(JSON.stringify(cartItems)),
+      orderCompleted: false,
       name: enteredName,
       email: enteredEmail,
       phone: enteredPhone,
@@ -73,16 +81,19 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
       city: selectedCity,
       textArea: textArea,
       totalAmount: totalAmount,
-    }
+      userId: authCtx.user.uid,
+    };
 
-    setDoc(doc(db, `users/${authCtx.user.uid}/orders`,randomString), {
-      ...order
+    setDoc(doc(db, "orders", randomString), { ...order});
+
+    setDoc(doc(db,`users/${authCtx.user.uid}/orders`, randomString), {
+      ...order,
     });
     // addDoc(collection(db, `users/${authCtx.user.uid}/orders`,randomString), {
     //   ...order
     // });
 
-    addOrder(order);
+    // addOrder(order);
 
     cartCtx.clearCart();
     setAlert(true);

@@ -26,14 +26,9 @@ import OrderDetail from "./components/profile/OrderDetail";
 
 import { AuthContextProvider } from "./store/auth-context";
 import CartContext from "./store/cart-context";
-// import {db} from '../src/components/firebase'
-// import {collection, getDocs} from 'firebase/firestore'
-import {realTimeDatabase} from '../src/components/firebase'
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
-
-  // const usersCollectionRef = collection(db, 'users');
 
   const cartCtx = useContext(CartContext);
   let cartI = cartCtx.items;
@@ -55,11 +50,8 @@ function App() {
     setCartIsShown(false);
   };
 
+  
   return (
-    // <Routes>
-    //   <Route path="/" element={<Mui/>} />
-    // </Routes>
-
     <AuthContextProvider>
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />

@@ -8,6 +8,10 @@
   }
 }
 
+.reFetchButton {
+  margin-right: 1rem;
+}
+
 .headerContainer {
   @include flex-center(flex-start);
   gap: 0;

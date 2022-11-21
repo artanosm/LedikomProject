@@ -1,8 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.scss";
-import useFetch from "./customHooks/useFetch";
 import Loader from "../ui/Loader";
+import { db } from "./firebase";
+import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
 
 const getMultipleRandom = (arr, num) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
@@ -22,83 +23,36 @@ const PhonesList = ({
   const [phones, setPhones] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const [data] = useFetch(
-    "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
-  );
-
   useEffect(() => {
-    if (data && data !== null) {
-      const loadedPhones = [];
-      for (const key in data) {
-        loadedPhones.push({
-          date: data[key].date,
-          type: data[key].type,
-          firebaseId: key,
-          // adding dash to every empty space
-          id: data[key].model.replace(/\s/g, "-"),
-          model: data[key].model,
-          brand: data[key].brand,
-          price: data[key].price,
-          colors: data[key].colors,
-          storage: data[key].storage,
-          ram: data[key].ram,
-        });
-      }
+    setIsLoading(true);
+    const colRef = collection(db, "products");
+    const q = query(colRef, orderBy("storage"));
+    const unSubscribe = onSnapshot(q, (colSnapshot) => {
+      let phonesArr = [];
 
-      searchQuery
-        ? setPhones(
-            loadedPhones.filter(
-              (item) =>
-                item.brand.toLowerCase().includes(searchQuery) ||
-                item.model.toLowerCase().includes(searchQuery)
-            )
+      colSnapshot.docs.forEach((doc) => {
+        phonesArr.push(doc.data());
+      });
+
+      if (searchQuery) {
+        setPhones(
+          phonesArr.filter(
+            (item) =>
+              item.brand.toLowerCase().includes(searchQuery) ||
+              item.model.toLowerCase().includes(searchQuery)
           )
-        : setPhones(() => loadedPhones);
-      setIsLoading(false);
-    }
-  }, [data, searchQuery]);
-  // useEffect(() => {
-  //   const fetchPhones = async () => {
-  //     const response = await fetch(
-  //       "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/phones.json"
-  //     );
+        );
+        setIsLoading(false);
+      } else {
+        setPhones(() => phonesArr);
+        setIsLoading(false);
+      }
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, [searchQuery]);
 
-  //     if (!response.ok) {
-  //       throw new Error("Something went wrong");
-  //     }
-  //     const responseData = await response.json();
-
-  //     const loadedPhones = [];
-
-  //     for (const key in responseData) {
-  //       loadedPhones.push({
-  //         date: responseData[key].date,
-  //         type: responseData[key].type,
-  //         id: key,
-  //         model: responseData[key].model,
-  //         brand: responseData[key].brand,
-  //         price: responseData[key].price,
-  //         image: responseData[key].image,
-  //         colors: responseData[key].colors,
-  //         storage: responseData[key].storage,
-  //         ram: responseData[key].ram,
-  //       });
-  //     }
-
-  //     setPhones(loadedPhones);
-  //   };
-
-  //   fetchPhones().catch((error) => {
-  //     console.log(error);
-  //   });
-  // }, []);
-  //  let brands
-  //   if (!brand) {
-  //     brands = {value:null,label:'Brands'}
-  //   }
-  //   else {
-  //     brands = brand
-  //   }
   let filteredPhones;
   if (brand) {
     filteredPhones = phones.filter((phone) => phone.brand === brand.value);
@@ -112,27 +66,31 @@ const PhonesList = ({
   } else {
     filteredType = filteredPhones;
   }
-
   let sortedPhones;
   if (sort) {
     if (sort.value === "ascending") {
       sortedPhones = filteredType.sort(
-        (a, b) => parseFloat(a.price.price64GB) - parseFloat(b.price.price64GB)
+        (a, b) =>
+          parseFloat(a.storage.storage1.price) -
+          parseFloat(b.storage.storage1.price)
       );
     } else {
       sortedPhones = filteredType.sort(
-        (a, b) => parseFloat(b.price.price64GB) - parseFloat(a.price.price64GB)
+        (a, b) =>
+          parseFloat(b.storage.storage1.price) -
+          parseFloat(a.storage.storage1.price)
       );
     }
   } else {
     sortedPhones = filteredType;
+    // .sort(
+    //   (a, b) =>
+    //     parseFloat(b.storage.storage1.price) -
+    //     parseFloat(a.storage.storage1.price)
+    // );;
   }
 
   // Arranges the products the newest first
-  date &&
-    sortedPhones.sort((a, b) => {
-      return new Date(b.date) - new Date(a.date);
-    });
 
   randomItems &&
     (sortedPhones = getMultipleRandom(sortedPhones, numberOfItems.value));
@@ -143,23 +101,20 @@ const PhonesList = ({
     ? (itemsToDisplay = sortedPhones.slice(0, numberOfItems.value))
     : (itemsToDisplay = sortedPhones);
 
-  const phoneItems = itemsToDisplay.map((phone) => {
-    let price1;
-  
-    // takes the prices in price property
-    const values = Object.values(phone.price);
-    const minPrice = values.filter((val) => val !== "");
-    price1 = Math.min(...minPrice);
+  date &&
+    itemsToDisplay.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+  const phoneItems = itemsToDisplay.map((phone, i) => {
     if (!priceRange) {
       return (
         <PhoneItem
-          firebaseId={phone?.firebaseId}
           date={phone.date}
           type={phone.type}
-          price1={price1}
-          key={phone.id}
+          key={i}
           id={phone.id}
-          price={phone.price}
+          price={phone.storage.storage1.price}
           brand={phone.brand}
           model={phone.model}
           colors={phone.colors}
@@ -167,15 +122,18 @@ const PhonesList = ({
         />
       );
     }
-    if (price1 < priceRange[1] && price1 > priceRange[0]) {
+    if (
+      phone.storage.storage1.price < priceRange[1] &&
+      phone.storage.storage1.price > priceRange[0]
+    ) {
       return (
         <PhoneItem
-          firebaseId={phone?.firebaseId}
+          date={phone.date}
+          phone={phone}
           type={phone.type}
-          price1={price1}
-          key={phone.id}
+          key={i}
           id={phone.id}
-          price={phone.price}
+          price={phone.storage.storage1.price}
           brand={phone.brand}
           model={phone.model}
           colors={phone.colors}
@@ -195,3 +153,162 @@ const PhonesList = ({
 };
 
 export default PhonesList;
+
+// import React, { Fragment, useEffect, useState } from "react";
+// import PhoneItem from "./PhoneItem";
+// import classes from "./PhonesList.module.scss";
+// import Loader from "../ui/Loader";
+// import { realTimeDatabase } from "./firebase";
+
+// const getMultipleRandom = (arr, num) => {
+//   const shuffled = [...arr].sort(() => 0.5 - Math.random());
+//   return shuffled.slice(0, num);
+// };
+
+// const PhonesList = ({
+//   priceRange,
+//   brand,
+//   type,
+//   sort,
+//   date,
+//   numberOfItems,
+//   randomItems,
+//   searchQuery = false,
+// }) => {
+//   const [phones, setPhones] = useState([]);
+//   const [isLoading, setIsLoading] = useState(true);
+
+//   useEffect(() => {
+//     const fetchPhones = async () => {
+//       const response = await fetch(`${realTimeDatabase}/phones.json`);
+//       if (!response.ok) {
+//         throw new Error("Something went wrong");
+//       }
+//       const data = await response.json();
+//       const loadedPhones = [];
+//       for (const key in data) {
+//         loadedPhones.push({
+//           date: data[key].date,
+//           type: data[key].type,
+//           firebaseId: key,
+//           // adding dash to every empty space
+//           id: data[key].model.replace(/\s/g, "-"),
+//           model: data[key].model,
+//           brand: data[key].brand,
+//           price: data[key].price,
+//           colors: data[key].colors,
+//           storage: data[key].storage,
+//           ram: data[key].ram,
+//         });
+//       }
+
+//       searchQuery
+//         ? setPhones(
+//             loadedPhones.filter(
+//               (item) =>
+//                 item.brand.toLowerCase().includes(searchQuery) ||
+//                 item.model.toLowerCase().includes(searchQuery)
+//             )
+//           )
+//         : setPhones(() => loadedPhones);
+//       setIsLoading(false);
+//     };
+//     fetchPhones();
+//   }, [searchQuery]);
+
+//   let filteredPhones;
+//   if (brand) {
+//     filteredPhones = phones.filter((phone) => phone.brand === brand.value);
+//   } else {
+//     filteredPhones = phones;
+//   }
+
+//   let filteredType;
+//   if (type) {
+//     filteredType = filteredPhones.filter((phone) => phone.type === type.value);
+//   } else {
+//     filteredType = filteredPhones;
+//   }
+
+//   let sortedPhones;
+//   if (sort) {
+//     if (sort.value === "ascending") {
+//       sortedPhones = filteredType.sort(
+//         (a, b) => parseFloat(a.price.price64GB) - parseFloat(b.price.price64GB)
+//       );
+//     } else {
+//       sortedPhones = filteredType.sort(
+//         (a, b) => parseFloat(b.price.price64GB) - parseFloat(a.price.price64GB)
+//       );
+//     }
+//   } else {
+//     sortedPhones = filteredType;
+//   }
+
+//   // Arranges the products the newest first
+//   date &&
+//     sortedPhones.sort((a, b) => {
+//       return new Date(b.date) - new Date(a.date);
+//     });
+
+//   randomItems &&
+//     (sortedPhones = getMultipleRandom(sortedPhones, numberOfItems.value));
+
+//   let itemsToDisplay;
+
+//   numberOfItems
+//     ? (itemsToDisplay = sortedPhones.slice(0, numberOfItems.value))
+//     : (itemsToDisplay = sortedPhones);
+
+//   const phoneItems = itemsToDisplay.map((phone) => {
+//     let price1;
+
+//     // takes the prices in price property
+//     const values = Object.values(phone.price);
+//     const minPrice = values.filter((val) => val !== "");
+//     price1 = Math.min(...minPrice);
+//     if (!priceRange) {
+//       return (
+//         <PhoneItem
+//           firebaseId={phone?.firebaseId}
+//           date={phone.date}
+//           type={phone.type}
+//           price1={price1}
+//           key={phone.id}
+//           id={phone.id}
+//           price={phone.price}
+//           brand={phone.brand}
+//           model={phone.model}
+//           colors={phone.colors}
+//           storage={phone.storage}
+//         />
+//       );
+//     }
+//     if (price1 < priceRange[1] && price1 > priceRange[0]) {
+//       return (
+//         <PhoneItem
+//           firebaseId={phone?.firebaseId}
+//           type={phone.type}
+//           price1={price1}
+//           key={phone.id}
+//           id={phone.id}
+//           price={phone.price}
+//           brand={phone.brand}
+//           model={phone.model}
+//           colors={phone.colors}
+//           storage={phone.storage}
+//         />
+//       );
+//     }
+//     return null;
+//   });
+
+//   return (
+//     <Fragment>
+//       {isLoading && <Loader />}
+//       <div className={classes.container}>{phoneItems}</div>
+//     </Fragment>
+//   );
+// };
+
+// export default PhonesList;

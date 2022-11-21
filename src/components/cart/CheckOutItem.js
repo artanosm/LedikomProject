@@ -2,9 +2,10 @@ import React from "react";
 import classes from "./CheckOutItem.module.scss";
 
 const CartItem = (props) => {
+  console.log(props)
   return (
     <div className={classes.mainContainer}>
-      <img src={props.color.color} alt="phone"></img>
+      <img src={props.color.image} alt="phone"></img>
       <p>
         {props.brand} {props.model} {props.storage} {props.color.name}
       </p>

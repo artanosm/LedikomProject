@@ -3,6 +3,7 @@
 
 .mainContainer {
   @include flex-center(flex-start);
+  font-size: small;
   margin: 0 0 1rem 0 ;
   gap: 1rem;
   img {

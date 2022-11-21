@@ -1,44 +1,80 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Stack } from "@mui/material";
 import AuthContext from "../store/auth-context";
-import { db } from "../components/firebase";
-import { collection, getDocs } from "firebase/firestore";
-import OrdersItemGroup from "../components/OrdersItemGroup";
 import classes from "./MyOrders.module.scss";
+import { db } from "../components/firebase";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import { Link } from "react-router-dom";
+import Loader from "../ui/Loader";
 
 const MyOrders = () => {
   const authCtx = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+
+
 
   useEffect(() => {
-    const getOrders = async () => {
-      const snapshot = await getDocs(
-        collection(db, `users/${authCtx.user?.uid}/orders`)
-      );
-
-      const docs = snapshot.docs?.map((doc) => doc?.data());
-
-      setOrders(docs);
-    };
-    getOrders();
+    setIsLoading(true);
+    // const getOrders = async () => {
+    //   const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
+    //   const q = query(colRef, orderBy("serverDate", 'desc'));
+    //   const data = await getDocs(q);
+    //   const docs = data.docs?.map((doc) => doc?.data());
+    //   setOrders(docs);
+    //   setIsLoading(false)
+    // };
+    // getOrders();
+      const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
+      const q = query(colRef, orderBy("serverDate", 'desc'));
+      let ordersArr =[];
+      const unsubscribe = onSnapshot(q ,(snapshot)=>{
+        let orderArr = snapshot.docs.map(doc => doc.data())
+        setOrders(orderArr)
+      });
+      setOrders(ordersArr);
+      setIsLoading(false)
+    
+    return ()=> {unsubscribe()};
   }, [authCtx.user?.uid]);
-  return (
-    <Stack p={4} maxWidth={800}>
+
+
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <div className={classes.mainContainer}>
+      <h2>My Orders</h2>
       {orders.map((order, i) => (
-        <Link  key={i} to={`/profile/orders/${order.id}`} state={{ order:order}}>
-          <div  className={classes.container}>
-            <div className={classes.info}>
-              <p>{order.date.slice(0, 22)}</p>
-            </div>
-            {order.cartItems.map((item, j) => {
-              return <OrdersItemGroup item={item} key={j}></OrdersItemGroup>;
-            })}
-            <h5>Total Amount: {order.totalAmount} $</h5>
+        <div key={i} className={classes.container}>
+          <div className={classes.info}>
+            <p>Order Date: {order?.date.slice(0, 15)}</p>
+            <p>Order Status: {order?.orderCompleted ? 'Completed' : 'Waiting'}</p>
           </div>
-        </Link>
+          <div className={classes.imagesContainer}>
+            {order?.cartItems.map((item, j) => {
+              if (j > 3) {
+                return null;
+              }
+              return (
+                <img key={j} alt={item.color.name} src={item.color.image} />
+              );
+            })}
+          </div>
+          <h5>Total: {order.totalAmount} $</h5>
+          <Link
+            className={classes.linkContainer}
+            to={`/profile/orders/${order.id}`}
+          >
+            Order Detail
+          </Link>
+        </div>
       ))}
-    </Stack>
+    </div>
   );
 };
 

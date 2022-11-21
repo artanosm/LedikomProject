@@ -34,13 +34,13 @@ const Profile = () => {
       )}
       {isLoggedIn && (
         /* <div className={classes.profileContainer}> */
-        <Stack alignItems={"center"} sx={{ width: "100%" }}>
+        <Stack alignItems={"center"} sx={{ p:2, width: "100%" }}>
           <Stack direction={"row"} justifyContent="end" sx={{ width: "100%" }}>
             <Button onClick={() => setEdit(!edit)}>Edit Profile</Button>
-            <Button color="error" onClick={logoutHandler}>
+            {/* <Button color="error" onClick={logoutHandler}>
               Logout
-            </Button>
-            <Link to={'/profile/orders'}>My Orders</Link>
+            </Button> */}
+            {/* <Link to={'/profile/orders'}>My Orders</Link> */}
           </Stack>
 
           {!edit && (
