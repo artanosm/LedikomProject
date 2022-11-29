@@ -103,12 +103,6 @@ const Header = (props) => {
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.1 }}
           >
-            {/* {authCtx.user ? (
-              <Avatar sx={{width:30,height:30}} src={authCtx.userData.photoProfile} />
-            ) : (
-              <PersonOutlineOutlinedIcon fontSize="medium" />
-            )} */}
-
             <Tooltip title="Account">
               <IconButton
                 onClick={handleClick}

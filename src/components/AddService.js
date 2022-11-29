@@ -1,6 +1,8 @@
 import React, { Fragment, useRef } from "react";
-import { realTimeDatabase } from "./firebase";
+// import { realTimeDatabase } from "./firebase";
 import { useNavigate } from "react-router-dom";
+import { db } from "./firebase";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 const AddService = () => {
   const brandRef = useRef("");
@@ -16,24 +18,30 @@ const AddService = () => {
 
   let navigate = useNavigate();
 
-  async function addPhoneHandler(servicePhone) {
-    const response = await fetch(
-      `${realTimeDatabase}/service.json`,
+  async function addPhoneHandler(service) {
+    setDoc(doc(db, "service", service.model.replace(/\s/g, "-")), {
+      ...service,
+    });
 
-      {
-        method: "POST",
-        body: JSON.stringify(servicePhone),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // const response = await fetch(
+    //   `${realTimeDatabase}/service.json`,
+
+    //   {
+    //     method: "POST",
+    //     body: JSON.stringify(servicePhone),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const phone = {
+    const service = {
+      id: modelRef.current.value.replace(/\s/g, "-"),
       date: new Date(),
+      serverDate:serverTimestamp(),
       brand: brandRef.current.value,
       model: modelRef.current.value,
       type: typeRef.current.value,
@@ -46,8 +54,8 @@ const AddService = () => {
       speaker: { price: +speakerRef.current.value },
     };
 
-    console.log(phone, "phone");
-    addPhoneHandler(phone);
+    console.log(service, "phone");
+    addPhoneHandler(service);
     navigate("/", { replace: true });
   };
 

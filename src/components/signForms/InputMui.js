@@ -3,6 +3,7 @@ import { TextField } from "@mui/material";
 
 const InputMui = React.forwardRef(
   ({ id, label, type, defaultValue = "" }, ref) => {
+    console.log(defaultValue)
     return (
       <>
         <TextField

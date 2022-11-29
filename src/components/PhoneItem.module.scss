@@ -5,20 +5,21 @@
 .a {
   text-decoration: none;
   margin: 0;
+  padding: 0;
   cursor: pointer;
 }
 
 .container {
   @include flex-center(space-evenly, column);
   height: auto;
+  width: 100%;
   max-width: 250px;
   min-width: 100px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  padding: 0;
   color: colors.$dark-blue;
   padding: 1rem;
-  &:hover{
+  &:hover {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
     transition: all 0.3s;
   }
@@ -61,26 +62,37 @@
   margin: 2%;
 }
 
-
 @media only screen and (max-width: 610px) {
   .a {
-    width: 100%;
-    padding: 1%;
+    width: 48%;
   }
+
   .container {
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 100%;
-    padding: 0;
-    max-width: 350px;
-    min-width: 100px;
-    padding: 5%;
+    font-size: small;
+    padding: 1rem 0.2rem;
+    margin: 0;
+    border: none;
+    align-content: stretch
   }
+
+  // .container {
+  //   flex-direction: row;
+  //   justify-content: flex-start;
+  //   width: 100%;
+  //   padding: 0;
+  //   max-width: 350px;
+  //   min-width: 100px;
+  //   padding: 5%;
+  // }
   .dataContainer {
-    @include flex-center(space-around,column,flex-start);
+    @include flex-center(space-around, column);
     flex-wrap: wrap;
   }
+
+  .model, .price {
+    text-align: center;
+  }
   .image {
-    width: 45%;
+    width: 90%;
   }
 }

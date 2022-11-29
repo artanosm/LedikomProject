@@ -16,32 +16,42 @@ const Phones = (props) => {
   const [priceRange, setPriceRange] = useState([10, 1500]);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [brand, setBrand] = useState(null);
-  const [type, setType] = useState(null);
-  const [sort, setSort] = useState(null);
-  const [numberOfItems, setNumberOfItems] = useState({
-    value: 24,
-    label: "24",
-  });
+  const [brand, setBrand] = useState("");
+  const [type, setType] = useState('');
+  const [sort, setSort] = useState("");
+  const [numberOfItems, setNumberOfItems] = useState(24);
 
   const paramsFunction = (e, queryName) => {
     if (e === null) {
       searchParams.delete(queryName);
       setSearchParams(searchParams);
     } else {
-      searchParams.set(queryName, e.value);
+      searchParams.set(queryName, e);
       setSearchParams(searchParams);
     }
   };
+  // const paramsFunction = (e, queryName) => {
+  //   if (e === null) {
+  //     searchParams.delete(queryName);
+  //     setSearchParams(searchParams);
+  //   } else {
+  //     searchParams.set(queryName, e.value);
+  //     setSearchParams(searchParams);
+  //   }
+  // };
+
   useEffect(() => {
     let brandParam = searchParams.get("brand");
     let typeParam = searchParams.get("type");
     let sortParam = searchParams.get("sort");
     brandParam
-      ? setBrand({ value: brandParam, label: brandParam })
-      : setBrand(null);
-    typeParam ? setType({ value: typeParam, label: typeParam }) : setType(null);
-    sortParam ? setSort({ value: sortParam, label: sortParam }) : setSort(null);
+      ? // ? setBrand({ value: brandParam, label: brandParam })
+        setBrand(brandParam)
+      : setBrand("");
+    // typeParam ? setType({ value: typeParam, label: typeParam }) : setType(null);
+    typeParam ? setType(typeParam) : setType('');
+    // sortParam ? setSort({ value: sortParam, label: sortParam }) : setSort(null);
+    sortParam ? setSort(sortParam) : setSort("");
   }, [searchParams]);
 
   const filtersClickHandler = () => {

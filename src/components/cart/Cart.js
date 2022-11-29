@@ -50,9 +50,11 @@ const Cart = (props) => {
     <Modal cartIsShown={props.cartIsShown} onClose={props.onClose}>
       <div className={classes.headerCartContainer}>
         {cartCtx.items.length > 0 && <h1>My Cart</h1>}
-        {cartCtx.items.length === 0 && <h2>Your Cart is empty</h2>}
+        {cartCtx.items.length === 0 && <h2>Your Cart is empty </h2>}
+    
+
         <button onClick={props.onClose} className={classes.closeButton}>
-          <CloseIcon fontSize="medium" />
+          <CloseIcon sx={{color: 'gray'}} fontSize="medium" />
         </button>
       </div>
       {cartCtx.items.length !== 0 && (

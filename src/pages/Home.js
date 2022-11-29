@@ -5,7 +5,7 @@ import PhonesList from '../components/PhonesList';
 import FreeDelivery from "../components/home/FreeDelivery";
 
 const Home = () => {
-  const date = true;
+  
   return (
     <div>
       {/* <div className={classes.sliderContainer}> */}
@@ -13,13 +13,13 @@ const Home = () => {
       {/* </div> */}
       <div className={classes.container}>
         <h2>New Products</h2>
-        <PhonesList numberOfItems={{value:8}} date={date}/>
+        <PhonesList numberOfItems={8} date={true}/>
       </div>
       <FreeDelivery/>
       <div className={classes.container}>
         <h2>Suggested Products</h2>
         
-        <PhonesList numberOfItems={{value:4}}  randomItems={true} sort={{value:'descending'}} date={date}/>
+        <PhonesList numberOfItems={4}  randomItems={true} sort={'descending'} date={true}/>
       </div>
     </div>
   );

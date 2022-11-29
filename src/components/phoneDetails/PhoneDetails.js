@@ -14,6 +14,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 const PhoneDetails = () => {
   const location = useLocation();
+
   const cartCtx = useContext(CartContext);
   const { phoneId } = useParams();
 
@@ -110,9 +111,6 @@ const PhoneDetails = () => {
   );
 
   const addItemToCart = () => {
-    console.log(storage);
-    console.log(price);
-    console.log(colorImg);
     setAlert(() => true);
     setTimeout(() => setAlert(() => false), 2000);
     cartCtx.addItem({

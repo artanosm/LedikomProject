@@ -10,6 +10,9 @@ import FrontCamera from "../../assets/service/frontCamera.png";
 import Speaker from "../../assets/service/speaker.png";
 import ServiceContext from "../../store/service-context";
 import ServiceItem from "./ServiceItem";
+import { db } from "../firebase";
+import { getDoc,doc} from 'firebase/firestore';
+
 
 const PhoneServiceDetails = () => {
   const serviceCtx = useContext(ServiceContext);
@@ -17,20 +20,25 @@ const PhoneServiceDetails = () => {
   const [item, setItem] = useState();
 
   useEffect(() => {
-    const getBrand = async () => {
-      const response = await fetch(
-        `https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/service/${param.serviceId}.json`
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const responseData = await response.json();
+    const docRef = doc(db,'service',param.serviceId)
+    getDoc(docRef).then(docSnap =>{
+      console.log(docSnap.data())
+      setItem(docSnap.data())
+    })
+    // const getBrand = async () => {
+    //   const response = await fetch(
+    //     `https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/service/${param.serviceId}.json`
+    //   );
+    //   if (!response.ok) {
+    //     throw new Error("Something went wrong");
+    //   }
+    //   const responseData = await response.json();
 
-      setItem(responseData);
-    };
-    getBrand().catch((error) => {
-      console.log(error);
-    });
+    //   setItem(responseData);
+    // };
+    // getBrand().catch((error) => {
+    //   console.log(error);
+    // });
   }, [param.serviceId]);
 
   let itemD;

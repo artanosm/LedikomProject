@@ -4,8 +4,9 @@
 
 .container {
     @include flex-center(flex-start);
+    margin:1rem;
     flex-wrap: wrap;
-    align-items: stretch;
+    // align-items: stretch;
     height: auto;
     width: 100%;
     gap: 2rem;
@@ -24,9 +25,10 @@
     }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 800px) {
     .container {
-        padding: .5rem .5rem;
-        gap: .8rem;
+        margin: 0;
+        padding: .1rem .1rem 1rem ;
+        gap: .7rem;
     }
   }

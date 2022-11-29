@@ -14,8 +14,6 @@ const StorageItem = ({ storage, storageA, setPrice, setStorage }) => {
         storage === storageA.storage ? classes.active : ""
       }`}
       onClick={() => {
-        console.log(storageA)
-
         setStorage(storageA);
       }}
     >

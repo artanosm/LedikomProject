@@ -137,8 +137,8 @@ const ProfileForm = ({ setEdit }) => {
           }
         />
       </Box>
-      <Button type="submit">Save Changes</Button>
-      <Button color="error" onClick={() => setEdit(false)}>
+      <Button sx={{textTransform:'none'}} type="submit">Save Changes</Button>
+      <Button sx={{textTransform:'none'}} color="error" onClick={() => setEdit(false)}>
         Cancel
       </Button>
     </form>

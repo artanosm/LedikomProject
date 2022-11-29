@@ -1,12 +1,13 @@
 @use "../sass/abstracts/colors";
 @use "../sass/abstracts/mixins" as *;
 
+$iscompleted: attr(iscompleted);
+
 .mainContainer {
-  @include flex-center (flex-start,column);
+  @include flex-center(flex-start, column);
   width: 100%;
   padding: 2rem;
 
-  
   h2 {
     text-align: left;
     width: 50%;
@@ -15,8 +16,8 @@
 }
 
 .container {
+  text-decoration: none;
   width: 50%;
-  // max-width: 450px;
   min-width: 450px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
@@ -29,7 +30,7 @@
   margin: 1rem 0;
 
   h5 {
-    color: colors.$dark-blue;
+    color: colors.$magenta-color;
     font-weight: 200;
     margin: 0;
     text-align: end;
@@ -37,7 +38,7 @@
 }
 .imagesContainer {
   @include flex-center(flex-start);
-  padding: .5rem;
+  padding: 0.5rem;
   img {
     width: 10%;
     min-width: 100px;
@@ -45,19 +46,26 @@
   }
 }
 
-.linkContainer {
-  font-size: small;
-  padding-top: 0.2rem;
-  text-decoration: none;
-  display: inline-block;
-  color: colors.$magenta-color;
-  width: fit-content;
-  text-align: end;
-}
+// .linkContainer {
+//   font-size: small;
+//   padding-top: 0.2rem;
+//   text-decoration: none;
+//   display: inline-block;
+//   color: colors.$magenta-color;
+//   width: fit-content;
+//   text-align: end;
+// }
 
 .info {
   @include flex-center(flex-start);
   flex-wrap: wrap;
+  .waiting {
+    color: colors.$orange;
+  }
+
+  .completed {
+    color: colors.$green;
+  }
   p {
     color: colors.$gray;
     border: solid 0.1px colors.$gray;
@@ -72,9 +80,9 @@
 @media only screen and (max-width: 500px) {
   .mainContainer {
     padding: 1rem;
-  h2 {
-    width: 100%;
-  }
+    h2 {
+      width: 100%;
+    }
   }
   .imagesContainer {
     padding: 0.1rem;
@@ -88,7 +96,7 @@
   }
   .container {
     width: 100%;
-    min-width:90vw;
+    min-width: 90vw;
 
     gap: 0.1rem;
     p {

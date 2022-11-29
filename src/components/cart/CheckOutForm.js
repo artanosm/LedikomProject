@@ -1,16 +1,18 @@
 import React, { useRef, useState, useContext } from "react";
-import Input from "./Input";
+// import Input from "./Input";
 import classes from "./CheckOutForm.module.scss";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import InputMui from "../signForms/InputMui";
 import CartContext from "../../store/cart-context";
+import Stack from '@mui/material/Stack';
 import CheckIcon from "@mui/icons-material/Check";
-import { realTimeDatabase } from "../firebase";
 import AuthContext from "../../store/auth-context";
 import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase";
 import { v4 } from "uuid";
 
 const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
+  const navigate =useNavigate()
   const [alert, setAlert] = useState(false);
 
   const authCtx = useContext(AuthContext);
@@ -27,34 +29,34 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
   const textAreaRef = useRef(null);
 
   // const addOrder = async (order) => {
-    // await fetch(
-    //   `${realTimeDatabase}/orders/${randomString}.json`,
+  // await fetch(
+  //   `${realTimeDatabase}/orders/${randomString}.json`,
 
-    //   {
-    //     method: "PUT",
-    //     body: JSON.stringify(
-    //       {
-    //         date: new Date().toString().slice(0,25),
-    //         serverDate:serverTimestamp(),
+  //   {
+  //     method: "PUT",
+  //     body: JSON.stringify(
+  //       {
+  //         date: new Date().toString().slice(0,25),
+  //         serverDate:serverTimestamp(),
 
-    //         name: order.name,
-    //         email: order.email,
-    //         phone: order.phone,
-    //         address: order.address,
-    //         city: order.city,
-    //         delivery: deliveryForm,
-    //         textArea: order.textArea,
-    //         orderCompleted: false,
-    //         totalAmount: totalAmount,
-    //         cartItems: cartItems,
-    //         id: order.id,
-    //         userId: authCtx.user.uid,
-    //       },
-    //       randomString
-    //     ),
-    //     headers: { "Content-Type": "application.json" },
-    //   }
-    // );
+  //         name: order.name,
+  //         email: order.email,
+  //         phone: order.phone,
+  //         address: order.address,
+  //         city: order.city,
+  //         delivery: deliveryForm,
+  //         textArea: order.textArea,
+  //         orderCompleted: false,
+  //         totalAmount: totalAmount,
+  //         cartItems: cartItems,
+  //         id: order.id,
+  //         userId: authCtx.user.uid,
+  //       },
+  //       randomString
+  //     ),
+  //     headers: { "Content-Type": "application.json" },
+  //   }
+  // );
   // };
   const submitHandler = (e) => {
     e.preventDefault();
@@ -69,8 +71,8 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
     const textArea = textAreaRef.current.value;
 
     const order = {
-      date: new Date().toString().slice(0,25),
-      serverDate:serverTimestamp(),
+      date: new Date().toString().slice(0, 25),
+      serverDate: serverTimestamp(),
       id: randomString,
       cartItems: JSON.parse(JSON.stringify(cartItems)),
       orderCompleted: false,
@@ -84,9 +86,9 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
       userId: authCtx.user.uid,
     };
 
-    setDoc(doc(db, "orders", randomString), { ...order});
+    setDoc(doc(db, "orders", randomString), { ...order });
 
-    setDoc(doc(db,`users/${authCtx.user.uid}/orders`, randomString), {
+    setDoc(doc(db, `users/${authCtx.user.uid}/orders`, randomString), {
       ...order,
     });
     // addDoc(collection(db, `users/${authCtx.user.uid}/orders`,randomString), {
@@ -97,9 +99,9 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
 
     cartCtx.clearCart();
     setAlert(true);
-    setTimeout(() => setAlert(false), 3000);
+    setTimeout(() => setAlert(false), 2000);
     formRef.current.reset();
-    // navigate("/", { replace: true });
+    // navigate("/profile/orders", { replace: true });
   };
   return (
     <form ref={formRef} onSubmit={submitHandler}>
@@ -108,30 +110,38 @@ const CheckOutForm = ({ deliveryForm, cartItems, totalAmount }) => {
       >
         <CheckIcon fontSize="large" /> <p>Order sent</p>
       </div>
-      <Input
-        defaultValue={authCtx.userData?.name}
+      <Stack spacing={2} >
+
+      <InputMui
         ref={nameRef}
-        name={"Name"}
+        label={"Name"}
         type={"text"}
+        id={"name"}
+        defaultValue={authCtx.userData?.name}
       />
-      <Input
-        defaultValue={authCtx.user?.email}
+      <InputMui
         ref={emailRef}
-        name={"Email"}
+        label={"Email"}
         type={"email"}
+        id={"email"}
+        defaultValue={authCtx.user?.email}
       />
-      <Input
-        defaultValue={authCtx.userData?.phoneNumber}
+      <InputMui
         ref={phoneRef}
-        name={"Phone Number"}
+        label={"Phone Number"}
         type={"tel"}
+        id={"phone number"}
+        defaultValue={authCtx.userData?.phoneNumber}
       />
-      <Input
-        defaultValue={authCtx.userData?.address}
+      <InputMui
         ref={addressRef}
-        name={"Address"}
+        label={"Address"}
         type={"text"}
+        id={"address"}
+        defaultValue={authCtx.userData?.address}
       />
+      </Stack>
+
       <select className={classes.select} ref={cityRef}>
         <option disabled defaultValue>
           Select City

@@ -3,24 +3,34 @@
 
 .button {
   @include flex-center;
-  width: 6rem;
-  height: auto;
-  border-radius: 5px;
+  // width: 6rem;
+  // height: auto;
+  // border-radius: 5px;
   margin: 1.2rem;
-  font-size: 1rem;
-  background-color: colors.$dark-gray;
+  // font-size: 1rem;
+  background-color: colors.$black;
   color: colors.$white;
   border: none;
-  padding: 0.4rem 0;
+  // padding: 0.4rem 0;
   &:hover {
     cursor: pointer;
-    background-color: colors.$magenta-color;
+    // background-color: colors.$magenta-color;
     transition: all 0.3s;
   }
 }
 
-.button.active {
-  background-color: colors.$magenta-color;
+.button.active::after {
+  content: attr(numberofitems);
+  @include flex-center(center);
+  position: relative;
+  right: 5px;
+  top: -10px;
+  font-size: 0.8rem;
+  text-align: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  background-color: red;
+  border-radius: 50%;
 }
 
 .span {
@@ -31,9 +41,7 @@
 @media only screen and (max-width: 500px) {
   .button {
     width: auto;
+    padding-left: .1rem;
     margin: 0;
-    padding: 8px;
-    margin: 0 2px;
-    background-color: colors.$dark-gray;
   }
 }

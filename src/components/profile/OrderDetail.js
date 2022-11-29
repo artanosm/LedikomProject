@@ -21,7 +21,6 @@ const OrderDetail = () => {
     setIsLoading(true);
       const docRef = doc(db, `users/${authCtx.user?.uid}/orders/${orderId}`);
       const unsubscribe = onSnapshot(docRef, (doc) => {
-        console.log(doc.data());
         setOrder(doc.data());
         setIsLoading(false);
       });
@@ -48,10 +47,8 @@ const OrderDetail = () => {
         <ul>
           <li>Order ID: {order?.id}</li>
           <li>Order placed on: {order?.date}</li>
-          <li>ServerDate: </li>
-
-          <li>
-            Is Completed: {order?.orderCompleted ? "Completed" : "Waiting"}
+          <li className={order?.orderCompleted ? classes.completed : classes.waiting}>
+            {order?.orderCompleted ? "Completed" : "Waiting"}
           </li>
         </ul>
       </div>

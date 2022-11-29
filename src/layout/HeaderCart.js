@@ -9,6 +9,7 @@ const HeaderCart = (props) => {
   const numberOfItems = cartCtx.items.length;
   return (
     <motion.button
+      numberofitems={numberOfItems}
       className={
         numberOfItems ? `${classes.button} ${classes.active}` : classes.button
       }
@@ -16,8 +17,7 @@ const HeaderCart = (props) => {
       whileHover={{ scale: 1.1 }}
       transition={{ duration: 0.1 }}
     >
-      <ShoppingCartOutlinedIcon fontSize="small" />
-      <span className={classes.span}>{numberOfItems}</span>
+      <ShoppingCartOutlinedIcon fontSize="medium" />
     </motion.button>
   );
 };

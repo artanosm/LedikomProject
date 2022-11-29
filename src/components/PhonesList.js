@@ -25,15 +25,14 @@ const PhonesList = ({
 
   useEffect(() => {
     setIsLoading(true);
+
     const colRef = collection(db, "products");
-    const q = query(colRef, orderBy("storage"));
+    const q = query(colRef, orderBy("serverDate", "desc"));
     const unSubscribe = onSnapshot(q, (colSnapshot) => {
       let phonesArr = [];
-
       colSnapshot.docs.forEach((doc) => {
         phonesArr.push(doc.data());
       });
-
       if (searchQuery) {
         setPhones(
           phonesArr.filter(
@@ -55,26 +54,28 @@ const PhonesList = ({
 
   let filteredPhones;
   if (brand) {
-    filteredPhones = phones.filter((phone) => phone.brand === brand.value);
+    filteredPhones = phones.filter((phone) => phone.brand === brand);
   } else {
     filteredPhones = phones;
   }
 
   let filteredType;
   if (type) {
-    filteredType = filteredPhones.filter((phone) => phone.type === type.value);
+    filteredType = filteredPhones.filter((phone) => phone.type === type);
   } else {
     filteredType = filteredPhones;
   }
   let sortedPhones;
+
   if (sort) {
-    if (sort.value === "ascending") {
+    if (sort === "ascending") {
       sortedPhones = filteredType.sort(
         (a, b) =>
           parseFloat(a.storage.storage1.price) -
           parseFloat(b.storage.storage1.price)
       );
-    } else {
+    }
+    if (sort === "descending") {
       sortedPhones = filteredType.sort(
         (a, b) =>
           parseFloat(b.storage.storage1.price) -
@@ -83,22 +84,14 @@ const PhonesList = ({
     }
   } else {
     sortedPhones = filteredType;
-    // .sort(
-    //   (a, b) =>
-    //     parseFloat(b.storage.storage1.price) -
-    //     parseFloat(a.storage.storage1.price)
-    // );;
   }
-
-  // Arranges the products the newest first
-
   randomItems &&
-    (sortedPhones = getMultipleRandom(sortedPhones, numberOfItems.value));
+    (sortedPhones = getMultipleRandom(sortedPhones, numberOfItems));
 
   let itemsToDisplay;
 
   numberOfItems
-    ? (itemsToDisplay = sortedPhones.slice(0, numberOfItems.value))
+    ? (itemsToDisplay = sortedPhones.slice(0, numberOfItems))
     : (itemsToDisplay = sortedPhones);
 
   date &&

@@ -39,9 +39,6 @@ function App() {
     localStorage.setItem("cartTotalAmount", JSON.stringify(cartTA));
   }, [cartI, cartTA]);
 
-
-
-
   const showCartHandler = () => {
     setCartIsShown(true);
   };
@@ -53,6 +50,7 @@ function App() {
   
   return (
     <AuthContextProvider>
+    
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
       )}

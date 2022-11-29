@@ -1,18 +1,24 @@
 import React from "react";
 import classes from "./PhoneItem.module.scss";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const PhoneItem = ({
-  phone,
-  id,
-  storage,
-  colors,
-  model,
-  brand,
-  price,
-}) => {
- 
+const cardVariants = {
+  offscreen: {
+    y: 200,
+    opacity:0
+  },
+  onscreen: {
+    y: 0,
+    opacity:1,
+    transition: {
+      type: "spring",
+      duration: 0.8,
+    },
+  },
+};
+
+const PhoneItem = ({ phone, id, storage, colors, model, brand, price }) => {
   return (
     <Link
       to={`/phones/${id}?color=${
@@ -22,22 +28,23 @@ const PhoneItem = ({
       className={classes.a}
     >
       <motion.div
-        className={classes.container}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.2 }}
       >
-        <img
-          className={classes.image}
-          alt="phone-img"
-          src={colors.color1.image}
-          loading="lazy"
-        />
-        <div className={classes.dataContainer}>
-          <p className={classes.model}>{model}</p>
-          <p className={classes.brand}>{brand}</p>
-          <p className={classes.price}>{price} $</p>
-        </div>
+        <motion.div className={classes.container} variants={cardVariants}>
+          <img
+            className={classes.image}
+            alt="phone-img"
+            src={colors.color1.image}
+            loading="lazy"
+          />
+          <div className={classes.dataContainer}>
+            <p className={classes.model}>{model}</p>
+            {/* <p className={classes.brand}>{brand}</p> */}
+            <p className={classes.price}>{price} $</p>
+          </div>
+        </motion.div>
       </motion.div>
     </Link>
   );
@@ -45,7 +52,52 @@ const PhoneItem = ({
 
 export default PhoneItem;
 
+// import React from "react";
+// import classes from "./PhoneItem.module.scss";
+// import { Link} from "react-router-dom";
+// import { motion } from "framer-motion";
 
+// const PhoneItem = ({
+//   phone,
+//   id,
+//   storage,
+//   colors,
+//   model,
+//   brand,
+//   price,
+// }) => {
+
+//   return (
+//     <Link
+//       to={`/phones/${id}?color=${
+//         colors.color1.name
+//       }&storage=${storage.storage1.storage.replace(/\s/g, "+")}`}
+//       state={{ phone }}
+//       className={classes.a}
+//     >
+//       <motion.div
+//         className={classes.container}
+//         initial={{ opacity: 0 }}
+//         animate={{ opacity: 1 }}
+//         transition={{ duration: 0.3 }}
+//       >
+//         <img
+//           className={classes.image}
+//           alt="phone-img"
+//           src={colors.color1.image}
+//           loading="lazy"
+//         />
+//         <div className={classes.dataContainer}>
+//           <p className={classes.model}>{model}</p>
+//           {/* <p className={classes.brand}>{brand}</p> */}
+//           <p className={classes.price}>{price} $</p>
+//         </div>
+//       </motion.div>
+//     </Link>
+//   );
+// };
+
+// export default PhoneItem;
 
 // import React from "react";
 // import classes from "./PhoneItem.module.scss";

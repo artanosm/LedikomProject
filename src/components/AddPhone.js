@@ -1,23 +1,18 @@
 import React, { useRef } from "react";
-import { realTimeDatabase } from "./firebase";
 import { useNavigate } from "react-router-dom";
 import InputForm from "./addPhone/InputForm";
 import { db } from "./firebase";
-import { setDoc,doc, collection, serverTimestamp } from "firebase/firestore";
+import { setDoc, doc, serverTimestamp } from "firebase/firestore";
 
 const AddPhone = () => {
+  const navigate = useNavigate();
+
   const brandRef = useRef("");
   const modelRef = useRef("");
   const typeRef = useRef("");
   const ramRef = useRef("");
   const warantyRef = useRef("");
   const storageOrCaseRef = useRef("");
-
-  // const storageRef64GB = useRef("");
-  // const storageRef128GB = useRef("");
-  // const storageRef256GB = useRef("");
-  // const storageRef512GB = useRef("");
-  // const storageRef1TB = useRef("");
 
   const storage1Ref = useRef("");
   const storage2Ref = useRef("");
@@ -30,11 +25,6 @@ const AddPhone = () => {
   const price3Ref = useRef("");
   const price4Ref = useRef("");
   const price5Ref = useRef("");
-  // const price64GBRef = useRef("");
-  // const price128GBRef = useRef("");
-  // const price256GBRef = useRef("");
-  // const price512GBRef = useRef("");
-  // const price1TBRef = useRef("");
 
   const color1NameRef = useRef("");
   const color1HexRef = useRef("");
@@ -56,86 +46,16 @@ const AddPhone = () => {
   const color5HexRef = useRef("");
   const color5ImageRef = useRef("");
 
-  let navigate = useNavigate();
-
-  // async function addPhoneHandler(phon) {
-  //   const response = await fetch(
-  //     `${realTimeDatabase}/phones.json`,
-  //     {
-  //       method: "POST",
-  //       body: JSON.stringify(phon),
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // }
-
-  // const submitHandler = (e) => {
-  //   e.preventDefault();
-  //   const phone = {
-  //     date: new Date(),
-  //     brand: brandRef.current.value,
-  //     model: modelRef.current.value,
-  //     type: typeRef.current.value,
-  //     ram: ramRef.current.value,
-  //     waranty: warantyRef.current.value,
-  //     storageOrCase: storageOrCaseRef.current.value,
-  //     storage: {
-  //       storage64GB: storageRef64GB.current.value,
-  //       storage128GB: storageRef128GB.current.value,
-  //       storage256GB: storageRef256GB.current.value,
-  //       storage512GB: storageRef512GB.current.value,
-  //       storage1TB: storageRef1TB.current.value,
-  //     },
-  //     price: {
-  //       price64GB: price64GBRef.current.value,
-  //       price128GB: price128GBRef.current.value,
-  //       price256GB: price256GBRef.current.value,
-  //       price512GB: price512GBRef.current.value,
-  //       price1TB: price1TBRef.current.value,
-  //     },
-  //     colors: {
-  //       color1: {
-  //         name: color1NameRef.current.value,
-  //         hex: color1HexRef.current.value,
-  //         image: color1ImageRef.current.value,
-  //       },
-  //       color2: {
-  //         name: color2NameRef.current.value,
-  //         hex: color2HexRef.current.value,
-  //         image: color2ImageRef.current.value,
-  //       },
-  //       color3: {
-  //         name: color3NameRef.current.value,
-  //         hex: color3HexRef.current.value,
-  //         image: color3ImageRef.current.value,
-  //       },
-  //       color4: {
-  //         name: color4NameRef.current.value,
-  //         hex: color4HexRef.current.value,
-  //         image: color4ImageRef.current.value,
-  //       },
-  //       color5: {
-  //         name: color5NameRef.current.value,
-  //         hex: color5HexRef.current.value,
-  //         image: color5ImageRef.current.value,
-  //       },
-  //     },
-  //   };
-
-  //   addPhoneHandler(phone);
-  //   navigate("/phones", { replace: true });
-  // };
-
   async function addPhoneHandler(product) {
-    setDoc(doc(db, "products",product.model.replace(/\s/g, "-") ), { ...product});
+    setDoc(doc(db, "products", product.model.replace(/\s/g, "-")), {
+      ...product,
+    });
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
     const phone = {
-      id:modelRef.current.value.replace(/\s/g, "-"),
+      id: modelRef.current.value.replace(/\s/g, "-"),
       date: new Date(),
       serverDate: serverTimestamp(),
       brand: brandRef.current.value,
@@ -144,8 +64,7 @@ const AddPhone = () => {
       ram: ramRef.current.value,
       waranty: warantyRef.current.value,
       storageOrCase: storageOrCaseRef.current.value,
-      storage:{
-
+      storage: {
         storage1: {
           storage: storage1Ref.current.value,
           price: price1Ref.current.value,

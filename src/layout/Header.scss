@@ -81,14 +81,12 @@
     display: none;
   }
   .cart {
-    gap: 1rem;
+    gap: .2rem;
     width: auto;
   }
 
   .nav-options {
     @include flex-center(center,column);
-    // display: flex;
-    // flex-direction: column;
     position: absolute;
     width: 100%;
     height: fit-content;
@@ -120,7 +118,6 @@
     border: none;
   }
   .img {
-    // width: fit-content;
     width: 7rem;
     height: 4rem;
   }
@@ -148,5 +145,15 @@
     margin-left: 1rem;
     @include flex-center(space-between);
 
+  }
+}
+
+
+@media only screen and (max-width: 610px) {
+  .cart {
+    gap: .5rem;
+  }
+  .mobile-menu {
+    margin: 0;
   }
 }

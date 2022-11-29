@@ -2,12 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../store/auth-context";
 import classes from "./MyOrders.module.scss";
 import { db } from "../components/firebase";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Loader from "../ui/Loader";
 
@@ -15,9 +10,6 @@ const MyOrders = () => {
   const authCtx = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-
-
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,19 +22,20 @@ const MyOrders = () => {
     //   setIsLoading(false)
     // };
     // getOrders();
-      const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
-      const q = query(colRef, orderBy("serverDate", 'desc'));
-      let ordersArr =[];
-      const unsubscribe = onSnapshot(q ,(snapshot)=>{
-        let orderArr = snapshot.docs.map(doc => doc.data())
-        setOrders(orderArr)
-      });
-      setOrders(ordersArr);
-      setIsLoading(false)
-    
-    return ()=> {unsubscribe()};
-  }, [authCtx.user?.uid]);
+    const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
+    const q = query(colRef, orderBy("serverDate", "desc"));
+    let ordersArr = [];
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      let orderArr = snapshot.docs.map((doc) => doc.data());
+      setOrders(orderArr);
+    });
+    setOrders(ordersArr);
+    setIsLoading(false);
 
+    return () => {
+      unsubscribe();
+    };
+  }, [authCtx.user?.uid]);
 
   return isLoading ? (
     <Loader />
@@ -50,10 +43,12 @@ const MyOrders = () => {
     <div className={classes.mainContainer}>
       <h2>My Orders</h2>
       {orders.map((order, i) => (
-        <div key={i} className={classes.container}>
+        <Link to={`/profile/orders/${order.id}`} key={i} className={classes.container}>
           <div className={classes.info}>
-            <p>Order Date: {order?.date.slice(0, 15)}</p>
-            <p>Order Status: {order?.orderCompleted ? 'Completed' : 'Waiting'}</p>
+            <p>Order Placed: {order?.date.slice(0, 15)}</p>
+            <p className={order?.orderCompleted ? classes.completed : classes.waiting}>
+              {order?.orderCompleted ? "Completed" : "Waiting"}
+            </p>
           </div>
           <div className={classes.imagesContainer}>
             {order?.cartItems.map((item, j) => {
@@ -66,13 +61,13 @@ const MyOrders = () => {
             })}
           </div>
           <h5>Total: {order.totalAmount} $</h5>
-          <Link
+          {/* <Link
             className={classes.linkContainer}
             to={`/profile/orders/${order.id}`}
           >
             Order Detail
-          </Link>
-        </div>
+          </Link> */}
+        </Link >
       ))}
     </div>
   );
