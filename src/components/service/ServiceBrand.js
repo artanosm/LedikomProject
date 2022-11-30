@@ -31,53 +31,13 @@ const ServiceBrand = () => {
           speaker: doc.data().speaker,
          } )
       })
-      console.log(services)
       setPhones(services)
       setIsLoading(false)
 
     })
-console.log(phones)
-    // const getBrand = async () => {
-    //   const response = await fetch(
-    //     "https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/service.json"
-    //   );
-
-    //   if (!response.ok) {
-    //     throw new Error("Something went wrong");
-    //   }
-    //   const responseData = await response.json();
-    //   let loadedPhones = [];
-
-      
-    //   for (const key in responseData) {
-    //     loadedPhones.push({
-    //       date: responseData[key].date,
-    //       type: responseData[key].type,
-    //       id: key,
-    //       model: responseData[key].model,
-    //       brand: responseData[key].brand,
-    //       image: responseData[key].image,
-    //       screen: responseData[key].screen,
-    //       battery: responseData[key].battery,
-    //       backGlass: responseData[key].backGlass,
-    //       backCamera: responseData[key].backCamera,
-    //       frontCamera: responseData[key].frontCamera,
-    //       speaker: responseData[key].speaker,
-    //     });
-    //   }
-    //   return loadedPhones;
-    // };
-    // getBrand()
-    //   .then((data) => {
-    //     setPhones([...data])
-    //     setIsLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    
   }, [brand]);
 
-console.log(brand)
   const filtered = phones.filter((phone) => phone?.brand === brand?.brand);
   
   const phoneItems = (

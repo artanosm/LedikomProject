@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import classes from "./PhoneServiceDetails.module.scss";
 import ServiceCard from "./ServiceCard";
@@ -8,37 +8,22 @@ import BackGlass from "../../assets/service/backGlass.png";
 import BackCamera from "../../assets/service/backCamera.png";
 import FrontCamera from "../../assets/service/frontCamera.png";
 import Speaker from "../../assets/service/speaker.png";
-import ServiceContext from "../../store/service-context";
 import ServiceItem from "./ServiceItem";
 import { db } from "../firebase";
-import { getDoc,doc} from 'firebase/firestore';
-
+import { getDoc, doc } from "firebase/firestore";
 
 const PhoneServiceDetails = () => {
-  const serviceCtx = useContext(ServiceContext);
   const param = useParams();
   const [item, setItem] = useState();
+  const [services, setServices] = useState({items:[],totalAmount:0})
 
+  console.log(services)
   useEffect(() => {
-    const docRef = doc(db,'service',param.serviceId)
-    getDoc(docRef).then(docSnap =>{
-      console.log(docSnap.data())
-      setItem(docSnap.data())
-    })
-    // const getBrand = async () => {
-    //   const response = await fetch(
-    //     `https://phone-14ee2-default-rtdb.europe-west1.firebasedatabase.app/service/${param.serviceId}.json`
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Something went wrong");
-    //   }
-    //   const responseData = await response.json();
+    const docRef = doc(db, "service", param.serviceId);
+    getDoc(docRef).then((docSnap) => {
+      setItem(docSnap.data());
+    });
 
-    //   setItem(responseData);
-    // };
-    // getBrand().catch((error) => {
-    //   console.log(error);
-    // });
   }, [param.serviceId]);
 
   let itemD;
@@ -50,7 +35,7 @@ const PhoneServiceDetails = () => {
 
   const serviceList = (
     <ul className={classes.cartContainer}>
-      {serviceCtx.items.map((item, key) => {
+      {services.items.map((item, key) => {
         return <ServiceItem key={key} name={item.name} price={item.price} />;
       })}
     </ul>
@@ -66,6 +51,8 @@ const PhoneServiceDetails = () => {
         <div className={classes.servicesContainer}>
           {itemD.screen.price !== 0 && (
             <ServiceCard
+              services={services}
+              setServices={setServices}
               itemImage={Screen}
               price={itemD.screen.price}
               name="Screen"
@@ -73,6 +60,8 @@ const PhoneServiceDetails = () => {
           )}
           {itemD.battery.price !== 0 && (
             <ServiceCard
+              services={services}
+              setServices={setServices}
               itemImage={Battery}
               price={itemD.battery.price}
               name="Battery"
@@ -80,6 +69,8 @@ const PhoneServiceDetails = () => {
           )}
           {itemD.backGlass.price !== 0 && (
             <ServiceCard
+              services={services}
+              setServices={setServices}
               itemImage={BackGlass}
               price={itemD.backGlass.price}
               name="Back Glass"
@@ -87,6 +78,8 @@ const PhoneServiceDetails = () => {
           )}
           {itemD.backCamera.price !== 0 && (
             <ServiceCard
+              services={services}
+              setServices={setServices}
               itemImage={BackCamera}
               price={itemD.backCamera.price}
               name="Back Camera"
@@ -94,6 +87,8 @@ const PhoneServiceDetails = () => {
           )}
           {itemD.frontCamera.price !== 0 && (
             <ServiceCard
+              services={services}
+              setServices={setServices}
               itemImage={FrontCamera}
               price={itemD.frontCamera.price}
               name="Front Camera"
@@ -101,6 +96,8 @@ const PhoneServiceDetails = () => {
           )}
           {itemD.speaker.price !== 0 && (
             <ServiceCard
+              services={services}
+              setServices={setServices}
               itemImage={Speaker}
               price={itemD.speaker.price}
               name="Speaker"
@@ -110,13 +107,15 @@ const PhoneServiceDetails = () => {
         <div className={classes.serviceAmountsContainer}>
           {serviceList}
 
-          {serviceCtx.items.length > 0 && (
+          {services.items.length > 0 && (
             <div>
-            <div className={classes.totalAmount}>
-              <p>Total:</p>
-              <p className={classes.totalNum}>{serviceCtx.totalAmount} $</p>
-            </div>
-            <p className={classes.callP}>Call On: <span className={classes.numS}>  070 660 038</span></p>
+              <div className={classes.totalAmount}>
+                <p>Total:</p>
+                <p className={classes.totalNum}>{services.totalAmount} $</p>
+              </div>
+              <p className={classes.callP}>
+                Call On: <span className={classes.numS}> 070 660 038</span>
+              </p>
             </div>
           )}
         </div>

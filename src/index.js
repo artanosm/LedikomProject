@@ -5,16 +5,16 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import CartProvider from "./store/CartProvider";
-import ServiceProvider from "./store/ServiceProvider";
+// import ServiceProvider from "./store/ServiceProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
       <CartProvider>
-        <ServiceProvider>
+        {/* <ServiceProvider> */}
           <App />
-        </ServiceProvider>
+        {/* </ServiceProvider> */}
       </CartProvider>
     </Router>
   </React.StrictMode>

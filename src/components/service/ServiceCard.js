@@ -1,16 +1,34 @@
-import React, { useContext } from "react";
+import React from "react";
 import classes from "./ServiceCard.module.scss";
-import ServiceContext from "../../store/service-context";
 
-const ServiceCard = ({ itemImage, price, name }) => {
-  const serviceCtx = useContext(ServiceContext);
-  const existing = serviceCtx.items.filter(item => item.name === name)
+const ServiceCard = ({ itemImage, price, name, services, setServices }) => {
+  const existing = services.items.filter((item) => item.name === name);
 
   const onAddRemoveHandler = () => {
-    serviceCtx.addItem({ name: name, price: price });
+    const exist = services.items.findIndex((item) => item.name === name);
+    console.log(exist);
+
+    if (exist >= 0) {
+      const itemsArr = services.items.filter((item) => item.name !== name);
+      const total = services.totalAmount;
+      const newTotal = total - price;
+      setServices({ items: itemsArr, totalAmount: newTotal });
+    } else {
+      const itemsArr = services.items;
+      itemsArr.push({ name, price });
+      const total = services.totalAmount;
+      const newTotal = total + price;
+
+      setServices({ items: itemsArr, totalAmount: newTotal });
+    }
   };
   return (
-    <div className={existing.length > 0 ? `${classes.main} ${classes.active}` : classes.main} onClick={onAddRemoveHandler}>
+    <div
+      className={
+        existing.length > 0 ? `${classes.main} ${classes.active}` : classes.main
+      }
+      onClick={onAddRemoveHandler}
+    >
       <img src={itemImage} alt="item" />
       <p>{name}</p>
       <p>{price} $</p>
