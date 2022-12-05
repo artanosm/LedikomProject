@@ -8,20 +8,19 @@
 }
 .container {
   @include flex-center(center, column);
-  // width: 40%;
   gap: 0.5rem;
   max-width: 400px;
   min-width: 350px;
   height: auto;
   max-height: 70vh;
-  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
-  // border-radius: 15px;
   margin: 2rem 4rem;
   padding: 2rem 2rem;
   border-radius: 50px;
   background: #fbfbfb;
-  // box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
   box-shadow: shadows.$box-shadow;
+  form{
+    width: 100%;
+  }
 }
 .h1 {
   color: colors.$dark-blue;
@@ -47,32 +46,28 @@
 
 .greenAlert {
   background-color: colors.$green-lighter;
-  // background-color: rgb(222, 255, 213);
   color: colors.$green;
-  // color: rgb(23, 142, 1);
 }
 
 // .span {
 //   color:darkgrey;
 //   font-size: small;
 // }
-.formContainer {
-  @include flex-center(center, column);
-  // display: flex;
-  // align-items: center;
-  // flex-direction: column;
-  height: fit-content;
-  width: 100%;
-  gap: 1rem;
-  margin: 2rem 1rem;
-}
+
+// .formContainer {
+//   @include flex-center(center, column);
+//   // display: flex;
+//   // align-items: center;
+//   // flex-direction: column;
+//   height: fit-content;
+//   width: 100%;
+//   gap: 1rem;
+//   margin: 2rem 1rem;
+// }
 
 .actions {
   @include flex-center(center, column);
   width: 100%;
-  // display: flex;
-  // align-items: center;
-  // flex-direction: column;
 }
 
 .resetButton {
@@ -91,12 +86,10 @@
 }
 
 .resetButton::before {
-  content: "Forgot your Password?";
+  content: "Forgot Password?";
   color: colors.$gray;
   padding-right: 5px;
-  font-size: small;
-  
-
+  font-size: smaller;
 }
 
 .actions .google {
@@ -106,9 +99,7 @@
   font: inherit;
   border-radius: 4px;
   padding: 0.5rem 0.5rem;
-  // background-color: colors.$white;
   background: #fbfbfb;
-
   color: colors.$blue;
   border: 1px solid colors.$blue;
 }
@@ -153,7 +144,7 @@
   content: "Don't have an account?";
   color: colors.$gray;
   padding-right: 5px;
-  font-size: small;
+  font-size: smaller;
 }
 
 .actions:hover .toggle:hover {
@@ -165,7 +156,7 @@
   .container {
     width: 100%;
     margin: 2rem 2rem;
-    padding: 0 2rem;
+    padding: 0 1rem;
     border-radius: 15px;
   }
 
@@ -174,8 +165,8 @@
     padding: 0.5rem 0.5rem;
   }
 
-  .formContainer {
-    gap: 0.5rem;
-    margin: 1rem 1rem;
-  }
+  // .formContainer {
+  //   gap: 0.5rem;
+  //   margin: 1rem 1rem;
+  // }
 }

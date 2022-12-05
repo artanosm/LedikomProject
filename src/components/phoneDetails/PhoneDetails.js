@@ -14,7 +14,6 @@ import { doc, getDoc } from "firebase/firestore";
 
 const PhoneDetails = () => {
   const location = useLocation();
-
   const cartCtx = useContext(CartContext);
   const { phoneId } = useParams();
 
@@ -26,7 +25,7 @@ const PhoneDetails = () => {
   const [colorImg, setColorImg] = useState({});
   const [price, setPrice] = useState("");
   const [storage, setStorage] = useState(null);
-  const [phone, setPhone] = useState(null);
+  const [phone, setPhone] = useState(location?.state?.phone);
   const [alert, setAlert] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,7 +55,7 @@ const PhoneDetails = () => {
 
   useEffect(() => {
     let found;
-    if (location.state?.phone) {
+    if (location?.state?.phone) {
       setPhone(location.state.phone);
     } else {
       const docRef = doc(db, "products", phoneId);
@@ -88,7 +87,17 @@ const PhoneDetails = () => {
       });
     }
     setIsLoading(false);
-  }, []);
+  }, [
+    setPhone,
+    setIsLoading,
+    setColorImg,
+    setPrice,
+    setStorage,
+    location.state,
+    colorParam,
+    phoneId,
+    storageParam,
+  ]);
 
   const colorImageHandler = useCallback(
     (e) => {

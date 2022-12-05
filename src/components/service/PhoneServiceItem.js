@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const PhoneServiceItem = ({item}) => {
   return (
-    <Link to={item.id} className={classes.main}>
+    <Link to={item.id} state={item} className={classes.main}>
         <img src={item.image} alt='logo' />
         <p className={classes.brandName}>{item.model}</p>
     </Link>

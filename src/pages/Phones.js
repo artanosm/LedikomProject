@@ -17,45 +17,47 @@ const Phones = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [brand, setBrand] = useState("");
-  const [type, setType] = useState('');
+  const [type, setType] = useState("");
   const [sort, setSort] = useState("");
   const [numberOfItems, setNumberOfItems] = useState(24);
 
-  const paramsFunction = (e, queryName) => {
-    if (e === null) {
-      searchParams.delete(queryName);
-      setSearchParams(searchParams);
-    } else {
-      searchParams.set(queryName, e);
-      setSearchParams(searchParams);
-    }
-  };
+  let brandParam = searchParams.get("brand");
+  let typeParam = searchParams.get("type");
+  let sortParam = searchParams.get("sort");
+
   // const paramsFunction = (e, queryName) => {
   //   if (e === null) {
   //     searchParams.delete(queryName);
   //     setSearchParams(searchParams);
   //   } else {
-  //     searchParams.set(queryName, e.value);
+  //     searchParams.set(queryName, e);
   //     setSearchParams(searchParams);
   //   }
   // };
 
+  const paramsFunction = useCallback((e, queryName)=> {
+    console.log(e, queryName)
+        if (e === '') {
+          console.log(e,'e')
+          searchParams.delete(queryName);
+          setSearchParams(searchParams);
+        } else {
+          searchParams.set(queryName, e);
+          setSearchParams(searchParams);
+        }
+  },[setSearchParams,searchParams])
+
   useEffect(() => {
-    let brandParam = searchParams.get("brand");
-    let typeParam = searchParams.get("type");
-    let sortParam = searchParams.get("sort");
-    brandParam
-      ? // ? setBrand({ value: brandParam, label: brandParam })
-        setBrand(brandParam)
-      : setBrand("");
-    // typeParam ? setType({ value: typeParam, label: typeParam }) : setType(null);
-    typeParam ? setType(typeParam) : setType('');
-    // sortParam ? setSort({ value: sortParam, label: sortParam }) : setSort(null);
+    // let brandParam = searchParams.get("brand");
+    // let typeParam = searchParams.get("type");
+    // let sortParam = searchParams.get("sort");
+    brandParam ? setBrand(brandParam) : setBrand("");
+    typeParam ? setType(typeParam) : setType("");
     sortParam ? setSort(sortParam) : setSort("");
-  }, [searchParams]);
+  }, [searchParams,typeParam,sortParam,brandParam]);
 
   const filtersClickHandler = () => {
-    setFiltersClick(!filtersClick);
+    setFiltersClick(prev => !prev);
   };
 
   const setNumberOfItemsHandler = useCallback(
@@ -70,7 +72,7 @@ const Phones = (props) => {
       setBrand(e);
       paramsFunction(e, "brand");
     },
-    [setBrand]
+    [setBrand,paramsFunction]
   );
 
   const setSortHandler = useCallback(
@@ -78,7 +80,7 @@ const Phones = (props) => {
       setSort(e);
       paramsFunction(e, "sort");
     },
-    [setSort]
+    [setSort,paramsFunction]
   );
 
   const setTypeHandler = useCallback(
@@ -86,7 +88,7 @@ const Phones = (props) => {
       setType(e);
       paramsFunction(e, "type");
     },
-    [setType]
+    [setType,paramsFunction]
   );
 
   return (

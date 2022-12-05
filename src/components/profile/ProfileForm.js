@@ -75,16 +75,16 @@ const ProfileForm = ({ setEdit }) => {
   };
 
   return (
-    <form onSubmit={formSubmitHandler}>
-      <Box
+    <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-end",
-          width: "100%",
+          width: {xs: '90%', md:'30%'},
         }}
       >
-        <Stack direction="row" alignItems="center" spacing={2}>
+    <form onSubmit={formSubmitHandler}>
+        <Stack pb={1} direction="row" alignItems="center" spacing={2}>
           <Avatar src={authCtx.userData?.photoProfile} />
           <IconButton
             size="small"
@@ -136,12 +136,12 @@ const ProfileForm = ({ setEdit }) => {
               : "+389"
           }
         />
-      </Box>
       <Button sx={{textTransform:'none'}} type="submit">Save Changes</Button>
       <Button sx={{textTransform:'none'}} color="error" onClick={() => setEdit(false)}>
         Cancel
       </Button>
     </form>
+      </Box>
   );
 };
 

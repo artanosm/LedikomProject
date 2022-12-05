@@ -49,7 +49,7 @@ const Cart = (props) => {
   return (
     <Modal cartIsShown={props.cartIsShown} onClose={props.onClose}>
       <div className={classes.headerCartContainer}>
-        {cartCtx.items.length > 0 && <h1>My Cart</h1>}
+        {cartCtx.items.length > 0 && <h2>My Cart</h2>}
         {cartCtx.items.length === 0 && <h2>Your Cart is empty </h2>}
     
 

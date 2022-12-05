@@ -6,7 +6,6 @@ const ServiceCard = ({ itemImage, price, name, services, setServices }) => {
 
   const onAddRemoveHandler = () => {
     const exist = services.items.findIndex((item) => item.name === name);
-    console.log(exist);
 
     if (exist >= 0) {
       const itemsArr = services.items.filter((item) => item.name !== name);
@@ -18,7 +17,6 @@ const ServiceCard = ({ itemImage, price, name, services, setServices }) => {
       itemsArr.push({ name, price });
       const total = services.totalAmount;
       const newTotal = total + price;
-
       setServices({ items: itemsArr, totalAmount: newTotal });
     }
   };

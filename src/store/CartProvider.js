@@ -2,8 +2,7 @@ import { useReducer } from "react";
 import CartContext from "./cart-context";
 import React from "react";
 
-
-let defaultCartState
+let defaultCartState;
 
 if (JSON.parse(window.localStorage.getItem("cartItems")) !== null) {
   defaultCartState = {
@@ -52,7 +51,6 @@ const cartReducer = (state, action) => {
     const updatedTotalAmount = state.totalAmount - existingItemTotal;
     let updatedItems;
     updatedItems = state.items.filter((item) => item.id !== action.id);
-    console.log(updatedTotalAmount);
     return {
       items: updatedItems,
       totalAmount: updatedTotalAmount,

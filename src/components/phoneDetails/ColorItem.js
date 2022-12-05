@@ -2,8 +2,7 @@ import React from "react";
 import classes from "./ColorItem.module.scss";
 import { motion } from "framer-motion";
 
-const ColorItem = ({ color, colorImg, setColorImg }) => {
-
+const ColorItem = ({ colorA, colorImg, setColorImg }) => {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
@@ -11,14 +10,14 @@ const ColorItem = ({ color, colorImg, setColorImg }) => {
       whileHover={{ scale: 1.1 }}
       transition={{ duration: 0.1 }}
       className={`${classes.colorsItem} ${
-      colorImg.hex === color.hex ? classes.active : ""
+      colorImg?.hex === colorA.hex ? classes.active : ""
       }`}
       onClick={() => {    
-        setColorImg(color);        
+        setColorImg(colorA);        
       }}
     >
-      <div style={{ backgroundColor: color.hex }}></div>
-      <p>{color.name}</p>
+      <div style={{ backgroundColor: colorA?.hex }}></div>
+      <p>{colorA?.name}</p>
     </motion.div>
   );
 };

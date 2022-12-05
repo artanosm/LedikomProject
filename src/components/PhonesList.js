@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.scss";
 import Loader from "../ui/Loader";
 import { db } from "./firebase";
-import { onSnapshot, collection, query, orderBy } from "firebase/firestore";
+import { collection, query, orderBy } from "firebase/firestore";
+import useGetData from "./customHooks/useGetData";
 
 const getMultipleRandom = (arr, num) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
@@ -20,37 +21,47 @@ const PhonesList = ({
   randomItems,
   searchQuery = false,
 }) => {
-  const [phones, setPhones] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [phones, setPhones] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    setIsLoading(true);
+  const colRef = collection(db, "products");
+  const q = query(colRef, orderBy("serverDate", "desc"));
+  const [phones, isLoading] = useGetData(q);
 
-    const colRef = collection(db, "products");
-    const q = query(colRef, orderBy("serverDate", "desc"));
-    const unSubscribe = onSnapshot(q, (colSnapshot) => {
-      let phonesArr = [];
-      colSnapshot.docs.forEach((doc) => {
-        phonesArr.push(doc.data());
-      });
-      if (searchQuery) {
-        setPhones(
-          phonesArr.filter(
-            (item) =>
-              item.brand.toLowerCase().includes(searchQuery) ||
-              item.model.toLowerCase().includes(searchQuery)
-          )
-        );
-        setIsLoading(false);
-      } else {
-        setPhones(() => phonesArr);
-        setIsLoading(false);
-      }
-    });
-    return () => {
-      unSubscribe();
-    };
-  }, [searchQuery]);
+  if (searchQuery) {
+    phones.filter(
+      (item) =>
+        item.brand.toLowerCase().includes(searchQuery) ||
+        item.model.toLowerCase().includes(searchQuery)
+    );
+  }
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   const colRef = collection(db, "products");
+  //   const q = query(colRef, orderBy("serverDate", "desc"));
+  //   const unSubscribe = onSnapshot(q, (colSnapshot) => {
+  //     let phonesArr = [];
+  //     colSnapshot.docs.forEach((doc) => {
+  //       phonesArr.push(doc.data());
+  //     });
+  //     if (searchQuery) {
+  //       setPhones(
+  //         phonesArr.filter(
+  //           (item) =>
+  //             item.brand.toLowerCase().includes(searchQuery) ||
+  //             item.model.toLowerCase().includes(searchQuery)
+  //         )
+  //       );
+  //       setIsLoading(false);
+  //     } else {
+  //       setPhones(() => phonesArr);
+  //       setIsLoading(false);
+  //     }
+  //   });
+  //   return () => {
+  //     unSubscribe();
+  //   };
+  // }, [searchQuery]);
 
   let filteredPhones;
   if (brand) {

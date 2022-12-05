@@ -39,9 +39,10 @@
 .headerCartContainer {
   @include flex-center(space-between);
   padding: 0rem;
-  margin-bottom: .7rem;
-  h1 {
-    margin: 0 0 0 1rem;
+  margin: 0;
+  h2 {
+    // margin: 0 0 0 1rem;
+    font-size: 1.3rem
   }
 }
 

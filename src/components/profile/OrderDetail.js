@@ -1,24 +1,28 @@
 import React, { useState, useEffect, useContext } from "react";
 import classes from "./OrderDetail.module.scss";
-import { useParams } from "react-router-dom";
+import { useParams,useLocation } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
 import OrdersItemGroup from "../OrdersItemGroup";
 import Loader from "../../ui/Loader";
 
+
 const OrderDetail = () => {
   const { orderId } = useParams();
-  const [order, setOrder] = useState(null);
+  const location = useLocation();
+  const [order, setOrder] = useState(location?.state);
   const [isLoading, setIsLoading] = useState(false);
   const authCtx = useContext(AuthContext);
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (!location?.state) {
+      setIsLoading(true);
       const docRef = doc(db, `users/${authCtx.user?.uid}/orders/${orderId}`);
       const unsubscribe = onSnapshot(docRef, (doc) => {
         setOrder(doc.data());
@@ -28,8 +32,9 @@ const OrderDetail = () => {
       return () => {
         unsubscribe();
       };
+    }
     
-  }, [authCtx.user?.uid, orderId]);
+  }, [location?.state,authCtx.user?.uid, orderId]);
 
   return isLoading ? (
     <Loader />

@@ -1,41 +1,38 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import AuthContext from "../store/auth-context";
 import classes from "./MyOrders.module.scss";
 import { db } from "../components/firebase";
-import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { collection, query, orderBy } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Loader from "../ui/Loader";
+import useGetData from "../components/customHooks/useGetData";
 
 const MyOrders = () => {
   const authCtx = useContext(AuthContext);
-  const [orders, setOrders] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [orders, setOrders] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    setIsLoading(true);
-    // const getOrders = async () => {
-    //   const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
-    //   const q = query(colRef, orderBy("serverDate", 'desc'));
-    //   const data = await getDocs(q);
-    //   const docs = data.docs?.map((doc) => doc?.data());
-    //   setOrders(docs);
-    //   setIsLoading(false)
-    // };
-    // getOrders();
-    const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
-    const q = query(colRef, orderBy("serverDate", "desc"));
-    let ordersArr = [];
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      let orderArr = snapshot.docs.map((doc) => doc.data());
-      setOrders(orderArr);
-    });
-    setOrders(ordersArr);
-    setIsLoading(false);
+  const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
+  const q = query(colRef, orderBy("serverDate", "desc"));
+  const [orders, isLoading] = useGetData(q)
 
-    return () => {
-      unsubscribe();
-    };
-  }, [authCtx.user?.uid]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+
+  //   const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
+  //   const q = query(colRef, orderBy("serverDate", "desc"));
+  //   // let ordersArr = [];
+  //   const unsubscribe = onSnapshot(q, (snapshot) => {
+  //     let orderArr = snapshot.docs.map((doc) => doc.data());
+  //     setOrders(orderArr);
+  //   });
+  //   // setOrders(ordersArr);
+  //   setIsLoading(false);
+
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [authCtx.user?.uid]);
 
   return isLoading ? (
     <Loader />
@@ -43,7 +40,7 @@ const MyOrders = () => {
     <div className={classes.mainContainer}>
       <h2>My Orders</h2>
       {orders.map((order, i) => (
-        <Link to={`/profile/orders/${order.id}`} key={i} className={classes.container}>
+        <Link state={order} to={`/profile/orders/${order.id}`} key={i} className={classes.container}>
           <div className={classes.info}>
             <p>Order Placed: {order?.date.slice(0, 15)}</p>
             <p className={order?.orderCompleted ? classes.completed : classes.waiting}>
@@ -61,13 +58,7 @@ const MyOrders = () => {
             })}
           </div>
           <h5>Total: {order.totalAmount} $</h5>
-          {/* <Link
-            className={classes.linkContainer}
-            to={`/profile/orders/${order.id}`}
-          >
-            Order Detail
-          </Link> */}
-        </Link >
+        </Link>
       ))}
     </div>
   );

@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { auth, db } from "../components/firebase";
-import {
-  setDoc,
-  doc,
-  onSnapshot,
-  serverTimestamp,
-} from "firebase/firestore";
-
+import { setDoc, doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 
 import {
   signInWithEmailAndPassword,
@@ -26,10 +20,9 @@ const AuthContext = React.createContext();
 const retriveStoredToken = () => {
   const storedToken = localStorage.getItem("token");
   const storedExpirationDate = localStorage.getItem("expirationTime");
-
   const remainingTime = calculateRemainingtime(storedExpirationDate);
 
-  if (remainingTime <= 60000) {
+  if (remainingTime < 0) {
     localStorage.removeItem("token");
     localStorage.removeItem("expirationTime");
     return null;
@@ -40,9 +33,7 @@ const retriveStoredToken = () => {
 const calculateRemainingtime = (expirationTime) => {
   const currentTime = new Date().getTime();
   const adjExpiration = new Date(expirationTime).getTime();
-
   const remainingDuration = adjExpiration - currentTime;
-
   return remainingDuration;
 };
 
@@ -53,25 +44,24 @@ export const AuthContextProvider = (props) => {
   const [userData, setUserData] = useState({});
 
   const tokenData = retriveStoredToken();
-  // const usersCollectionRef = collection(db, "users");
-
   let initialtoken;
-
   if (tokenData) {
     initialtoken = tokenData.token;
+  } else {
+    initialtoken = null;
   }
 
   const [token, setToken] = useState(initialtoken);
-
   async function signUp(email, password) {
     await createUserWithEmailAndPassword(auth, email, password).then((cred) => {
-      setDoc(doc(db, "users", cred.user.uid), { userId:cred.user.uid, createdAt: serverTimestamp() });
+      setDoc(doc(db, "users", cred.user.uid), {
+        userId: cred.user.uid,
+        createdAt: serverTimestamp(),
+      });
     });
   }
 
   async function getUserData(uid) {
-    // const data = await getDoc(doc(db, "users", uid));
-    // setUserData(data.data())
     await onSnapshot(doc(db, "users", uid), (doc) => {
       setUserData(doc.data());
     });
@@ -79,10 +69,9 @@ export const AuthContextProvider = (props) => {
 
   async function signIn(email, password) {
     await signInWithEmailAndPassword(auth, email, password).then((cred) => {
-      console.log(cred);
       getUserData(cred.user.uid);
       const expirationTime = new Date(
-        new Date().getTime() + +cred._tokenResponse.expiresIn * 500
+        new Date().getTime() + +cred._tokenResponse.expiresIn * 600
       );
       localStorage.setItem("token", cred._tokenResponse.idToken);
       localStorage.setItem("expirationTime", expirationTime);

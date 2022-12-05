@@ -5,68 +5,18 @@ import classes from "./OrderItem.module.scss";
 import { doc, updateDoc,deleteDoc } from "firebase/firestore";
 import { db } from "../components/firebase";
 
-const OrderItem = ({ order, reFetch, setReFetch }) => {
-  console.log(order.userId);
+const OrderItem = ({ order }) => {
+  const docRef = doc(db,'orders',order.id)
+  const userDocRef = doc(db,'users',order.userId,'orders',order.id)
+
   const onDeleteHandler = () => {
-    const docRef = doc(db,'orders',order.id)
-    const userDocRef = doc(db,'users',order.userId,'orders',order.id)
   deleteDoc(docRef)
   deleteDoc(userDocRef)
-    // const deleteOrder = async () => {
-    //   const response = await fetch(
-    //     `${realTimeDatabase}/orders/${order.id}.json`,
-    //     {
-    //       method: "DELETE",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Something went wrong");
-    //   }
-    //   // const responseData = await response.json();
-    // };
-    // deleteOrder()
-    //   .then(() => setReFetch(true))
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   const onCompleteHandler = () => {
-    const docRef = doc(db,'orders',order.id)
-    const userDocRef = doc(db, "users", order.userId, "orders", order.id);
     updateDoc(userDocRef, { orderCompleted: true });
     updateDoc(docRef,{ orderCompleted: true })
-
-    // const completeOrder = async () => {
- 
-    //   const response = await fetch(
-    //     `${realTimeDatabase}/orders/${order.id}.json`,
-    //     {
-    //       method: "PUT",
-    //       headers: {
-    //         "Content-type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         ...order,
-    //         orderCompleted: true,
-    //       }),
-    //     }
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Something went wrong");
-    //   }
-    // };
-    // completeOrder()
-    //   .then(() => {
-    //     setReFetch(true);
-    //     console.log("Completed");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
   const cartItems = (

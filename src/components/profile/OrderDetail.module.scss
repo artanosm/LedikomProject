@@ -40,9 +40,16 @@
   }
 }
 
+@media only screen and (max-width: 800px) {
+  .mainContainer {
+    margin: auto;
+    width: 70%;
+    padding: 1rem;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .mainContainer {
-    // margin: 0.5rem;
     margin: auto;
     width: 100%;
     padding: 1rem;

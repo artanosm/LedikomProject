@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,useLocation } from "react-router-dom";
 import classes from "./PhoneServiceDetails.module.scss";
 import ServiceCard from "./ServiceCard";
 import Battery from "../../assets/service/battery.png";
@@ -13,93 +13,89 @@ import { db } from "../firebase";
 import { getDoc, doc } from "firebase/firestore";
 
 const PhoneServiceDetails = () => {
+  const location = useLocation()
   const param = useParams();
-  const [item, setItem] = useState();
+  const [item, setItem] = useState(location?.state);
   const [services, setServices] = useState({items:[],totalAmount:0})
 
-  console.log(services)
   useEffect(() => {
-    const docRef = doc(db, "service", param.serviceId);
-    getDoc(docRef).then((docSnap) => {
-      setItem(docSnap.data());
-    });
+    if (!location?.state) {
+      const docRef = doc(db, "service", param.serviceId);
+      getDoc(docRef).then((docSnap) => {
+        setItem(docSnap.data());
+      });
+    }
+  }, [param]);
 
-  }, [param.serviceId]);
 
-  let itemD;
-  if (item) {
-    itemD = item;
-  } else {
-    return;
-  }
 
   const serviceList = (
     <ul className={classes.cartContainer}>
       {services.items.map((item, key) => {
-        return <ServiceItem key={key} name={item.name} price={item.price} />;
+        return <ServiceItem key={key} name={item?.name} price={item?.price} />;
       })}
     </ul>
   );
   return (
     <div className={classes.main}>
       <div className={classes.imageContainer}>
-        <img src={itemD.image} alt="Phone" />
+        <img src={item?.image} alt="Phone" />
       </div>
       <div className={classes.headerService}>
-        <h2>{itemD.model}</h2>
+        <h2>{item?.model}</h2>
         <hr />
         <div className={classes.servicesContainer}>
-          {itemD.screen.price !== 0 && (
+          {item?.screen.price !== 0 && (
             <ServiceCard
               services={services}
               setServices={setServices}
               itemImage={Screen}
-              price={itemD.screen.price}
+              price={item?.screen.price}
               name="Screen"
             />
           )}
-          {itemD.battery.price !== 0 && (
+          {item?.battery.price !== 0 && (
             <ServiceCard
               services={services}
               setServices={setServices}
               itemImage={Battery}
-              price={itemD.battery.price}
+              price={item?.battery.price}
               name="Battery"
             />
           )}
-          {itemD.backGlass.price !== 0 && (
+          {item?.backGlass.price !== 0 && (
             <ServiceCard
               services={services}
               setServices={setServices}
               itemImage={BackGlass}
-              price={itemD.backGlass.price}
+              price={item?.backGlass.price}
               name="Back Glass"
             />
           )}
-          {itemD.backCamera.price !== 0 && (
+          {item?.backCamera.price !== 0 && (
             <ServiceCard
               services={services}
               setServices={setServices}
               itemImage={BackCamera}
-              price={itemD.backCamera.price}
+              price={item?.backCamera.price}
               name="Back Camera"
             />
           )}
-          {itemD.frontCamera.price !== 0 && (
+          {item?.frontCamera.price !== 0 && (
             <ServiceCard
               services={services}
               setServices={setServices}
               itemImage={FrontCamera}
-              price={itemD.frontCamera.price}
+              price={item?.frontCamera.price}
               name="Front Camera"
             />
           )}
-          {itemD.speaker.price !== 0 && (
+          {item?.speaker.price !== 0 && (
             <ServiceCard
               services={services}
               setServices={setServices}
               itemImage={Speaker}
-              price={itemD.speaker.price}
+              price={item?.speaker.price}
               name="Speaker"
             />
           )}
