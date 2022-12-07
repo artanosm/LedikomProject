@@ -1,9 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState,useEffect } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.scss";
 import Loader from "../ui/Loader";
 import { db } from "./firebase";
-import { collection, query, orderBy } from "firebase/firestore";
+import { collection, query, orderBy,onSnapshot } from "firebase/firestore";
 import useGetData from "./customHooks/useGetData";
 
 const getMultipleRandom = (arr, num) => {
@@ -27,13 +27,16 @@ const PhonesList = ({
   const colRef = collection(db, "products");
   const q = query(colRef, orderBy("serverDate", "desc"));
   const [phones, isLoading] = useGetData(q);
+  let searchPhone;
 
   if (searchQuery) {
-    phones.filter(
-      (item) =>
-        item.brand.toLowerCase().includes(searchQuery) ||
+    searchPhone = phones.filter(item => 
+      item.brand.toLowerCase().includes(searchQuery) ||
         item.model.toLowerCase().includes(searchQuery)
     );
+  }
+  else{
+    searchPhone = phones;
   }
   // useEffect(() => {
   //   setIsLoading(true);
@@ -65,9 +68,9 @@ const PhonesList = ({
 
   let filteredPhones;
   if (brand) {
-    filteredPhones = phones.filter((phone) => phone.brand === brand);
+    filteredPhones = searchPhone.filter((phone) => phone.brand === brand);
   } else {
-    filteredPhones = phones;
+    filteredPhones = searchPhone;
   }
 
   let filteredType;

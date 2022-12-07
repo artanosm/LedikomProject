@@ -160,6 +160,7 @@ const Login = () => {
                   type="submit"
                   style={{
                     backgroundColor: formik.isSubmitting && "lightgrey",
+                    borderColor: formik.isSubmitting && 'lightgrey'
                   }}
                   className={classes.loginButton}
                 >

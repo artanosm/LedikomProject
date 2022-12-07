@@ -1,10 +1,12 @@
-import React, { useRef, useContext } from "react";
+import React, { useContext } from "react";
 import AuthContext from "../../store/auth-context";
 import InputMui from "../signForms/InputMui";
 import { Box } from "@mui/system";
 import { Button, IconButton, Stack, Avatar } from "@mui/material";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { v4 } from "uuid";
+import { Formik, Form } from "formik";
+import { object, string, number } from "yup";
 
 import { db } from "../firebase";
 import { updateDoc, doc, collection } from "firebase/firestore";
@@ -19,25 +21,18 @@ import {
 
 const ProfileForm = ({ setEdit }) => {
   const authCtx = useContext(AuthContext);
-  const enteredNameRef = useRef("");
-  const enteredAddressRef = useRef("");
-  const enteredCityRef = useRef("");
-  const enteredPhoneNumberRef = useRef("");
 
   const userDataRef = collection(db, "users");
   const photoProfileRef = ref(storage, `/${authCtx.user.uid}/profilePicture`);
 
-  //   useEffect(() => {
-  //     list(photoProfileRef).then((res) => {
-  //         console.log(res.items[0].fullPath);
-  //       getDownloadURL(res?.items[0]).then((url) => setProfilePic(url));
-  //     });
-  //   }, []);
+  const uploadImage = (image,actions) => {
+    if (image == null) {
+      actions.setSubmitting(false)
 
-  const uploadImage = (image) => {
-    if (image == null) return;
+      return;
+    }
     list(photoProfileRef).then((res) => {
-      const existing = res.items[0].fullPath;
+      const existing = res.items[0]?.fullPath;
       const deleteProfilePic = ref(storage, existing);
 
       deleteObject(deleteProfilePic).then(
@@ -57,91 +52,97 @@ const ProfileForm = ({ setEdit }) => {
     });
   };
 
-  const formSubmitHandler = async (e) => {
-    e.preventDefault();
-    const enteredName = enteredNameRef.current.value;
-    const enteredAddress = enteredAddressRef.current.value;
-    const enteredCity = enteredCityRef.current.value;
-    const enteredPhoneNumber = enteredPhoneNumberRef.current.value;
+  const initialFormState = {
+    name: authCtx.userData?.name,
+    address: authCtx.userData?.address,
+    city: authCtx.userData?.city,
+    phoneNumber: authCtx.userData?.phoneNumber,
+  };
 
+  const validationSchema = object({
+    name: string(),
+    address: string(),
+    city: string(),
+    phoneNumber: number(),
+  });
+
+  const submitHandler = async (values, actions) => {
+    actions.setSubmitting(true);
     await updateDoc(doc(userDataRef, authCtx.user.uid), {
-      name: enteredName,
-      address: enteredAddress,
-      city: enteredCity,
-      phoneNumber: enteredPhoneNumber,
+      name: values.name,
+      address: values.address,
+      city: values.city,
+      phoneNumber: values.phoneNumber,
     });
-
+    actions.setSubmitting(false);
     setEdit(false);
   };
 
   return (
     <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end",
-          width: {xs: '90%', md:'30%'},
-        }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+        width: { xs: "90%", sm: "60%", md: "30%" },
+      }}
+    >
+      <Formik
+        initialValues={initialFormState}
+        onSubmit={submitHandler}
+        validationSchema={validationSchema}
       >
-    <form onSubmit={formSubmitHandler}>
-        <Stack pb={1} direction="row" alignItems="center" spacing={2}>
-          <Avatar src={authCtx.userData?.photoProfile} />
-          <IconButton
-            size="small"
-            color="primary"
-            aria-label="upload picture"
-            component="label"
-          >
-            <input
-              hidden
-              accept="image/*"
-              type="file"
-              onChange={(e) => {
-                uploadImage(e.target.files[0]);
-              }}
+        {(formik) => (
+          
+          <Form>
+            <Stack pb={1} direction="row" alignItems="center" spacing={2}>
+              <Avatar src={authCtx.userData?.photoProfile} />
+              <IconButton
+                size="small"
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+              >
+                <input
+                  hidden
+                  accept="image/*"
+                  type="file"
+                  onChange={(e) => {
+                    uploadImage(e.target.files[0],formik);
+                  }}
+                />
+                <PhotoCamera />
+              </IconButton>
+            </Stack>
+            <InputMui name={"name"} label={"Name"} type={"text"} id={"name"} />
+            <InputMui
+              name={"address"}
+              label={"Address"}
+              type={"text"}
+              id={"address"}
             />
-            <PhotoCamera />
-          </IconButton>
-        </Stack>
-        <InputMui
-          ref={enteredNameRef}
-          label={"Name"}
-          type={"text"}
-          id={"name"}
-          defaultValue={authCtx.userData?.name}
-        />
-        <InputMui
-          ref={enteredAddressRef}
-          label={"Address"}
-          type={"text"}
-          id={"address"}
-          defaultValue={authCtx.userData?.address}
-        />
 
-        <InputMui
-          ref={enteredCityRef}
-          label={"City"}
-          type={"text"}
-          id={"City"}
-          defaultValue={authCtx.userData?.city}
-        />
-        <InputMui
-          ref={enteredPhoneNumberRef}
-          label={"Phone Number"}
-          type={"text"}
-          id={"phone-number"}
-          defaultValue={
-            authCtx.userData?.phoneNumber
-              ? authCtx.userData?.phoneNumber
-              : "+389"
-          }
-        />
-      <Button sx={{textTransform:'none'}} type="submit">Save Changes</Button>
-      <Button sx={{textTransform:'none'}} color="error" onClick={() => setEdit(false)}>
-        Cancel
-      </Button>
-    </form>
-      </Box>
+            <InputMui name={"city"} label={"City"} type={"text"} id={"City"} />
+            <InputMui
+              name={"phoneNumber"}
+              label={"Phone Number"}
+              type={"text"}
+              id={"phone-number"}
+            />
+            <Button sx={{ textTransform: "none" }} type="submit">
+              Save Changes
+            </Button>
+            <Button
+              sx={{ textTransform: "none" }}
+              color="error"
+              onClick={() => setEdit(false)}
+            >
+              Cancel
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </Box>
   );
 };
 

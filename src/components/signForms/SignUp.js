@@ -44,14 +44,14 @@ const SignUp = () => {
 
   const submitHandler = async (values, actions) => {
     setError("");
-    actions.setSubmitting(true);
+    // actions.setSubmitting(true);
     try {
       await authCtx.signUp(values.email, values.password);
       navigate("/profile", { replace: true });
     } catch (err) {
       setError(err.message);
     }
-    actions.setSubmitting(false);
+    // actions.setSubmitting(false);
   };
 
   const variants = {
@@ -118,6 +118,8 @@ const SignUp = () => {
                   type="submit"
                   style={{
                     backgroundColor: formik.isSubmitting && "lightgrey",
+                    borderColor: formik.isSubmitting && 'lightgrey'
+
                   }}
                   className={classes.loginButton}
                 >

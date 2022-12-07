@@ -50,7 +50,6 @@ function App() {
   
   return (
     <AuthContextProvider>
-    
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
       )}

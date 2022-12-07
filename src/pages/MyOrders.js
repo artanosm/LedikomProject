@@ -1,16 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext,useEffect } from "react";
 import AuthContext from "../store/auth-context";
 import classes from "./MyOrders.module.scss";
 import { db } from "../components/firebase";
 import { collection, query, orderBy } from "firebase/firestore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Loader from "../ui/Loader";
 import useGetData from "../components/customHooks/useGetData";
 
 const MyOrders = () => {
   const authCtx = useContext(AuthContext);
+  const navigate =useNavigate()
   // const [orders, setOrders] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
+  // const token = sessionStorage.getItem('token')
+
+
+// useEffect(() => {
+//   if (!token) {
+//     authCtx.logOut()
+//     navigate('/',{replace:true})
+//   }
+// }, [token,navigate,authCtx])
+
 
   const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
   const q = query(colRef, orderBy("serverDate", "desc"));

@@ -36,9 +36,7 @@ const Phones = (props) => {
   // };
 
   const paramsFunction = useCallback((e, queryName)=> {
-    console.log(e, queryName)
         if (e === '') {
-          console.log(e,'e')
           searchParams.delete(queryName);
           setSearchParams(searchParams);
         } else {
@@ -48,9 +46,6 @@ const Phones = (props) => {
   },[setSearchParams,searchParams])
 
   useEffect(() => {
-    // let brandParam = searchParams.get("brand");
-    // let typeParam = searchParams.get("type");
-    // let sortParam = searchParams.get("sort");
     brandParam ? setBrand(brandParam) : setBrand("");
     typeParam ? setType(typeParam) : setType("");
     sortParam ? setSort(sortParam) : setSort("");

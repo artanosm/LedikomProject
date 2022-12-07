@@ -17,14 +17,14 @@ let logoutTimer;
 const AuthContext = React.createContext();
 
 // ==============================
-const retriveStoredToken = () => {
-  const storedToken = localStorage.getItem("token");
-  const storedExpirationDate = localStorage.getItem("expirationTime");
-  const remainingTime = calculateRemainingtime(storedExpirationDate);
 
+const retriveStoredToken = () => {
+  const storedToken = sessionStorage.getItem("token");
+  const storedExpirationDate = sessionStorage.getItem("expirationTime");
+  const remainingTime = calculateRemainingtime(storedExpirationDate);
   if (remainingTime < 0) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("expirationTime");
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("expirationTime");
     return null;
   }
   return { token: storedToken, duration: remainingTime };
@@ -38,11 +38,9 @@ const calculateRemainingtime = (expirationTime) => {
 };
 
 // ==============================
-
 export const AuthContextProvider = (props) => {
   const [user, setUser] = useState();
   const [userData, setUserData] = useState({});
-
   const tokenData = retriveStoredToken();
   let initialtoken;
   if (tokenData) {
@@ -54,10 +52,18 @@ export const AuthContextProvider = (props) => {
   const [token, setToken] = useState(initialtoken);
   async function signUp(email, password) {
     await createUserWithEmailAndPassword(auth, email, password).then((cred) => {
+      console.log(cred);
       setDoc(doc(db, "users", cred.user.uid), {
         userId: cred.user.uid,
         createdAt: serverTimestamp(),
       });
+      const expirationTime = new Date(
+        new Date().getTime() + +cred._tokenResponse.expiresIn * 800
+      );
+      sessionStorage.setItem("token", cred._tokenResponse.idToken);
+      sessionStorage.setItem("expirationTime", expirationTime);
+      const remainingTime = calculateRemainingtime(expirationTime);
+      logoutTimer = setTimeout(logOut, remainingTime);
     });
   }
 
@@ -71,10 +77,10 @@ export const AuthContextProvider = (props) => {
     await signInWithEmailAndPassword(auth, email, password).then((cred) => {
       getUserData(cred.user.uid);
       const expirationTime = new Date(
-        new Date().getTime() + +cred._tokenResponse.expiresIn * 600
+        new Date().getTime() + +cred._tokenResponse.expiresIn * 800
       );
-      localStorage.setItem("token", cred._tokenResponse.idToken);
-      localStorage.setItem("expirationTime", expirationTime);
+      sessionStorage.setItem("token", cred._tokenResponse.idToken);
+      sessionStorage.setItem("expirationTime", expirationTime);
       const remainingTime = calculateRemainingtime(expirationTime);
       logoutTimer = setTimeout(logOut, remainingTime);
     });
@@ -83,10 +89,12 @@ export const AuthContextProvider = (props) => {
   const logOut = useCallback(async () => {
     await signOut(auth).then(() => {
       setToken(null);
-      localStorage.removeItem("token");
-      localStorage.removeItem("expirationTime");
-      localStorage.removeItem("cartItems");
-      localStorage.removeItem("cartTotalAmount");
+      setUser(null);
+      setUserData({});
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("expirationTime");
+      sessionStorage.removeItem("cartItems");
+      sessionStorage.removeItem("cartTotalAmount");
       if (logoutTimer) {
         clearTimeout(logoutTimer);
       }
@@ -95,7 +103,19 @@ export const AuthContextProvider = (props) => {
 
   function googleSignIn() {
     const googleAuthProvider = new GoogleAuthProvider();
-    return signInWithPopup(auth, googleAuthProvider);
+    return signInWithPopup(auth, googleAuthProvider).then((cred) => {
+      setDoc(doc(db, "users", cred.user.uid), {
+        userId: cred.user.uid,
+        createdAt: serverTimestamp(),
+      });
+      const expirationTime = new Date(
+        new Date().getTime() + +cred._tokenResponse.expiresIn * 800
+      );
+      sessionStorage.setItem("token", cred._tokenResponse.idToken);
+      sessionStorage.setItem("expirationTime", expirationTime);
+      const remainingTime = calculateRemainingtime(expirationTime);
+      logoutTimer = setTimeout(logOut, remainingTime);
+    });
   }
   function resetPassword(email) {
     return sendPasswordResetEmail(auth, email);

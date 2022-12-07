@@ -7,7 +7,7 @@ import AuthContext from "../store/auth-context";
 //   listAll,
 //   list,
 // } from "firebase/storage";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./Profile.module.scss";
 import ProfileForm from "../components/profile/ProfileForm";
@@ -20,10 +20,14 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.user;
 
-  // const logoutHandler = () => {
-  //   authCtx.logOut();
-  //   navigate("/", { replace: true });
-  // };
+  // const token = sessionStorage.getItem("token");
+
+  // useEffect(() => {
+  //   if (!token) {
+  //     authCtx.logOut();
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [token, navigate, authCtx]);
 
   return (
     <div className={classes.mainContainer}>
@@ -34,15 +38,35 @@ const Profile = () => {
       )}
       {isLoggedIn && (
         /* <div className={classes.profileContainer}> */
-         <Stack alignItems={"center"} sx={{ p:2, width: "100%" }}>
-         {!edit && <Stack direction={"row"} justifyContent="end" sx={{ width: "100%" }}>
-            <Button sx={{textTransform:'none'}} onClick={()=> navigate('orders')}>My Orders</Button>
-           <Button sx={{textTransform:'none'}} onClick={() => setEdit(!edit)}>Edit Profile</Button>
-          </Stack>}
-
+        <Stack alignItems={"center"} sx={{ p: 2, width: "100%" }}>
           {!edit && (
-            <ProfileInfo />
+            <Stack
+              direction={"row"}
+              justifyContent="end"
+              sx={{ width: "100%" }}
+            >
+              <Button
+                sx={{ textTransform: "none" }}
+                onClick={() => navigate("orders")}
+              >
+                My Orders
+              </Button>
+              <Button
+                sx={{ textTransform: "none" }}
+                onClick={() => setEdit(!edit)}
+              >
+                Edit Profile
+              </Button>
+              <Button
+              color="error"
+              sx={{textTransform:'none'}}
+              onClick={()=> authCtx.logOut()}>
+                Logout
+              </Button>
+            </Stack>
           )}
+
+          {!edit && <ProfileInfo />}
           {edit && (
             <Stack
               sx={{ width: "100%" }}

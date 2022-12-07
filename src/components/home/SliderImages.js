@@ -1,7 +1,6 @@
 import React from "react";
 import { Carousel } from "react-carousel-minimal";
 import classes from "./SliderImages.module.css";
-import { motion } from "framer-motion";
 
 const SliderImages = () => {
   const images = [
@@ -28,10 +27,8 @@ const SliderImages = () => {
   ];
 
   return (
-    <motion.div
+    <div
       className={classes.sliderContainer}
-      // initial={{ opacity: 1 }}
-      // animate={{ opacity: 1 }}
     >
       <Carousel
         data={images}
@@ -51,7 +48,7 @@ const SliderImages = () => {
           padding: "0",
         }}
       />
-    </motion.div>
+    </div>
   );
 };
 

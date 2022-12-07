@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import AuthContext from "../store/auth-context";
 import { Link, useNavigate } from "react-router-dom";
 import { ReactComponent as CloseMenu } from "../assets/x.svg";
@@ -21,6 +21,7 @@ import Logout from "@mui/icons-material/Logout";
 const Header = (props) => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
+  const token = sessionStorage.getItem('token')
 
   const [click, setClick] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,6 +42,13 @@ const Header = (props) => {
     authCtx.logOut();
     navigate("/", { replace: true });
   };
+
+  useEffect(() => {
+    if (!token) {
+      authCtx.logOut()
+    }
+  }, [token])
+  
 
   return (
     <div className="header">

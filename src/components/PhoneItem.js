@@ -41,7 +41,6 @@ const PhoneItem = ({ phone, id, storage, colors, model, brand, price }) => {
           />
           <div className={classes.dataContainer}>
             <p className={classes.model}>{model}</p>
-            {/* <p className={classes.brand}>{brand}</p> */}
             <p className={classes.price}>{price} $</p>
           </div>
         </motion.div>

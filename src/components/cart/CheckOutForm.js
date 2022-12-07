@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 // import Input from "./Input";
 import classes from "./CheckOutForm.module.scss";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import InputMui from "../signForms/InputMui";
 import CartContext from "../../store/cart-context";
 import Stack from "@mui/material/Stack";
@@ -46,12 +46,9 @@ const CheckOutForm = ({ cartItems, totalAmount }) => {
   });
 
   const submitHandler = (values, actions) => {
-    if (!authCtx.user) {
+    if (!authCtx?.user) {
       return;
     }
-
-    console.log(values);
-
     const order = {
       date: new Date().toString().slice(0, 25),
       serverDate: serverTimestamp(),
