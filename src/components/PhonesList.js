@@ -1,9 +1,9 @@
-import React, { Fragment, useState,useEffect } from "react";
+import React, { Fragment } from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.scss";
 import Loader from "../ui/Loader";
 import { db } from "./firebase";
-import { collection, query, orderBy,onSnapshot } from "firebase/firestore";
+import { collection, query, orderBy } from "firebase/firestore";
 import useGetData from "./customHooks/useGetData";
 
 const getMultipleRandom = (arr, num) => {

@@ -122,7 +122,7 @@ const Header = (props) => {
               >
                 {authCtx.user ? (
                   <Avatar
-                    sx={{ width: 32, height: 32 }}
+                    sx={{ width: 32, height: 32}}
                     src={authCtx.userData?.photoProfile}
                   />
                 ) : (

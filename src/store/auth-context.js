@@ -54,6 +54,7 @@ export const AuthContextProvider = (props) => {
     await createUserWithEmailAndPassword(auth, email, password).then((cred) => {
       console.log(cred);
       setDoc(doc(db, "users", cred.user.uid), {
+        email:cred.user.email,
         userId: cred.user.uid,
         createdAt: serverTimestamp(),
       });
@@ -75,6 +76,7 @@ export const AuthContextProvider = (props) => {
 
   async function signIn(email, password) {
     await signInWithEmailAndPassword(auth, email, password).then((cred) => {
+      console.log(cred)
       getUserData(cred.user.uid);
       const expirationTime = new Date(
         new Date().getTime() + +cred._tokenResponse.expiresIn * 800
@@ -105,6 +107,7 @@ export const AuthContextProvider = (props) => {
     const googleAuthProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleAuthProvider).then((cred) => {
       setDoc(doc(db, "users", cred.user.uid), {
+        email:cred.user.email,
         userId: cred.user.uid,
         createdAt: serverTimestamp(),
       });
@@ -137,7 +140,7 @@ export const AuthContextProvider = (props) => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (tokenData) {

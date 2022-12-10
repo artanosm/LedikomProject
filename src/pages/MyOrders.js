@@ -9,18 +9,18 @@ import useGetData from "../components/customHooks/useGetData";
 
 const MyOrders = () => {
   const authCtx = useContext(AuthContext);
-  const navigate =useNavigate()
+  const navigate =useNavigate();
   // const [orders, setOrders] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
-  // const token = sessionStorage.getItem('token')
+  const token = sessionStorage.getItem('token')
 
 
-// useEffect(() => {
-//   if (!token) {
-//     authCtx.logOut()
-//     navigate('/',{replace:true})
-//   }
-// }, [token,navigate,authCtx])
+useEffect(() => {
+  if (!token) {
+    authCtx.logOut()
+    navigate('/',{replace:true})
+  }
+}, [token,navigate,authCtx])
 
 
   const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
