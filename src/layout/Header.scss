@@ -13,6 +13,9 @@
 }
 
 .header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   width: 100%;
   background: black;
   @include flex-center(space-between);
@@ -73,6 +76,7 @@
     justify-content: flex-end;
     padding: 0px 10px;
     height: 70px;
+
   }
   .logo-container {
     margin-right: auto;

@@ -11,6 +11,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 
+
 const Phones = (props) => {
   const [filtersClick, setFiltersClick] = useState(false);
   const [priceRange, setPriceRange] = useState([10, 1500]);
@@ -24,7 +25,6 @@ const Phones = (props) => {
   let brandParam = searchParams.get("brand");
   let typeParam = searchParams.get("type");
   let sortParam = searchParams.get("sort");
-
   // const paramsFunction = (e, queryName) => {
   //   if (e === null) {
   //     searchParams.delete(queryName);
@@ -35,24 +35,27 @@ const Phones = (props) => {
   //   }
   // };
 
-  const paramsFunction = useCallback((e, queryName)=> {
-        if (e === '') {
-          searchParams.delete(queryName);
-          setSearchParams(searchParams);
-        } else {
-          searchParams.set(queryName, e);
-          setSearchParams(searchParams);
-        }
-  },[setSearchParams,searchParams])
+  const paramsFunction = useCallback(
+    (e, queryName) => {
+      if (e === "") {
+        searchParams.delete(queryName);
+        setSearchParams(searchParams);
+      } else {
+        searchParams.set(queryName, e);
+        setSearchParams(searchParams);
+      }
+    },
+    [setSearchParams, searchParams]
+  );
 
   useEffect(() => {
     brandParam ? setBrand(brandParam) : setBrand("");
     typeParam ? setType(typeParam) : setType("");
     sortParam ? setSort(sortParam) : setSort("");
-  }, [searchParams,typeParam,sortParam,brandParam]);
+  }, [searchParams, typeParam, sortParam, brandParam]);
 
   const filtersClickHandler = () => {
-    setFiltersClick(prev => !prev);
+    setFiltersClick((prev) => !prev);
   };
 
   const setNumberOfItemsHandler = useCallback(
@@ -67,7 +70,7 @@ const Phones = (props) => {
       setBrand(e);
       paramsFunction(e, "brand");
     },
-    [setBrand,paramsFunction]
+    [setBrand, paramsFunction]
   );
 
   const setSortHandler = useCallback(
@@ -75,7 +78,7 @@ const Phones = (props) => {
       setSort(e);
       paramsFunction(e, "sort");
     },
-    [setSort,paramsFunction]
+    [setSort, paramsFunction]
   );
 
   const setTypeHandler = useCallback(
@@ -83,8 +86,9 @@ const Phones = (props) => {
       setType(e);
       paramsFunction(e, "type");
     },
-    [setType,paramsFunction]
+    [setType, paramsFunction]
   );
+   
 
   return (
     <div className={classes.container}>
@@ -106,7 +110,6 @@ const Phones = (props) => {
           }}
         >
           <div className={classes.priceRangeContainer}>
-            <h4>Price:</h4>
             <RangePrice priceRange={priceRange} setPriceRange={setPriceRange} />
           </div>
 
@@ -120,7 +123,7 @@ const Phones = (props) => {
         </motion.div>
         )
       </AnimatePresence>
-
+          
       <motion.button
         layout
         transition={{ duration: 0.2 }}

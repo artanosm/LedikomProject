@@ -32,7 +32,7 @@ const TypeFilter = ({ type, setType }) => {
         color="magenta"
         sx={{
           m: 1,
-          minWidth: { xs: "80%", sm: 120 },
+          minWidth: { xs: "80%", sm: '300px', md:120 },
           "&.MuiFormControl-root": {
             margin: 0,
           },

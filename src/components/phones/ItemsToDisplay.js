@@ -24,7 +24,7 @@ const menuItemStyles = {
   },
 };
 
-const options = [24,48,96];
+const options = [6,12,24,48,96];
 const ItemsToDisplay = ({ numberOfItems, setNumberOfItems }) => {
   return (
     <ThemeProvider theme={theme}>

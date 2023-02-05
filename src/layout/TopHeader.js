@@ -10,7 +10,7 @@ const TopHeader = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const searchQuery = searchRef.current.value;
-    navigate(`/search?query=${searchQuery}`);
+    navigate(`/search?search=${searchQuery}`);
   };
 
   return (

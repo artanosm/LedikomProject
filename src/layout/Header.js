@@ -99,7 +99,7 @@ const Header = (props) => {
 
       <div className="cart">
         {!authCtx.user && (
-          <Link to={authCtx.user ? "/profile" : "/login"}>
+          <Link to={authCtx.user ? "/profile" : "/login"} onClick={closeMobileMenu}>
             <Avatar sx={{ width: 32, height: 32, bgcolor: "black" }}>
               <PersonOutlineOutlinedIcon fontSize="medium" />
             </Avatar>
@@ -121,6 +121,7 @@ const Header = (props) => {
                 aria-expanded={open ? "true" : undefined}
               >
                 {authCtx.user ? (
+                  
                   <Avatar
                     sx={{ width: 32, height: 32}}
                     src={authCtx.userData?.photoProfile}

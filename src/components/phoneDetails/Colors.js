@@ -6,9 +6,9 @@ const Colors = ({ phoneColors, setColorImg, colorImg }) => {
 
   // const colors = Object.keys(phoneColors).map((col, i) => {
   //   return (
-  //     phoneColors[col].hex && (
+  //     phoneColors[col]?.hex && (
   //         <ColorItem
-  //           key={col}
+  //           key={i}
   //           color={phoneColors[col]}
   //           colorImg={colorImg}
   //           setColorImg={setColorImg}
@@ -17,6 +17,7 @@ const Colors = ({ phoneColors, setColorImg, colorImg }) => {
   //     );
   //   });
 
+  //   console.log(colors)
   return (
     <Fragment>
       <h4 className={classes.title}>Colors:</h4>

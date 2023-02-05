@@ -68,7 +68,7 @@ useEffect(() => {
               );
             })}
           </div>
-          <h5>Total: {order.totalAmount} $</h5>
+          <h4>Total: {order.totalAmount} $</h4>
         </Link>
       ))}
     </div>

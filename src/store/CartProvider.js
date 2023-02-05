@@ -1,10 +1,32 @@
 import { useReducer } from "react";
 import CartContext from "./cart-context";
 import React from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../components/firebase";
 
-let defaultCartState;
+let   defaultCartState;
 
 if (JSON.parse(window.localStorage.getItem("cartItems")) !== null) {
+  let itemsA = JSON.parse(window.localStorage.getItem("cartItems"));
+  let itemsB = [];
+  let totalAmountB = 0;
+
+  itemsA.forEach((item) => {
+    let docRef = doc(db, "products", item.model.replace(/\s/g, "-"));
+    getDoc(docRef).then((doc) => {
+      const data = doc.data().storage;
+      for (const storage in data) {
+        if (item.storage === data[storage].storage) {
+          let priceItem = +data[storage].price * +item.amount;
+          totalAmountB += +priceItem;
+          itemsB.push({ ...item, price: +data[storage].price });
+        }
+      }
+      localStorage.setItem("cartItems", JSON.stringify(itemsB));
+      localStorage.setItem("cartTotalAmount", JSON.stringify(totalAmountB));
+    });
+  });
+
   defaultCartState = {
     items: JSON.parse(window.localStorage.getItem("cartItems")),
     totalAmount: JSON.parse(window.localStorage.getItem("cartTotalAmount")),
@@ -15,8 +37,6 @@ if (JSON.parse(window.localStorage.getItem("cartItems")) !== null) {
     totalAmount: 0,
   };
 }
-
-
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD") {

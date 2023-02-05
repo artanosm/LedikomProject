@@ -10,7 +10,7 @@ const ColorItem = ({ colorA, colorImg, setColorImg }) => {
       whileHover={{ scale: 1.1 }}
       transition={{ duration: 0.1 }}
       className={`${classes.colorsItem} ${
-      colorImg?.hex === colorA.hex ? classes.active : ""
+      colorImg?.hex === colorA?.hex ? classes.active : ""
       }`}
       onClick={() => {    
         setColorImg(colorA);        

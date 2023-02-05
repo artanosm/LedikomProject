@@ -26,7 +26,7 @@ const CheckOutForm = ({ cartItems, totalAmount }) => {
 
   const authCtx = useContext(AuthContext);
   const cartCtx = useContext(CartContext);
-
+  console.log(cartCtx)
   const randomString = v4();
 
   const initialValues = {
@@ -53,7 +53,8 @@ const CheckOutForm = ({ cartItems, totalAmount }) => {
       date: new Date().toString().slice(0, 25),
       serverDate: serverTimestamp(),
       id: randomString,
-      cartItems: JSON.parse(JSON.stringify(cartItems)),
+      cartItems: cartCtx.items,
+      // cartItems: JSON.parse(JSON.stringify(cartItems)),
       orderCompleted: false,
       name: values.name,
       email: values.email,

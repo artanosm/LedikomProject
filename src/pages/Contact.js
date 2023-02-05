@@ -11,9 +11,7 @@ export const Contact = () => {
       <div></div>
       <div className={classes.infoContainer}>
         <h3>Contact Info</h3>
-        <Link to='/orders'>
-        Orders
-        </Link>
+        <Link to="/orders">Orders</Link>
         <p>
           <span>
             <RoomOutlinedIcon fontSize="smaller" />

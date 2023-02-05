@@ -19,7 +19,9 @@
   position: fixed;
   height: 100px;
   width: 230px;
-  background-color: colors.$green;
+  // background-color: colors.$green;
+  background-color:  #23cf00bf;
+  backdrop-filter: blur(10px);
   border-radius: 15px;
   gap: 0.5rem;
 }

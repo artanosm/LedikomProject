@@ -2,7 +2,13 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CheckIcon from "@mui/icons-material/Check";
 import { AnimatePresence, motion } from "framer-motion";
 import { Fragment, useCallback, useContext, useEffect, useState } from "react";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import {
+  useLocation,
+  useParams,
+  useSearchParams,
+  // useNavigate,
+  
+} from "react-router-dom";
 import CartContext from "../../store/cart-context";
 import Loader from "../../ui/Loader";
 import Colors from "./Colors";
@@ -14,6 +20,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 const PhoneDetails = () => {
   const location = useLocation();
+  // const navigate = useNavigate();
   const cartCtx = useContext(CartContext);
   const { phoneId } = useParams();
 
@@ -116,9 +123,10 @@ const PhoneDetails = () => {
       searchParams.set("storage", e.storage);
       setSearchParams(searchParams);
     },
+    
     [setStorage, searchParams, setSearchParams]
-  );
-
+    );
+  
   const addItemToCart = () => {
     setAlert(() => true);
     setTimeout(() => setAlert(() => false), 2000);

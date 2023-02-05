@@ -2,11 +2,14 @@
 @use '../sass/abstracts/mixins' as *;
 @use '../sass/abstracts/colors';
 
+
+
 .container {
-  margin: 2vw;
   @include flex-center(center,column);
-  // display: flex;
-  // flex-direction: column;
+  background-color: colors.$white;
+  // padding: 2vw;
+  // margin: 2vw;
+
 }
 .container h2 {
   color: colors.$dark-blue;
@@ -23,4 +26,5 @@
     font-size: large;
     margin-bottom: 1rem;
   }
+ 
 }
