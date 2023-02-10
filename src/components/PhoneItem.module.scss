@@ -7,14 +7,25 @@
   margin: 0;
   padding: 0;
   cursor: pointer;
+  max-width: 250px;
+}
+
+.main {
+  max-width: 250px;
+
+  // min-width: 100px;
+  // width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   @include flex-center(space-evenly, column);
   height: auto;
   width: 100%;
+  // width: 250px;
   max-width: 250px;
-  min-width: 100px;
+  // min-width: 100px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
   color: colors.$dark-blue;
@@ -37,6 +48,7 @@
   aspect-ratio: 1/1;
   height: auto;
   max-height: 220px;
+  // max-width: 200px;
 }
 
 .brand {
@@ -65,7 +77,8 @@
 
 @media only screen and (max-width: 610px) {
   .a {
-    width: 48%;
+    // width: 48%;
+    max-width: 165px;
   }
 
   .container {
@@ -73,7 +86,7 @@
     padding: 1rem 0.2rem;
     margin: 0;
     border: none;
-    align-content: stretch
+    align-content: stretch;
   }
 
   // .container {
@@ -90,7 +103,8 @@
     flex-wrap: wrap;
   }
 
-  .model, .price {
+  .model,
+  .price {
     text-align: center;
   }
   .image {

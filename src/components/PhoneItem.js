@@ -28,6 +28,7 @@ const PhoneItem = ({ phone, id, storage, colors, model, brand, price }) => {
       className={classes.a}
     >
       <motion.div
+      className={classes.main}
         initial="offscreen"
         whileInView="onscreen"
         viewport={{ once: true, amount: 0.2 }}
