@@ -1,0 +1,22 @@
+@use '../../sass/abstracts/mixins' as *;
+@use '../../sass/abstracts/colors';
+
+
+.container {
+    @include flex-center(center);
+    background-color: colors.$white;
+    flex-wrap: wrap;
+    height: auto;
+    width: 100%;
+    gap: 2rem;
+    padding: 2rem 3rem;
+    z-index: 1;
+}
+
+@media only screen and (max-width: 800px) {
+    .container {
+        margin: 0;
+        padding: 0 ;
+        gap: 1rem;
+    }
+  }

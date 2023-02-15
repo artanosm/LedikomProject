@@ -2,7 +2,8 @@
 @use "../../sass/abstracts/mixins" as *;
 
 .mainContainer {
-  // z-index: -10;
+  position: relative;
+  z-index: -10;
   background-image: url("https://admin.ledikom.mk/uploads/banners/8/1652861506-8.jpg?v=1");
   background-size: cover;
   background-repeat: no-repeat;
@@ -13,12 +14,16 @@
   h4 {
     color: colors.$white;
     margin: 1rem;
-    text-shadow: black 1px 1px 5px;
+    text-shadow: colors.$black 1px 1px 5px;
   }
 }
 
 @media only screen and (max-width: 770px) {
   .mainContainer {
     display: none;
+    // height: 200px;
+    // h1 {
+    //   font-size: 1.3rem;
+    // }
   }
 }

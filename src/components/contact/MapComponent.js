@@ -11,9 +11,8 @@ const MapComponent = () => {
         height: "600px",
         paddingBottom: "2rem",
       }}
-      allowfullscreen=""
       loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
+      referrerPolicy="no-referrer-when-downgrade"
     ></iframe>
   );
 };

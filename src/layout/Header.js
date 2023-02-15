@@ -1,11 +1,11 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../store/auth-context";
 import { Link, useNavigate } from "react-router-dom";
-import { ReactComponent as CloseMenu } from "../assets/x.svg";
-import { ReactComponent as MenuIcon } from "../assets/menu.svg";
+// import { ReactComponent as CloseMenu } from "../assets/x.svg";
+// import { ReactComponent as MenuIcon } from "../assets/menu.svg";
 import { motion } from "framer-motion";
 import HeaderCart from "./HeaderCart";
-import "./Header.scss";
+import classes from "./Header.module.scss";
 import {
   Avatar,
   Menu,
@@ -14,6 +14,7 @@ import {
   IconButton,
   Tooltip,
 } from "@mui/material";
+import { Turn as Hamburger } from 'hamburger-react'
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 import Logout from "@mui/icons-material/Logout";
@@ -21,20 +22,35 @@ import Logout from "@mui/icons-material/Logout";
 const Header = (props) => {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const token = sessionStorage.getItem('token')
+  const token = sessionStorage.getItem("token");
 
   const [click, setClick] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleMenuClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
+  const handleMenuClick = () => {
+    if (!click) {
+      props.onDisableScroll();
+    }
+    if (click) {
+      props.onEnableScroll();
+    }
+    setClick(!click);
+  };
+
+  const closeMobileMenu = () => {
+    props.onEnableScroll();
+    setClick(false);
+  };
 
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
+    props.onEnableScroll();
+    setClick(false)
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
+    props.onEnableScroll();
     setAnchorEl(null);
   };
 
@@ -45,61 +61,89 @@ const Header = (props) => {
 
   useEffect(() => {
     if (!token) {
-      authCtx.logOut()
+      authCtx.logOut();
     }
-  }, [token])
-  
+  }, [token]);
 
   return (
-    <div className="header">
+    <div
+      // className={"header"}
+      className={classes.header}
+    >
       <motion.div
-        className="logo-container"
+        // className="logo-container"
+        className={classes.logoContainer}
         initial={{ rotate: 0 }}
         animate={{ rotate: [15, -15, 0] }}
         transition={{ duration: 0.5 }}
       >
         <Link to="/" onClick={closeMobileMenu}>
           <img
-            className="img"
+            // className="img"
+            className={classes.img}
             alt="Logo"
             src="https://ledikom.mk/assets/ledikom/images/logo.png?v=1"
           />
         </Link>
       </motion.div>
 
-      <ul className={click ? "nav-options active" : "nav-options"}>
+      <ul
+        // className={click ? "nav-options active" : "nav-options"}
+        className={
+          click ? `${classes.navOptions} ${classes.active}` : classes.navOptions
+        }
+      >
         <li
-          className={click ? "option activeOption" : "option"}
+          // className={click ? "option activeOption" : "option"}
+          // className={click ? `${classes.option} ${classes.activeOption}` : classes.option}
+          className={
+            click ? `${classes.option} ${classes.activeOption}` : classes.option
+          }
           onClick={closeMobileMenu}
         >
           <Link to="/">Home</Link>
         </li>
-        {click && <hr />}
+        <hr />
         <li
-          className={click ? "option activeOption" : "option"}
+          // className={click ? "option activeOption" : "option"}
+          className={
+            click ? `${classes.option} ${classes.activeOption}` : classes.option
+          }
           onClick={closeMobileMenu}
         >
           <Link to="/phones">Phones</Link>
         </li>
-        {click && <hr />}
+        <hr />
         <li
-          className={click ? "option activeOption" : "option"}
+          // className={click ? "option activeOption" : "option"}
+          className={
+            click ? `${classes.option} ${classes.activeOption}` : classes.option
+          }
           onClick={closeMobileMenu}
         >
           <Link to="/service">Service</Link>
         </li>
-        {click && <hr />}
+        <hr />
         <li
-          className={click ? "option activeOption" : "option"}
+          // className={click ? "option activeOption" : "option"}
+          className={
+            click ? `${classes.option} ${classes.activeOption}` : classes.option
+          }
           onClick={closeMobileMenu}
         >
           <Link to="/contact">Contact</Link>
         </li>
       </ul>
-
-      <div className="cart">
+      <div
+        className={click ? classes.overlay : ""}
+        onClick={closeMobileMenu}
+      ></div>
+      <div className={classes.cart}>
         {!authCtx.user && (
-          <Link to={authCtx.user ? "/profile" : "/login"} onClick={closeMobileMenu}>
+          <Link
+            to={authCtx.user ? "/profile" : "/login"}
+            onClick={closeMobileMenu}
+          >
             <Avatar sx={{ width: 32, height: 32, bgcolor: "black" }}>
               <PersonOutlineOutlinedIcon fontSize="medium" />
             </Avatar>
@@ -107,7 +151,8 @@ const Header = (props) => {
         )}
         {authCtx.user && (
           <motion.div
-            className="icon"
+            // className="icon"
+            className={classes.icon}
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.1 }}
           >
@@ -115,15 +160,13 @@ const Header = (props) => {
               <IconButton
                 onClick={handleClick}
                 size="medium"
-                // sx={{ ml: 2 }}
                 aria-controls={open ? "account-menu" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
                 {authCtx.user ? (
-                  
                   <Avatar
-                    sx={{ width: 32, height: 32}}
+                    sx={{ width: 32, height: 32 }}
                     src={authCtx.userData?.photoProfile}
                   />
                 ) : (
@@ -218,14 +261,24 @@ const Header = (props) => {
           </motion.div>
         )}
         {/* </Link> */}
-        <HeaderCart className="cart" onClick={props.onShowCart} />
+        {/* <HeaderCart className={classes.cart} onClick={props.onShowCart} /> */}
+        <HeaderCart
+          className={classes.cart}
+          onClick={() => {
+            closeMobileMenu();
+            props.onShowCart();
+          }}
+        />
       </div>
-      <div className="mobile-menu" onClick={handleMenuClick}>
-        {click ? (
-          <CloseMenu className="menu-icon" />
+      <div className={classes.mobileMenu} onClick={handleMenuClick}>
+      <Hamburger duration={.5} rounded color="white" distance="md" size={26} toggled={click} toggle={handleMenuClick} />
+
+ 
+        {/* {click ? (
+          <CloseMenu className={classes.menuIcon} />
         ) : (
-          <MenuIcon className="menu-icon" />
-        )}
+          <MenuIcon className={classes.menuIcon} />
+        )} */}
       </div>
     </div>
   );

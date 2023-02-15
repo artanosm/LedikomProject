@@ -3,9 +3,9 @@ import classes from "./FreeDelivery.module.scss";
 import { useParallax } from "react-scroll-parallax";
 
 const FreeDelivery = () => {
-  const image = useParallax({ speed: -10 });
-  const text = useParallax({ speed:5 });
-  const title = useParallax({ speed: 5 });
+  const image = useParallax({ speed: -15 });
+  const text = useParallax({ speed:0 });
+  const title = useParallax({ speed: 0 });
 
   return (
 

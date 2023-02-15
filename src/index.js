@@ -5,17 +5,27 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import CartProvider from "./store/CartProvider";
+import { ParallaxProvider } from "react-scroll-parallax";
+import ScrollToTop from "../src/ScrollToTop";
 // import ServiceProvider from "./store/ServiceProvider";
+import { AuthContextProvider } from "./store/auth-context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Router>
-      <CartProvider>
-        {/* <ServiceProvider> */}
-          <App />
-        {/* </ServiceProvider> */}
-      </CartProvider>
+      <ParallaxProvider>
+        <ScrollToTop>
+        <AuthContextProvider>
+
+          <CartProvider>
+            {/* <ServiceProvider> */}
+            <App />
+            {/* </ServiceProvider> */}
+          </CartProvider>
+        </AuthContextProvider>
+        </ScrollToTop>
+      </ParallaxProvider>
     </Router>
   </React.StrictMode>
 );

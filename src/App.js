@@ -23,11 +23,8 @@ import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
 import Search from "./pages/Search";
 import Contact from "./pages/Contact";
 import OrderDetail from "./components/profile/OrderDetail";
-import ScrollToTop from "./ScrollToTop";
 
-import { AuthContextProvider } from "./store/auth-context";
-import { ParallaxProvider } from 'react-scroll-parallax';
-
+// import { AuthContextProvider } from "./store/auth-context";
 
 import CartContext from "./store/cart-context";
 
@@ -44,50 +41,58 @@ function App() {
   }, [cartI, cartTA]);
 
   const showCartHandler = () => {
+    disableScroll();
     setCartIsShown(true);
   };
   const hideCartHandler = () => {
-    window.document.body.style.overflow = "unset";
+    enableScroll();
+    // window.document.body.style.overflow = "unset";
     setCartIsShown(false);
   };
 
+  const disableScroll = () => {
+    window.document.body.style.overflow = "hidden";
+  };
+  const enableScroll = () => {
+    window.document.body.style.overflow = "unset";
+  };
   return (
-    <AuthContextProvider>
-    <ParallaxProvider>
-
-  
-      <ScrollToTop>
-        {cartIsShown && (
-          <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
-        )}
-        <TopHeader />
-        <Header onShowCart={showCartHandler} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/addPhone" element={<AddPhone />} />
-          <Route path="/addService" element={<AddService />} />
-          <Route path="/phones" element={<Phones />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/service" element={<Service />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/service/:brand" element={<ServiceBrand />} />
-          <Route
-            path="/service/:brand/:serviceId"
-            element={<PhoneServiceDetails />}
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/orders" element={<MyOrders />} />
-          <Route path="/profile/orders/:orderId" element={<OrderDetail />} />
-          <Route path="/checkout" element={<CheckOut />} />
-          <Route path="/phones/:phoneId" element={<PhoneDetails />} />
-        </Routes>
-        <Footer />
-      </ScrollToTop>
-      </ParallaxProvider>
-    </AuthContextProvider>
+    // <AuthContextProvider>
+    <>
+      {cartIsShown && (
+        <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
+      )}
+      <TopHeader />
+      <Header
+        onShowCart={showCartHandler}
+        onDisableScroll={disableScroll}
+        onEnableScroll={enableScroll}
+      />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/addPhone" element={<AddPhone />} />
+        <Route path="/addService" element={<AddService />} />
+        <Route path="/phones" element={<Phones />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/service" element={<Service />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/service/:brand" element={<ServiceBrand />} />
+        <Route
+          path="/service/:brand/:serviceId"
+          element={<PhoneServiceDetails />}
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/orders" element={<MyOrders />} />
+        <Route path="/profile/orders/:orderId" element={<OrderDetail />} />
+        <Route path="/checkout" element={<CheckOut />} />
+        <Route path="/phones/:phoneId" element={<PhoneDetails />} />
+      </Routes>
+      <Footer />
+    </>
+    // </AuthContextProvider>
   );
 }
 

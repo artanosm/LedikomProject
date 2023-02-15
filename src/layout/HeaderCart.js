@@ -8,9 +8,7 @@ const HeaderCart = (props) => {
   const cartCtx = useContext(CartContext);
   const numberOfItems = cartCtx.items?.length;
   const onCartClickHandler = () => {
-    // window.scroll(0,0)
- 
-    props.onClick()
+     props.onClick()
   }
 
   return (

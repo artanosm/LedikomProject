@@ -6,7 +6,6 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import {IconButton} from "@mui/material";
 
-// const CartItem = ({ brand,price, amount, model, id, color, storage }) => {
 const CartItem = ({item}) => {
   const { brand,price, amount, model, id, color, storage } = item;
   const cartCtx = useContext(CartContext);

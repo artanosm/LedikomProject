@@ -3,10 +3,13 @@ import classes from "./PhoneItem.module.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+
+const PhoneItem = ({ phone, id, storage, colors, model, price,animation=false }) => {
+
 const cardVariants = {
   offscreen: {
-    y: 200,
-    opacity:0
+    y: animation ? 200 : 0,
+    opacity: animation ? 0 :1
   },
   onscreen: {
     y: 0,
@@ -18,7 +21,6 @@ const cardVariants = {
   },
 };
 
-const PhoneItem = ({ phone, id, storage, colors, model, brand, price }) => {
   return (
     <Link
       to={`/phones/${id}?color=${
@@ -31,7 +33,7 @@ const PhoneItem = ({ phone, id, storage, colors, model, brand, price }) => {
       className={classes.main}
         initial="offscreen"
         whileInView="onscreen"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once:true, amount: 0.2 }}
       >
         <motion.div className={classes.container} variants={cardVariants}>
           <img

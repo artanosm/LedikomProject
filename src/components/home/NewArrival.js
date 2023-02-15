@@ -57,7 +57,7 @@ const NewArrival = () => {
       >
         <Link to={"/phones/Z-Fold-4?color=Black&storage=256+GB"}>
           <h2>Z Fold 4</h2>
-          <motion.img
+          <img className={classes.secondImg}
    
             alt="z fold 4"
             src="https://admin.ledikom.mk/uploads/banners/5/1664009729-5.jpg?v=1"
