@@ -8,9 +8,9 @@ import SortItems from "../components/phones/SortItems";
 import ItemsToDisplay from "../components/phones/ItemsToDisplay";
 import FilterListOutlinedIcon from "@mui/icons-material/FilterListOutlined";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import { motion, AnimatePresence } from "framer-motion";
+import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useSearchParams } from "react-router-dom";
-
+import { motion } from "framer-motion";
 
 const Phones = (props) => {
   const [filtersClick, setFiltersClick] = useState(false);
@@ -25,15 +25,6 @@ const Phones = (props) => {
   let brandParam = searchParams.get("brand");
   let typeParam = searchParams.get("type");
   let sortParam = searchParams.get("sort");
-  // const paramsFunction = (e, queryName) => {
-  //   if (e === null) {
-  //     searchParams.delete(queryName);
-  //     setSearchParams(searchParams);
-  //   } else {
-  //     searchParams.set(queryName, e);
-  //     setSearchParams(searchParams);
-  //   }
-  // };
 
   const paramsFunction = useCallback(
     (e, queryName) => {
@@ -58,6 +49,14 @@ const Phones = (props) => {
     setFiltersClick((prev) => !prev);
   };
 
+  const clearFilterHandler = () => {
+    setBrand("");
+    setSort("");
+    setType("");
+    setNumberOfItems(24);
+    setPriceRange([10,1500])
+  };
+
   const setNumberOfItemsHandler = useCallback(
     (e) => {
       setNumberOfItems(e);
@@ -69,6 +68,7 @@ const Phones = (props) => {
     (e) => {
       setBrand(e);
       paramsFunction(e, "brand");
+
     },
     [setBrand, paramsFunction]
   );
@@ -77,6 +77,7 @@ const Phones = (props) => {
     (e) => {
       setSort(e);
       paramsFunction(e, "sort");
+
     },
     [setSort, paramsFunction]
   );
@@ -85,63 +86,61 @@ const Phones = (props) => {
     (e) => {
       setType(e);
       paramsFunction(e, "type");
+
     },
     [setType, paramsFunction]
   );
-   
 
   return (
-    <div className={classes.container}>
-      <AnimatePresence initial={false}>
-        (
-        <motion.div
-          key="filter"
-          className={
-            filtersClick
-              ? `${classes.filterContainer} ${classes.active}`
-              : classes.filterContainer
-          }
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{
-            // y: -100,
-            opacity: 0,
-            transition: { duration: 0.1 },
-          }}
-        >
-          <div className={classes.priceRangeContainer}>
-            <RangePrice priceRange={priceRange} setPriceRange={setPriceRange} />
-          </div>
-
-          <Brand brand={brand} setBrand={setBrandHandler} />
-          <TypeFilter brand={brand} type={type} setType={setTypeHandler} />
-          <SortItems sort={sort} setSort={setSortHandler} />
-          <ItemsToDisplay
-            numberOfItems={numberOfItems}
-            setNumberOfItems={setNumberOfItemsHandler}
-          />
-        </motion.div>
-        )
-      </AnimatePresence>
-          
-      <motion.button
-        layout
-        transition={{ duration: 0.2 }}
-        className={classes.showFilter}
-        onClick={filtersClickHandler}
+    <motion.div
+      // initial={{ opacity: 0.6 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0.6 }}
+      // transition={{ duration: .3 }}
+      className={classes.container}
+    >
+      <div
+        className={
+          filtersClick
+            ? `${classes.filterContainer} ${classes.active}`
+            : classes.filterContainer
+        }
       >
-        {filtersClick ? (
-          <span>
-            Close
-            <CloseOutlinedIcon />
-          </span>
-        ) : (
-          <span>
-            Filter
-            <FilterListOutlinedIcon />
-          </span>
+        {/* <div className={classes.priceRangeContainer}>
+        </div> */}
+        <RangePrice priceRange={priceRange} setPriceRange={setPriceRange} />
+        <Brand brand={brand} setBrand={setBrandHandler} />
+        <TypeFilter brand={brand} type={type} setType={setTypeHandler} />
+
+        <SortItems sort={sort} setSort={setSortHandler} />
+        <ItemsToDisplay
+          numberOfItems={numberOfItems}
+          setNumberOfItems={setNumberOfItemsHandler}
+        />
+      </div>
+      <div className={classes.buttonsContainer}>
+        <button className={classes.showFilter} onClick={filtersClickHandler}>
+          {filtersClick ? (
+            <span>
+              Close
+              <CloseOutlinedIcon />
+            </span>
+          ) : (
+            <span>
+              Filters
+              <FilterListOutlinedIcon />
+            </span>
+          )}
+        </button>
+        {filtersClick &&  (
+          <button className={classes.clearFilter} onClick={clearFilterHandler}>
+            <span>
+              Clear
+              <ClearAllIcon />
+            </span>
+          </button>
         )}
-      </motion.button>
+      </div>
 
       <PhonesList
         layout
@@ -152,7 +151,7 @@ const Phones = (props) => {
         numberOfItems={numberOfItems}
         searchQuery={props.searchQuery}
       />
-    </div>
+    </motion.div>
   );
 };
 

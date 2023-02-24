@@ -1,6 +1,6 @@
 @use "../sass/abstracts/mixins" as *;
 .main {
-  @include flex-center(space-between,row,none);
+  @include flex-center(center,row,none);
   flex-wrap: wrap;
   gap: 1rem;
   margin: 2rem;

@@ -1,7 +1,8 @@
-import classes from "./RangePrice.module.scss";
+// import classes from "./RangePrice.module.scss";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Slider from "@mui/material/Slider";
+import { Typography } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -16,7 +17,6 @@ const theme = createTheme({
 export default function RangePrice({ priceRange, setPriceRange }) {
   function valuetext(value) {
     return `${value}`;
-    // return value + ''
   }
   const handleChange = (event, newValue) => {
     setPriceRange(newValue);
@@ -24,9 +24,12 @@ export default function RangePrice({ priceRange, setPriceRange }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Box sx={{ width: {xs:'100%', md:250} }}>
-        <div className={classes.valueContainer}>
-          <p>Price:</p>
+      <Box display='flex' alignItems={'center'} justifyContent={'space-between'} gap='1rem' sx={{ 
+          minWidth: { xs: "90%", sm: '300px', md:'250px' },
+          marginTop:{xs:'1.3rem'},
+         }}>
+
+          <Typography fontSize={{xs:14,md:16}} color='gray'>Price:</Typography>
           <Slider
             size="small"
             min={0}
@@ -48,7 +51,6 @@ export default function RangePrice({ priceRange, setPriceRange }) {
               },
               "& .MuiSlider-valueLabel": {
                 lineHeight: 1,
-                fontSize: 10,
                 background: "unset",
                 padding: 0,
                 width: 25,
@@ -61,14 +63,18 @@ export default function RangePrice({ priceRange, setPriceRange }) {
                 "&:before": { display: "none" },
                 "&.MuiSlider-valueLabelOpen": {
                   transform: "translate(50%, -80%) rotate(-45deg) scale(1)",
+            
                 },
+                "& .MuiSlider-valueLabelLabel": {
+            fontSize:'10px'
+                },
+
                 "& > *": {
                   transform: "rotate(45deg)",
                 },
               },
             }}
           />
-        </div>
       </Box>
     </ThemeProvider>
   );

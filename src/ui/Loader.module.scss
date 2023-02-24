@@ -1,14 +1,14 @@
-@use '../sass/abstracts/colors';
+// @use '../sass/abstracts/colors';
 
 
-@keyframes spinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+// @keyframes spinner {
+//     0% {
+//       transform: rotate(0deg);
+//     }
+//     100% {
+//       transform: rotate(360deg);
+//     }
+//   }
 
   .spinnerContainer {
     display: flex;
@@ -16,11 +16,11 @@
     padding: 5%;
  
   }
-  .loadingSpinner {
-    width: 50px;
-    height: 50px;
-    border: 5px solid colors.$white;
-    border-top: 5px solid colors.$magenta-color;
-    border-radius: 50%;
-    animation: spinner 1.5s linear infinite;
-  }
+  // .loadingSpinner {
+  //   width: 50px;
+  //   height: 50px;
+  //   border: 5px solid colors.$white;
+  //   border-top: 5px solid colors.$magenta-color;
+  //   border-radius: 50%;
+  //   animation: spinner 1.5s linear infinite;
+  // }

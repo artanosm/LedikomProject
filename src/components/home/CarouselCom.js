@@ -2,14 +2,15 @@ import React from "react";
 import PhoneItem from "../PhoneItem";
 import Carousel from "react-elastic-carousel";
 import './CarouselCom.css'
-
+// import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+// import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const getMultipleRandom = (arr) => {
   const shuffled = [...arr].sort(() => 0.5 - Math.random());
   return shuffled;
 };
 
-const CarouselCom = ({phones, isLoading = false}) => {
+const CarouselCom = ({phones, isLoading=false}) => {
 
 // const arrowTheme = {
 //     fontSize: '2rem',
@@ -21,8 +22,10 @@ const CarouselCom = ({phones, isLoading = false}) => {
 //   const myArrow = ({ type, onClick, isEdge }) => {
 //     const pointer =
 //       type === consts.PREV ? (
+     
 //         <ArrowBackIosIcon sx={{...arrowTheme}} />
 //       ) : (
+        
 //         <ArrowForwardIosIcon sx={{...arrowTheme}} />
 //       );
 
@@ -52,11 +55,12 @@ const CarouselCom = ({phones, isLoading = false}) => {
     // { width: 1750, itemsToShow: 5 },
   ];
 
-  const randomized = getMultipleRandom(phones).slice(0,12)
+  const randomized = getMultipleRandom(phones).slice(0,14)
 
   const phoneItems = randomized.map((phone, i) => {
     return (
       <PhoneItem
+      isLoading={isLoading}
         date={phone.date}
         phone={phone}
         type={phone.type}
@@ -72,12 +76,13 @@ const CarouselCom = ({phones, isLoading = false}) => {
   });
 
   return (
-    <>
+    <div className="main">
 
       <Carousel
+        // itemPadding={[10]}
         // renderArrow={myArrow}
-        // itemPadding={[10, 50]}
-        // itemPadding={[5, 30]}
+        enableAutoPlay={true}
+        autoPlaySpeed={4000}
         enableSwipe={true}
         pagination={true}
         breakPoints={breakPoints}
@@ -85,7 +90,7 @@ const CarouselCom = ({phones, isLoading = false}) => {
       
         {phoneItems}
       </Carousel>
-    </>
+    </div>
   );
 };
 

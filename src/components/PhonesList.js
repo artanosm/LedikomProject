@@ -64,14 +64,14 @@ const PhonesList = ({
     ));
 
   if (sort) {
-    if (sort === "ascending") {
+    if (sort === "Ascending") {
       phones = phones.sort(
         (a, b) =>
           parseFloat(a.storage.storage1.price) -
           parseFloat(b.storage.storage1.price)
       );
     }
-    if (sort === "descending") {
+    if (sort === "Descending") {
       phones = phones.sort(
         (a, b) =>
           parseFloat(b.storage.storage1.price) -
@@ -84,6 +84,7 @@ const PhonesList = ({
     if (!priceRange) {
       return (
         <PhoneItem
+          isLoading={isLoading}
           date={phone.date}
           phone={phone}
           type={phone.type}
@@ -104,6 +105,8 @@ const PhonesList = ({
     ) {
       return (
         <PhoneItem
+                  isLoading={isLoading}
+
           date={phone.date}
           phone={phone}
           type={phone.type}
@@ -123,7 +126,7 @@ const PhonesList = ({
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div className={classes.container}>{phoneItems}</div>
     </>
   );

@@ -1,7 +1,6 @@
 @use "../sass/abstracts/mixins" as *;
 @use "../sass/abstracts/colors";
 
-
 .icon {
   padding-top: 0.3rem;
   color: colors.$white;
@@ -49,7 +48,7 @@
   list-style-type: none;
   z-index: 2;
   height: 100%;
-  hr{
+  hr {
     display: none;
   }
 }
@@ -111,7 +110,9 @@
     grid-gap: 0;
     overflow-x: hidden;
     list-style-type: none;
-    border-radius: 10px;
+    // border-radius: 10px;
+    border-radius: 0 0 30px 30px;
+
     transition: all 0.4s ease;
     background: colors.$black;
   }
@@ -123,7 +124,7 @@
   }
 
   .navOptions hr {
-    display:block;
+    display: block;
     height: 1px;
     background-color: colors.$dark-gray;
     width: 70%;
@@ -150,9 +151,12 @@
     }
   }
   // .option.activeOption {
-  //   @include flex-center(center, column);
-  //   height: 10vw;
-  //   padding: 30px 0px;
+  // a {
+
+  // }
+  // @include flex-center(center, column);
+  // height: 10vw;
+  // padding: 30px 0px;
   // }
 
   .mobileMenu {
@@ -162,5 +166,4 @@
     // margin-left: 1rem;
     @include flex-center(space-between);
   }
-
 }

@@ -1,49 +1,37 @@
-@use '../../sass/abstracts/mixins' as *;
-@use '../../sass/abstracts/colors';
+@use "../../sass/abstracts/mixins" as *;
+@use "../../sass/abstracts/colors";
 
 .select {
-    height: 2rem;
-    width: 80%;
-    font-size: medium;
-    border-radius: 5px;
-    margin: 1rem 0;
+  height: 2rem;
+  width: 80%;
+  font-size: medium;
+  border-radius: 5px;
+  margin: 1rem 0;
 }
 
 .orderButton {
-    border-radius: 5px;
-    border: none;
-    padding: 5px;
-    width: 5rem;
-    margin: 1rem 0;
-    height: 2rem;
-    color:colors.$white;
-    background-color: colors.$green;
-    &:hover{
-        background-color: green;
-    
-    }
-}
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  width: 5rem;
+  margin: 1rem 0;
+  height: 2rem;
+  color: colors.$white;
+  background-color: colors.$green;
+  &:hover {
+    background-color: colors.$dark-green;
 
-.alert {
-    @include flex-center(flex-start);
-    visibility: hidden;
-    transition: all 0.5s linear;
-    padding: 1rem;
-    color: colors.$white;
-    top: 70px;
-    right: 15px;
-    z-index: 3;
-    position: fixed;
-    height: 100px;
-    width: 230px;
-    background-color: colors.$green;
-    border-radius: 15px;
-    gap: 0.5rem;
-    opacity: 0;
   }
-  
-  .alert.active {
-    transition: all 0.5s linear;
-    visibility: visible;
-    opacity: 1;
+  &:disabled {
+    background-color: colors.$white;
+    padding: 0;
+    font-size: 0;
+    border-bottom: 3px colors.$green solid;
+    border-left: 3px colors.$green solid;
+    width: 40px;
+    height: 15px;
+    rotate: -45deg;
+    border-radius: 0;
+    transition: all 0.4s;
   }
+}

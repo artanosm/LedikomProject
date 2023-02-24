@@ -52,7 +52,7 @@ const Cart = (props) => {
         {cartCtx.items.length === 0 && <h2>Your Cart is empty </h2>}
     
 
-        <button onClick={props.onClose} className={classes.closeButton}>
+        <button onClick={props.onClose}>
           <CloseIcon sx={{color: 'gray'}} fontSize="medium" />
         </button>
       </div>

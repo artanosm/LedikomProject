@@ -55,7 +55,6 @@
   }
   .multi {
     @include flex-center(center, column);
-    gap: 0.5rem;
   }
 }
 

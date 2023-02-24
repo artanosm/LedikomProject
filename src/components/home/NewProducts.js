@@ -7,6 +7,7 @@ const NewProducts = ({ phones, isLoading }) => {
   const phoneItems = phones.map((phone, i) => {
     return (
       <PhoneItem
+        // isLoading={isLoading}
         date={phone.date}
         type={phone.type}
         key={i}

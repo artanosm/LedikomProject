@@ -9,23 +9,6 @@
   gap: 1rem;
 }
 
-.alert {
-  @include flex-center(flex-start);
-  padding: 1rem;
-  color:colors.$white;
-  top: 70px;
-  right: 15px;
-  z-index: 3;
-  position: fixed;
-  height: 100px;
-  width: 230px;
-  // background-color: colors.$green;
-  background-color:  #23cf00bf;
-  backdrop-filter: blur(10px);
-  border-radius: 15px;
-  gap: 0.5rem;
-}
-
 .imageContainer {
   margin: 3rem 1rem 1rem;
   height: fit-content;
@@ -64,25 +47,24 @@ hr {
   @include flex-center(flex-start);
   flex-wrap: nowrap;
   gap: 2rem;
+  > button  {
+    @include flex-center(center);
+    background-color: colors.$light-gray;
+    border: 0 none colors.$white;
+    border-radius: 10px;
+    margin: 1rem;
+    padding: 1rem;
+    color: colors.$magenta-color;
+    box-shadow: 0 2px 10px colors.$light-gray;;
+    transition: all 0.2s ease;
+    &:hover {
+      cursor: pointer;
+      background-color: colors.$magenta-color;
+      color: colors.$white;
+    }
+  }
   h3 {
     color:colors.$dark-blue;
-  }
-}
-
-.button {
-  @include flex-center(center);
-  background-color: colors.$light-gray;
-  border: 0 none colors.$white;
-  border-radius: 10px;
-  margin: 1rem;
-  padding: 1rem;
-  color: colors.$magenta-color;
-  box-shadow: 0 2px 10px colors.$light-gray;;
-  transition: all 0.2s ease;
-  &:hover {
-    cursor: pointer;
-    background-color: colors.$magenta-color;
-    color: colors.$white;
   }
 }
 
@@ -92,12 +74,7 @@ hr {
     justify-content: flex-start;
     gap: 0;
   }
-  .alert {
-    top: 10%;
-    height: 60px;
-    border-radius: 5px;
-    padding: 1rem 0;
-  }
+
 .image {
   width: 80%;
 }

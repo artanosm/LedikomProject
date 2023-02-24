@@ -1,8 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../store/auth-context";
 import { Link, useNavigate } from "react-router-dom";
-// import { ReactComponent as CloseMenu } from "../assets/x.svg";
-// import { ReactComponent as MenuIcon } from "../assets/menu.svg";
+// fir
 import { motion } from "framer-motion";
 import HeaderCart from "./HeaderCart";
 import classes from "./Header.module.scss";
@@ -106,8 +105,8 @@ const Header = (props) => {
         <hr />
         <li
           // className={click ? "option activeOption" : "option"}
-          className={
-            click ? `${classes.option} ${classes.activeOption}` : classes.option
+          className={classes.option
+            // click ? `${classes.option} ${classes.activeOption}` : classes.option
           }
           onClick={closeMobileMenu}
         >

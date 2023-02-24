@@ -2,23 +2,20 @@ import { useEffect, useState, useContext } from "react";
 import { onSnapshot } from "firebase/firestore";
 import AuthContext from "../../store/auth-context";
 
-const useGetData = (
-  queryPassed,
-  argumentChange = null,
-  brand,
-  type,
-) => {
+const useGetData = (queryPassed, argumentChange = null, brand, type) => {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
   const authCtx = useContext(AuthContext);
   useEffect(() => {
-      setIsLoading(true);   
-      let unsubscribe = onSnapshot(queryPassed, (snapshot) => {
-        let orderArr = snapshot.docs.map((doc) => doc.data());
-        setData(orderArr);
-        setIsLoading(false);
-      });
-   
+    setIsLoading(true);
+    let unsubscribe = onSnapshot(queryPassed, (snapshot) => {
+      let orderArr = snapshot.docs.map((doc) => doc.data());
+      setData(orderArr);
+      setIsLoading(false);
+      // setTimeout(() => {
+
+      // }, 10000);
+    });
 
     return () => {
       unsubscribe();

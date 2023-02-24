@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useLocation } from "react-router-dom";
 import React, { useContext, useState, useEffect } from "react";
 
 import TopHeader from "./layout/TopHeader";
@@ -24,13 +24,14 @@ import Search from "./pages/Search";
 import Contact from "./pages/Contact";
 import OrderDetail from "./components/profile/OrderDetail";
 
-// import { AuthContextProvider } from "./store/auth-context";
+import { AnimatePresence } from "framer-motion";
+
 
 import CartContext from "./store/cart-context";
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
-
+  const location = useLocation()
   const cartCtx = useContext(CartContext);
   let cartI = cartCtx.items;
   let cartTA = cartCtx.totalAmount;
@@ -57,7 +58,6 @@ function App() {
     window.document.body.style.overflow = "unset";
   };
   return (
-    // <AuthContextProvider>
     <>
       {cartIsShown && (
         <Cart cartIsShown={cartIsShown} onClose={hideCartHandler} />
@@ -68,7 +68,9 @@ function App() {
         onDisableScroll={disableScroll}
         onEnableScroll={enableScroll}
       />
-      <Routes>
+
+   <AnimatePresence exitBeforeEnter>
+      <Routes key={location.pathname} location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/addPhone" element={<AddPhone />} />
         <Route path="/addService" element={<AddService />} />
@@ -90,9 +92,10 @@ function App() {
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/phones/:phoneId" element={<PhoneDetails />} />
       </Routes>
+      </AnimatePresence>
+
       <Footer />
     </>
-    // </AuthContextProvider>
   );
 }
 

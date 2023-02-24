@@ -8,6 +8,7 @@ import NewProducts from "../components/home/NewProducts";
 import { db } from "../components/firebase";
 import { collection, query, orderBy } from "firebase/firestore";
 import useGetData from "../components/customHooks/useGetData";
+import {motion} from 'framer-motion'
 
 const Home = () => {
   // const div = useParallax({ speed:0 });
@@ -16,12 +17,16 @@ const Home = () => {
   let [phones, isLoading] = useGetData(queryName);
 
   return (
-    <div>
+    <motion.div
+  // initial={{ opacity: 0.6 }}
+  //     animate={{ opacity: 1 }}
+  //     exit={{ opacity: 0.6 }}
+  //     transition={{ duration: .3 }}
+      >
       <SliderImages className={classes.sliderContainer} />
       <div className={classes.container}>
         <h2>New Products</h2>
         <NewProducts  isLoading={isLoading} phones={phones.slice(0,8)} />
-        {/* <PhonesList  numberOfItems={8} date={true} /> */}
       </div>
       <FreeDelivery />
       <div className={classes.carouselContainer} >
@@ -31,7 +36,7 @@ const Home = () => {
           <CarouselCom  phones={phones}/>
       </div>
       <NewArrival/>
-    </div>
+    </motion.div>
   );
 };
 

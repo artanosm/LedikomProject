@@ -40,23 +40,34 @@
   @include flex-center(space-between);
   padding: 0rem;
   margin: 0;
+  > button {
+    @include flex-center(center);
+    padding: 2px;
+    margin: 0;
+    background-color: colors.$white;
+    border: none;
+    &:hover {
+      background-color: colors.$light-gray;
+      border-radius: 5px;
+  }
+  }
   h2 {
     // margin: 0 0 0 1rem;
     font-size: 1.3rem
   }
 }
 
-.closeButton {
-  @include flex-center(center);
-  padding: 2px;
-  margin: 0;
-  background-color: colors.$white;
-  border: none;
-  &:hover {
-    background-color: colors.$light-gray;
-    border-radius: 5px;
-}
-}
+// .closeButton {
+//   @include flex-center(center);
+//   padding: 2px;
+//   margin: 0;
+//   background-color: colors.$white;
+//   border: none;
+//   &:hover {
+//     background-color: colors.$light-gray;
+//     border-radius: 5px;
+// }
+// }
 
 .clearCart {
   background-color: colors.$red-lighter;
@@ -87,6 +98,9 @@
 
 
 @media only screen and (max-width: 500px) {
+  .itemsContainer {
+    max-height: 55vh;
+  }
   .cartContainer {
     padding-left: 0;
   }

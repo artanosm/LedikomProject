@@ -18,7 +18,7 @@ const SelectMui = ({ name, options, ...otherProps }) => {
     onChange: handleChange,
     ...field,
 
-    ...otherProps
+    ...otherProps,
   };
 
   if (meta && meta.touched && meta.error) {
@@ -27,7 +27,26 @@ const SelectMui = ({ name, options, ...otherProps }) => {
   }
 
   return (
-    <TextField {...configSelect}>
+    <TextField
+      sx={{
+        "& .MuiInputBase-root.MuiInput-root:hover:not(.Mui-disabled):before": {
+          borderBottom: "2px solid #ee3183",
+        },
+        "& .MuiInputBase-input": {
+          color: "text.secondary",
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+          color: "#ee3183",
+        },
+        "& .Mui-focused": {
+          color: "text.secondary",
+        },
+        "& .MuiInput-root::after": {
+          borderBottom: "2px solid #ee3183",
+        },
+      }}
+      {...configSelect}
+    >
       {Object.keys(options).map((item, index) => (
         <MenuItem key={index} value={item}>
           {options[item]}

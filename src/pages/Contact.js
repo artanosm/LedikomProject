@@ -5,7 +5,6 @@ import { Call, Email } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import MapComponent from "../components/contact/MapComponent";
 
-
 export const Contact = () => {
   return (
     <div className={classes.main}>

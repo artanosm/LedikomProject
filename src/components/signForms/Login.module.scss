@@ -5,6 +5,7 @@
 .mainContainer {
   display: flex;
   justify-content: center;
+  // background-image: url('../../assets/low-poly-grid.svg')
 }
 .container {
   @include flex-center(center, column);
