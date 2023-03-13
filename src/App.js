@@ -1,5 +1,5 @@
 import { Routes, Route,useLocation } from "react-router-dom";
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 
 import TopHeader from "./layout/TopHeader";
 import Header from "./layout/Header";
@@ -23,18 +23,30 @@ import PhoneServiceDetails from "./components/service/PhoneServiceDetails";
 import Search from "./pages/Search";
 import Contact from "./pages/Contact";
 import OrderDetail from "./components/profile/OrderDetail";
-
+import AuthContext from "./store/auth-context";
 import { AnimatePresence } from "framer-motion";
 
 
 import CartContext from "./store/cart-context";
+import EditPhone from "./components/EditPhone";
+
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
+  const token = sessionStorage.getItem("token");
+
   const [cartIsShown, setCartIsShown] = useState(false);
   const location = useLocation()
   const cartCtx = useContext(CartContext);
   let cartI = cartCtx.items;
   let cartTA = cartCtx.totalAmount;
+
+  useEffect(() => {
+    if (!token) {
+      authCtx.logOut();
+    }
+  }, [token]);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartI));
@@ -50,6 +62,7 @@ function App() {
     // window.document.body.style.overflow = "unset";
     setCartIsShown(false);
   };
+
 
   const disableScroll = () => {
     window.document.body.style.overflow = "hidden";
@@ -75,22 +88,23 @@ function App() {
         <Route path="/addPhone" element={<AddPhone />} />
         <Route path="/addService" element={<AddService />} />
         <Route path="/phones" element={<Phones />} />
-        <Route path="/search" element={<Search />} />
-        <Route path="/service" element={<Service />} />
+        <Route path="/product/:phoneId" element={<EditPhone />} />
+        <Route path="/phones/:phoneId" element={<PhoneDetails />} />
+        <Route path="/search/:searchId" element={<Search />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/service" element={<Service />} />
         <Route path="/service/:brand" element={<ServiceBrand />} />
         <Route
           path="/service/:brand/:serviceId"
           element={<PhoneServiceDetails />}
         />
+        <Route path="/checkout" element={<CheckOut />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/orders" element={<MyOrders />} />
         <Route path="/profile/orders/:orderId" element={<OrderDetail />} />
-        <Route path="/checkout" element={<CheckOut />} />
-        <Route path="/phones/:phoneId" element={<PhoneDetails />} />
       </Routes>
       </AnimatePresence>
 

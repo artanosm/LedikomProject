@@ -11,10 +11,7 @@
   min-width: 110px;
   padding: 0.2rem;
   transition: all 0.2s ease;
-  &:hover {
-    border: solid 1.5px colors.$magenta-light;
-    cursor: pointer;
-  }
+  cursor: pointer;
   img {
     width: 90%;
   }

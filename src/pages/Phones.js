@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import  { useState, useEffect, useCallback } from "react";
 import PhonesList from "../components/PhonesList";
 import RangePrice from "../components/phones/RangePrice";
 import classes from "./Phones.module.scss";
@@ -12,11 +12,14 @@ import ClearAllIcon from "@mui/icons-material/ClearAll";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const Phones = (props) => {
-  const [filtersClick, setFiltersClick] = useState(false);
-  const [priceRange, setPriceRange] = useState([10, 1500]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
+
+const Phones = (props) => {
+
+  const [filtersClick, setFiltersClick] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const [priceRange, setPriceRange] = useState([10, 1500]);
   const [brand, setBrand] = useState("");
   const [type, setType] = useState("");
   const [sort, setSort] = useState("");
@@ -39,11 +42,12 @@ const Phones = (props) => {
     [setSearchParams, searchParams]
   );
 
-  useEffect(() => {
+  useEffect(() => { 
     brandParam ? setBrand(brandParam) : setBrand("");
     typeParam ? setType(typeParam) : setType("");
     sortParam ? setSort(sortParam) : setSort("");
-  }, [searchParams, typeParam, sortParam, brandParam]);
+  }, [typeParam, sortParam, brandParam]);
+
 
   const filtersClickHandler = () => {
     setFiltersClick((prev) => !prev);
@@ -106,8 +110,6 @@ const Phones = (props) => {
             : classes.filterContainer
         }
       >
-        {/* <div className={classes.priceRangeContainer}>
-        </div> */}
         <RangePrice priceRange={priceRange} setPriceRange={setPriceRange} />
         <Brand brand={brand} setBrand={setBrandHandler} />
         <TypeFilter brand={brand} type={type} setType={setTypeHandler} />

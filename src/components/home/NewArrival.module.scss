@@ -3,6 +3,8 @@
 
 .main {
   @include flex-center(center);
+  background-color: colors.$white;
+  overflow-y: hidden;
   gap: 1rem;
   width: 100%;
   padding: 1rem 2rem;

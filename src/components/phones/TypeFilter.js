@@ -1,4 +1,4 @@
-import React from "react";
+import {memo} from "react";
 import InputFilter from "./InputFilter";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
@@ -72,7 +72,7 @@ const TypeFilter = ({ type, setType }) => {
   );
 };
 
-export default React.memo(TypeFilter);
+export default memo(TypeFilter);
 
 // import React from "react";
 // import Select from "react-select";

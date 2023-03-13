@@ -25,11 +25,11 @@ export default function RangePrice({ priceRange, setPriceRange }) {
   return (
     <ThemeProvider theme={theme}>
       <Box display='flex' alignItems={'center'} justifyContent={'space-between'} gap='1rem' sx={{ 
-          minWidth: { xs: "90%", sm: '300px', md:'250px' },
+          minWidth: { xs: "85%", sm: '300px', md:'250px' },
           marginTop:{xs:'1.3rem'},
          }}>
 
-          <Typography fontSize={{xs:14,md:16}} color='gray'>Price:</Typography>
+          <Typography fontSize={{xs:13, sm:15 ,md:17}} color='gray'>Price:</Typography>
           <Slider
             size="small"
             min={0}

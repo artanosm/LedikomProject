@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import  { useContext, useState } from "react";
 import classes from "./CartItem.module.scss";
 import CartContext from "../../store/cart-context";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";

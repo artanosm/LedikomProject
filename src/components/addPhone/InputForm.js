@@ -1,10 +1,10 @@
 import React from 'react'
 
-const InputForm = React.forwardRef(({title, type},ref) => {
+const InputForm = React.forwardRef(({title, type,value = ''},ref) => {
   return (
     <div>
     <label >{title}</label>
-    <input type={type} ref={ref} />
+    <input defaultValue={value} type={type} ref={ref} />
     </div>
   )
 })

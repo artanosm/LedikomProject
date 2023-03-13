@@ -2,8 +2,12 @@
 .main {
   max-width: 1400px;
   width: 100%;
-  background-color: white;
+  /* background-color: transparent; */
   margin: 0 auto;
+}
+
+.rec .rec-carousel-item {
+  max-width: 30rem;
 }
 
 .rec.rec-item-wrapper {
@@ -28,23 +32,6 @@
 .rec-arrow:focus {
   background-color: transparent;
 }
-/* 
-.kXteup {
-  color: rgb(238, 49, 131) !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-} */
-
-/* .Slxdj {
-  background-color: transparent !important;
-  color: #ffbbd8 !important;
-  box-shadow: none !important;
-} */
-
-/* .cVXxbE {
-  box-shadow: 0 0 1px 3px rgb(238, 49, 131) !important;
-  background-color: transparent !important;
-} */
 
 .rec-dot {
   box-shadow: 0 0 1px 1px rgba(0, 0, 0, 50%) !important;
@@ -57,14 +44,9 @@
 
 
 
-/* .ezKHIn {
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 50%) !important;
-} */
+
 
 @media only screen and (max-width: 660px) {
-  /* .jtKTCe {
-    margin: 10px 0 !important;
-  } */
 
   .rec .rec-pagination {
     margin: 10px 0 !important;
@@ -73,10 +55,4 @@
   .rec .rec-carousel button {
     display: none !important;
   }
-  /* .kXteup {
-    display: none !important;
-  } */
-  /* .Slxdj {
-    display: none !important;
-  } */
 }

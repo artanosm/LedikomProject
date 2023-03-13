@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import  {  useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PhoneServiceItem from "./PhoneServiceItem";
 import classes from "./ServiceBrand.module.css";
@@ -49,11 +49,11 @@ const ServiceBrand = () => {
   );
 
   return (
-    <Fragment>
-      {isLoading && <Loader/>}
+    <>
+      {isLoading ? <Loader/>:
 
-      <div className={classes.main}>{phoneItems}</div>
-    </Fragment>
+      <div className={classes.main}>{phoneItems}</div>}
+    </>
 
    
   );

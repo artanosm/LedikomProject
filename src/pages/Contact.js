@@ -1,9 +1,9 @@
-import React from "react";
 import classes from "./Contact.module.scss";
 import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 import { Call, Email } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import MapComponent from "../components/contact/MapComponent";
+
 
 export const Contact = () => {
   return (
@@ -31,7 +31,7 @@ export const Contact = () => {
           info@ledikom.mk
         </p>
       </div>
-      <MapComponent/>
+      <MapComponent />
     </div>
   );
 };

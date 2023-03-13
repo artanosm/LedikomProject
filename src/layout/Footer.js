@@ -1,9 +1,10 @@
-import React from "react";
+import {memo} from "react";
 import classes from "./Footer.module.scss";
 import {Facebook, Instagram, YouTube, Call, Email} from '@mui/icons-material';
 
 
 const Footer = () => {
+
   return (
     <div className={classes.container1}>
       <div className={classes.newsletter}>
@@ -47,40 +48,5 @@ const Footer = () => {
   );
 };
 
-export default Footer;
-/* <SocialMediaIconsReact
-              borderColor="rgba(255,255,255,0.25)"
-              borderWidth="0"
-              borderStyle="outset"
-              icon="facebook"
-              iconColor="darkgrey"
-              backgroundColor="rgba(9,9,9,0)"
-              iconSize="0"
-              roundness="26%"
-              url="https://facebook.com/"
-              size="30"
-            />
-            <SocialMediaIconsReact
-              borderColor="rgba(255,255,255,0.25)"
-              borderWidth="0"
-              borderStyle="outset"
-              icon="instagram"
-              iconColor="darkgrey"
-              backgroundColor="rgba(9,9,9,0)"
-              iconSize="0"
-              roundness="26%"
-              url="https://instagram.com/"
-              size="30"
-            />
-            <SocialMediaIconsReact
-              borderColor="rgba(255,255,255,0.25)"
-              borderWidth="0"
-              borderStyle="outset"
-              icon="youtube"
-              iconColor="darkgrey"
-              backgroundColor="rgba(9,9,9,0)"
-              iconSize="0"
-              roundness="26%"
-              url="https://youtube.com/"
-              size="30"
-            /> */
+export default memo(Footer);
+

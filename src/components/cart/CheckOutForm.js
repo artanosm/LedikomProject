@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import { useState, useContext } from "react";
 // import Input from "./Input";
 import classes from "./CheckOutForm.module.scss";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +13,6 @@ import { v4 } from "uuid";
 import { Formik, Form } from "formik";
 import { object, string, number } from "yup";
 import SelectMui from "../signForms/SelectMui";
-import Snackbar from "@mui/material/Snackbar";
-import MuiAlert from "@mui/material/Alert";
 import SnackBar from "../../ui/SnackBar";
 
 const cities = {
@@ -91,7 +89,7 @@ const CheckOutForm = ({ cartItems, totalAmount }) => {
   };
   return (
     <>
-    <SnackBar color={'#4bb74b'} message='Order Sent' handleClose={handleClose} alert={alert} icon={<CheckIcon/>} />
+    <SnackBar color={"rgba(75, 183, 75, .8)"} message='Order Sent' handleClose={handleClose} alert={alert} icon={<CheckIcon/>} />
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}

@@ -1,10 +1,9 @@
-import React from "react";
 import classes from "./MyOrderItem.module.scss";
 
 const MyOrderItem = ({ item }) => {
   return (
     <div className={classes.mainContainer}>
-      <img className={classes.img} src={item.color.color} alt="product" />
+      <img  src={item.color.color} alt="product" />
 
       <div className={classes.infoContainer}>
         <h5>{item.brand}</h5>

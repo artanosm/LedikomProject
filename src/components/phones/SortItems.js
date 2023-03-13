@@ -1,4 +1,4 @@
-import React from "react";
+import {memo}from "react";
 import InputFilter from "./InputFilter";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
@@ -89,7 +89,7 @@ const SortItems = ({ sort, setSort }) => {
   );
 };
 
-export default React.memo(SortItems);
+export default memo(SortItems);
 
 
 

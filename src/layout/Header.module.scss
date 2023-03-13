@@ -1,20 +1,13 @@
 @use "../sass/abstracts/mixins" as *;
 @use "../sass/abstracts/colors";
 
-.icon {
-  padding-top: 0.3rem;
-  color: colors.$white;
-  transition: all 0.3s ease;
-  &:hover {
-    color: colors.$magenta-color;
-  }
-}
-
 .header {
   position: sticky;
   top: 0;
   z-index: 10;
   width: 100%;
+  // background-color: rgba(0, 0, 0, 0.9);
+  // backdrop-filter: blur(15px);
   background: colors.$black;
   @include flex-center(space-between);
   padding: 0px 2rem;
@@ -26,7 +19,6 @@
   @include flex-center(space-between);
 }
 .logoContainer {
-  // justify-self: start;
   @include flex-center;
 }
 .cart {
@@ -53,25 +45,19 @@
   }
 }
 
-.option :hover {
-  color: colors.$white;
-  transition: all 0.3s;
-}
 
-.option a {
-  padding: 10px 0;
-  color: colors.$white;
-  text-decoration: none;
-  &:hover {
-    color: colors.$magenta-color;
-  }
-}
 
+.searchBox {
+  display: none;
+}
 .mobileMenu {
   display: none;
 }
 
 @media (max-width: 610px) {
+  .searchBox {
+    display: inline;
+  }
   .overlay {
     transition: all 0.3s ease;
     position: fixed;
@@ -140,25 +126,7 @@
     width: 45px;
     height: 45px;
   }
-  .option {
-    @include flex-center(center, column);
-    height: 10vw;
-    padding: 30px 0px;
-    a {
-      color: colors.$white;
-      text-decoration: none;
-      padding: 0;
-    }
-  }
-  // .option.activeOption {
-  // a {
-
-  // }
-  // @include flex-center(center, column);
-  // height: 10vw;
-  // padding: 30px 0px;
-  // }
-
+ 
   .mobileMenu {
     background-color: black;
     width: 10%;

@@ -1,4 +1,3 @@
-import React, { Fragment } from "react";
 import classes from "./Service.module.scss";
 import BrandItem from "../components/service/BrandItem";
 import AppleLogo from "../assets/brandsLogo/apple-logo.png";
@@ -24,12 +23,14 @@ const brandsItem = brands.map((brand, key) => {
 });
 const Service = () => {
   return (
-    <Fragment>
+    <>
       <motion.div className={classes.main}
-        initial={{opacity:0}}
-        animate={{opacity:1}}
+      //      initial={{ opacity: 0.6 }}
+      // animate={{ opacity: 1 }}
+      // exit={{ opacity: 0.6 }}
+      // transition={{ duration: .3 }}
       >{brandsItem}</motion.div>
-    </Fragment>
+    </>
   );
 };
 

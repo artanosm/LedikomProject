@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import  { useState, useEffect, useCallback,createContext } from "react";
 import { auth, db } from "../components/firebase";
 import { setDoc, doc, onSnapshot, serverTimestamp } from "firebase/firestore";
 
@@ -14,7 +14,7 @@ import {
 } from "firebase/auth";
 
 let logoutTimer;
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 // ==============================
 
@@ -52,10 +52,10 @@ export const AuthContextProvider = (props) => {
   const [token, setToken] = useState(initialtoken);
   async function signUp(email, password) {
     await createUserWithEmailAndPassword(auth, email, password).then((cred) => {
-      console.log(cred);
       setDoc(doc(db, "users", cred.user?.uid), {
         email: cred.user.email,
         userId: cred.user.uid,
+        ratedDevices: [],
         createdAt: serverTimestamp(),
       });
       const expirationTime = new Date(
@@ -76,7 +76,6 @@ export const AuthContextProvider = (props) => {
 
   async function signIn(email, password) {
     await signInWithEmailAndPassword(auth, email, password).then((cred) => {
-      console.log(cred);
       getUserData(cred.user.uid);
       const expirationTime = new Date(
         new Date().getTime() + +cred._tokenResponse.expiresIn * 800
@@ -124,12 +123,12 @@ export const AuthContextProvider = (props) => {
     return sendPasswordResetEmail(auth, email);
   }
 
-  function updateUserProfile(userDisplayName, userPhotoURL) {
-    return updateProfile(auth.currentUser, {
-      displayName: userDisplayName,
-      photoURL: userPhotoURL,
-    });
-  }
+  // function updateUserProfile(userDisplayName, userPhotoURL) {
+  //   return updateProfile(auth.currentUser, {
+  //     displayName: userDisplayName,
+  //     photoURL: userPhotoURL,
+  //   });
+  // }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {

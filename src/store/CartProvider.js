@@ -1,6 +1,5 @@
 import { useReducer } from "react";
 import CartContext from "./cart-context";
-import React from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../components/firebase";
 

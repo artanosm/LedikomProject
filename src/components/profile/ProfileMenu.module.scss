@@ -1,0 +1,12 @@
+@use "../../sass/abstracts/colors";
+
+.icon {
+    padding-top: 0.3rem;
+    color: colors.$white;
+    transition: all 0.3s ease;
+    &:hover {
+      color: colors.$magenta-color;
+    }
+  }
+
+  

@@ -7,7 +7,7 @@ import AuthContext from "../store/auth-context";
 //   listAll,
 //   list,
 // } from "firebase/storage";
-import React, { useContext, useState,useEffect } from "react";
+import  { useContext, useState,useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import classes from "./Profile.module.scss";
 import ProfileForm from "../components/profile/ProfileForm";

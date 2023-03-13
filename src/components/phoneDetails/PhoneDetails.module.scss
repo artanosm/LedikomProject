@@ -1,15 +1,41 @@
+@use "../../sass/abstracts/mixins" as *;
+@use "../../sass/abstracts/colors";
 
-@use '../../sass/abstracts/mixins' as *;
-@use '../../sass/abstracts/colors';
 
+.modalContainer {
+  @include flex-center(flex-start,column);
+  align-items:flex-start;
+  gap: 1rem;
+}
+
+.iFrame {
+  width: 100%;
+  height: 500px;
+}
 .container {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   gap: 1rem;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.suggestContainer {
+  padding: 1rem;
+  width: 100%;
+  background-color: colors.$lightest-gray;
+
+  h2 {
+    color: colors.$dark-blue;
+    align-self: center;
+    text-align: center;
+  }
 }
 
 .imageContainer {
+  @include flex-center(center, column);
+  gap: 1rem;
   margin: 3rem 1rem 1rem;
   height: fit-content;
   padding: 1rem;
@@ -17,6 +43,13 @@
   min-width: 250px;
   box-shadow: 0 2px 10px colors.$light-gray;
   border-radius: 10px;
+  > button {
+    background-color: transparent;
+    border: none;
+    // border-radius: 5px;
+    // padding: 8px;
+    color: colors.$gray;
+  }
 }
 
 hr {
@@ -31,7 +64,6 @@ hr {
   }
 }
 
-
 .image {
   height: auto;
   width: 80%;
@@ -39,45 +71,88 @@ hr {
 
 .h1 {
   font-size: 2rem;
-  border-bottom: solid 1px colors.$light-gray;;
+  border-bottom: solid 1px colors.$light-gray;
   padding-bottom: 1.5rem;
 }
 
 .containerPrice {
   @include flex-center(flex-start);
   flex-wrap: nowrap;
-  gap: 2rem;
-  > button  {
+  gap: 0.5rem;
+  > button {
     @include flex-center(center);
-    background-color: colors.$light-gray;
+    // background-color: colors.$light-gray;
     border: 0 none colors.$white;
     border-radius: 10px;
+  
     margin: 1rem;
     padding: 1rem;
-    color: colors.$magenta-color;
-    box-shadow: 0 2px 10px colors.$light-gray;;
+    color: colors.$white;
+    background-color: colors.$magenta-color;
+    // box-shadow: 0 2px 10px colors.$light-gray;
     transition: all 0.2s ease;
     &:hover {
       cursor: pointer;
-      background-color: colors.$magenta-color;
-      color: colors.$white;
+      background-color: colors.$magenta-dark;
+      scale: 1.05;
+    }
+    &:disabled {
+      background-color: colors.$light-gray;
     }
   }
   h3 {
-    color:colors.$dark-blue;
+    color: colors.$dark-blue;
+  }
+
+  .discountText {
+    color: colors.$red;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 800px) and (min-width: 601px) {
+
+  .modalContainer {
+    @include flex-center(flex-start,column);
+    align-items:flex-start;
+    gap: 1rem;
+  width:500px;
+  }
+
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+  }
+  .imageContainer {
+    width: 70%;
+    margin: 1rem auto;
+  
+  }
+  .dataContainer {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 610px) {
   .container {
     flex-direction: column;
     justify-content: flex-start;
     gap: 0;
   }
 
-.image {
-  width: 80%;
-}
+  .suggestContainer {
+    padding: 1rem 0;
+
+    h2 {
+      font-size: large;
+      padding-top: 0.5rem;
+    }
+  }
+
+  .image {
+    width: 80%;
+  }
   .imageContainer {
     margin: 1rem 1rem;
     display: flex;
@@ -85,6 +160,7 @@ hr {
     width: 90%;
   }
   .dataContainer {
+    font-size: 15px;
     width: 100%;
     padding: 0 1rem 1rem 1rem;
     h1 {
@@ -97,6 +173,9 @@ hr {
   .containerPrice {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    button {
+      margin-left: 10%;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import  { useContext,useState } from "react";
 import AuthContext from "../../store/auth-context";
 import InputMui from "../signForms/InputMui";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -17,16 +17,17 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
+
   deleteObject,
   list,
 } from "firebase/storage";
 
 const ProfileForm = ({ setEdit }) => {
   const authCtx = useContext(AuthContext);
-  const [photoProgress, setPhotoProgress] = React.useState(100);
+  const [photoProgress, setPhotoProgress] = useState(100);
 
   const userDataRef = collection(db, "users");
-  const photoProfileRef = ref(storage, `/${authCtx.user.uid}/profilePicture`);
+  const photoProfileRef = ref(storage, `users/${authCtx.user.uid}/profilePicture`);
 
   const uploadImage = (image, actions) => {
     if (image == null) {
@@ -34,6 +35,7 @@ const ProfileForm = ({ setEdit }) => {
 
       return;
     }
+    console.log(photoProfileRef)
     list(photoProfileRef).then((res) => {
       const existing = res.items[0]?.fullPath;
       const deleteProfilePic = ref(storage, existing);
@@ -44,7 +46,7 @@ const ProfileForm = ({ setEdit }) => {
     });
     const photoToUpload = ref(
       storage,
-      `${authCtx.user.uid}/profilePicture/${image.name + v4()}`
+      `users/${authCtx.user.uid}/profilePicture/${image.name + v4()}`
     );
 
     const uploadTask = uploadBytesResumable(photoToUpload, image);

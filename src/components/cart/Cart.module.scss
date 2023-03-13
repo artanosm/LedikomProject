@@ -57,18 +57,6 @@
   }
 }
 
-// .closeButton {
-//   @include flex-center(center);
-//   padding: 2px;
-//   margin: 0;
-//   background-color: colors.$white;
-//   border: none;
-//   &:hover {
-//     background-color: colors.$light-gray;
-//     border-radius: 5px;
-// }
-// }
-
 .clearCart {
   background-color: colors.$red-lighter;
   color: colors.$red;
@@ -115,7 +103,12 @@
     }
   }
 
-  .totalContainer h3 {
-    font-size: smaller;
+  .totalContainer {
+    h3 {
+      font-size: smaller;
+    }
+    > button {
+      font-size: 12px;
+    }
   }
 }

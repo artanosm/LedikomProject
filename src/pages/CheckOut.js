@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import  { Fragment, useContext, useState } from "react";
 import CartContext from "../store/cart-context";
 import classes from "./CheckOut.module.scss";
 import CheckOutItem from "../components/cart/CheckOutItem";

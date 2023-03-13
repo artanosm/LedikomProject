@@ -1,8 +1,14 @@
 @use "../sass/abstracts/mixins" as *;
 @use "../sass/abstracts/colors";
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
 .main {
-  @include flex-center(flex-start,column,flex-start);
+  @include flex-center(flex-start, column, flex-start);
   max-width: 1400px;
   // margin: 1rem;
   padding: 1rem;
@@ -25,7 +31,11 @@
   .main {
     flex-direction: column;
   }
-  .infoContainer > p span {
-    width: fit-content;
+
+  .infoContainer > p {
+    font-size: 14px;
+    span {
+      width: fit-content;
+    }
   }
 }

@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./CheckOutItem.module.scss";
 
 const CartItem = (props) => {

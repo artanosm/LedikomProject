@@ -8,7 +8,13 @@
     background-color: rgba(0, 0, 0, 0.75);   
     backdrop-filter: blur(15px);
   }
-  
+/* 
+  .content {
+    display: flex;
+    flex-direction: column;
+    /* justify-items: flex-end; */
+   
+
   .modal{
     margin: 0;
     position:absolute;
@@ -38,7 +44,7 @@
     from {
       
       opacity: 0;
-      transform: translateY(-5rem);
+      transform: translateY(-10rem);
     }
     to {
       

@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./Loader.module.scss";
 import { GridLoader } from "react-spinners";
 

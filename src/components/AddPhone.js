@@ -1,12 +1,28 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import InputForm from "./addPhone/InputForm";
 import { db } from "./firebase";
-import { setDoc, doc, serverTimestamp } from "firebase/firestore";
+import {
+  setDoc,
+  doc,
+  serverTimestamp,
+  // collection
+} from "firebase/firestore";
+// import { storage } from "./firebase";
+
+// import { updateDoc, doc, collection } from "firebase/firestore";
+// import {
+// ref,
+// uploadBytesResumable,
+// getDownloadURL,
+// deleteObject,
+// list,
+// } from "firebase/storage";
+// import { v4 } from "uuid";
 
 const AddPhone = () => {
   const navigate = useNavigate();
-
+  // const [threeD, setThreeD] = React.useState(null)
   const brandRef = useRef("");
   const modelRef = useRef("");
   const typeRef = useRef("");
@@ -25,6 +41,12 @@ const AddPhone = () => {
   const price3Ref = useRef("");
   const price4Ref = useRef("");
   const price5Ref = useRef("");
+
+  const discountPrice1Ref = useRef("");
+  const discountPrice2Ref = useRef("");
+  const discountPrice3Ref = useRef("");
+  const discountPrice4Ref = useRef("");
+  const discountPrice5Ref = useRef("");
 
   const color1NameRef = useRef("");
   const color1HexRef = useRef("");
@@ -46,6 +68,44 @@ const AddPhone = () => {
   const color5HexRef = useRef("");
   const color5ImageRef = useRef("");
 
+  // const uploadImage = (model, actions) => {
+  //   const phoneThreeDRef = ref(storage, `products/${modelRef.current.value.replace(/\s/g, "-")}/threeD`);
+
+  //   if (model == null) {
+  //     // actions.setSubmitting(false);
+
+  //     return;
+  //   }
+  //   const phoneToUpload = ref(
+  //     storage,
+  //     `products/${modelRef.current.value.replace(/\s/g, "-")}/threeD/${model.name + v4()}`
+  //   );
+
+  //   const uploadTask = uploadBytesResumable(phoneToUpload, model);
+  //   uploadTask.on(
+  //     "state_changed",
+  //     (snapshot) => {
+  //       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+  //       const progress =
+  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //       console.log("Upload is " + progress + "% done");
+  //       // setPhotoProgress(progress);
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //     },
+  //     () => {
+  //       console.log("here");
+  //       // Upload completed successfully, now we can get the download URL
+  //       getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+  //         console.log("File available at", url);
+  //         setThreeD(url)
+  //         console.log("Done", url);
+
+  //       });
+  //     }
+  //   );
+  // };
   async function addPhoneHandler(product) {
     setDoc(doc(db, "products", product.model.replace(/\s/g, "-")), {
       ...product,
@@ -63,27 +123,33 @@ const AddPhone = () => {
       type: typeRef.current.value,
       ram: ramRef.current.value,
       waranty: warantyRef.current.value,
+      // threeDModel:threeD,
       storageOrCase: storageOrCaseRef.current.value,
       storage: {
         storage1: {
           storage: storage1Ref.current.value,
           price: price1Ref.current.value,
+          discountPrice: discountPrice1Ref.current.value,
         },
         storage2: {
           storage: storage2Ref.current.value,
           price: price2Ref.current.value,
+          discountPrice: discountPrice2Ref.current.value,
         },
         storage3: {
           storage: storage3Ref.current.value,
           price: price3Ref.current.value,
+          discountPrice: discountPrice3Ref.current.value,
         },
         storage4: {
           storage: storage4Ref.current.value,
           price: price4Ref.current.value,
+          discountPrice: discountPrice4Ref.current.value,
         },
         storage5: {
           storage: storage5Ref.current.value,
           price: price5Ref.current.value,
+          discountPrice: discountPrice5Ref.current.value,
         },
       },
       colors: {
@@ -155,6 +221,35 @@ const AddPhone = () => {
           <InputForm title="Price 4" type="number" ref={price4Ref} />
           <InputForm title="Price 5" type="number" ref={price5Ref} />
         </div>
+        <br/>
+        <div>
+          <InputForm
+            title="Discount Price 1"
+            type="number"
+            ref={discountPrice1Ref}
+          />
+          <InputForm
+            title="Discount Price 2"
+            type="number"
+            ref={discountPrice2Ref}
+          />
+          <InputForm
+            title="Discount Price 3"
+            type="number"
+            ref={discountPrice3Ref}
+          />
+          <InputForm
+            title="Discount Price 4"
+            type="number"
+            ref={discountPrice4Ref}
+          />
+          <InputForm
+            title="Discount Price 5"
+            type="number"
+            ref={discountPrice5Ref}
+          />
+        </div>
+        <br />
         <br />
         <div>
           <label>Colors</label>
@@ -184,7 +279,15 @@ const AddPhone = () => {
           <InputForm title="Hex" type="text" ref={color5HexRef} />
           <InputForm title="Image Url" type="text" ref={color5ImageRef} />
           <br />
+          {/* <input
+                  accept="*"
+                  type="file"
+                  onChange={(e) => {
+                    uploadImage(e.target.files[0]);
+                  }}
+                /> */}
         </div>
+
         <button type="submit">Add Phone</button>
       </form>
     </div>

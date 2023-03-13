@@ -1,4 +1,3 @@
-import React from "react";
 import classes from "./ServiceCard.module.scss";
 
 const ServiceCard = ({ itemImage, price, name, services, setServices }) => {
@@ -20,6 +19,8 @@ const ServiceCard = ({ itemImage, price, name, services, setServices }) => {
       setServices({ items: itemsArr, totalAmount: newTotal });
     }
   };
+
+  
   return (
     <div
       className={

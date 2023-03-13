@@ -1,13 +1,12 @@
-import React from "react";
 import classes from "./NewProducts.module.scss";
-import Loader from "../../ui/Loader";
+// import Loader from "../../ui/Loader";
 import PhoneItem from "../PhoneItem";
 
 const NewProducts = ({ phones, isLoading }) => {
   const phoneItems = phones.map((phone, i) => {
     return (
       <PhoneItem
-        // isLoading={isLoading}
+        isLoading={isLoading}
         date={phone.date}
         type={phone.type}
         key={i}
@@ -24,8 +23,9 @@ const NewProducts = ({ phones, isLoading }) => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div className={classes.container}>{phoneItems}</div>
+
     </>
   );
 };

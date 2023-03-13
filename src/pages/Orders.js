@@ -1,4 +1,4 @@
-import React, { Fragment,useState, useContext } from "react";
+import  { Fragment,useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import OrderItem from "../components/OrderItem";
 import classes from "./Orders.module.scss";
@@ -9,19 +9,23 @@ import {
   collection,
   query,
   orderBy,
+  // onSnapshot
 } from "firebase/firestore";
 import useGetData from "../components/customHooks/useGetData";
+
+const colRef = collection(db, "orders");
+const q = query(colRef, orderBy("serverDate", "desc"));
 
 const Orders = () => {
   // const [orders, setOrders] = useState([]);
   const [completedOrders, setCompletedOrders] = useState(false);
   // const [isLoading, setIsLoading] = useState(false);
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.user;
+  const isLoggedIn = authCtx?.user;
 
-  const colRef = collection(db, "orders");
-  const q = query(colRef, orderBy("serverDate", "desc"));
+
   const [orders,isLoading] = useGetData(q)
+
   // useEffect(() => {
   //   setIsLoading(true);
   //   const colRef = collection(db, "orders");

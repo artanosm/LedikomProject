@@ -1,29 +1,60 @@
 @use "../../sass/abstracts/colors";
 @use "../../sass/abstracts/mixins" as *;
 
-.mainContainer {
+.section {
   position: relative;
-  z-index: -10;
-  background-image: url("https://admin.ledikom.mk/uploads/banners/8/1652861506-8.jpg?v=1");
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 400px;
+  overflow: hidden;
   width: 100%;
-  @include flex-center(center, column);
+  display: block;
+  margin: 0;
+  padding: 0;
+  span {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    float: left;
+    width: 100% !important;
+    height: 350px;
+    background: url("https://admin.ledikom.mk/uploads/banners/8/1659720998-8.jpg?v=1");
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+
+.textContainer {
+  width: 100%;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 100%;
   h1,
   h4 {
     color: colors.$white;
     margin: 1rem;
     text-shadow: colors.$black 1px 1px 5px;
   }
+  h1 {
+    font-size: 2rem;
+  }
+  h4 {
+    font-size: 1rem;
+  }
 }
 
 @media only screen and (max-width: 770px) {
-  .mainContainer {
-    display: none;
-    // height: 200px;
-    // h1 {
-    //   font-size: 1.3rem;
-    // }
+  .section {
+    span {
+      background-attachment: unset;
+      height: 250px;
+    }
+
+    .textContainer {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
   }
 }

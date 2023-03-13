@@ -1,4 +1,4 @@
-import React from "react";
+import {memo} from "react";
 import classes from "./InfoItem.module.scss";
 
 const InfoItem = ({title, content}) => {
@@ -11,4 +11,4 @@ const InfoItem = ({title, content}) => {
   );
 };
 
-export default React.memo(InfoItem);
+export default memo(InfoItem);

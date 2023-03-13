@@ -1,4 +1,4 @@
-import React from "react";
+import {memo} from "react";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
 // import FormControl from "@mui/material/FormControl";
@@ -59,5 +59,5 @@ const ItemsToDisplay = ({ numberOfItems, setNumberOfItems }) => {
   );
 };
 
-export default React.memo(ItemsToDisplay);
+export default memo(ItemsToDisplay);
 

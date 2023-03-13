@@ -1,0 +1,93 @@
+@use "../sass/abstracts/mixins" as *;
+@use "../sass/abstracts/colors";
+
+
+
+
+.navOptions {
+  @include flex-center;
+  padding: 0;
+  gap: 2rem;
+  list-style-type: none;
+  z-index: 2;
+  height: 100%;
+  hr {
+    display: none;
+  }
+}
+
+.option :hover {
+  color: colors.$white;
+  transition: all 0.3s;
+}
+
+.option a {
+  font-size: 14px;
+  padding: 10px 0;
+  color: colors.$white;
+  text-decoration: none;
+  &:hover {
+    color: colors.$magenta-color;
+  }
+}
+
+.mobileMenu {
+  display: none;
+}
+
+
+
+@media (max-width: 610px) {
+  .navOptions {
+    @include flex-center(center, column);
+    position: absolute;
+    width: 0;
+    height: fit-content;
+    top: 46px;
+    right: 0;
+    // right: -100%;
+    grid-gap: 0;
+    overflow-x: hidden;
+    list-style-type: none;
+    // border-radius: 10px;
+    border-radius: 0 0 30px 30px;
+
+    transition: all 0.4s ease;
+    background: colors.$black;
+  }
+
+  .navOptions.active {
+    transition: all 0.4s ease;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .navOptions hr {
+    display: block;
+    height: 1px;
+    background-color: colors.$dark-gray;
+    width: 70%;
+    margin: 0;
+    border: none;
+  }
+
+  .option {
+    @include flex-center(center, column);
+    height: 10vw;
+    padding: 30px 0px;
+    a {
+      color: colors.$white;
+      text-decoration: none;
+      padding: 0;
+    }
+  }
+  // .option.activeOption {
+  // a {
+
+  // }
+  // @include flex-center(center, column);
+  // height: 10vw;
+  // padding: 30px 0px;
+  // }
+
+}

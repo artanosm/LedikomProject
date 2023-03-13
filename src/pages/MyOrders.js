@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from "react";
+import { useContext,useEffect,memo } from "react";
 import AuthContext from "../store/auth-context";
 import classes from "./MyOrders.module.scss";
 import { db } from "../components/firebase";
@@ -13,19 +13,16 @@ const MyOrders = () => {
   // const [orders, setOrders] = useState([]);
   // const [isLoading, setIsLoading] = useState(false);
   const token = sessionStorage.getItem('token')
+  const colRef = collection(db, `users/${authCtx?.user?.uid}/orders`);
+  const q = query(colRef, orderBy("serverDate", "desc"));
 
-
+  const [orders, isLoading] = useGetData(q,authCtx?.user?.uid)
 useEffect(() => {
   if (!token) {
     authCtx.logOut()
     navigate('/',{replace:true})
   }
 }, [token,navigate,authCtx])
-
-
-  const colRef = collection(db, `users/${authCtx.user?.uid}/orders`);
-  const q = query(colRef, orderBy("serverDate", "desc"));
-  const [orders, isLoading] = useGetData(q)
 
   // useEffect(() => {
   //   setIsLoading(true);
@@ -51,7 +48,7 @@ useEffect(() => {
     <div className={classes.mainContainer}>
       <h2>My Orders</h2>
       {orders.map((order, i) => (
-        <Link state={order} to={`/profile/orders/${order.id}`} key={i} className={classes.container}>
+        <Link to={`/profile/orders/${order.id}`} key={i} className={classes.container}>
           <div className={classes.info}>
             <p>Order Placed: {order?.date.slice(0, 15)}</p>
             <p className={order?.orderCompleted ? classes.completed : classes.waiting}>
@@ -75,4 +72,4 @@ useEffect(() => {
   );
 };
 
-export default React.memo(MyOrders);
+export default memo(MyOrders);

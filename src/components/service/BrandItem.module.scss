@@ -3,7 +3,7 @@
 
 .main {
   @include flex-center(flex-end, column);
-  height: auto;
+  height: 160px;
   max-width: 150px;
   min-width: 150px;
   border-radius: 15px;
@@ -16,12 +16,13 @@
     transition: all 0.3s;
   }
   img {
-    width: 8rem;
-    padding: 1rem;
+    width:60%;
+    padding: 0;
   }
 }
 
 .brandName {
+  margin: 0;
   text-align: center;
   font-size: 1rem;
   font-weight: 200;

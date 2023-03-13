@@ -1,7 +1,6 @@
-import React from "react";
 import PhoneItem from "./PhoneItem";
 import classes from "./PhonesList.module.scss";
-import Loader from "../ui/Loader";
+// import Loader from "../ui/Loader";
 import { db } from "./firebase";
 import { collection, query, orderBy, limit, where } from "firebase/firestore";
 import useGetData from "./customHooks/useGetData";
@@ -18,6 +17,7 @@ const PhonesList = ({
   let queryName;
 
   const quer = (brand, type) => {
+  
   if (searchQuery) {
     queryName = query(colRef);
     return;
@@ -55,7 +55,6 @@ const PhonesList = ({
   quer(brand, type);
 
   let [phones, isLoading] = useGetData(queryName, numberOfItems, brand, type);
-
   searchQuery &&
     (phones = phones.filter(
       (item) =>
@@ -81,12 +80,12 @@ const PhonesList = ({
   }
 
   const phoneItems = phones.map((phone, i) => {
+   
     if (!priceRange) {
       return (
         <PhoneItem
           isLoading={isLoading}
           date={phone.date}
-          phone={phone}
           type={phone.type}
           key={i}
           id={phone.id}
@@ -105,10 +104,8 @@ const PhonesList = ({
     ) {
       return (
         <PhoneItem
-                  isLoading={isLoading}
-
+          isLoading={isLoading}
           date={phone.date}
-          phone={phone}
           type={phone.type}
           key={i}
           id={phone.id}

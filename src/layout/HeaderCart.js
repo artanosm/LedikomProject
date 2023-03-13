@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import classes from "./HeaderCart.module.scss";
 import CartContext from "../store/cart-context";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";

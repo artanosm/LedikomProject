@@ -1,4 +1,4 @@
-import React from "react";
+import {memo} from "react";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
 // import FormControl from "@mui/material/FormControl";
@@ -69,7 +69,7 @@ const Brand = ({ brand, setBrand }) => {
   );
 };
 
-export default React.memo(Brand);
+export default memo(Brand);
 
 // import React from "react";
 // import Select from "react-select";

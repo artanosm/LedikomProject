@@ -1,5 +1,6 @@
-import React from "react";
+import { memo } from "react";
 import PhoneItem from "../PhoneItem";
+
 import Carousel from "react-elastic-carousel";
 import './CarouselCom.css'
 // import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -10,8 +11,7 @@ const getMultipleRandom = (arr) => {
   return shuffled;
 };
 
-const CarouselCom = ({phones, isLoading=false}) => {
-
+const CarouselCom = ({phones, isLoading=false,showDots=true}) => {
 // const arrowTheme = {
 //     fontSize: '2rem',
 //   "&:hover": {
@@ -46,13 +46,13 @@ const CarouselCom = ({phones, isLoading=false}) => {
 //     );
 //   };
 
+
   const breakPoints = [
-    { width: 250, itemsToShow: 2 ,},
     { width: 550, itemsToShow: 2,},
-    { width: 850, itemsToShow: 3 },
+    { width: 650, itemsToShow: 3,},
+    { width: 900, itemsToShow: 3 },
     { width: 1150, itemsToShow: 4},
     { width: 1450, itemsToShow: 5 },
-    // { width: 1750, itemsToShow: 5 },
   ];
 
   const randomized = getMultipleRandom(phones).slice(0,14)
@@ -77,15 +77,18 @@ const CarouselCom = ({phones, isLoading=false}) => {
 
   return (
     <div className="main">
-
       <Carousel
         // itemPadding={[10]}
         // renderArrow={myArrow}
+        outerSpacing={0}
         enableAutoPlay={true}
-        autoPlaySpeed={4000}
+        autoPlaySpeed={3000}
         enableSwipe={true}
-        pagination={true}
+        pagination={showDots}
         breakPoints={breakPoints}
+      
+
+        
       >
       
         {phoneItems}
@@ -94,4 +97,4 @@ const CarouselCom = ({phones, isLoading=false}) => {
   );
 };
 
-export default CarouselCom;
+export default memo(CarouselCom);

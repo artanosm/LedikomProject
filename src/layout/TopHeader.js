@@ -1,37 +1,38 @@
-import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import classes from "./TopHeader.module.scss";
-import { Facebook, Instagram, YouTube, Search } from "@mui/icons-material";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import SearchBox from "../components/signForms/SearchBox";
 
 const TopHeader = () => {
-  const searchRef = useRef();
-  const navigate = useNavigate();
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const searchQuery = searchRef.current.value;
-    navigate(`/search?search=${searchQuery}`);
-  };
-
   return (
     <div className={classes.mainContainer}>
       <div className={classes.socialNetworkContainer}>
         <a href="https://facebook.com/">
-          <Facebook fontSize="small" />
+          <FacebookIcon fontSize="small" sx={{
+            '&:hover':{
+              fill:'#395498'
+            }
+          }}/>
+         
         </a>
         <a href="https://instagram.com/">
-          <Instagram fontSize="small" />
+          <InstagramIcon fontSize="small" sx={{
+            '&:hover':{
+              fill:'#ab2f88'
+            }
+          }} />
         </a>
         <a href="https://youtube.com/">
-          <YouTube fontSize="small" />
+          <YouTubeIcon sx={{
+            '&:hover':{
+              fill:'red',
+          
+            }
+          }} fontSize="small" />
         </a>
       </div>
-      <form onSubmit={submitHandler} className={classes.inputContainer}>
-        <input ref={searchRef} placeholder="Search..." />
-        <button type="submit" className={classes.searchButton}>
-          <Search fontSize="small" />
-        </button>
-      </form>
+      <SearchBox />
     </div>
   );
 };

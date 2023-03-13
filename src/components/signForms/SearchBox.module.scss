@@ -1,0 +1,46 @@
+@use "../../sass/abstracts/mixins" as *;
+@use '../../sass/abstracts/colors';
+
+
+.inputContainer {
+  @include flex-center(center);
+  input {
+    color: colors.$dark-gray;
+    font-size: small;
+    height: 1.7rem;
+    border: colors.$white;
+    outline: none;
+    border-radius: 5px 0 0 5px;
+  }
+  
+}
+
+.searchButton {
+  @include flex-center(center);
+  height: 1.7rem;
+  color: colors.$white;
+  padding: 0 6px;
+  margin: 0;
+  border-radius: 0 5px 5px 0;
+  border: solid 1px colors.$magenta-color;
+  background-color: colors.$magenta-color;
+}
+
+@media only screen and (max-width: 610px) {
+    .inputContainer {
+        margin-bottom: 1rem;
+        input {
+            background-color: colors.$black;
+            border: solid 1px colors.$gray;
+            color: colors.$gray;
+
+
+        }
+    }
+    .searchButton {
+        background-color: colors.$white;
+        border: solid 1px colors.$gray;
+
+
+}
+}

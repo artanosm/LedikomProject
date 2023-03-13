@@ -3,15 +3,15 @@
 
 
 .container {
-    @include flex-center(center);
+    @include flex-center(center);    
     background-color: colors.$white;
     flex-wrap: wrap;
     height: auto;
     width: 100%;
     max-width: 1400px;
+    margin: 0 auto;
     gap: 2rem;
     padding: 2rem 3rem;
-    margin: 0 auto;
     z-index: 1;
 }
 
@@ -30,9 +30,7 @@
 
 @media only screen and (max-width: 800px) {
     .container {
-        margin: 0;
-        // padding: .1rem .1rem 1rem ;
-        // padding: .1rem 2vw 1rem ;
+        margin-bottom: 1rem;
         padding: 0 ;
         gap: 1rem;
     }

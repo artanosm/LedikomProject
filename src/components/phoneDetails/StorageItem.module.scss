@@ -1,15 +1,59 @@
-@use '../../sass/abstracts/colors';
+@use "../../sass/abstracts/mixins" as *;
+@use "../../sass/abstracts/colors";
 
-.storageItem {
-    color: colors.$magenta-color;
-    padding: 1rem;
-    box-shadow: 0 2px 10px colors.$light-gray;
-    border-radius: 10px;
-    width: 6rem;
-    text-align: center;
-    transition: all 0.2s ease;
+.storageItem,
+.storageItemDiscount {
+  @include flex-center(center);
+  color:colors.$dark-gray;
+  // color: colors.$magenta-color;
+ padding: 0;
+  // box-shadow: 0 2px 10px colors.$light-gray;
+  border: 2px solid colors.$light-gray;
+  border-radius: 10px;
+  height: 3.5rem;
+  width: 6.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+  &:hover {
+    border-color: colors.$gray;
   }
-  .active {
-    box-shadow: 0 2px 10px colors.$magenta-color;
-    
-  }  
+}
+
+.storageItemDiscount::after {
+  content: attr(percent);
+  @include flex-center(center);
+  color: colors.$white;
+  position: relative;
+  left: 8px;
+  top: -8px;
+  font-size: 0.65rem;
+  text-align: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-color: colors.$red;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.active {
+  // box-shadow: 0 2px 10px colors.$magenta-color;
+  border: 2px solid colors.$magenta-color;
+  color: colors.$magenta-color;
+  &:hover {
+    border: 2px solid colors.$magenta-color;
+
+  }
+
+}
+
+@media only screen and (max-width: 610px) {
+  .storageItem,
+  .storageItemDiscount {
+    font-size: 13px;
+    width: 9rem;
+  }
+
+  
+
+
+}

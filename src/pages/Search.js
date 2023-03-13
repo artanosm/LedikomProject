@@ -1,19 +1,20 @@
-import React from "react";
-import { useSearchParams } from "react-router-dom";
+import {memo} from "react";
+import { useParams } from "react-router-dom";
 import PhonesList from "../components/PhonesList";
-// import Phones from "./Phones";
-const Search = () => {
-  const [searchParams] = useSearchParams();
 
-  const searchQuery = searchParams.get("search").toLocaleLowerCase();
+
+const Search = () => {
+  const {searchId} = useParams();
+  let search = searchId.toLocaleLowerCase()
+
   return (
     <div style={{ display:'flex',flexDirection:'column' ,justifyContent:'center', alignItems: 'center'}}>
-      <h4 style={{color: 'gray'}}>Search results for: {searchQuery}</h4>
-      <PhonesList searchQuery={searchQuery} />
+      <h4 style={{color: 'gray'}}>Search results for: {search}</h4>
+      
+   <PhonesList searchQuery={search} />
     </div>
   );
 
-  // return <Phones searchQuery={searchQuery} />;
 };
 
-export default React.memo(Search);
+export default memo(Search);

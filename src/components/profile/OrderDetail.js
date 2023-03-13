@@ -1,40 +1,41 @@
-import React, { useState, useEffect, useContext } from "react";
+import  {  useEffect, useContext } from "react";
+import useGetSingleData from "../customHooks/useGetSingleData";
+
 import classes from "./OrderDetail.module.scss";
-import { useParams,useLocation } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
-import { doc, onSnapshot } from "firebase/firestore";
+
 import { db } from "../firebase";
+import { doc } from "firebase/firestore";
+
 import OrdersItemGroup from "../OrdersItemGroup";
 import Loader from "../../ui/Loader";
 
-
 const OrderDetail = () => {
   const { orderId } = useParams();
-  const location = useLocation();
-  const [order, setOrder] = useState(location?.state);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [order, setOrder] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
   const authCtx = useContext(AuthContext);
-
+  const docRef = doc(db, `users/${authCtx.user?.uid}/orders/${orderId}`);
+  const [order, isLoading] = useGetSingleData(docRef,authCtx?.user?.uid)
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    if (!location?.state) {
-      setIsLoading(true);
-      const docRef = doc(db, `users/${authCtx.user?.uid}/orders/${orderId}`);
-      const unsubscribe = onSnapshot(docRef, (doc) => {
-        setOrder(doc.data());
-        setIsLoading(false);
-      });
-      
-      return () => {
-        unsubscribe();
-      };
-    }
-    
-  }, [location?.state,authCtx.user?.uid, orderId]);
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   const unsubscribe = onSnapshot(docRef, (doc) => {
+  //     setOrder(doc.data());
+  //     setIsLoading(false);
+  //   });
+
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [authCtx.user?.uid,orderId]);
+
 
   return isLoading ? (
     <Loader />
@@ -52,7 +53,11 @@ const OrderDetail = () => {
         <ul>
           <li>Order ID: {order?.id}</li>
           <li>Order placed on: {order?.date}</li>
-          <li className={order?.orderCompleted ? classes.completed : classes.waiting}>
+          <li
+            className={
+              order?.orderCompleted ? classes.completed : classes.waiting
+            }
+          >
             {order?.orderCompleted ? "Completed" : "Waiting"}
           </li>
         </ul>

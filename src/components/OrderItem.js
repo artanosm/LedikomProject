@@ -1,4 +1,3 @@
-import React from "react";
 import OrdersItemGroup from "./OrdersItemGroup";
 import classes from "./OrderItem.module.scss";
 // import { realTimeDatabase } from "./firebase";

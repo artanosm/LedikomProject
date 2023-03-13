@@ -1,4 +1,3 @@
-import React from "react";
 import SliderImages from "../components/home/SliderImages";
 import classes from "./Home.module.scss";
 import CarouselCom from "../components/home/CarouselCom";
@@ -11,7 +10,6 @@ import useGetData from "../components/customHooks/useGetData";
 import {motion} from 'framer-motion'
 
 const Home = () => {
-  // const div = useParallax({ speed:0 });
   let colRef = collection(db, "products");
   let  queryName = query(colRef,  orderBy("serverDate", "desc"));
   let [phones, isLoading] = useGetData(queryName);
@@ -33,7 +31,7 @@ const Home = () => {
         <h2 >
           Suggested Products
         </h2>
-          <CarouselCom  phones={phones}/>
+          <CarouselCom isLoading={isLoading}  phones={phones}/>
       </div>
       <NewArrival/>
     </motion.div>
